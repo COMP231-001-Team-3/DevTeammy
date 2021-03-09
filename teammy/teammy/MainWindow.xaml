@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:teammy"
         mc:Ignorable="d"
-        Title="Teammy" Height="620" Width="1000">
+        Title="Teammy" Height="620" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,1,-0.4,-0.6">
         <Grid.Background>
             <ImageBrush ImageSource="images\BG.png"/>
