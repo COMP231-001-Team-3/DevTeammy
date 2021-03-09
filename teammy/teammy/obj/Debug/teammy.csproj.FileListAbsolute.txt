@@ -1,0 +1,15 @@
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\bin\Debug\teammy.exe.config
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\bin\Debug\teammy.exe
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\bin\Debug\teammy.pdb
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\MainWindow.g.cs
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\App.g.cs
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\MainWindow.baml
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\teammy.g.resources
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\teammy.Properties.Resources.resources
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\teammy.csproj.GenerateResource.cache
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\teammy.csproj.CoreCompileInputs.cache
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\teammy.exe
+C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\obj\Debug\teammy.pdb
