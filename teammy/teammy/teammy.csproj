@@ -98,28 +98,13 @@
     <Resource Include="images\MicrosoftTeams-image %286%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="menu_icon %281%29.JPG" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="MicrosoftTeams-image %2812%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="MENU BAR.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="MENU BAR %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\MicrosoftTeams-image %2815%29.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\MicrosoftTeams-image %2816%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="BG %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="BG %282%29.png" />
+    <Resource Include="images\BG %282%29.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\MicrosoftTeams-image %2818%29.png" />

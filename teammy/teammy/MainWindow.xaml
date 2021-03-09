@@ -8,7 +8,7 @@
         Title="Temmay" Height="620" Width="1000">
     <Grid Margin="0,1,-0.4,-0.6">
         <Grid.Background>
-            <ImageBrush ImageSource="BG (2).png"/>
+            <ImageBrush ImageSource="images\BG (2).png"/>
         </Grid.Background>
 
         <Menu Margin="0,0,-0.4,363" >
@@ -18,31 +18,31 @@
 
                 <MenuItem Header="Home">
                     <MenuItem.Icon>
-                        <Image Source="C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\images\MicrosoftTeams-image (6).png" Height="20" Width="20"/>
+                        <Image Source="images\MicrosoftTeams-image (6).png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Boards">
                     <MenuItem.Icon>
-                        <Image Source="C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\images\MicrosoftTeams-image (18).png" Height="20" Width="20"/>
+                        <Image Source="images\MicrosoftTeams-image (18).png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
                 <MenuItem Header="Teams">
                     <MenuItem.Icon>
-                        <Image Source="C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\images\MicrosoftTeams-image (17).png" Height="20" Width="20"/>
+                        <Image Source="images\MicrosoftTeams-image (17).png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
 
                 <MenuItem Header="Progress Report">
                     <MenuItem.Icon>
-                        <Image Source="C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\images\MicrosoftTeams-image (15).png" Height="20" Width="20"/>
+                        <Image Source="images\MicrosoftTeams-image (15).png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
                 <MenuItem Header="Schedule">
                     <MenuItem.Icon>
-                        <Image Source="C:\Users\afafp\OneDrive\Desktop\c#\teammy\teammy\images\MicrosoftTeams-image (16).png" Height="20" Width="20"/>
+                        <Image Source="images\MicrosoftTeams-image (16).png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
