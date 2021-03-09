@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:teammy"
         mc:Ignorable="d"
-        Title="Teammy" Height="620" Width="1000">
+        Title="Teammy" Height="620" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,1,-0.4,-0.6">
         <Grid.Background>
-            <ImageBrush ImageSource="images\BG (2).png"/>
+            <ImageBrush ImageSource="images\BG.png"/>
         </Grid.Background>
 
         <Menu Margin="0,0,-0.4,363" >
@@ -18,31 +18,31 @@
 
                 <MenuItem Header="Home">
                     <MenuItem.Icon>
-                        <Image Source="images\MicrosoftTeams-image (6).png" Height="20" Width="20"/>
+                        <Image Source="images\Home.png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Boards">
                     <MenuItem.Icon>
-                        <Image Source="images\MicrosoftTeams-image (18).png" Height="20" Width="20"/>
+                        <Image Source="images\Board.png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
                 <MenuItem Header="Teams">
                     <MenuItem.Icon>
-                        <Image Source="images\MicrosoftTeams-image (17).png" Height="20" Width="20"/>
+                        <Image Source="images\Team.png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
 
                 <MenuItem Header="Progress Report">
                     <MenuItem.Icon>
-                        <Image Source="images\MicrosoftTeams-image (15).png" Height="20" Width="20"/>
+                        <Image Source="images\Progress.png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
                 <MenuItem Header="Schedule">
                     <MenuItem.Icon>
-                        <Image Source="images\MicrosoftTeams-image (16).png" Height="20" Width="20"/>
+                        <Image Source="images\Schedule.png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
