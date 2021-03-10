@@ -94,23 +94,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Resource Include="images\MicrosoftTeams-image %286%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\MicrosoftTeams-image %2815%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\MicrosoftTeams-image %2816%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\BG %282%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\MicrosoftTeams-image %2818%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\MicrosoftTeams-image %2817%29.png" />
+    <Resource Include="images\BG.png" />
+    <Resource Include="images\Board.png" />
+    <Resource Include="images\Home.png" />
+    <Resource Include="images\Progress.png" />
+    <Resource Include="images\Schedule.png" />
+    <Resource Include="images\Team.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
