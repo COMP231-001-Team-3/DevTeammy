@@ -8,7 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+<<<<<<< HEAD
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg.png")]
+=======
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg%20.png")]
+>>>>>>> 5d67e77... Fixed startup errors
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/board.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/home.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/progress.png")]

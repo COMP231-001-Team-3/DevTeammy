@@ -10,11 +10,15 @@ none
 false
 DEBUG;TRACE
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
+<<<<<<< HEAD
 2-419118988
+=======
+11151548125
+>>>>>>> 5d67e77... Fixed startup errors
 
 81996061233
 1361861584214
 login.xaml;MainWindow.xaml;
 
-False
+True
 
