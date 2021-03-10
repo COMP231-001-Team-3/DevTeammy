@@ -14,6 +14,7 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\tea
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CoreCompileInputs.cache
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
 <<<<<<< HEAD
+<<<<<<< HEAD
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
 C:\Users\14379\Source\Repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
 C:\Users\14379\Source\Repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.g.cs
@@ -96,3 +97,7 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\Gen
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\App.baml
 =======
 >>>>>>> 5d67e77... Fixed startup errors
+=======
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.g.cs
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.baml
+>>>>>>> ce597e9... Title bar done

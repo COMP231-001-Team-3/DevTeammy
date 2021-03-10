@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg.png")]
 =======
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg%20.png")]
@@ -18,5 +19,8 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/progress.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/schedule.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/team.png")]
+=======
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/jelly.jpg")]
+>>>>>>> ce597e9... Title bar done
 
 

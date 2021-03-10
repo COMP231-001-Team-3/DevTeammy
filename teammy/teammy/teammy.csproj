@@ -101,8 +101,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
     <Compile Include="UserModel.cs" />
     <Page Include="login.xaml">
+=======
+    <Page Include="CreateProject.xaml">
+>>>>>>> ce597e9... Title bar done
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -114,8 +118,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
+=======
+    <Compile Include="CreateProject.xaml.cs">
+      <DependentUpon>CreateProject.xaml</DependentUpon>
+>>>>>>> ce597e9... Title bar done
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -149,7 +158,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="images\menuIcon.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="images\BG.png" />
     <Resource Include="images\Board.png" />
@@ -157,6 +168,9 @@
     <Resource Include="images\Progress.png" />
     <Resource Include="images\Schedule.png" />
     <Resource Include="images\Team.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\jelly.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
