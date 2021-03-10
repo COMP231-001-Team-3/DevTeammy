@@ -53,7 +53,7 @@
         </Style>
     </Window.Resources>
     <Grid Background="White">
-        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,410">
+        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,410" MouseDown="pnlTitle_MouseDown">
             <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="770,0,0,10" Click="btnClose_Click"/>
             <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="740,0,30,10" Click="btnMinimize_Click"/>
             <Label Content="Teammy" HorizontalAlignment="Left" Margin="35,3,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting"/>
