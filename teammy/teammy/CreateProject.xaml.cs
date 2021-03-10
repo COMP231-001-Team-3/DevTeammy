@@ -38,5 +38,10 @@ namespace teammy
         {
 
         }
+
+        private void pnlTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            DragMove();
+        }
     }
 }
