@@ -8,11 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg%20.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/board.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/home.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/progress.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/schedule.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/team.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/jelly.jpg")]
 
 
