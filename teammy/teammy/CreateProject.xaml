@@ -13,7 +13,7 @@
             <Setter Property="BorderBrush" Value="{x:Null}"/>
             <Setter Property="Width" Value="30"/>
             <Setter Property="Height" Value="30"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -35,7 +35,8 @@
             <Setter Property="BorderBrush" Value="{x:Null}"/>
             <Setter Property="Width" Value="30"/>
             <Setter Property="Height" Value="30"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontStyle" Value="Oblique"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -55,7 +56,7 @@
     <Grid Background="White">
         <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,410" MouseDown="pnlTitle_MouseDown">
             <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="770,0,0,10" Click="btnClose_Click"/>
-            <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="740,0,30,10" Click="btnMinimize_Click"/>
+            <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="738,0,32,10" Click="btnMinimize_Click"/>
             <Label Content="Teammy" HorizontalAlignment="Left" Margin="35,3,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting"/>
             <Button x:Name="btnMenu" Background="{x:Null}" Margin="5,0,758,10" BorderBrush="{x:Null}" Click="btnMenu_Click">
                 <Button.Content>
