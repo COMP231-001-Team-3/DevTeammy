@@ -12,6 +12,7 @@ DEBUG;TRACE
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 2-419118988
 =======
 11151548125
@@ -22,11 +23,18 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
 login.xaml;MainWindow.xaml;
 =======
 2-1939165864
+=======
+32065141461
+>>>>>>> 940a552... Custom Project Control done
 
-6-205957246
+7456903176
 13-1505183044
+<<<<<<< HEAD
 CreateProject.xaml;MainWindow.xaml;
 >>>>>>> ce597e9... Title bar done
+=======
+CreateProject.xaml;MainWindow.xaml;ProjectBox.xaml;
+>>>>>>> 940a552... Custom Project Control done
 
 False
 

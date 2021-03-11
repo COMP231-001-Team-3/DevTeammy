@@ -52,6 +52,9 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="ProjectBoxStyle" TargetType="Rectangle">
+            <!--<Setter Property=""/>-->
+        </Style>
     </Window.Resources>
     <Grid Background="White">
         <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,410" MouseDown="pnlTitle_MouseDown">
@@ -65,6 +68,8 @@
             </Button>
         </Grid>
         <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
+
+
 
     </Grid>
 </Window>

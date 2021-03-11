@@ -102,9 +102,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="UserModel.cs" />
     <Page Include="login.xaml">
 =======
+=======
+    <Compile Include="ProjectBox.xaml.cs">
+      <DependentUpon>ProjectBox.xaml</DependentUpon>
+    </Compile>
+>>>>>>> 940a552... Custom Project Control done
     <Page Include="CreateProject.xaml">
 >>>>>>> ce597e9... Title bar done
       <SubType>Designer</SubType>
@@ -130,6 +136,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProjectBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -171,6 +181,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\jelly.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\protoNaturBg.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
