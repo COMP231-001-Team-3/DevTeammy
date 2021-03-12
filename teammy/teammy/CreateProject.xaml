@@ -67,7 +67,7 @@
                 </Button.Content>
             </Button>
         </Grid>
-        <ScrollViewer MaxHeight="382" Margin="220,58,10,10">
+        <ScrollViewer MaxHeight="382" Margin="220,58,10,75">
             <Grid MinHeight="400" x:Name="projGrid" Margin="0,0,0,0"/>
         </ScrollViewer>
         <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
