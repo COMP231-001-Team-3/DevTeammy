@@ -21,36 +21,42 @@ namespace teammy
     public partial class ProjectBox : UserControl
     {
         public static readonly DependencyProperty ProjectNameProperty = DependencyProperty.Register("ProjectName", typeof(string), typeof(ProjectBox));
-        public static readonly DependencyProperty ProjectImageProperty = DependencyProperty.Register("ProjectImage", typeof(ImageSource), typeof(ProjectBox));
+        public static readonly DependencyProperty ProjectProfileBackProperty = DependencyProperty.Register("ProjectProfileBack", typeof(Color), typeof(ProjectBox));
+        public static readonly DependencyProperty ProjectProfileProperty = DependencyProperty.Register("ProjectProfile", typeof(string), typeof(ProjectBox));
 
         public string ProjectName
         {
             get { return (string)GetValue(ProjectNameProperty); }
             set { SetValue(ProjectNameProperty, value); }
         }
-        public ImageSource ProjectImage
+        public string ProjectProfile
         {
-            get { return (ImageSource)GetValue(ProjectImageProperty); }
-            set { SetValue(ProjectImageProperty, value); }
+            get { return (string)GetValue(ProjectProfileProperty); }
+            set { SetValue(ProjectProfileProperty, value); }
         }
-
+        public Color ProjectProfileBack
+        {
+            get { return (Color)GetValue(ProjectProfileBackProperty); }
+            set { SetValue(ProjectProfileBackProperty, value); }
+        }
+        
         public event EventHandler<EventArgs> ProjectNameChanged;
-        public event EventHandler<EventArgs> ProjectImageChanged;
+        public event EventHandler<EventArgs> ProjectProfileChanged;
         public ProjectBox()
         {
             InitializeComponent();
         }
 
-        private void imgProjProfile_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            //e.Handled = true;
-            ProjectImageChanged?.Invoke(this, EventArgs.Empty);
-        }
-
         private void txtProjName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //e.Handled = true;
+            e.Handled = true;
             ProjectNameChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtProfText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            e.Handled = true;
+            ProjectProfileChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

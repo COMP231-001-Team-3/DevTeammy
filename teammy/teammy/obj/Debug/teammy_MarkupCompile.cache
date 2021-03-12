@@ -27,12 +27,17 @@ login.xaml;MainWindow.xaml;
 32065141461
 >>>>>>> 940a552... Custom Project Control done
 
+<<<<<<< HEAD
 7456903176
 13-1505183044
 <<<<<<< HEAD
 CreateProject.xaml;MainWindow.xaml;
 >>>>>>> ce597e9... Title bar done
 =======
+=======
+81343040276
+118-703174741
+>>>>>>> 71a88d4... Project cards retrieved from DB & Displayed
 CreateProject.xaml;MainWindow.xaml;ProjectBox.xaml;
 >>>>>>> 940a552... Custom Project Control done
 
