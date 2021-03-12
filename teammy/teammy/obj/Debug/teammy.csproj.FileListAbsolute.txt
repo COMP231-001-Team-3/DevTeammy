@@ -36,6 +36,7 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\tea
 <<<<<<< HEAD
 <<<<<<< HEAD
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
+<<<<<<< HEAD
 C:\Users\14379\Source\Repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
 C:\Users\14379\Source\Repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.g.cs
 C:\Users\14379\Source\Repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\App.g.cs
@@ -124,3 +125,6 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\Cre
 =======
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
 >>>>>>> 940a552... Custom Project Control done
+=======
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
+>>>>>>> 90b9222... Scroll enabled for project cards
