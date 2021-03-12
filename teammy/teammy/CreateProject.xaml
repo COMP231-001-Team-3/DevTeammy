@@ -56,7 +56,7 @@
             <!--<Setter Property=""/>-->
         </Style>
     </Window.Resources>
-    <Grid Background="White">
+    <Grid x:Name="containerGrid" Background="White">
         <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,410" MouseDown="pnlTitle_MouseDown">
             <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="770,0,0,10" Click="btnClose_Click"/>
             <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="738,0,32,10" Click="btnMinimize_Click"/>
@@ -69,6 +69,9 @@
         </Grid>
         <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
 
+        <Grid x:Name="projGrid" Margin="244,55,10,25">
+            
+        </Grid>
 
 
     </Grid>

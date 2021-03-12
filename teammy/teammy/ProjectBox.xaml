@@ -4,13 +4,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:teammy"
-             mc:Ignorable="d" x:Name="root" Width="111.778" Height="111.111">
+             mc:Ignorable="d" x:Name="root" Width="130" Height="130">
+    <UserControl.Resources>
+        <local:ColorToBrushConverter x:Key="ColorConverter"/>
+        <Style x:Key="mouseOverStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Rectangle x:Name="background"
+                                   Fill="{TemplateBinding Background}"/>
+                                <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="background" Property="Fill" Value="AliceBlue"/>
+                                <Setter TargetName="background" Property="Opacity" Value="0.5"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid Margin="0,0,-4,-2.667">
-        <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Height="108" Stroke="#FF1E1922" VerticalAlignment="Top" Width="108" Margin="2,1,0,0"/>
+        <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Height="125" Stroke="#FF1E1922" VerticalAlignment="Top" Width="127" Margin="2,3,-13,-14"/>
 
-        <Image x:Name="imgProjProfile" HorizontalAlignment="Left" Height="79" Margin="17,10,0,0" VerticalAlignment="Top" Width="77" Source="{Binding ElementName=root, Path=ProjectImage}" SourceUpdated="imgProjProfile_SourceUpdated" />
-
-        <TextBox x:Name="txtProjName" Text="{Binding ElementName=root, Path=ProjectName}" HorizontalAlignment="Left" Margin="7,85,0,0" VerticalAlignment="Top" Width="102" FontFamily="Georgia" Foreground="#FF0A98F7" BorderBrush="{x:Null}" TextChanged="txtProjName_TextChanged" IsReadOnly="True"/>
+        <TextBox x:Name="txtProjName" Text="{Binding ElementName=root, Path=ProjectName}" HorizontalAlignment="Left" Margin="5,106,-10,-11" VerticalAlignment="Top" Width="121" FontFamily="Georgia" Foreground="#FF0A98F7" BorderBrush="{x:Null}" TextChanged="txtProjName_TextChanged" IsReadOnly="True" Height="19" IsHitTestVisible="False"/>
+        
+        <Rectangle x:Name="rectProfile" HorizontalAlignment="Left" Height="83" Stroke="#FF1E1922" VerticalAlignment="Top" Width="93" Margin="18,18,0,0" Fill="{Binding ElementName=root, Converter={StaticResource ColorConverter}, Path=ProjectProfileBack}"/>
+        
+        <TextBox x:Name="txtProfText" Text="{Binding ElementName=root, Path=ProjectProfile}" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="80" FontFamily="Gill Sans Ultra Bold" Foreground="White" BorderBrush="{x:Null}" Height="60" Background="{x:Null}" FontSize="40" TextChanged="txtProfText_TextChanged" IsReadOnly="True" IsHitTestVisible="False"/>
+        <Button x:Name="btnDetails" Content="" HorizontalAlignment="Left" Margin="2,3,0,0" VerticalAlignment="Top" Width="127" Height="125" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True"/>
 
     </Grid>
 </UserControl>
