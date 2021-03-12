@@ -36,7 +36,7 @@ namespace teammy
             using (reader)
             {
                 ProjectBox project;
-                int left = 44, top = 13, right = 361, bottom = 217;
+                int left = 0, top = 0, right = 361, bottom = 260;
                 int count = 0;
                 Random rd = new Random();
                 string projName;
@@ -45,22 +45,25 @@ namespace teammy
                 while (reader.Read())
                 {
                     projName = reader[0].ToString();
-                    ProjectNames.Add(reader[0].ToString());
+                    ProjectNames.Add(projName);
                     profChars = projName.Split(' ')[0][0] + "" + projName.Split(' ')[1][0];
                     project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack= backColors[rd.Next(0, 7)], ProjectProfile=profChars };
                     projGrid.Children.Add(project);
-                    left += 135;
-                    right -= 135;
+                    left += 140;
+                    right -= 140;
                     
                     if(count == 2)
                     {
-                        top = 145;
-                        bottom = 85;
-                        left = 44;
+                        top += 132;
+                        bottom -= 132;
+                        left = 0;
                         right = 361;
                         count = 0;
                     }
-                    count++;
+                    else
+                    {
+                        count++;
+                    }
                 }
             }
         }
