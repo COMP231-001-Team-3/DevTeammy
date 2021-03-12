@@ -21,7 +21,7 @@ namespace teammy
     public partial class CreateProject : Window
     {
         public string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
-        Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral };
+        Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
         List<string> ProjectNames = new List<string>();
 
         public CreateProject()
@@ -47,10 +47,10 @@ namespace teammy
                     projName = reader[0].ToString();
                     ProjectNames.Add(projName);
                     profChars = projName.Split(' ')[0][0] + "" + projName.Split(' ')[1][0];
-                    project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack= backColors[rd.Next(0, 7)], ProjectProfile=profChars };
+                    project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack= backColors[rd.Next(0, 18)], ProjectProfile=profChars };
                     projGrid.Children.Add(project);
-                    left += 140;
-                    right -= 140;
+                    left += 175;
+                    right -= 175;
                     
                     if(count == 2)
                     {
