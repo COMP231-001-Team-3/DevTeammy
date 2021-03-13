@@ -16,6 +16,7 @@
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Template">
                 <Setter.Value>
+                    <!-- Modifying control template of button to give custom mouseover color -->
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0.1">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -24,6 +25,7 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
+                <!-- Mouseover trigger -->
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="Red"/>
                     <Setter Property="Foreground" Value="White"/>
@@ -39,6 +41,7 @@
             <Setter Property="FontStyle" Value="Oblique"/>
             <Setter Property="Template">
                 <Setter.Value>
+                    <!-- Modifying control template of button to give custom mouseover color -->
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0.1">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -47,16 +50,18 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
+                <!-- Mouseover trigger -->
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="LightBlue"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="ProjectBoxStyle" TargetType="Rectangle">
-            <!--<Setter Property=""/>-->
-        </Style>
     </Window.Resources>
+    
+    <!-- UI Elements' declaration start here -->
     <Grid x:Name="containerGrid" Background="White">
+
+        <!-- Grid pnlTitle represents Custom title Bar -->
         <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,410" MouseDown="pnlTitle_MouseDown">
             <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="770,0,0,10" Click="btnClose_Click"/>
             <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="738,0,32,10" Click="btnMinimize_Click"/>
@@ -67,11 +72,11 @@
                 </Button.Content>
             </Button>
         </Grid>
+
+        <!-- This ScrollViewer houses the grid that ultimately holds the project cards -->
         <ScrollViewer MaxHeight="382" Margin="220,58,10,75">
             <Grid MinHeight="400" x:Name="projGrid" Margin="0,0,0,0"/>
         </ScrollViewer>
         <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
-
-
     </Grid>
 </Window>
