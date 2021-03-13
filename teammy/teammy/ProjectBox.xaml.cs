@@ -1,29 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace teammy
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for ProjectBox.xaml
     /// </summary>
     public partial class ProjectBox : UserControl
     {
+        #region Dependency Properties
         public static readonly DependencyProperty ProjectNameProperty = DependencyProperty.Register("ProjectName", typeof(string), typeof(ProjectBox));
         public static readonly DependencyProperty ProjectProfileBackProperty = DependencyProperty.Register("ProjectProfileBack", typeof(Color), typeof(ProjectBox));
         public static readonly DependencyProperty ProjectProfileProperty = DependencyProperty.Register("ProjectProfile", typeof(string), typeof(ProjectBox));
+        #endregion
 
+        #region Public Properties of the Dependency properties
         public string ProjectName
         {
             get { return (string)GetValue(ProjectNameProperty); }
@@ -39,24 +32,39 @@ namespace teammy
             get { return (Color)GetValue(ProjectProfileBackProperty); }
             set { SetValue(ProjectProfileBackProperty, value); }
         }
-        
+        #endregion
+
+        //Events for change on the text properties
         public event EventHandler<EventArgs> ProjectNameChanged;
         public event EventHandler<EventArgs> ProjectProfileChanged;
+
+        #region Constructor
         public ProjectBox()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Text Changed Event Handlers
+        /// <summary>
+        ///     Invokes any events related to the ProjectNameProperty when
+        ///     Project Name Textbox's Text changes.
+        /// </summary>
         private void txtProjName_TextChanged(object sender, TextChangedEventArgs e)
         {
             e.Handled = true;
             ProjectNameChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        ///     Invokes any events related to the ProjectProfileProperty when
+        ///     Project Prof Textbox's Text changes.
+        /// </summary>
         private void txtProfText_TextChanged(object sender, TextChangedEventArgs e)
         {
             e.Handled = true;
             ProjectProfileChanged?.Invoke(this, EventArgs.Empty);
         }
+        #endregion
     }
 }
