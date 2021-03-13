@@ -41,12 +41,20 @@ namespace teammy
                 Random rd = new Random();
                 string projName;
                 string profChars;
-
+                string[] nameWords;
                 while (reader.Read())
                 {
                     projName = reader[0].ToString();
                     ProjectNames.Add(projName);
-                    profChars = projName.Split(' ')[0][0] + "" + projName.Split(' ')[1][0];
+                    nameWords = projName.Split(' ');
+                    if(nameWords.Length >= 2)
+                    {
+                        profChars = nameWords[0][0] + "" + nameWords[1][0];
+                    }
+                    else
+                    {
+                        profChars = nameWords[0][0] + "" + nameWords[0][1];
+                    }
                     project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack= backColors[rd.Next(0, 18)], ProjectProfile=profChars };
                     projGrid.Children.Add(project);
                     left += 175;
