@@ -4,11 +4,12 @@
 winexe
 C#
 .cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\
 teammy
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -29,6 +30,9 @@ login.xaml;MainWindow.xaml;
 CreateProject.xaml;MainWindow.xaml;
 >>>>>>> ce597e9... Title bar done
 =======
+=======
+D:\Last Semester\Teammy\New folder\teammy\teammy\App.xaml
+>>>>>>> e2fc073... Menu items stylized
 32065141461
 
 9500680909

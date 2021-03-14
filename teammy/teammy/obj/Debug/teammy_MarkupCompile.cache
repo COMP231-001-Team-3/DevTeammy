@@ -4,11 +4,12 @@
 winexe
 C#
 .cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\
 teammy
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -24,6 +25,9 @@ login.xaml;MainWindow.xaml;
 =======
 2-1939165864
 =======
+=======
+D:\Last Semester\Teammy\New folder\teammy\teammy\App.xaml
+>>>>>>> e2fc073... Menu items stylized
 32065141461
 >>>>>>> 940a552... Custom Project Control done
 

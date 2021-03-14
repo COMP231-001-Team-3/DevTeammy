@@ -8,6 +8,67 @@
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" AllowsTransparency="True">
     <Window.Resources>
+        <Style x:Key="mouseOverStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Rectangle x:Name="background"
+                                   Fill="{TemplateBinding Background}"/>
+                                <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="background" Property="Fill" Value="LightBlue"/>
+                                <Setter TargetName="background" Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ContextMenu x:Key="cmButton" >
+            <MenuItem x:Name="homeItem" Header="Home" Background="White"  Width="200" Height="40" FontSize="16" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave">
+                <MenuItem.Icon>
+                    <Grid x:Name="homeIconGrid">                        
+                        <Image x:Name="iconImg" Source="images/house1.jpeg" />
+                        <Button x:Name="iconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
+                                Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
+                                BorderThickness="0"/>
+                    </Grid>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Boards" Background="White"  Width="200" Height="40" FontSize="16"  MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave">
+                <MenuItem.Icon>
+                    <Grid x:Name="BoardsIconGrid">
+                        <Image x:Name="BoardsIconImg" Source="images/Board.png" />
+                        <Button x:Name="BoardsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
+                                Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
+                                BorderThickness="0"/>
+                    </Grid>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Teams" Background="white"  Width="200" Height="40" FontSize="16" >
+                <MenuItem.Icon>
+                    <Image Source="images/Team.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Progress Report" Background="White"  Width="200" Height="40" FontSize="16" >
+                <MenuItem.Icon>
+                    <Image Source="images/Progress.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Schedule" Background="White"  Width="200" Height="40" FontSize="16" BorderBrush="#FFF01FFF" >
+                <MenuItem.Icon>
+                    <Image Source="images/Schedule.png"  />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
         <Style x:Key="closeButton" TargetType="Button">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="{x:Null}"/>
@@ -65,6 +126,7 @@
                 <Button.Content>
                     <Image Source="images\menuIcon.png"/>
                 </Button.Content>
+                
             </Button>
         </Grid>
         <ScrollViewer MaxHeight="382" Margin="220,58,10,75">
