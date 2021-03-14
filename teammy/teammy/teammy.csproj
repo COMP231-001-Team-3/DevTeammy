@@ -149,7 +149,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="images\jelly.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="images\BG.png" />
     <Resource Include="images\Board.png" />
@@ -157,6 +159,9 @@
     <Resource Include="images\Progress.png" />
     <Resource Include="images\Schedule.png" />
     <Resource Include="images\Team.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\menuIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
