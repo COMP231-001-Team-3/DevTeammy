@@ -34,3 +34,39 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\tea
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\teammy.exe.config
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\teammy.exe
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\teammy.pdb
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\MySql.Data.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\Google.Protobuf.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\Zstandard.Net.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\BouncyCastle.Crypto.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\Ubiety.Dns.Core.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\Renci.SshNet.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\System.Memory.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\System.Buffers.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\K4os.Compression.LZ4.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\K4os.Hash.xxHash.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\System.Numerics.Vectors.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\MySql.Data.xml
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.exe.config
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\CreateProject.g.cs
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\MainWindow.g.cs
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\ProjectBox.g.cs
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\App.g.cs
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\CreateProject.baml
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\MainWindow.baml
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\ProjectBox.baml
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.g.resources
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.Properties.Resources.resources
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.csproj.GenerateResource.cache
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.csproj.CoreCompileInputs.cache
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.exe
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.pdb
