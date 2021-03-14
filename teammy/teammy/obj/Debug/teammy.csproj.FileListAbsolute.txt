@@ -54,14 +54,12 @@ D:\Last Semester\Teammy\New folder\teammy\teammy\bin\Debug\MySql.Data.xml
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.exe.config
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\CreateProject.g.cs
-D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\MainWindow.g.cs
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\ProjectBox.g.cs
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\App.g.cs
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\CreateProject.baml
-D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\MainWindow.baml
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\ProjectBox.baml
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.g.resources
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.Properties.Resources.resources
@@ -70,3 +68,6 @@ D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.csproj.CoreCom
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.exe
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.pdb
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\MainWindowTeammy.g.cs
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\MainWindowTeammy.baml
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\App.baml

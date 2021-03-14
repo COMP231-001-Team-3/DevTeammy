@@ -64,7 +64,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MainWindowTeammy.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -75,8 +75,8 @@
     <Compile Include="CreateProject.xaml.cs">
       <DependentUpon>CreateProject.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="MainWindowTeammy.xaml.cs">
+      <DependentUpon>MainWindowTeammy.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ProjectBox.xaml">
@@ -138,6 +138,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\house1.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\calendar1.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Progress1.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\team1.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\boards1.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
