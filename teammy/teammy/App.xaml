@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:teammy"
 <<<<<<< HEAD
+<<<<<<< HEAD
              StartupUri="login.xaml">
 =======
              StartupUri="CreateProject.xaml">
 >>>>>>> ce597e9... Title bar done
+=======
+             StartupUri="login.xaml">
+>>>>>>> e7d111a... Update App.xaml
     <Application.Resources>
         <local:MainWindow x:Key="mainInstance"/>
     </Application.Resources>

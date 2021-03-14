@@ -114,7 +114,11 @@
 =======
 =======
     <Compile Include="ColorToBrushConverter.cs" />
+<<<<<<< HEAD
 >>>>>>> 71a88d4... Project cards retrieved from DB & Displayed
+=======
+    <Compile Include="NameToCharsConverter.cs" />
+>>>>>>> c07ea48... Create Project function complete
     <Compile Include="ProjectBox.xaml.cs">
       <DependentUpon>ProjectBox.xaml</DependentUpon>
     </Compile>

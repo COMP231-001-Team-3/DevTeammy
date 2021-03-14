@@ -24,7 +24,11 @@ namespace teammy
         //Colors for project cards
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
-        public object Frame { get; private set; }
+        //Margins indicate position of each box to be placed
+        int left = 0, top = 0, right = 361, bottom = 260;
+        int boxCount = 0;
+        ProjectBox toBeInserted;
+        MySqlConnection conn;
         #endregion
 
         #region Constructor
@@ -32,8 +36,8 @@ namespace teammy
         {
             InitializeComponent();
 
-            //Connection and data retrieval starts here
-            MySqlConnection conn = new MySqlConnection(connectionString);
+            //Connection and data retrieval starts here    
+            conn = new MySqlConnection(connectionString);
             conn.Open();
             MySqlCommand cmd = new MySqlCommand("SELECT Proj_Name FROM projects", conn);
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -43,33 +47,17 @@ namespace teammy
                 //Custom Control developed for this app
                 ProjectBox project;
 
-                //Margins indicate position of each box to be placed
-                int left = 0, top = 0, right = 361, bottom = 260;
-                int count = 0;
-
                 //Variables for usage in loop declared beforehand for performance reasons
                 Random rd = new Random();
-                string projName, profChars;
-                string[] nameWords;
+                string projName;
 
                 //Loop to read through results from query
                 while (reader.Read())
                 {
                     projName = reader[0].ToString();
-                    nameWords = projName.Split(' ');
-
-                    //If Project name has two or more words...then
-                    if(nameWords.Length >= 2)
-                    {
-                        profChars = nameWords[0][0] + "" + nameWords[1][0];
-                    }
-                    else
-                    {
-                        profChars = nameWords[0][0] + "" + nameWords[0][1];
-                    }
-
+                    
                     //Creation & Initialization of ProjectBox
-                    project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack= backColors[rd.Next(0, 18)], ProjectProfile=profChars };
+                    project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack= backColors[rd.Next(0, 18)] };
 
                     //Adds the newly created ProjectBox to the Grid within the ScrollViewer
                     projGrid.Children.Add(project);
@@ -79,18 +67,18 @@ namespace teammy
                     right -= 175;
                     
                     //If 3 boxes have been created...then
-                    if(count == 2)
+                    if(boxCount == 2)
                     {
                         //Margin updates for a new ProjectBox in a new row
                         top += 132;
                         bottom -= 132;
                         left = 0;
                         right = 361;
-                        count = 0;
+                        boxCount = 0;
                     }
                     else
                     {
-                        count++;
+                        boxCount++;
                     }
                 }
             } // Data retrieval ends here
@@ -178,6 +166,76 @@ namespace teammy
             Hide();
             (Application.Current.Resources["mainInstance"] as Window).Show();
         }
+<<<<<<< HEAD
 >>>>>>> 11e363c... Menu Completed
+=======
+
+        private void btnCreateProj_Click(object sender, RoutedEventArgs e)
+        {
+            Random rd = new Random();
+            toBeInserted = new ProjectBox() { ProjectProfileBack=backColors[rd.Next(0, backColors.Length - 1)]};
+            TextBox txtNameInput = new TextBox() { Height = 25, Width = 120, FontSize = 16};
+            //{ Text = "Enter Project Name", Foreground = new SolidColorBrush(Colors.Gray)}
+            if (boxCount == 0)
+            {
+                //Margin updates for a new ProjectBox in a new row
+                top += 132;
+                bottom -= 132;
+                left = 0;
+                right = 361;
+                boxCount = 0;
+            }
+            toBeInserted.Margin = new Thickness(left, top, right, bottom);
+            txtNameInput.Margin = new Thickness(left, top + 93, right, bottom - 3);
+
+            projGrid.Children.Add(toBeInserted);
+            projGrid.Children.Add(txtNameInput);
+            txtNameInput.Focus();
+            txtNameInput.GotFocus += new RoutedEventHandler(txtNameInput_GotFocus);
+            txtNameInput.LostFocus += new RoutedEventHandler(txtNameInput_LostFocus);
+            txtNameInput.KeyUp += new KeyEventHandler(txtNameInput_KeyUp);
+        }
+
+        private void txtNameInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox txtNameInput = sender as TextBox;
+            if (e.Key == Key.Enter)
+            {
+                toBeInserted.ProjectName = txtNameInput.Text;
+                txtNameInput.Visibility = Visibility.Hidden;
+
+                conn = new MySqlConnection(connectionString);
+                conn.Open();
+
+                MySqlCommand insert = new MySqlCommand("INSERT INTO projects VALUES(Proj_ID, @Proj_Name, @Team_Num);", conn);
+                MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
+                insert.Parameters.AddWithValue("Proj_Name", txtNameInput.Text);
+                insert.Parameters.AddWithValue("Team_Num", null);
+
+                insert.ExecuteNonQuery();
+                commit.ExecuteNonQuery();
+            }
+        }
+
+        private void txtNameInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox txtNameInput = sender as TextBox;
+            if (txtNameInput.Text.Equals(""))
+            {
+                txtNameInput.Text = "Enter Name";
+                txtNameInput.Foreground = new SolidColorBrush(Colors.Gray);
+            }
+        }
+
+        private void txtNameInput_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox txtNameInput = sender as TextBox;
+            if(txtNameInput.Text.Equals("Enter Name"))
+            {
+                txtNameInput.Text = "";
+                txtNameInput.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
+>>>>>>> c07ea48... Create Project function complete
     }
 }

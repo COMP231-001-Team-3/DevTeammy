@@ -34,19 +34,19 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <!-- Menu dropdown -->
         <ContextMenu x:Key="cmButton" >
             <MenuItem x:Name="homeItem" Header="Home" Background="White"  Width="200" Height="40" FontSize="16"
                       MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" Click="homeMenu_click">
                 <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
-                <MenuItem.Icon>       
-                    <Grid x:Name="homeIconGrid">                        
+                <MenuItem.Icon>
+                    <Grid x:Name="homeIconGrid">
                         <Image x:Name="homeIconImg" Source="images/house1.jpeg" />
                         <Button x:Name="homeIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
                                 Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
-                        
+
                     </Grid>
                 </MenuItem.Icon>
             </MenuItem>
@@ -72,7 +72,7 @@
                                 Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
                     </Grid>
-                   
+
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Progress Report" Background="White"  Width="200" Height="40" FontSize="16"
@@ -85,7 +85,7 @@
                                 Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
                     </Grid>
-                   
+
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Schedule" Background="White"  Width="200" Height="40" FontSize="16" 
@@ -96,7 +96,7 @@
                         <Button x:Name="ScheduleIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
                                 Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
-                        </Grid>
+                    </Grid>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -149,7 +149,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
+
     <!-- UI Elements' declaration start here -->
     <Grid x:Name="containerGrid" Background="White">
 
@@ -160,9 +160,12 @@
             <Label Content="Teammy" HorizontalAlignment="Left" Margin="35,3,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting"/>
             <Button x:Name="btnMenu" Background="{x:Null}" Margin="5,0,758,10" BorderBrush="{x:Null}" Click="btnMenu_Click">
                 <Button.Content>
-                    <Image Source="images\menuIcon.png"/>
+                    <Grid>
+                        <Image Source="images\menuIcon.png"/>
+
+                    </Grid>
                 </Button.Content>
-                
+
             </Button>
         </Grid>
 
@@ -171,5 +174,17 @@
             <Grid MinHeight="400" x:Name="projGrid" Margin="0,0,0,0"/>
         </ScrollViewer>
         <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
+        <Button x:Name="btnCreateProj" HorizontalAlignment="Left" Margin="601,401,0,0" VerticalAlignment="Top" Width="189" Height="39" FontSize="20" Background="White" BorderBrush="{x:Null}"
+                Click="btnCreateProj_Click">
+            <Button.Content>
+                <DockPanel>
+                    <Grid DockPanel.Dock="Left">
+                        <Ellipse Fill="#F01FFF" Width="25" Height="25"/>
+                        <TextBlock Margin="5,2,-5,-2" Foreground="White">+</TextBlock>
+                    </Grid>
+                    <Label Content="Create Project" Foreground="#FFF01FFF" DockPanel.Dock="Right"/>
+                </DockPanel>
+            </Button.Content>
+        </Button>
     </Grid>
 </Window>
