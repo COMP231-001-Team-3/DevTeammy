@@ -24,5 +24,10 @@ namespace teammy
         {
             InitializeComponent();
         }
+
+        private void mainWindow_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

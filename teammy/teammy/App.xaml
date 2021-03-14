@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:teammy"
              StartupUri="login.xaml">
     <Application.Resources>
-         
+        <local:MainWindow x:Key="mainInstance"/>
     </Application.Resources>
 </Application>
