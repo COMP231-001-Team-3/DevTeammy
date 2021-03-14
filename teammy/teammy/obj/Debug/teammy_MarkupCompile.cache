@@ -4,23 +4,31 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\
+=======
+C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\obj\Debug\
+>>>>>>> 4d54f6d... changed main color
 teammy
 none
 false
 DEBUG;TRACE
 <<<<<<< HEAD
+<<<<<<< HEAD
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\App.xaml
+>>>>>>> 4d54f6d... changed main color
 2-419118988
 =======
 11151548125
 >>>>>>> 5d67e77... Fixed startup errors
 
 7-1456546696
-1361861584214
+136-1892453458
 login.xaml;MainWindow.xaml;
 =======
 2-1939165864

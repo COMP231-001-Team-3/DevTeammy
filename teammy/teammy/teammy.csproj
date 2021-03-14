@@ -181,7 +181,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Resource Include="images\menuIcon.png" />
+=======
+    <Resource Include="images\jelly.jpg" />
+>>>>>>> 4d54f6d... changed main color
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\BG.png" />
@@ -192,6 +196,7 @@
     <Resource Include="images\Team.png" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Resource Include="images\jelly.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +225,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\boards1.jpeg" />
+=======
+    <Resource Include="images\menuIcon.png" />
+>>>>>>> 4d54f6d... changed main color
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
