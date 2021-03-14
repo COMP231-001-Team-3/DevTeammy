@@ -27,6 +27,7 @@ login.xaml;MainWindow.xaml;
 =======
 =======
 D:\Last Semester\Teammy\New folder\teammy\teammy\App.xaml
+<<<<<<< HEAD
 >>>>>>> e2fc073... Menu items stylized
 32065141461
 >>>>>>> 940a552... Custom Project Control done
@@ -44,6 +45,13 @@ CreateProject.xaml;MainWindow.xaml;
 >>>>>>> 71a88d4... Project cards retrieved from DB & Displayed
 CreateProject.xaml;MainWindow.xaml;ProjectBox.xaml;
 >>>>>>> 940a552... Custom Project Control done
+=======
+31257597642
+
+8-2099296691
+118-703174741
+CreateProject.xaml;MainWindowTeammy.xaml;ProjectBox.xaml;
+>>>>>>> 11e363c... Menu Completed
 
 False
 

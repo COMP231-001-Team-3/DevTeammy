@@ -3,6 +3,11 @@ using MySql.Data.MySqlClient;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+<<<<<<< HEAD
+=======
+using System.Windows.Controls;
+using System.Windows.Navigation;
+>>>>>>> 11e363c... Menu Completed
 
 namespace teammy
 {
@@ -11,12 +16,15 @@ namespace teammy
     /// </summary>
     public partial class CreateProject : Window
     {
+        
         #region Fields
         //Hosted DB connection string
         private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
 
         //Colors for project cards
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
+
+        public object Frame { get; private set; }
         #endregion
 
         #region Constructor
@@ -161,6 +169,15 @@ namespace teammy
         }
 =======
         #endregion
+<<<<<<< HEAD
 >>>>>>> 438712a... Added comments for readability
+=======
+
+        private void homeMenu_click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            (Application.Current.Resources["mainInstance"] as Window).Show();
+        }
+>>>>>>> 11e363c... Menu Completed
     }
 }

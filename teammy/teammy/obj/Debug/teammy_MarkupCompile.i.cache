@@ -32,13 +32,21 @@ CreateProject.xaml;MainWindow.xaml;
 =======
 =======
 D:\Last Semester\Teammy\New folder\teammy\teammy\App.xaml
+<<<<<<< HEAD
 >>>>>>> e2fc073... Menu items stylized
 32065141461
+=======
+31257597642
+>>>>>>> 11e363c... Menu Completed
 
-9500680909
+91353311238
 14-430030424
+<<<<<<< HEAD
 CreateProject.xaml;MainWindow.xaml;ProjectBox.xaml;
 >>>>>>> 90b9222... Scroll enabled for project cards
+=======
+CreateProject.xaml;MainWindowTeammy.xaml;ProjectBox.xaml;
+>>>>>>> 11e363c... Menu Completed
 
-True
+False
 
