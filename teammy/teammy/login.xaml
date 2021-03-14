@@ -18,7 +18,7 @@
         <Label x:Name="passwordLabel" Content="Password" HorizontalAlignment="Left" Margin="430,264,0,0" VerticalAlignment="Top" FontSize="22"/>
         <Label x:Name="noticeLabel" Content="Please Enter Your credentials to login" HorizontalAlignment="Left" Margin="430,76,0,0" VerticalAlignment="Top" FontSize="30" Foreground="#FFFDB237"/>
         <Label x:Name="welcomeLable" Content="Welcome Back!" HorizontalAlignment="Left" Margin="41,109,0,0" VerticalAlignment="Top" FontSize="36"/>
-        <Button x:Name="signinBtn" Content="Sing In" HorizontalAlignment="Left" Margin="430,395,0,0" VerticalAlignment="Top" Width="123" FontSize="24" Background="#FFFDB237" Foreground="White">
+        <Button x:Name="signinBtn" Content="Sing In" HorizontalAlignment="Left" Margin="430,395,0,0" VerticalAlignment="Top" Width="123" FontSize="24" Background="#FFFDB237" Foreground="White" Click="signinBtn_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20"/>
