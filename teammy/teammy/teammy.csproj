@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ColorToBrushConverter.cs" />
+    <Compile Include="NameToCharsConverter.cs" />
     <Compile Include="ProjectBox.xaml.cs">
       <DependentUpon>ProjectBox.xaml</DependentUpon>
     </Compile>
