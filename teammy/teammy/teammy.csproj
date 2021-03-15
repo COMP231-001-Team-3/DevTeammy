@@ -57,6 +57,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ColorToBrushConverter.cs" />
+    <Compile Include="ProjectDetail\NewCategory.xaml.cs">
+      <DependentUpon>NewCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectDetail\ProjBoard.xaml.cs">
+      <DependentUpon>ProjBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProjectBox.xaml.cs">
       <DependentUpon>ProjectBox.xaml</DependentUpon>
     </Compile>
@@ -79,12 +85,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProjectDetail\NewCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProjectDetail\ProjBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProjectBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProjectDetail\TaskBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProjectDetail\TaskBox.xaml.cs">
+      <DependentUpon>TaskBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -129,6 +150,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\protoNaturBg2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\done.png" />
+    <Resource Include="images\notStarted.png" />
+    <Resource Include="images\priority 1.png" />
+    <Resource Include="images\priority2.png" />
+    <Resource Include="images\priority3.png" />
+    <Resource Include="images\underProgress.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
