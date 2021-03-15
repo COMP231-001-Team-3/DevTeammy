@@ -40,7 +40,10 @@ namespace teammy
         }
         private void addTask(object sender, RoutedEventArgs e)
         {
-            
+            ProjectDetail.TaskBox taskbox = new ProjectDetail.TaskBox();
+            taStackPanel.Children.Add(taskbox);
+
+
         }
 
         private void btnCloseC_Click(object sender, RoutedEventArgs e)

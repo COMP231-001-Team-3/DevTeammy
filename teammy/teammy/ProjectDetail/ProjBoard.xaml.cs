@@ -126,6 +126,7 @@ namespace teammy
         private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
         {
             add_newCategory();
+            
         }
         private void add_newCategory()
         {

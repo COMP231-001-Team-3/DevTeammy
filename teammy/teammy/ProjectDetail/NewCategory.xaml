@@ -64,7 +64,9 @@
     </UserControl.Resources>
     <Grid x:Name="containerGrid">
         <Rectangle x:Name="categoryRect" Fill="White" Height="243" Stroke="#FF1E1922" VerticalAlignment="Top" Margin="2,24,-9,0" HorizontalAlignment="Left" Width="220"/>
-        <ScrollViewer MaxHeight="382" Margin="2,25,1,0" RenderTransformOrigin="0.5,0.5"/>
+        <ScrollViewer MaxHeight="382" Margin="2,25,1,0" RenderTransformOrigin="0.5,0.5">
+            <StackPanel x:Name="taStackPanel" Orientation="Vertical"></StackPanel>
+        </ScrollViewer>
         <TextBox x:Name="txtCategroyName" HorizontalAlignment="Left" Text="{Binding Path=CategoryName}" Height="24" Margin="2,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="189" TextChanged="txtCategroyName_TextChanged">
             <TextBox.Background>
                 <SolidColorBrush Color="Azure" Opacity="0.5" />
