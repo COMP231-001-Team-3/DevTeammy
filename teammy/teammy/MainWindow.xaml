@@ -220,12 +220,17 @@
             </DataGrid>
         </GroupBox>
 
-        <GroupBox x:Name="ComingGroup" HorizontalAlignment="Left" Height="217" Margin="359,363,0,0" VerticalAlignment="Top" Width="593" Foreground="#FF262625" BorderBrush="#FF181818"  BorderThickness="2">
+        <GroupBox x:Name="ComingGroup" HorizontalAlignment="Left"  Height="217" Margin="359,363,0,0" VerticalAlignment="Top" Width="593" Foreground="#FF262625" BorderBrush="#FF181818"  BorderThickness="2">
 
             <GroupBox.Header>
                 <TextBlock x:Name="text2" FontSize="14" Foreground="White" FontWeight="Bold" FontFamily="Yu Gothic" Background="#FFCE82E8" Width="500" Height="30" Margin="0,0,0,1.2">Coming Up</TextBlock>
             </GroupBox.Header>
-            <DataGrid x:Name="ComingDatagrid" HorizontalAlignment="Left" Height="180" Margin="22,0,0,-1.6" VerticalAlignment="Top" Width="539" FontSize="14" />
+            <DataGrid x:Name="ComingDatagrid" DataGrid.GridLinesVisibility="None" HorizontalAlignment="Left" Height="180" Margin="22,0,0,-1.6" VerticalAlignment="Top" Width="539" FontSize="14" AutoGenerateColumns="False" HeadersVisibility="None" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name"  Binding="{Binding taskname}" Width="100"/>
+                <DataGridTextColumn Header="Due date" Binding="{Binding duedate}" Width="100"/>
+            </DataGrid.Columns>
+            </DataGrid>
         </GroupBox>
 
 

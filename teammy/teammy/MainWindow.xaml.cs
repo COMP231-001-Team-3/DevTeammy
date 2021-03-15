@@ -29,8 +29,7 @@ namespace teammy
         {
             InitializeComponent();
             displaying_assigntome();
-           
-
+            displaying_comingup();
         }
 
         public void displaying_assigntome()
@@ -58,8 +57,30 @@ namespace teammy
             AssignedtomeDatagrid.ItemsSource = list;
         }
 
+        public void displaying_comingup()
+        {
+            ObservableCollection<TasksAssignedtome> list = new ObservableCollection<TasksAssignedtome>();
+            //DB connection
+            string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
 
+            //Getting list of assigned tasks by userid
+            MySqlCommand cmd = new MySqlCommand("Select task_name, due_date,progress_code FROM tasks NATURAL JOIN assignees NATURAL JOIN team_mates NATURAL JOIN users WHERE user_name = @nameUser AND due_date < (NOW() + INTERVAL 7 DAY)", conn);
+            cmd.Parameters.AddWithValue("nameUser", currentUser.Username);
 
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            using (reader)
+            {
+                while (reader.Read())
+                {
+                    list.Add(new TasksAssignedtome { taskname = (string)reader["task_name"], duedate = reader["due_date"].ToString() });
+                }
+            }
+            ComingDatagrid.ItemsSource = list;
+        }
+            
         private void mainWindow_Closed(object sender, EventArgs e)
         {
             Application.Current.Shutdown();

@@ -13,7 +13,7 @@ namespace teammy
             set;
             get;
         }
-        public string duedata
+        public string duedate
         {
             set;
             get;
