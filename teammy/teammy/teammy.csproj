@@ -57,6 +57,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ColorToBrushConverter.cs" />
+    <Compile Include="ProjectDetail\NewCategory.xaml.cs">
+      <DependentUpon>NewCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectDetail\ProjBoard.xaml.cs">
+      <DependentUpon>ProjBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProjectBox.xaml.cs">
       <DependentUpon>ProjectBox.xaml</DependentUpon>
     </Compile>
@@ -79,6 +85,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProjectDetail\NewCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProjectDetail\ProjBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProjectBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,5 +144,6 @@
   <ItemGroup>
     <Resource Include="images\protoNaturBg2.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
