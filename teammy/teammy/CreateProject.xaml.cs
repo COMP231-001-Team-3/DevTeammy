@@ -22,24 +22,61 @@ namespace teammy
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
         //Margins indicate position of each box to be placed
-        int left = 0, top = 0, right = 361, bottom = 260;
+        int left, top, right, bottom;
         int boxCount = 0;
+        int totalBoxes = 0;
         ProjectBox toBeInserted;
         MySqlConnection conn;
+
+        TextBox txtNameInput;
         #endregion
 
         #region Constructor
         public CreateProject()
         {
             InitializeComponent();
+            LoadProjects();
+            cmbTeams.DropDownClosed += new EventHandler(cmbTeams_DropDownClosed);
+        }
+        #endregion
+
+        private void LoadProjects()
+        {
+            left = 0;
+            right = 361;
+            top = 0;
+            bottom = 260;
+            boxCount = 0;
+            totalBoxes = 0;
+            projGrid.Children.Clear();
 
             //Connection and data retrieval starts here    
             conn = new MySqlConnection(connectionString);
             conn.Open();
-            MySqlCommand cmd = new MySqlCommand("SELECT Proj_Name FROM projects", conn);
-            MySqlDataReader reader = cmd.ExecuteReader();
 
-            using (reader)
+            if(cmbTeams.Items.Count == 0)
+            {
+                MySqlCommand getTeams = new MySqlCommand("SELECT Team_Name FROM teams", conn);
+                MySqlDataReader teamsReader = getTeams.ExecuteReader();
+
+                using (teamsReader)
+                {
+                    string teamName;
+                    while (teamsReader.Read())
+                    {
+                        teamName = teamsReader[0].ToString();
+                        cmbTeams.Items.Add(teamName);
+                    }
+                }
+                cmbTeams.SelectedIndex = 0;
+            }
+            
+
+            MySqlCommand getProjects = new MySqlCommand("SELECT Proj_Name FROM projects NATURAL JOIN teams WHERE Team_Name = @nameTeam", conn);
+            getProjects.Parameters.AddWithValue("nameTeam", cmbTeams.SelectedItem.ToString());
+            MySqlDataReader projectsReader = getProjects.ExecuteReader();
+
+            using (projectsReader)
             {
                 //Custom Control developed for this app
                 ProjectBox project;
@@ -49,12 +86,13 @@ namespace teammy
                 string projName;
 
                 //Loop to read through results from query
-                while (reader.Read())
+                while (projectsReader.Read())
                 {
-                    projName = reader[0].ToString();
-                    
+                    totalBoxes++;
+                    projName = projectsReader[0].ToString();
+
                     //Creation & Initialization of ProjectBox
-                    project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack= backColors[rd.Next(0, 18)] };
+                    project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack = backColors[rd.Next(0, 18)] };
 
                     //Adds the newly created ProjectBox to the Grid within the ScrollViewer
                     projGrid.Children.Add(project);
@@ -62,9 +100,9 @@ namespace teammy
                     //Updates margin for the next box
                     left += 175;
                     right -= 175;
-                    
+
                     //If 3 boxes have been created...then
-                    if(boxCount == 2)
+                    if (boxCount == 2)
                     {
                         //Margin updates for a new ProjectBox in a new row
                         top += 132;
@@ -78,9 +116,8 @@ namespace teammy
                         boxCount++;
                     }
                 }
-            } // Data retrieval ends here
+            }
         }
-        #endregion
 
         #region Title Bar Button Event Handlers
 
@@ -156,11 +193,25 @@ namespace teammy
 
         private void btnCreateProj_Click(object sender, RoutedEventArgs e)
         {
+            btnCreateProj.Visibility = Visibility.Hidden;
+            btnDone.Visibility = Visibility.Visible;
+            btnCancel.Visibility = Visibility.Visible;
+
+            if(++totalBoxes == 10)
+            {
+                totalBoxes--;
+                MessageBox.Show("The maximum limit for projects per team is 9!", "Max projects completed", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             Random rd = new Random();
             toBeInserted = new ProjectBox() { ProjectProfileBack=backColors[rd.Next(0, backColors.Length - 1)]};
-            TextBox txtNameInput = new TextBox() { Height = 25, Width = 120, FontSize = 16};
-            //{ Text = "Enter Project Name", Foreground = new SolidColorBrush(Colors.Gray)}
-            if (boxCount == 0)
+            txtNameInput = new TextBox() { Height = 25, Width = 120, FontSize = 16 };            
+            
+            toBeInserted.Margin = new Thickness(left, top, right, bottom);
+            txtNameInput.Margin = new Thickness(left, top + 93, right, bottom - 3);
+
+            if (boxCount == 2)
             {
                 //Margin updates for a new ProjectBox in a new row
                 top += 132;
@@ -169,8 +220,13 @@ namespace teammy
                 right = 361;
                 boxCount = 0;
             }
-            toBeInserted.Margin = new Thickness(left, top, right, bottom);
-            txtNameInput.Margin = new Thickness(left, top + 93, right, bottom - 3);
+            else
+            {
+                //Updates margin for the next box
+                left += 175;
+                right -= 175;
+                boxCount++;
+            }            
 
             projGrid.Children.Add(toBeInserted);
             projGrid.Children.Add(txtNameInput);
@@ -178,11 +234,63 @@ namespace teammy
             txtNameInput.GotFocus += new RoutedEventHandler(txtNameInput_GotFocus);
             txtNameInput.LostFocus += new RoutedEventHandler(txtNameInput_LostFocus);
             txtNameInput.KeyUp += new KeyEventHandler(txtNameInput_KeyUp);
+
+            btnCreateProj.Visibility = Visibility.Hidden;
+        }
+
+        private void cmbTeams_DropDownClosed(object sender, EventArgs e)
+        {
+            LoadProjects();
+        }
+
+        private void btnDone_Click(object sender, RoutedEventArgs e)
+        {
+            toBeInserted.ProjectName = txtNameInput.Text;
+            txtNameInput.Visibility = Visibility.Hidden;
+
+            conn = new MySqlConnection(connectionString);
+            conn.Open();
+            MySqlCommand insert = new MySqlCommand("INSERT INTO projects VALUES(Proj_ID, @Proj_Name, (SELECT Team_ID from teams WHERE Team_Name = @nameTeam));", conn);
+            MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
+            insert.Parameters.AddWithValue("Proj_Name", txtNameInput.Text);
+            insert.Parameters.AddWithValue("nameTeam", cmbTeams.SelectedItem.ToString());
+
+            insert.ExecuteNonQuery();
+            commit.ExecuteNonQuery();
+
+            btnDone.Visibility = Visibility.Hidden;
+            btnCancel.Visibility = Visibility.Hidden;
+            btnCreateProj.Visibility = Visibility.Visible;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            projGrid.Children.Remove(toBeInserted);
+            projGrid.Children.Remove(txtNameInput);
+
+            if(boxCount == 0)
+            {
+                boxCount = 2;
+                left = 350;
+                right = 11;
+                top -= 132;
+                bottom += 132;
+            }
+            else
+            {
+                left -= 175;
+                right += 175;
+                --boxCount;
+            }
+            --totalBoxes;
+
+            btnDone.Visibility = Visibility.Hidden;
+            btnCancel.Visibility = Visibility.Hidden;
+            btnCreateProj.Visibility = Visibility.Visible;
         }
 
         private void txtNameInput_KeyUp(object sender, KeyEventArgs e)
         {
-            TextBox txtNameInput = sender as TextBox;
             if (e.Key == Key.Enter)
             {
                 toBeInserted.ProjectName = txtNameInput.Text;
@@ -191,19 +299,22 @@ namespace teammy
                 conn = new MySqlConnection(connectionString);
                 conn.Open();
 
-                MySqlCommand insert = new MySqlCommand("INSERT INTO projects VALUES(Proj_ID, @Proj_Name, @Team_Num);", conn);
+                MySqlCommand insert = new MySqlCommand("INSERT INTO projects VALUES(Proj_ID, @Proj_Name, (SELECT Team_ID from teams WHERE Team_Name = @nameTeam));", conn);
                 MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
                 insert.Parameters.AddWithValue("Proj_Name", txtNameInput.Text);
-                insert.Parameters.AddWithValue("Team_Num", null);
+                insert.Parameters.AddWithValue("nameTeam", cmbTeams.SelectedItem.ToString());
 
                 insert.ExecuteNonQuery();
                 commit.ExecuteNonQuery();
+
+                btnDone.Visibility = Visibility.Hidden;
+                btnCancel.Visibility = Visibility.Hidden;
+                btnCreateProj.Visibility = Visibility.Visible;
             }
         }
 
         private void txtNameInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox txtNameInput = sender as TextBox;
             if (txtNameInput.Text.Equals(""))
             {
                 txtNameInput.Text = "Enter Name";
@@ -213,7 +324,6 @@ namespace teammy
 
         private void txtNameInput_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox txtNameInput = sender as TextBox;
             if(txtNameInput.Text.Equals("Enter Name"))
             {
                 txtNameInput.Text = "";

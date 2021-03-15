@@ -1,0 +1,34 @@
+﻿<Window x:Class="teammy.login"
+        x:Name="loginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:teammy"
+        mc:Ignorable="d"
+        Title="login"  Height="620" Width="1000" Closed="loginWindow_Closed"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,1,-0.4,-0.6">
+        <Grid.Background>
+            <ImageBrush ImageSource="images\BG.png"/>
+        </Grid.Background>
+        <Label Content="Login" HorizontalAlignment="Left" Margin=
+"0,0,-190.4,0" VerticalAlignment="Top"  FontSize="30" Background="#FF4FC6A2" Width="984" FontFamily="Arial" />
+        <TextBox x:Name="usernameInput" HorizontalAlignment="Left" Height="49" Margin="430,198,0,0" TextWrapping="Wrap" Text="Enter your user name" VerticalAlignment="Top" Width="362" Opacity="0.8" FontSize="18" Foreground="Gray" GotFocus="usernameInput_GotFocus" LostFocus="usernameInput_LostFocus"/>
+        <PasswordBox x:Name="passwordInput" Height="50" Width="363"  Margin="430,310,0,0" LostFocus="passwordInput_LostFocus"
+          HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.8" FontSize="18"/>
+        <TextBox x:Name="passwordPlaceholder" HorizontalAlignment="Left" Height="49" Margin="430,311,0,0" TextWrapping="Wrap" Text="Enter your Password" VerticalAlignment="Top" Width="362" Opacity="0.8" FontSize="18" Foreground="Gray" GotFocus="passwordPlaceholder_GotFocus"/>
+        <Label x:Name="usernameLabel" Content="Username" HorizontalAlignment="Left" Margin="430,153,0,0" VerticalAlignment="Top" FontSize="22"/>
+        <Label x:Name="passwordLabel" Content="Password" HorizontalAlignment="Left" Margin="430,264,0,0" VerticalAlignment="Top" FontSize="22"/>
+        <Label x:Name="noticeLabel" Content="Please Enter Your credentials to login" HorizontalAlignment="Left" Margin="430,76,0,0" VerticalAlignment="Top" FontSize="30" Foreground="#FFFDB237"/>
+        <Label x:Name="welcomeLable" Content="Welcome Back!" HorizontalAlignment="Left" Margin="41,109,0,0" VerticalAlignment="Top" FontSize="36"/>
+        <Button x:Name="signinBtn" Content="Sign In" HorizontalAlignment="Left" Margin="430,395,0,0" VerticalAlignment="Top" Width="123" FontSize="24" Background="#FFFDB237" Foreground="White" Click="signinBtn_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+    </Grid>
+</Window>

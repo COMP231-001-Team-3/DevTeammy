@@ -24,5 +24,16 @@ namespace teammy
         {
             InitializeComponent();
         }
+
+        private void mainWindow_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            (Application.Current.Resources["createProjInstance"] as Window).Show();
+            Hide();
+        }
     }
 }
