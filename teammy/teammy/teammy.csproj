@@ -132,7 +132,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
     <Page Include="MainWindowTeammy.xaml">
+=======
+    <Compile Include="TasksAssignedtome.cs" />
+    <Compile Include="UserModel.cs" />
+    <Page Include="login.xaml">
+      <SubType>Designer</SubType>
+>>>>>>> c9959c9... "displaying assigned to me tasks"
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

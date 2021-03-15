@@ -316,4 +316,55 @@ D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.csproj.CopyCom
 =======
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.exe
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\teammy.pdb
+<<<<<<< HEAD
 >>>>>>> 5f85293... Error fix: Illegal characters solution error fixed
+=======
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe.config
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\teammy.pdb
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\Renci.SshNet.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\System.Buffers.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\Zstandard.Net.dll
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.pdb
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.xml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.xml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\Renci.SshNet.xml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\System.Buffers.xml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.xml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.g.cs
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\login.g.cs
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.g.cs
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.g.cs
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\App.g.cs
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\App.baml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.baml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\login.baml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.baml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.baml
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\teammy.g.resources
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\teammy.Properties.Resources.resources
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.GenerateResource.cache
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CoreCompileInputs.cache
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
+>>>>>>> c9959c9... "displaying assigned to me tasks"

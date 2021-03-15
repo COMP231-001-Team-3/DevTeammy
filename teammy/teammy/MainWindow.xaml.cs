@@ -1,5 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +24,41 @@ namespace teammy
     /// </summary>
     public partial class MainWindow : Window
     {
+        public UserModel currentUser { get; set; } = Application.Current.Resources["currentUser"] as UserModel;
         public MainWindow()
         {
             InitializeComponent();
+            displaying_assigntome();
+           
+
         }
+
+        public void displaying_assigntome()
+        {
+            ObservableCollection<TasksAssignedtome> list = new ObservableCollection<TasksAssignedtome>();
+            //DB connection
+            string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+
+            //Getting list of assigned tasks by userid
+            MySqlCommand cmd = new MySqlCommand("Select task_name, due_date,progress_code FROM tasks NATURAL JOIN assignees NATURAL JOIN team_mates NATURAL JOIN users WHERE user_name = @nameUser", conn);
+            cmd.Parameters.AddWithValue("nameUser", currentUser.Username);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            using (reader)
+            {
+                
+
+                while (reader.Read())
+                {
+
+                    list.Add(new TasksAssignedtome { taskname = (string)reader["task_name"], progress = (string)reader["progress_code"] });
+                }
+            }
+            AssignedtomeDatagrid.ItemsSource = list;
+        }
+
+
 
         private void mainWindow_Closed(object sender, EventArgs e)
         {

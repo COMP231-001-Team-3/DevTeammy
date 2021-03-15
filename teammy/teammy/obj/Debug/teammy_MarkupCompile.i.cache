@@ -5,14 +5,19 @@ winexe
 C#
 .cs
 <<<<<<< HEAD
+<<<<<<< HEAD
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\
 =======
 C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\obj\Debug\
 >>>>>>> 4d54f6d... changed main color
+=======
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\
+>>>>>>> c9959c9... "displaying assigned to me tasks"
 teammy
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
@@ -57,4 +62,14 @@ CreateProject.xaml;MainWindowTeammy.xaml;ProjectBox.xaml;
 >>>>>>> 11e363c... Menu Completed
 
 False
+=======
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\App.xaml
+4494474348
+
+14-645820089
+1362136499738
+CreateProject.xaml;login.xaml;MainWindow.xaml;ProjectBox.xaml;
+
+True
+>>>>>>> c9959c9... "displaying assigned to me tasks"
 

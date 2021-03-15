@@ -6,6 +6,7 @@ C#
 .cs
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\
 =======
 C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\obj\Debug\
@@ -13,10 +14,14 @@ C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\obj\Debug\
 =======
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\
 >>>>>>> 1cd9fd5... Authentication implemented for boards
+=======
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\
+>>>>>>> c9959c9... "displaying assigned to me tasks"
 teammy
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -71,6 +76,13 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
 
 12870207975
 1361861584214
+=======
+C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\App.xaml
+4494474348
+
+13196539278
+1362136499738
+>>>>>>> c9959c9... "displaying assigned to me tasks"
 CreateProject.xaml;login.xaml;MainWindow.xaml;ProjectBox.xaml;
 >>>>>>> 1cd9fd5... Authentication implemented for boards
 
