@@ -9,10 +9,8 @@
         Title="Teammy" Height="620" Width="1000" WindowStartupLocation="CenterScreen" Closed="mainWindow_Closed">
     <Grid Margin="0,1,-0.4,-0.6">
         <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="446" Margin="30,125,0,0" VerticalAlignment="Top" Width="274"/>
-        <Menu Margin="0,0,0,535" >
-
-<<<<<<< HEAD
         <Menu Margin="0,0,-0.4,363" >
+<<<<<<< HEAD
             <MenuItem Header="Menu" RenderTransformOrigin="-9.436,0.71" FontSize="30" Background="#FF4FC6A2" Width="984" FontFamily="Arial" >
 =======
 
@@ -35,20 +33,38 @@
                         <Image Source="images\Team.png" Height="20" Width="20"/>
                     </MenuItem.Icon>
                 </MenuItem>
+=======
+            <MenuItem Header="Menu" RenderTransformOrigin="-9.436,0.71" FontSize="30" Background="#FFF01FFF" Width="984" Foreground="White" FontFamily="Lucida Handwriting" Height="55" />
+
+            <MenuItem Header="Home">
+                <MenuItem.Icon>
+                    <Image Source="images\Home.png" Height="20" Width="20"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Boards" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <Image Source="images\Board.png" Height="20" Width="20"/>
+                </MenuItem.Icon>
+            </MenuItem>
+>>>>>>> 1cd9fd5... Authentication implemented for boards
+
+            <MenuItem Header="Teams">
+                <MenuItem.Icon>
+                    <Image Source="images\Team.png" Height="20" Width="20"/>
+                </MenuItem.Icon>
+            </MenuItem>
 
 
-                <MenuItem Header="Progress Report">
-                    <MenuItem.Icon>
-                        <Image Source="images\Progress.png" Height="20" Width="20"/>
-                    </MenuItem.Icon>
-                </MenuItem>
+            <MenuItem Header="Progress Report">
+                <MenuItem.Icon>
+                    <Image Source="images\Progress.png" Height="20" Width="20"/>
+                </MenuItem.Icon>
+            </MenuItem>
 
-                <MenuItem Header="Schedule">
-                    <MenuItem.Icon>
-                        <Image Source="images\Schedule.png" Height="20" Width="20"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-
+            <MenuItem Header="Schedule">
+                <MenuItem.Icon>
+                    <Image Source="images\Schedule.png" Height="20" Width="20"/>
+                </MenuItem.Icon>
             </MenuItem>
         </Menu>
         <Label x:Name="welcomeLabel" Content="Welcome Back, User!" HorizontalAlignment="Left" Margin="362,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.644,0.235" FontFamily="Yet R" FontSize="36" FontWeight="Bold" Foreground="#FF1F1F1F"/>

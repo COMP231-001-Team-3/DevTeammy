@@ -118,7 +118,11 @@
 >>>>>>> 71a88d4... Project cards retrieved from DB & Displayed
 =======
     <Compile Include="NameToCharsConverter.cs" />
+<<<<<<< HEAD
 >>>>>>> c07ea48... Create Project function complete
+=======
+    <Compile Include="PrivToVisibConverter.cs" />
+>>>>>>> 1cd9fd5... Authentication implemented for boards
     <Compile Include="ProjectBox.xaml.cs">
       <DependentUpon>ProjectBox.xaml</DependentUpon>
     </Compile>

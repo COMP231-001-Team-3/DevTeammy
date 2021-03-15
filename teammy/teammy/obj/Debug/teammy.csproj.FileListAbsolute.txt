@@ -1,11 +1,27 @@
+<<<<<<< HEAD
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe.config
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.g.cs
+=======
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.g.cs
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\login.g.cs
+>>>>>>> 1cd9fd5... Authentication implemented for boards
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\App.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
+<<<<<<< HEAD
+=======
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\App.baml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.baml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\login.baml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.baml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.baml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.g.resources
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
+>>>>>>> 1cd9fd5... Authentication implemented for boards
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe.config
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.pdb
@@ -113,6 +129,7 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Sys
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+<<<<<<< HEAD
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\App.baml
@@ -218,3 +235,10 @@ C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.C
 C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
 C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
 >>>>>>> 4d54f6d... changed main color
+=======
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.Properties.Resources.resources
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.GenerateResource.cache
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CoreCompileInputs.cache
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
+>>>>>>> 1cd9fd5... Authentication implemented for boards

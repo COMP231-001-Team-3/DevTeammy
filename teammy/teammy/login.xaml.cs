@@ -17,6 +17,12 @@ namespace teammy
         public login()
         {
             InitializeComponent();
+<<<<<<< HEAD
+=======
+
+            Application.Current.Resources["loginInstance"] = this;
+
+>>>>>>> 1cd9fd5... Authentication implemented for boards
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
@@ -30,7 +36,7 @@ namespace teammy
             {
                 while (reader.Read())
                 {
-                    users.Add(new UserModel(reader));
+                    users.Add(new UserModel(reader[1].ToString(), reader[2].ToString(), reader[3].ToString()));
                 }
             }
 
@@ -54,13 +60,11 @@ namespace teammy
                 MessageBox.Show("The username/password entered is incorrect!", "Authentication Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
-            {//showing homepage if authentication succees
+            {//showing homepage if authentication success
+                Application.Current.Resources.Add("currentUser", userEntered);
                 (Application.Current.Resources["mainInstance"] as Window).Show();
                 Hide();
             }
-
-
-
         }
 
         private void usernameInput_GotFocus(object sender, RoutedEventArgs e)

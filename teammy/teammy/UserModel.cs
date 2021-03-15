@@ -9,15 +9,19 @@ namespace teammy
 {
     public class UserModel
     {
-        private int ID { get; set; }
         public string Username { get; set; }
         private string Password { get; set; }
+        public string Privilege { get; set; }
 
-        public UserModel(MySqlDataReader reader)
+        public UserModel()
         {
-            ID = int.Parse(reader[0].ToString());
-            Username = reader[1].ToString();
-            Password = reader[2].ToString();
+
+        }
+        public UserModel(string username, string password, string privilege)
+        {
+            Username = username;
+            Password = password;
+            Privilege = privilege;
         }
 
         public bool VerifyPassword(string passEntered)

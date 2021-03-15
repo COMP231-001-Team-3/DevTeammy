@@ -30,6 +30,8 @@ namespace teammy
         ProjectBox toBeInserted;
         MySqlConnection conn;
         #endregion
+        public UserModel currentUser { get; set; } = Application.Current.Resources["currentUser"] as UserModel;
+
 
         #region Constructor
         public CreateProject()
@@ -42,7 +44,34 @@ namespace teammy
             MySqlCommand cmd = new MySqlCommand("SELECT Proj_Name FROM projects", conn);
             MySqlDataReader reader = cmd.ExecuteReader();
 
+<<<<<<< HEAD
             using (reader)
+=======
+            if(cmbTeams.Items.Count == 0)
+            {
+                MySqlCommand getTeams = new MySqlCommand("SELECT Team_Name FROM teams NATURAL JOIN team_mates NATURAL JOIN users WHERE user_name = @nameUser", conn);
+                getTeams.Parameters.AddWithValue("nameUser", currentUser.Username);
+                MySqlDataReader teamsReader = getTeams.ExecuteReader();
+
+                using (teamsReader)
+                {
+                    string teamName;
+                    while (teamsReader.Read())
+                    {
+                        teamName = teamsReader[0].ToString();
+                        cmbTeams.Items.Add(teamName);
+                    }
+                }
+                cmbTeams.SelectedIndex = 0;
+            }
+            
+
+            MySqlCommand getProjects = new MySqlCommand("SELECT Proj_Name FROM projects NATURAL JOIN teams WHERE Team_Name = @nameTeam", conn);
+            getProjects.Parameters.AddWithValue("nameTeam", cmbTeams.SelectedItem.ToString());
+            MySqlDataReader projectsReader = getProjects.ExecuteReader();
+
+            using (projectsReader)
+>>>>>>> 1cd9fd5... Authentication implemented for boards
             {
                 //Custom Control developed for this app
                 ProjectBox project;
