@@ -4,17 +4,26 @@
 winexe
 C#
 .cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\
+C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\obj\Debug\
 teammy
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
 4494474348
 
 11697227153
 1361861584214
 CreateProject.xaml;login.xaml;MainWindow.xaml;ProjectBox.xaml;
+=======
+C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\App.xaml
+2-419118988
+
+7-1456546696
+136-1892453458
+login.xaml;MainWindow.xaml;
+>>>>>>> 4d54f6dd7a4e98f48cdb107ed278544683370851
 
 False
 

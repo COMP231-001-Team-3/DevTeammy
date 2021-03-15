@@ -8,12 +8,16 @@
         mc:Ignorable="d"
         Title="Teammy" Height="620" Width="1000" WindowStartupLocation="CenterScreen" Closed="mainWindow_Closed">
     <Grid Margin="0,1,-0.4,-0.6">
-        <Grid.Background>
-            <ImageBrush ImageSource="images\BG.png"/>
-        </Grid.Background>
+        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="446" Margin="30,125,0,0" VerticalAlignment="Top" Width="274"/>
+        <Menu Margin="0,0,0,535" >
 
+<<<<<<< HEAD
         <Menu Margin="0,0,-0.4,363" >
             <MenuItem Header="Menu" RenderTransformOrigin="-9.436,0.71" FontSize="30" Background="#FF4FC6A2" Width="984" FontFamily="Arial" >
+=======
+
+            <MenuItem Header="Menu" RenderTransformOrigin="-9.436,0.71" FontSize="30" Background="#FFF01FFF" Width="984" Foreground="White" FontFamily="Lucida Handwriting" Height="55" >
+>>>>>>> 4d54f6dd7a4e98f48cdb107ed278544683370851
 
                 <MenuItem Header="Home">
                     <MenuItem.Icon>
@@ -47,12 +51,12 @@
 
             </MenuItem>
         </Menu>
-        <Label x:Name="welcomeLabel" Content="Welcome Back, User!" HorizontalAlignment="Left" Margin="42,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.644,0.235" FontFamily="Yet R" FontSize="36" FontWeight="Bold" Foreground="#FF1F1F1F"/>
+        <Label x:Name="welcomeLabel" Content="Welcome Back, User!" HorizontalAlignment="Left" Margin="362,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.644,0.235" FontFamily="Yet R" FontSize="36" FontWeight="Bold" Foreground="#FF1F1F1F"/>
 
         <GroupBox x:Name="AssignedGroup" HorizontalAlignment="Left" Height="217" Margin="359,125,0,0" VerticalAlignment="Top" Width="593" Foreground="#FF262625" BorderBrush="#FF181818"  BorderThickness="2">
 
             <GroupBox.Header>
-                <TextBlock x:Name="text1" FontSize="14" Foreground="White" FontWeight="Bold" FontFamily="Yu Gothic" Background="#FFFDB237" Width="500" Height="30" Margin="0,0,0,1.2">Assigned to me</TextBlock>
+                <TextBlock x:Name="text1" FontSize="14" Foreground="White" FontWeight="Bold" FontFamily="Yu Gothic" Background="#FFCE82E8" Width="500" Height="30" Margin="0,0,0,1.2">Assigned to me</TextBlock>
             </GroupBox.Header>
             <DataGrid x:Name="AssignedtomeDatagrid" HorizontalAlignment="Left" Height="180" Margin="26,0,0,-1.6" VerticalAlignment="Top" Width="529" Background="#FFEAE0E0"/>
         </GroupBox>
@@ -60,7 +64,7 @@
         <GroupBox x:Name="ComingGroup" HorizontalAlignment="Left" Height="217" Margin="359,363,0,0" VerticalAlignment="Top" Width="593" Foreground="#FF262625" BorderBrush="#FF181818"  BorderThickness="2">
 
             <GroupBox.Header>
-                <TextBlock x:Name="text2" FontSize="14" Foreground="White" FontWeight="Bold" FontFamily="Yu Gothic" Background="#FF434CBF" Width="500" Height="30" Margin="0,0,0,1.2">Coming Up</TextBlock>
+                <TextBlock x:Name="text2" FontSize="14" Foreground="White" FontWeight="Bold" FontFamily="Yu Gothic" Background="#FFCE82E8" Width="500" Height="30" Margin="0,0,0,1.2">Coming Up</TextBlock>
             </GroupBox.Header>
             <DataGrid x:Name="ComingDatagrid" HorizontalAlignment="Left" Height="180" Margin="22,0,0,-1.6" VerticalAlignment="Top" Width="539" Background="#FFEAE0E0"/>
         </GroupBox>
