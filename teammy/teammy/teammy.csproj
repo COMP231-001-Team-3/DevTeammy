@@ -166,6 +166,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\jelly.jpg" />
+    <Resource Include="images\protoNaturBg.jpg" />
+    <Resource Include="images\protoNaturBg2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="images\menuIcon.png" />
     <Resource Include="images\BG.png" />
     <Resource Include="images\Board.png" />
@@ -173,11 +178,9 @@
     <Resource Include="images\Progress.png" />
     <Resource Include="images\Schedule.png" />
     <Resource Include="images\Team.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\jelly.jpg" />
-    <Resource Include="images\protoNaturBg.jpg" />
-    <Resource Include="images\protoNaturBg2.jpg" />
+    <Resource Include="images\protoDone.png" />
+    <Resource Include="images\cancel.png" />
+    <Resource Include="images\menuIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\whitehome.jpeg" />
@@ -187,12 +190,6 @@
     <Resource Include="images\Progress1.jpeg" />
     <Resource Include="images\team1.jpeg" />
     <Resource Include="images\boards1.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\protoDone.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\cancel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
