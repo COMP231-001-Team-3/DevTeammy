@@ -184,7 +184,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <Resource Include="images\menuIcon.png" />
 =======
@@ -232,6 +234,17 @@
 =======
     <Resource Include="images\menuIcon.png" />
 >>>>>>> 4d54f6d... changed main color
+=======
+    <Resource Include="images\cancel.png" />
+    <Resource Include="images\jelly.jpg" />
+    <Resource Include="images\menuIcon.png" />
+    <Resource Include="images\protoBoards.png" />
+    <Resource Include="images\protoDone.png" />
+    <Resource Include="images\protoHome.png" />
+    <Resource Include="images\protoProgress.jpg" />
+    <Resource Include="images\protoSchedule.png" />
+    <Resource Include="images\protoTeams.png" />
+>>>>>>> bb9e98b... Custom Panel implemented for login and Home
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

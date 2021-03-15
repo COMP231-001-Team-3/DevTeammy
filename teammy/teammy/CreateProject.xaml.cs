@@ -135,7 +135,11 @@ namespace teammy
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             ContextMenu cm = this.FindResource("cmButton") as ContextMenu;
+=======
+            ContextMenu cm = FindResource("cmButton") as ContextMenu;
+>>>>>>> bb9e98b... Custom Panel implemented for login and Home
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
  }

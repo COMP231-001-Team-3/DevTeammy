@@ -10,6 +10,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg.png")]
 =======
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg%20.png")]
@@ -22,5 +23,16 @@
 =======
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/jelly.jpg")]
 >>>>>>> ce597e9... Title bar done
+=======
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cancel.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/jelly.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/menuicon.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/protoboards.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/protodone.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/protohome.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/protoprogress.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/protoschedule.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/prototeams.png")]
+>>>>>>> bb9e98b... Custom Panel implemented for login and Home
 
 

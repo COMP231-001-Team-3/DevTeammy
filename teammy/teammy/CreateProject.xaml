@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:teammy"
         mc:Ignorable="d" Height="450" Width="800"
         WindowStartupLocation="CenterScreen" 
-        WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" AllowsTransparency="True" DataContext="{Binding RelativeSource={RelativeSource self}}">
+        WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Window.Resources>
         <local:PrivToVisibConverter x:Key="PrivConverter"/>
         <Style x:Key="mouseOverStyle" TargetType="Button">
@@ -43,7 +43,7 @@
                 <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                 <MenuItem.Icon>
                     <Grid x:Name="homeIconGrid">
-                        <Image x:Name="homeIconImg" Source="images/house1.jpeg" />
+                        <Image x:Name="homeIconImg" Source="images/protoHome.png" />
                         <Button x:Name="homeIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
                                 Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -56,7 +56,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="boardsIconGrid">
-                        <Image x:Name="BoardsIconImg" Source="images/boards1.jpeg" />
+                        <Image x:Name="BoardsIconImg" Source="images/protoBoards.png" />
                         <Button x:Name="BoardsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
                                 Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -68,7 +68,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="TeamsIconGrid">
-                        <Image x:Name="TeamsIconImg" Source="images/team1.jpeg" />
+                        <Image x:Name="TeamsIconImg" Source="images/protoTeams.png" />
                         <Button x:Name="TeamsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
                                 Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -81,7 +81,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="ProgressIconGrid">
-                        <Image x:Name="ProgressIconImg" Source="images/Progress1.jpeg" />
+                        <Image x:Name="ProgressIconImg" Source="images/protoProgress.jpg" />
                         <Button x:Name="ProgressIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
                                 Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -93,7 +93,7 @@
                     MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave"   >
                 <MenuItem.Icon>
                     <Grid x:Name="ScheduleIconGrid">
-                        <Image x:Name="ScheduleIconImg" Source="images/calendar1.jpeg" />
+                        <Image x:Name="ScheduleIconImg" Source="images/protoSchedule.png" />
                         <Button x:Name="ScheduleIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
                                 Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>

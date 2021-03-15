@@ -15,7 +15,7 @@ namespace teammy
             bool emptyName = nameWords[0].Equals("");
 
             //If Project name has two or more words...then
-            if (nameWords.Length >= 2)
+            if (nameWords.Length >= 2 && !nameWords[1].Equals(""))
             {
                 profChars = nameWords[0][0] + "" + nameWords[1][0];
             }

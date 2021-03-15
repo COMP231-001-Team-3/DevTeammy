@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:teammy"
         mc:Ignorable="d"
+<<<<<<< HEAD
         Title="Teammy" Height="620" Width="1000" WindowStartupLocation="CenterScreen" Closed="mainWindow_Closed">
     <Grid Margin="0,1,-0.4,-0.6">
         <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="446" Margin="30,125,0,0" VerticalAlignment="Top" Width="274"/>
@@ -35,38 +36,174 @@
                 </MenuItem>
 =======
             <MenuItem Header="Menu" RenderTransformOrigin="-9.436,0.71" FontSize="30" Background="#FFF01FFF" Width="984" Foreground="White" FontFamily="Lucida Handwriting" Height="55" />
+=======
+        Title="Teammy" Height="620" Width="1000" WindowStartupLocation="CenterScreen" Closed="mainWindow_Closed"
+        WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <Window.Resources>
+        <Style x:Key="mouseOverStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!-- Redefining how a Button's structure is -->
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Rectangle x:Name="background"
+                                   Fill="{TemplateBinding Background}"/>
+                                <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <!-- Extra Hover handler for preventing complete blockout of icon image -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="background" Property="Fill" Value="LightBlue"/>
+                                <Setter TargetName="background" Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+>>>>>>> bb9e98b... Custom Panel implemented for login and Home
 
-            <MenuItem Header="Home">
+        <!-- Menu dropdown -->
+        <ContextMenu x:Key="cmButton" >
+            <MenuItem x:Name="homeItem" Header="Home" Background="White"  Width="200" Height="40" FontSize="16"
+                      MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" Click="homeMenu_click">
+                <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                 <MenuItem.Icon>
-                    <Image Source="images\Home.png" Height="20" Width="20"/>
+                    <Grid x:Name="homeIconGrid">
+                        <Image x:Name="homeIconImg" Source="images/protoHome.png" />
+                        <Button x:Name="homeIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIconImg, Path=ActualHeight}"
+                                Width="{Binding ElementName=homeIconImg, Path=ActualWidth}" Background="{x:Null}" 
+                                BorderThickness="0"/>
+
+                    </Grid>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Boards" Click="MenuItem_Click">
+            <MenuItem Header="Boards" Background="White"  Width="200" Height="40" FontSize="16"
+                      MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" Click="MenuItem_Click">
                 <MenuItem.Icon>
-                    <Image Source="images\Board.png" Height="20" Width="20"/>
+                    <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
+                    <Grid x:Name="boardsIconGrid">
+                        <Image x:Name="BoardsIconImg" Source="images/protoBoards.png" />
+                        <Button x:Name="BoardsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=BoardsIconImg, Path=ActualHeight}"
+                                Width="{Binding ElementName=BoardsIconImg, Path=ActualWidth}" Background="{x:Null}" 
+                                BorderThickness="0"/>
+                    </Grid>
                 </MenuItem.Icon>
             </MenuItem>
+<<<<<<< HEAD
 >>>>>>> 1cd9fd5... Authentication implemented for boards
 
             <MenuItem Header="Teams">
+=======
+            <MenuItem Header="Teams" Background="white"  Width="200" Height="40" FontSize="16"
+                      MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave">
+>>>>>>> bb9e98b... Custom Panel implemented for login and Home
                 <MenuItem.Icon>
-                    <Image Source="images\Team.png" Height="20" Width="20"/>
+                    <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
+                    <Grid x:Name="TeamsIconGrid">
+                        <Image x:Name="TeamsIconImg" Source="images/protoTeams.png" />
+                        <Button x:Name="TeamsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=TeamsIconImg, Path=ActualHeight}"
+                                Width="{Binding ElementName=TeamsIconImg, Path=ActualWidth}" Background="{x:Null}" 
+                                BorderThickness="0"/>
+                    </Grid>
+
                 </MenuItem.Icon>
             </MenuItem>
-
-
-            <MenuItem Header="Progress Report">
+            <MenuItem Header="Progress Report" Background="White"  Width="200" Height="40" FontSize="16"
+                      MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave">
                 <MenuItem.Icon>
-                    <Image Source="images\Progress.png" Height="20" Width="20"/>
+                    <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
+                    <Grid x:Name="ProgressIconGrid">
+                        <Image x:Name="ProgressIconImg" Source="images/protoProgress.jpg" />
+                        <Button x:Name="ProgressIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=ProgressIconImg, Path=ActualHeight}"
+                                Width="{Binding ElementName=ProgressIconImg, Path=ActualWidth}" Background="{x:Null}" 
+                                BorderThickness="0"/>
+                    </Grid>
+
                 </MenuItem.Icon>
             </MenuItem>
-
-            <MenuItem Header="Schedule">
+            <MenuItem Header="Schedule" Background="White"  Width="200" Height="40" FontSize="16" 
+                    MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave"   >
                 <MenuItem.Icon>
-                    <Image Source="images\Schedule.png" Height="20" Width="20"/>
+                    <Grid x:Name="ScheduleIconGrid">
+                        <Image x:Name="ScheduleIconImg" Source="images/protoSchedule.png" />
+                        <Button x:Name="ScheduleIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=ScheduleIconImg, Path=ActualHeight}"
+                                Width="{Binding ElementName=ScheduleIconImg, Path=ActualWidth}" Background="{x:Null}" 
+                                BorderThickness="0"/>
+                    </Grid>
                 </MenuItem.Icon>
             </MenuItem>
-        </Menu>
+        </ContextMenu>
+        <Style x:Key="closeButton" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!-- Modifying control template of button to give custom mouseover color -->
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0.1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Mouseover trigger -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="minimizeButton" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontStyle" Value="Oblique"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!-- Modifying control template of button to give custom mouseover color -->
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0.1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Mouseover trigger -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightBlue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0,1,-0.4,-0.6">
+        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="2,0,0.4,563.6" MouseDown="pnlTitle_MouseDown" RenderTransformOrigin="0.5,0.5">
+            <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="965,7,2.6,18.4" Click="btnClose_Click"/>
+            <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="930,7,37.6,18.4" Click="btnMinimize_Click"/>
+            <Label Content="Teammy" HorizontalAlignment="Left" Margin="34,10,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting"/>
+            <Button x:Name="btnMenu" Background="{x:Null}" Margin="0,0,968.6,10.4" BorderBrush="{x:Null}" Click="btnMenu_Click">
+                <Button.Content>
+                    <Grid>
+                        <Image Source="images\menuIcon.png"/>
+                    </Grid>
+                </Button.Content>
+
+            </Button>
+        </Grid>
+
+        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="446" Margin="30,125,0,0" VerticalAlignment="Top" Width="274"/>
         <Label x:Name="welcomeLabel" Content="Welcome Back, User!" HorizontalAlignment="Left" Margin="362,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.644,0.235" FontFamily="Yet R" FontSize="36" FontWeight="Bold" Foreground="#FF1F1F1F"/>
 
         <GroupBox x:Name="AssignedGroup" HorizontalAlignment="Left" Height="217" Margin="359,125,0,0" VerticalAlignment="Top" Width="593" Foreground="#FF262625" BorderBrush="#FF181818"  BorderThickness="2">
