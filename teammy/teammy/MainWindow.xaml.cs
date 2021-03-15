@@ -29,5 +29,11 @@ namespace teammy
         {
             Application.Current.Shutdown();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            (Application.Current.Resources["createProjInstance"] as Window).Show();
+            Hide();
+        }
     }
 }

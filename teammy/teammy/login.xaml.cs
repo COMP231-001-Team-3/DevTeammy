@@ -17,6 +17,9 @@ namespace teammy
         public login()
         {
             InitializeComponent();
+
+            Application.Current.Resources["login"] = this;
+
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
