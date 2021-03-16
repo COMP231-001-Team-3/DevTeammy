@@ -38,36 +38,53 @@
         </Style>
         <!-- Menu dropdown -->
         <ContextMenu x:Key="cmPriority" >
-            <MenuItem x:Name="highItem" Header="High" Background="White"  Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+            <MenuItem x:Name="highItem" Header="High" Background="White"  Width="150" Height="40" FontSize="16" Click="PriorMenuItem_Click">
                 <MenuItem.Icon>
                     <Rectangle Fill="Red" Height="20" Width="40"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="mediumItem" Header="Medium" Background="White"  Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+            <MenuItem x:Name="mediumItem" Header="Medium" Background="White"  Width="150" Height="40" FontSize="16" Click="PriorMenuItem_Click">
                 <MenuItem.Icon>
                     <Rectangle Fill="Yellow" Height="20" Width="40"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="lowItem" Header="Low" Background="White" Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+            <MenuItem x:Name="lowItem" Header="Low" Background="White" Width="150" Height="40" FontSize="16" Click="PriorMenuItem_Click">
                 <MenuItem.Icon>
                     <Rectangle Fill="Blue" Height="20" Width="40"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
+        
+        <!-- Menu dropdown -->
         <ContextMenu x:Key="cmStatus" >
-            <MenuItem x:Name="nsItem" Header="Not Started" Background="White"  Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+            <MenuItem x:Name="nsItem" Header="Not Started" Background="White"  Width="200" Height="40" FontSize="16" Click="StatusMenuItem_Click" MouseEnter="StatusMenuItem_MouseEnter" MouseLeave="StatusMenuItem_MouseLeave">
                 <MenuItem.Icon>
-                    <Image Source=""/>
+                    <Grid>
+                        <Image x:Name="notStartedIcon" Source="../images/notStarted.png"/>
+                        <Button x:Name="notStartedBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=notStartedIcon, Path=ActualHeight}"
+                                Width="{Binding ElementName=notStartedIcon, Path=ActualWidth}" Background="{x:Null}" 
+                                BorderThickness="0"/>
+                    </Grid>                    
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="mediumItem" Header="Medium" Background="White"  Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+            <MenuItem x:Name="ipItem" Header="In Progress" Background="White"  Width="200" Height="40" FontSize="16" Click="StatusMenuItem_Click" MouseEnter="StatusMenuItem_MouseEnter" MouseLeave="StatusMenuItem_MouseLeave">
                 <MenuItem.Icon>
-                    <Rectangle Fill="Yellow" Height="20" Width="40"/>
+                    <Grid>
+                        <Image x:Name="inProgressIcon" Source="../images/progressIcon.jpg"/>
+                        <Button x:Name="inProgressBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=inProgressIcon, Path=ActualHeight}"
+                                Width="{Binding ElementName=inProgressIcon, Path=ActualWidth}" Background="{x:Null}" 
+                                BorderThickness="0"/>
+                    </Grid>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="lowItem" Header="Low" Background="White" Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+            <MenuItem x:Name="coItem" Header="Completed" Background="White" Width="200" Height="40" FontSize="16" Click="StatusMenuItem_Click" MouseEnter="StatusMenuItem_MouseEnter" MouseLeave="StatusMenuItem_MouseLeave">
                 <MenuItem.Icon>
-                    <Rectangle Fill="Blue" Height="20" Width="40"/>
+                    <Grid>
+                        <Image x:Name="completedIcon" Source="../images/complete.png"/>
+                        <Button x:Name="completedBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=completedIcon, Path=ActualHeight}"
+                                Width="{Binding ElementName=completedIcon, Path=ActualWidth}" Background="{x:Null}" 
+                                BorderThickness="0"/>
+                    </Grid>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -81,64 +98,22 @@
             <RowDefinition/>
             <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
-
-        <!-- Represents the container for the card -->
         <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Stroke="#FF1E1922" Width="182" Margin="0,0,-42.667,3.333" Grid.ColumnSpan="2"/>
 
-        <!-- Project Name -->
 
-        <!-- The Background of the Project Profile -->
-
-        <!-- Profile Text (Placed above the Background) -->
-        <!--<TextBox x:Name="txtProfText" Text="" HorizontalAlignment="Left" Margin="235,85,0,0" VerticalAlignment="Top" Width="186" FontFamily="Gill Sans Ultra Bold" Foreground="White" BorderBrush="{x:Null}" Height="60" Background="{x:Null}" FontSize="40"  IsReadOnly="True" IsHitTestVisible="False"/>-->
-
-        <!-- Button that provides mouseover and click events for the project -->
-        <!--<Button x:Name="btnDetails" Content="" HorizontalAlignment="Left" Margin="10,-36,0,-37.666" VerticalAlignment="Top" Width="709" Height="349" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True" Click="btnDetails_Click"/>-->
-        <!--<ComboBox x:Name="statusCombo" ItemsSource="{Binding StatusImages}" HorizontalAlignment="Left" Margin="10,4,-33.667,0" VerticalAlignment="Top" Width="33" Height="21" Grid.Column="1">
-            <ComboBox.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                    <GradientStop Color="#FFF6F6F6" Offset="1"/>
-                </LinearGradientBrush>
-            </ComboBox.Background>
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <Image Source="{Binding Img}"></Image>
-                        <TextBlock Text="{Binding ImgName}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>-->
-        <Border BorderThickness="1" BorderBrush="Black"  Margin="159,5,4.333,60.333" Height="20" Width="20">
-            <Grid x:Name="statusGrid">
-                <Button x:Name="btnStatus" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnStatus_Click" Margin="0,0,0.333,0.333">
-                </Button>
-            </Grid>
-        </Border>
-        <Border BorderThickness="1" BorderBrush="Black" Margin="159,29,4.333,36.333" Height="20" Width="20">
+        <Grid x:Name="statusGrid" Height="30" Width="30" Margin="148,6,5.333,49.333">
+            <Grid.Background>
+                <ImageBrush ImageSource="../images/notStarted.png"/>
+            </Grid.Background>
+            <Button x:Name="btnStatus" BorderThickness="0" Background="Transparent" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnStatus_Click">
+            </Button>
+        </Grid>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="148,45,5.333,10.333" Height="30" Width="30">
             <Grid x:Name="priorityGrid">
                 <Button x:Name="btnPriority" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnPriority_Click" Margin="0,0,0.333,0.333">
                 </Button>
             </Grid>
         </Border>
-
-        <!--<ComboBox x:Name="priorityCombo" ItemsSource="{Binding PriorityImages}" HorizontalAlignment="Left" Margin="144,30,0,0" VerticalAlignment="Top" Width="33" Height="21">
-            <ComboBox.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                    <GradientStop Color="#FFF6F6F6" Offset="1"/>
-                </LinearGradientBrush>
-            </ComboBox.Background>
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <Image Source="{Binding Img}"></Image>
-                        <TextBlock Text="{Binding ImgName}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>-->
         <ComboBox x:Name="assigneeCombo" ItemsSource="{Binding AssigneeImages}" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="62" Height="16" RenderTransformOrigin="0.819,0.659" SelectionChanged="assigneeCombo_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
