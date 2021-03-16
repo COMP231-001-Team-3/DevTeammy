@@ -30,6 +30,7 @@ namespace teammy
             InitializeComponent();
             displaying_assigntome();
             displaying_comingup();
+         
         }
 
         public void displaying_assigntome()
@@ -75,7 +76,7 @@ namespace teammy
             {
                 while (reader.Read())
                 {
-                    list.Add(new TasksAssignedtome { taskname = (string)reader["task_name"], duedate = reader["due_date"].ToString() });
+                    list.Add(new TasksAssignedtome { taskname = (string)reader["task_name"], progress = (string)reader["progress_code"],duedate ="Due on "+ reader["due_date"].ToString() });
                 }
             }
             ComingDatagrid.ItemsSource = list;

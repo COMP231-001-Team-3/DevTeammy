@@ -8,6 +8,7 @@ namespace teammy
 {
     class TasksAssignedtome
     {
+        string Progress;
         public string taskname
         {
             set;
@@ -17,11 +18,20 @@ namespace teammy
         {
             set;
             get;
+          
         }
         public string progress
         {
-            set;
-            get;
+            set
+            {
+                if (value == "NS")
+                {Progress= "images/notstarted.png"; }
+                else if (value == "CO")
+                { Progress = "images/checkmark.png"; }
+                else
+                { Progress = "images/Progress.png"; }
+            }
+            get {return Progress; }
         }
         
 

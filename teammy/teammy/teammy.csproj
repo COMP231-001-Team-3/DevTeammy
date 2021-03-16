@@ -191,7 +191,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="images\notstarted.png" />
+  </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -252,6 +254,12 @@
     <Resource Include="images\protoSchedule.png" />
     <Resource Include="images\protoTeams.png" />
 >>>>>>> bb9e98b... Custom Panel implemented for login and Home
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\checkmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Progress.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
