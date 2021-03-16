@@ -14,17 +14,20 @@
                 <Setter.Value>
                     <!-- Modifying control template of button to give custom mouseover color -->
                     <ControlTemplate TargetType="Button">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border BorderBrush="{x:Null}"
+                        BorderThickness="0">
                             <Grid>
-                                <Rectangle x:Name="background"
-                                   Fill="{TemplateBinding Background}"/>
+                                <Ellipse x:Name="background" Fill="#FFF01FFF"/>
+                                <Label Margin="-3,-21,0,-29.667" Foreground="White" Content="+" FontSize="40" VerticalAlignment="Center" Height="80" RenderTransformOrigin="0.529,0.447"/>
                                 <ContentPresenter
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                <Ellipse Fill="#FFF01FFF"/>
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Grid>
+
+                                </Grid>
+
                             </Grid>
+
                         </Border>
                         <ControlTemplate.Triggers>
                             <!-- Mouseover trigger -->
@@ -110,12 +113,11 @@
         <ScrollViewer MaxHeight="382" Margin="231,64,-1,10" RenderTransformOrigin="0.489,0.49" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
             <StackPanel x:Name="caStackPanel" Orientation="Horizontal">
                 <!--<Grid MinHeight="400" x:Name="newCategoryGrid" Margin="0,0,0,0" Height="344" Width="570"/>-->
-            </StackPanel>            
+            </StackPanel>
         </ScrollViewer>
         <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
         <Label x:Name="ProjNameLable" Content="ProjectName" HorizontalAlignment="Left" Height="25" Margin="231,39,0,0" VerticalAlignment="Top" Width="160"/>
-        <Button x:Name="AddCategoryButton" Content="Add" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=mouseOverStyle}" Margin="231,61,0,0" VerticalAlignment="Top" Width="34" Height="29" Click="AddCategoryButton_Click" RenderTransformOrigin="-1.108,1.379">
-            
+        <Button x:Name="AddCategoryButton" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=mouseOverStyle}" Margin="232,58,0,0" VerticalAlignment="Top" Width="34" Height="29" Click="AddCategoryButton_Click" RenderTransformOrigin="-1.108,1.379" Content="">
         </Button>
     </Grid>
 </Window>

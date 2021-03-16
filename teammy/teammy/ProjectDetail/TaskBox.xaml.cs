@@ -31,62 +31,62 @@ namespace teammy.ProjectDetail
 
             InitializeComponent();
 
-            StatusImages.Add(new PicClass
-            {
-                Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\notStarted.png")),
-                //ImgName = "Not started"
+            //StatusImages.Add(new PicClass
+            //{
+            //    Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\notStarted.png")),
+            //    //ImgName = "Not started"
 
-            });
-            StatusImages.Add(new PicClass
-            {
-                Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\underProgress.png")),
-                //ImgName = "Under Progress"
+            //});
+            //StatusImages.Add(new PicClass
+            //{
+            //    Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\underProgress.png")),
+            //    //ImgName = "Under Progress"
 
-            });
-            StatusImages.Add(new PicClass
-            {
-                Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\done.png")),
-                //ImgName = "Done"
+            //});
+            //StatusImages.Add(new PicClass
+            //{
+            //    Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\done.png")),
+            //    //ImgName = "Done"
 
-            });
+            //});
 
-            PriorityImages.Add(new PicClass
-            {
-                Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority 1.png")),
-                //ImgName = "High"
+            //PriorityImages.Add(new PicClass
+            //{
+            //    Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority 1.png")),
+            //    //ImgName = "High"
 
-            });
-            PriorityImages.Add(new PicClass
-            {
-                Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority2.png")),
-                //ImgName = "Midium"
+            //});
+            //PriorityImages.Add(new PicClass
+            //{
+            //    Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority2.png")),
+            //    //ImgName = "Midium"
 
-            });
-            PriorityImages.Add(new PicClass
-            {
-                Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority3.png")),
-                //ImgName = "Low"
+            //});
+            //PriorityImages.Add(new PicClass
+            //{
+            //    Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority3.png")),
+            //    //ImgName = "Low"
 
-            });
+            //});
 
-            AssigneeImages.Add(new PicClass
-            {
-                Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority 1.png")),
-                ImgName = "assignee1"
+            //AssigneeImages.Add(new PicClass
+            //{
+            //    Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority 1.png")),
+            //    ImgName = "assignee1"
 
-            });
-            AssigneeImages.Add(new PicClass
-            {
-                Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority2.png")),
-                ImgName = "assignee2"
+            //});
+            //AssigneeImages.Add(new PicClass
+            //{
+            //    Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority2.png")),
+            //    ImgName = "assignee2"
 
-            });
-            AssigneeImages.Add(new PicClass
-            {
-                Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority3.png")),
-                ImgName = "assignee3"
+            //});
+            //AssigneeImages.Add(new PicClass
+            //{
+            //    Img = new BitmapImage(new Uri(@"C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\images\priority3.png")),
+            //    ImgName = "assignee3"
 
-            });
+            //});
         }
 
         public ObservableCollection<PicClass> StatusImages { get; set; }
@@ -121,6 +121,26 @@ namespace teammy.ProjectDetail
         private void assigneeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnPriority_Click(object sender, RoutedEventArgs e)
+        {
+            ContextMenu cm = FindResource("cmPriority") as ContextMenu;
+            cm.PlacementTarget = sender as Button;
+            cm.IsOpen = true;
+        }
+
+        private void btnStatus_Click(object sender, RoutedEventArgs e)
+        {
+            ContextMenu cm = FindResource("cmPriority") as ContextMenu;
+            cm.PlacementTarget = sender as Button;
+            cm.IsOpen = true;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Brush chosenPriority = ((sender as MenuItem).Icon as Rectangle).Fill;
+            priorityGrid.Background = chosenPriority;
         }
     }
 

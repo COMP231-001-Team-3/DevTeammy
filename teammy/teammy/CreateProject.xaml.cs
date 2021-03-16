@@ -109,7 +109,6 @@ namespace teammy
 
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-
         }
         #endregion
 

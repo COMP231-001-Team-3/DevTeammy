@@ -33,7 +33,7 @@ namespace teammy
         }
 
         public event EventHandler<EventArgs> txtCategroyNameChanged;
-        private void txtCategroyName_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtCategoryName_TextChanged(object sender, TextChangedEventArgs e)
         {
             e.Handled = true;
             txtCategroyNameChanged?.Invoke(this, EventArgs.Empty);
@@ -42,8 +42,6 @@ namespace teammy
         {
             ProjectDetail.TaskBox taskbox = new ProjectDetail.TaskBox();
             taStackPanel.Children.Add(taskbox);
-
-
         }
 
         private void btnCloseC_Click(object sender, RoutedEventArgs e)

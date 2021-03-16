@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:teammy"
-             mc:Ignorable="d" Width="143.589" Height="97.355">
+             mc:Ignorable="d" Width="200.848" Height="106.07">
     <UserControl.Resources>
         <!-- Value Converter Instance -->
         <local:ColorToBrushConverter x:Key="ColorConverter"/>
@@ -28,7 +28,7 @@
                         <ControlTemplate.Triggers>
                             <!-- Mouseover trigger -->
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="background" Property="Fill" Value="AliceBlue"/>
+                                <Setter TargetName="background" Property="Fill" Value="LightBlue"/>
                                 <Setter TargetName="background" Property="Opacity" Value="0.5"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -36,6 +36,41 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!-- Menu dropdown -->
+        <ContextMenu x:Key="cmPriority" >
+            <MenuItem x:Name="highItem" Header="High" Background="White"  Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <Rectangle Fill="Red" Height="20" Width="40"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="mediumItem" Header="Medium" Background="White"  Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <Rectangle Fill="Yellow" Height="20" Width="40"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="lowItem" Header="Low" Background="White" Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <Rectangle Fill="Blue" Height="20" Width="40"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+        <ContextMenu x:Key="cmStatus" >
+            <MenuItem x:Name="nsItem" Header="Not Started" Background="White"  Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <Image Source=""/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="mediumItem" Header="Medium" Background="White"  Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <Rectangle Fill="Yellow" Height="20" Width="40"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="lowItem" Header="Low" Background="White" Width="150" Height="40" FontSize="16" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <Rectangle Fill="Blue" Height="20" Width="40"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
     </UserControl.Resources>
     <Grid Margin="10,10,-6.333,0" Height="85" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
@@ -48,7 +83,7 @@
         </Grid.RowDefinitions>
 
         <!-- Represents the container for the card -->
-        <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Stroke="#FF1E1922" Width="132" Margin="0,0,0,3.333" Grid.ColumnSpan="2"/>
+        <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Stroke="#FF1E1922" Width="182" Margin="0,0,-42.667,3.333" Grid.ColumnSpan="2"/>
 
         <!-- Project Name -->
 
@@ -59,7 +94,7 @@
 
         <!-- Button that provides mouseover and click events for the project -->
         <!--<Button x:Name="btnDetails" Content="" HorizontalAlignment="Left" Margin="10,-36,0,-37.666" VerticalAlignment="Top" Width="709" Height="349" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True" Click="btnDetails_Click"/>-->
-        <ComboBox x:Name="statusCombo" ItemsSource="{Binding StatusImages}" HorizontalAlignment="Left" Margin="87,4,0,0" VerticalAlignment="Top" Width="33" Height="21">
+        <!--<ComboBox x:Name="statusCombo" ItemsSource="{Binding StatusImages}" HorizontalAlignment="Left" Margin="10,4,-33.667,0" VerticalAlignment="Top" Width="33" Height="21" Grid.Column="1">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -74,8 +109,21 @@
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox x:Name="priorityCombo" ItemsSource="{Binding PriorityImages}" HorizontalAlignment="Left" Margin="87,30,0,0" VerticalAlignment="Top" Width="33" Height="21">
+        </ComboBox>-->
+        <Border BorderThickness="1" BorderBrush="Black"  Margin="159,5,4.333,60.333" Height="20" Width="20">
+            <Grid x:Name="statusGrid">
+                <Button x:Name="btnStatus" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnStatus_Click" Margin="0,0,0.333,0.333">
+                </Button>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="159,29,4.333,36.333" Height="20" Width="20">
+            <Grid x:Name="priorityGrid">
+                <Button x:Name="btnPriority" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnPriority_Click" Margin="0,0,0.333,0.333">
+                </Button>
+            </Grid>
+        </Border>
+
+        <!--<ComboBox x:Name="priorityCombo" ItemsSource="{Binding PriorityImages}" HorizontalAlignment="Left" Margin="144,30,0,0" VerticalAlignment="Top" Width="33" Height="21">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -90,8 +138,8 @@
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox x:Name="assigneeCombo" ItemsSource="{Binding AssigneeImages}" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="62" Height="16" RenderTransformOrigin="0.819,0.659" SelectionChanged="assigneeCombo_SelectionChanged">
+        </ComboBox>-->
+        <ComboBox x:Name="assigneeCombo" ItemsSource="{Binding AssigneeImages}" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="62" Height="16" RenderTransformOrigin="0.819,0.659" SelectionChanged="assigneeCombo_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -107,8 +155,8 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <DatePicker Margin="24,60,6,0" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="19" VerticalAlignment="Top"/>
-        <TextBox x:Name="taskNameTextBox" HorizontalAlignment="Left" Height="15" Margin="10,4,0,0" TextWrapping="Wrap" Text="Task Name" VerticalAlignment="Top" Width="66" FontSize="10"/>
+        <DatePicker Margin="10,56,81.333,0" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="23" VerticalAlignment="Top"/>
+        <TextBox x:Name="taskNameTextBox" HorizontalAlignment="Left" Height="21" Margin="10,4,0,0" TextWrapping="Wrap" Text="Task Name" VerticalAlignment="Top" Width="110" FontSize="10"/>
 
 
     </Grid>
