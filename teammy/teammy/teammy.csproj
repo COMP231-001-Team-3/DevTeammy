@@ -35,7 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -57,9 +56,6 @@
     <Reference Include="Renci.SshNet, Version=2020.0.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2020.0.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
-=======
-    <Reference Include="MySql.Data, Version=8.0.23.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
->>>>>>> 71a88d4... Project cards retrieved from DB & Displayed
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -105,58 +101,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <Compile Include="UserModel.cs" />
-    <Page Include="login.xaml">
-=======
-=======
-=======
+    <Page Include="login.xaml" />
     <Compile Include="ColorToBrushConverter.cs" />
-<<<<<<< HEAD
->>>>>>> 71a88d4... Project cards retrieved from DB & Displayed
-=======
     <Compile Include="NameToCharsConverter.cs" />
-<<<<<<< HEAD
->>>>>>> c07ea48... Create Project function complete
-=======
     <Compile Include="PrivToVisibConverter.cs" />
->>>>>>> 1cd9fd5... Authentication implemented for boards
     <Compile Include="ProjectBox.xaml.cs">
       <DependentUpon>ProjectBox.xaml</DependentUpon>
     </Compile>
->>>>>>> 940a552... Custom Project Control done
-    <Page Include="CreateProject.xaml">
->>>>>>> ce597e9... Title bar done
+    <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
-    <Page Include="MainWindowTeammy.xaml">
-=======
+    <Page Include="CreateProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="TasksAssignedtome.cs" />
     <Compile Include="UserModel.cs" />
-    <Page Include="login.xaml">
-      <SubType>Designer</SubType>
->>>>>>> c9959c9... "displaying assigned to me tasks"
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
-=======
+    </Compile>
     <Compile Include="CreateProject.xaml.cs">
       <DependentUpon>CreateProject.xaml</DependentUpon>
->>>>>>> ce597e9... Title bar done
     </Compile>
-    <Compile Include="MainWindowTeammy.xaml.cs">
-      <DependentUpon>MainWindowTeammy.xaml</DependentUpon>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ProjectBox.xaml">
@@ -192,74 +165,26 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\jelly.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="images\notstarted.png" />
-  </ItemGroup>
-  <ItemGroup>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <Resource Include="images\menuIcon.png" />
-=======
-    <Resource Include="images\jelly.jpg" />
->>>>>>> 4d54f6d... changed main color
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\BG.png" />
-    <Resource Include="images\Board.png" />
-    <Resource Include="images\Home.png" />
-    <Resource Include="images\Progress.png" />
-    <Resource Include="images\Schedule.png" />
-    <Resource Include="images\Team.png" />
-  </ItemGroup>
-  <ItemGroup>
-<<<<<<< HEAD
-    <Resource Include="images\jelly.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\protoNaturBg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\protoNaturBg2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\whitehome.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\whitePurpleHome.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\house1.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\calendar1.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Progress1.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\team1.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\boards1.jpeg" />
-=======
-    <Resource Include="images\menuIcon.png" />
->>>>>>> 4d54f6d... changed main color
-=======
-    <Resource Include="images\cancel.png" />
-    <Resource Include="images\jelly.jpg" />
     <Resource Include="images\menuIcon.png" />
     <Resource Include="images\protoBoards.png" />
-    <Resource Include="images\protoDone.png" />
     <Resource Include="images\protoHome.png" />
     <Resource Include="images\protoProgress.jpg" />
     <Resource Include="images\protoSchedule.png" />
     <Resource Include="images\protoTeams.png" />
->>>>>>> bb9e98b... Custom Panel implemented for login and Home
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\checkmark.png" />
+    <Resource Include="images\complete.png" />
+    <Resource Include="images\progressIcon.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Progress.png" />
+    <Resource Include="images\protoDone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\cancel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

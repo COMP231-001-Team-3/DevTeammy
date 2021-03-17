@@ -10,21 +10,18 @@ namespace teammy
     /// <summary>
     /// Interaction logic for login.xaml
     /// </summary>
-    public partial class login : Window
+    public partial class LoginWindow : Window
     {
         //connecting DB
         string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
         List<UserModel> users = new List<UserModel>();
 
-        public login()
+        public LoginWindow()
         {
             InitializeComponent();
-<<<<<<< HEAD
-=======
 
             Application.Current.Resources["loginInstance"] = this;
 
->>>>>>> 1cd9fd5... Authentication implemented for boards
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
@@ -50,14 +47,9 @@ namespace teammy
             string nameinput = usernameInput.Text;
             string passwordinput = passwordInput.Password;
 
-            UserModel userEntered = users.Find((user) => user.Username.Equals(nameinput)); 
-            
-            if(userEntered == null)
-            {
-                //showing invalid user id error
-                MessageBox.Show("The username entered is not valid!", "Authentication Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else if(!userEntered.VerifyPassword(passwordinput))
+            UserModel userEntered = users.Find((user) => user.Username.Equals(nameinput));
+
+            if ( userEntered == null || !userEntered.VerifyPassword(passwordinput))
             {
                 MessageBox.Show("The username/password entered is incorrect!", "Authentication Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -80,7 +72,7 @@ namespace teammy
 
         private void usernameInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            if(usernameInput.Text == null || usernameInput.Text.Equals(""))
+            if (usernameInput.Text == null || usernameInput.Text.Equals(""))
             {
                 usernameInput.Text = "Enter your user name";
                 usernameInput.Foreground = new SolidColorBrush(Colors.Gray);
@@ -96,7 +88,7 @@ namespace teammy
 
         private void passwordInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            if(passwordInput.Password == null || passwordInput.Password.Equals(""))
+            if (passwordInput.Password == null || passwordInput.Password.Equals(""))
             {
                 passwordInput.Visibility = Visibility.Hidden;
                 passwordPlaceholder.Visibility = Visibility.Visible;
@@ -127,7 +119,7 @@ namespace teammy
 
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
         #endregion
 

@@ -4,111 +4,17 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\
-=======
-C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\obj\Debug\
->>>>>>> 4d54f6d... changed main color
-=======
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\
->>>>>>> 1cd9fd5... Authentication implemented for boards
-=======
-C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\
->>>>>>> c9959c9... "displaying assigned to me tasks"
-=======
-C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\obj\Debug\
->>>>>>> e14eef0... "Add Coming up funtion"
-=======
-C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\obj\Debug\
->>>>>>> bc5f4c0... "showing picture of prgress status "
 teammy
 none
 false
 DEBUG;TRACE
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\App.xaml
->>>>>>> 4d54f6d... changed main color
-2-419118988
-=======
-11151548125
->>>>>>> 5d67e77... Fixed startup errors
-
-7-1456546696
-136-1892453458
-login.xaml;MainWindow.xaml;
-=======
-2-1939165864
-=======
-=======
-D:\Last Semester\Teammy\New folder\teammy\teammy\App.xaml
-<<<<<<< HEAD
->>>>>>> e2fc073... Menu items stylized
-32065141461
->>>>>>> 940a552... Custom Project Control done
-
-<<<<<<< HEAD
-7456903176
-13-1505183044
-<<<<<<< HEAD
-CreateProject.xaml;MainWindow.xaml;
->>>>>>> ce597e9... Title bar done
-=======
-=======
-81343040276
-118-703174741
->>>>>>> 71a88d4... Project cards retrieved from DB & Displayed
-CreateProject.xaml;MainWindow.xaml;ProjectBox.xaml;
->>>>>>> 940a552... Custom Project Control done
-=======
-31257597642
-
-9988657676
-118-703174741
-CreateProject.xaml;MainWindowTeammy.xaml;ProjectBox.xaml;
->>>>>>> 11e363c... Menu Completed
-=======
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
 4494474348
 
-12870207975
+13196539278
 1361861584214
-=======
-C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\App.xaml
-4494474348
-
-13196539278
-1362136499738
->>>>>>> c9959c9... "displaying assigned to me tasks"
-=======
-C:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\App.xaml
-4494474348
-
-13196539278
-136-1892453458
->>>>>>> e14eef0... "Add Coming up funtion"
-=======
-C:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\App.xaml
-4494474348
-
-13196539278
-1362136499738
->>>>>>> bc5f4c0... "showing picture of prgress status "
-CreateProject.xaml;login.xaml;MainWindow.xaml;ProjectBox.xaml;
->>>>>>> 1cd9fd5... Authentication implemented for boards
+login.xaml;MainWindow.xaml;CreateProject.xaml;ProjectBox.xaml;
 
 False
 

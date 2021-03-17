@@ -30,7 +30,7 @@ namespace teammy
             InitializeComponent();
             displaying_assigntome();
             displaying_comingup();
-         
+
         }
 
         public void displaying_assigntome()
@@ -47,7 +47,7 @@ namespace teammy
             MySqlDataReader reader = cmd.ExecuteReader();
             using (reader)
             {
-                
+
 
                 while (reader.Read())
                 {
@@ -76,18 +76,16 @@ namespace teammy
             {
                 while (reader.Read())
                 {
-                    list.Add(new TasksAssignedtome { taskname = (string)reader["task_name"], progress = (string)reader["progress_code"],duedate ="Due on "+ reader["due_date"].ToString() });
+                    list.Add(new TasksAssignedtome { taskname = (string)reader["task_name"], progress = (string)reader["progress_code"], duedate = "Due on " + reader["due_date"].ToString() });
                 }
             }
             ComingDatagrid.ItemsSource = list;
         }
-            
+
         private void mainWindow_Closed(object sender, EventArgs e)
         {
             Application.Current.Shutdown();
         }
-<<<<<<< HEAD
-=======
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -165,6 +163,5 @@ namespace teammy
             Hide();
             (Application.Current.Resources["mainInstance"] as Window).Show();
         }
->>>>>>> bb9e98b... Custom Panel implemented for login and Home
     }
 }

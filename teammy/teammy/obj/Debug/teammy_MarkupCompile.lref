@@ -1,63 +1,7 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-﻿
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1cd9fd5... Authentication implemented for boards
+﻿D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml;;
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\login.xaml;;
-=======
-
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 5d67e77... Fixed startup errors
-=======
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\CreateProject.xaml;;
->>>>>>> ce597e9... Title bar done
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\MainWindow.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\CreateProject.xaml;;
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\ProjectBox.xaml;;
-<<<<<<< HEAD
-=======
-=======
-=======
-﻿D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
->>>>>>> 5f85293... Error fix: Illegal characters solution error fixed
-FD:\Last Semester\Teammy\New folder\teammy\teammy\App.xaml;;
->>>>>>> 11e363c... Menu Completed
-FD:\Last Semester\Teammy\New folder\teammy\teammy\CreateProject.xaml;;
-FD:\Last Semester\Teammy\New folder\teammy\teammy\MainWindowTeammy.xaml;;
-FD:\Last Semester\Teammy\New folder\teammy\teammy\ProjectBox.xaml;;
->>>>>>> e2fc073... Menu items stylized
-=======
-FC:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\App.xaml;;
-FC:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\login.xaml;;
-FC:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\MainWindow.xaml;;
->>>>>>> 4d54f6d... changed main color
-=======
->>>>>>> 1cd9fd5... Authentication implemented for boards
-=======
-﻿
-<<<<<<< HEAD
-=======
->>>>>>> bc5f4c0... "showing picture of prgress status "
-FC:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\App.xaml;;
-FC:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\CreateProject.xaml;;
-FC:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\login.xaml;;
-FC:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\MainWindow.xaml;;
-FC:\Users\afafp\OneDrive\Desktop\c#\comp231-001_team3\teammy\teammy\ProjectBox.xaml;;
-<<<<<<< HEAD
->>>>>>> c9959c9... "displaying assigned to me tasks"
-=======
-FC:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\App.xaml;;
-FC:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\CreateProject.xaml;;
-FC:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\login.xaml;;
-FC:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\MainWindow.xaml;;
-FC:\Users\14379\Desktop\comp231-001_team3\teammy\teammy\ProjectBox.xaml;;
->>>>>>> e14eef0... "Add Coming up funtion"
-=======
->>>>>>> bc5f4c0... "showing picture of prgress status "
 

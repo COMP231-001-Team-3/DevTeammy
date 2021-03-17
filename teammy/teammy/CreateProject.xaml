@@ -187,5 +187,24 @@
                 </DockPanel>
             </Button.Content>
         </Button>
+        <ComboBox x:Name="cmbTeams" HorizontalAlignment="Left" Margin="357,410,0,0" VerticalAlignment="Top" Width="155" Height="27" BorderBrush="White"/>
+        <Button x:Name="btnDone" HorizontalAlignment="Left" Margin="593,403,0,0" VerticalAlignment="Top" Width="99" Height="37" Background="White" FontSize="20" BorderBrush="{x:Null}" Visibility="Hidden" Click="btnDone_Click">
+            <Button.Content>
+                <DockPanel>
+                    <Image Source="images/protoDone.png" DockPanel.Dock="Left"/>
+                    <Label Content="Done" VerticalAlignment="Center"  Foreground="#FF66CC44" DockPanel.Dock="Right"/>
+                </DockPanel>
+            </Button.Content>
+        </Button>
+        <Button x:Name="btnCancel" HorizontalAlignment="Left" Margin="697,404,0,0" VerticalAlignment="Top" Width="103" Height="36" Background="White" FontSize="20" BorderBrush="{x:Null}" Visibility="Hidden" Click="btnCancel_Click">
+            <Button.Content>
+                <DockPanel>
+                    <Image Source="images/cancel.png" DockPanel.Dock="Left"/>
+                    <Label Content="Cancel" VerticalAlignment="Center" Foreground="#FFF60000" DockPanel.Dock="Right"/>
+                </DockPanel>
+
+            </Button.Content>
+        </Button>
+
     </Grid>
 </Window>

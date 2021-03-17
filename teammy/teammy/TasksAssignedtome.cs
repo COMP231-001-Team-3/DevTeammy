@@ -27,9 +27,9 @@ namespace teammy
                 if (value == "NS")
                 {Progress= "images/notstarted.png"; }
                 else if (value == "CO")
-                { Progress = "images/checkmark.png"; }
+                { Progress = "images/complete.png"; }
                 else
-                { Progress = "images/Progress.png"; }
+                { Progress = "images/progressIcon.jpg"; }
             }
             get {return Progress; }
         }
