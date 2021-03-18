@@ -12,92 +12,68 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MySql.Data.MySqlClient;
 using System.Windows.Shapes;
+using teammy.ProjectDetail;
 
 namespace teammy
 {
+
     /// <summary>
     /// Interaction logic for ProjBoard.xaml
     /// </summary>
     public partial class ProjBoard : Window
     {
-        #region Fields
-        //Hosted DB connection string
-        //private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
+        private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
+
+        int left, top, right, bottom;
+        int catCount = 0;
+        int totalCats = 0;
+        NewCategory toBeInserted;
+        MySqlConnection conn;
+
 
         //Colors for project cards
-        Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
-        #endregion
+        //Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
+       
         public ProjBoard()
         {
             InitializeComponent();
-
-            ////Connection and data retrieval starts here
-            //MySqlConnection conn = new MySqlConnection(connectionString);
-            //conn.Open();
-
-            //string sql = "SELECT Proj_Name FROM projects";
-            //MySqlCommand cmd = new MySqlCommand(sql, conn);
-            //MySqlDataReader reader = cmd.ExecuteReader();
-
-            //using (reader)
-            //{
-            //    //Custom Control developed for this app
-            //    //NewCategory addCategory;
-
-            //    //Margins indicate position of each box to be placed
-            //    int left = 0, top = 0, right = 361, bottom = 260;
-            //    int count = 0;
-
-            //    //Variables for usage in loop declared beforehand for performance reasons
-            //    Random rd = new Random();
-            //    string projName, profChars;
-            //    string[] nameWords;
-
-            //    //Loop to read through results from query
-            //    while (reader.Read())
-            //    {
-            //        projName = reader[0].ToString();
-            //        nameWords = projName.Split(' ');
-
-            //        //If Project name has two or more words...then
-            //        if (nameWords.Length >= 2)
-            //        {
-            //            profChars = nameWords[0][0] + "" + nameWords[1][0];
-            //        }
-            //        else
-            //        {
-            //            profChars = nameWords[0][0] + "" + nameWords[0][1];
-            //        }
-
-            //        //Creation & Initialization of ProjectBox
-            //        //addCategory = new NewCategory() { CategoryName = projName, Margin = new Thickness(left, top, right, bottom)};
-
-            //        //Adds the newly created ProjectBox to the Grid within the ScrollViewer
-            //        //newCategoryGrid.Children.Add(addCategory);
-
-            //        //Updates margin for the next box
-            //        left += 175;
-            //        right -= 175;
-
-            //        //If 3 boxes have been created...then
-            //        if (count == 2)
-            //        {
-            //            //Margin updates for a new ProjectBox in a new row
-            //            top += 132;
-            //            bottom -= 132;
-            //            left = 0;
-            //            right = 361;
-            //            count = 0;
-            //        }
-            //        else
-            //        {
-            //            count++;
-            //        }
-            //    }
-            //} // Data retrieval ends here
+            LoadCategorys();
         }
 
+        private void LoadCategorys()
+        {
+            left = 0;
+            top = 0;
+            right = 5;
+            bottom = 0;
+            catCount = 0;
+            totalCats = 0;
+            caStackPanel.Children.Clear();
 
+            conn = new MySqlConnection(connectionString);
+            
+            conn.Open();
+            
+            MySqlCommand getCategorys = new MySqlCommand("SELECT category_name FROM categories NATURAL JOIN projects where proj_name = @projName", conn);
+            getCategorys.Parameters.AddWithValue("projName", ProjNameLable.Content.ToString());
+            MySqlDataReader categorysReader = getCategorys.ExecuteReader();
+                       
+            using (categorysReader)
+            {
+                NewCategory category;
+
+                //Random rd = new Random();
+                string catName;
+                while (categorysReader.Read())
+                {
+                    totalCats++;
+                    catName = categorysReader[0].ToString();
+
+                    category = new NewCategory() { CategoryName = catName, Margin = new Thickness(left, top, right, bottom)};
+                    caStackPanel.Children.Add(category);                   
+                }
+            }
+        }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -112,7 +88,8 @@ namespace teammy
         }
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-
+            Hide();
+            (Application.Current.Resources["mainInstance"] as Window).Show();
         }
 
         /// <summary>
@@ -130,10 +107,26 @@ namespace teammy
         }
         private void add_newCategory()
         {
+            if (++totalCats == 10)
+            {
+                totalCats--;
+                MessageBox.Show("The maximum limit for categorys per project is 9!", "Max categorys completed", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             //Margins indicate position of each box to be placed
             int left = 0, top = 0, right = 5, bottom = 0;
             NewCategory newCategory = new NewCategory() { Margin = new Thickness(left, top, right, bottom) };
             caStackPanel.Children.Add(newCategory);
+
+            //conn = new MySqlConnection(connectionString);
+            //conn.Open();
+            //MySqlCommand insertCatName = new MySqlCommand("Insert INTO categories VALUES(category_id, @category_name, (SELECT Proj_ID FROM projects WHERE Proj_Name = @projName));", conn);
+            //MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
+            //insertCatName.Parameters.AddWithValue("category_name", toBeInserted.txtCategoryName.Text);
+            //insertCatName.Parameters.AddWithValue("projName", ProjNameLable.Content.ToString());
+
+            //insertCatName.ExecuteNonQuery();
+            //commit.ExecuteNonQuery();
         }
     }
 }

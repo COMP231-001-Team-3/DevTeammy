@@ -21,6 +21,40 @@ namespace teammy.ProjectDetail
     /// </summary>
     public partial class TaskBox : UserControl
     {
+        public static readonly DependencyProperty TaskNameProperty = DependencyProperty.Register("TaskName", typeof(string), typeof(TaskBox));
+        public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string),  typeof(TaskBox));
+        public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
+        public static readonly DependencyProperty TaskDueDateProperty = DependencyProperty.Register("TaskDueDate", typeof(DateTime), typeof(TaskBox));
+
+
+
+        public string TaskName
+        {
+            get { return (string)GetValue(TaskNameProperty); }
+            set { SetValue(TaskNameProperty, value); }
+        }
+        public string TaskPriority
+        {
+            get { return (string)GetValue(TaskPriorityProperty); }
+            set { SetValue(TaskPriorityProperty, value); }
+        }
+        public string TaskProgress
+        {
+            get { return (string)GetValue(TaskProgressProperty); }
+            set { SetValue(TaskProgressProperty, value); }
+        }
+        public DateTime TaskDueDate
+        {
+            get { return (DateTime)GetValue(TaskDueDateProperty); }
+            set { SetValue(TaskProgressProperty, value); }
+        }
+
+
+        //Events for change on the text properties
+        public event EventHandler<EventArgs> TaskNameChanged;
+        public event EventHandler<EventArgs> TaskPriorityChanged;
+        public event EventHandler<EventArgs> TaskProgressChanged;
+        public event EventHandler<EventArgs> TaskDueDateChanged;
         public TaskBox()
         {
             InitializeComponent();
@@ -31,6 +65,9 @@ namespace teammy.ProjectDetail
             ContextMenu cm = FindResource("cmPriority") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
+
+            e.Handled = true;
+            TaskPriorityChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnStatus_Click(object sender, RoutedEventArgs e)
@@ -38,6 +75,9 @@ namespace teammy.ProjectDetail
             ContextMenu cm = FindResource("cmStatus") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
+
+            e.Handled = true;
+            TaskProgressChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void PriorMenuItem_Click(object sender, RoutedEventArgs e)
