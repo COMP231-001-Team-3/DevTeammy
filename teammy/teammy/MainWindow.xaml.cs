@@ -67,7 +67,7 @@ namespace teammy
             conn.Open();
 
             //Getting list of assigned tasks by userid
-            MySqlCommand cmd = new MySqlCommand("Select task_name, due_date,progress_code FROM tasks NATURAL JOIN assignees NATURAL JOIN team_mates NATURAL JOIN users WHERE user_name = @nameUser AND due_date < (NOW() + INTERVAL 7 DAY)", conn);
+            MySqlCommand cmd = new MySqlCommand("Select task_name, due_date,progress_code FROM tasks NATURAL JOIN assignees NATURAL JOIN team_mates NATURAL JOIN users WHERE user_name = @nameUser AND NOW() < due_date AND due_date < (NOW() + INTERVAL 7 DAY)", conn);
             cmd.Parameters.AddWithValue("nameUser", currentUser.Username);
 
             MySqlDataReader reader = cmd.ExecuteReader();
