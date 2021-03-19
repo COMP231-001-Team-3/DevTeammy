@@ -25,6 +25,7 @@ namespace teammy.ProjectDetail
         public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string),  typeof(TaskBox));
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskDueDateProperty = DependencyProperty.Register("TaskDueDate", typeof(DateTime), typeof(TaskBox));
+        public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("Assignee", typeof(List<string>), typeof(TaskBox));
 
 
 
@@ -49,12 +50,19 @@ namespace teammy.ProjectDetail
             set { SetValue(TaskProgressProperty, value); }
         }
 
+        public List<string> AssigneeList
+        {
+            get { return (List<string>)GetValue(TaskAssigneeListProperty); }
+            set { SetValue(TaskAssigneeListProperty, value); }
+        }
+
 
         //Events for change on the text properties
         public event EventHandler<EventArgs> TaskNameChanged;
         public event EventHandler<EventArgs> TaskPriorityChanged;
         public event EventHandler<EventArgs> TaskProgressChanged;
         public event EventHandler<EventArgs> TaskDueDateChanged;
+        public event EventHandler<EventArgs> TaskAssigneeChanged;
         
         public TaskBox()
         {

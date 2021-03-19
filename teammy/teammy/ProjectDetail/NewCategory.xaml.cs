@@ -92,7 +92,7 @@ namespace teammy
 
             conn.Open();
 
-            MySqlCommand getTasks = new MySqlCommand("SELECT task_name,  priority, due_date, progress_code FROM tasks NATURAL JOIN categories where category_name  = @catName", conn);
+            MySqlCommand getTasks = new MySqlCommand("SELECT task_name,  priority, due_date, progress_code, Assigned_group FROM tasks NATURAL JOIN categories where category_name  = @catName", conn);
             getTasks.Parameters.AddWithValue("catName", txtCategoryName.Text);
             MySqlDataReader tasksReader = getTasks.ExecuteReader();
 
@@ -105,6 +105,7 @@ namespace teammy
                 string taskPrio;
                 string taskProgre;
                 DateTime taskDate;
+                List<string> taskAssigneeList;
                 while (tasksReader.Read())
                 {
                     totalBoxes++;
@@ -112,6 +113,7 @@ namespace teammy
                     taskPrio = tasksReader[1].ToString();
                     taskProgre = tasksReader[3].ToString();
                     taskDate = DateTime.Parse((string)tasksReader[2]);
+                    //taskAssigneeList = tasksReader[4];
 
                     taskBox = new TaskBox() { TaskName = taskName, Margin = new Thickness(left, top, right, bottom) ,TaskPriority = taskPrio, TaskProgress = taskProgre, TaskDueDate = taskDate };
                     taStackPanel.Children.Add(taskBox);

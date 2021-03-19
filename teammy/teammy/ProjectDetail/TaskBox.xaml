@@ -127,7 +127,6 @@
                 </Button.Background>
             </Button>
             <!--<Image Source="../images/threeDots.png" RenderTransformOrigin="-15.217,2.754" Margin="0,0,0,-2"/>-->
-
         </Grid>
 
         <Grid x:Name="statusGrid" Margin="148,17,14.333,49.333">

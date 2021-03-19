@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="teammy.ProjectDetail.assigneeInitialBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:teammy"
+             mc:Ignorable="d" Height="21.82" Width="20"
+             DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <UserControl.Resources>
+        <local:ColorToBrushConverter x:Key="ColorConverter"/>
+        <local:NameToCharsConverter x:Key="NameConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="1,1,1,1">
+        <!-- The Background of the Project Profile -->
+        <Rectangle x:Name="rectProfile" HorizontalAlignment="Left" Height="83" Stroke="#FF1E1922" VerticalAlignment="Top" Width="93" Margin="18,18,0,0" Fill="{Binding Converter={StaticResource ColorConverter}, Path=ProjectProfileBack}"/>
+
+        <!-- Profile Text (Placed above the Background) -->
+        <TextBox x:Name="txtProfText" Text="{Binding ElementName=txtProjName, Converter={StaticResource NameConverter},Path=Text}" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="80" FontFamily="Gill Sans Ultra Bold" Foreground="White" BorderBrush="{x:Null}" Height="60" Background="{x:Null}" FontSize="40" TextChanged="txtProfText_TextChanged" IsReadOnly="True" IsHitTestVisible="False"/>
+
+        
+
+    </Grid>
+</UserControl>
+
+
