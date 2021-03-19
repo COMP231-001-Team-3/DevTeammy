@@ -55,11 +55,21 @@ namespace teammy.ProjectDetail
         public event EventHandler<EventArgs> TaskPriorityChanged;
         public event EventHandler<EventArgs> TaskProgressChanged;
         public event EventHandler<EventArgs> TaskDueDateChanged;
+        
         public TaskBox()
         {
             InitializeComponent();
         }
 
+        private void btnEditDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ContextMenu cm = FindResource("cmThreeDots") as ContextMenu;
+            cm.PlacementTarget = sender as Button;
+            cm.IsOpen = true;
+
+            //e.Handled = true;
+            //TaskPriorityChanged?.Invoke(this, EventArgs.Empty);
+        }
         private void btnPriority_Click(object sender, RoutedEventArgs e)
         {
             ContextMenu cm = FindResource("cmPriority") as ContextMenu;

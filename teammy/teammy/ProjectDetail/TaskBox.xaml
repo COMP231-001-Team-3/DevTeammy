@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:teammy"
-             mc:Ignorable="d" Width="200.848" Height="106.07">
+             mc:Ignorable="d" Width="204.181" Height="106.07">
     <UserControl.Resources>
         <!-- Value Converter Instance -->
         <local:ColorToBrushConverter x:Key="ColorConverter"/>
@@ -37,6 +37,25 @@
             </Setter>
         </Style>
         <!-- Menu dropdown -->
+
+        <ContextMenu x:Key="cmThreeDots" >
+            <MenuItem x:Name="etItem" Header="Edit Task" Background="HotPink"  Width="150" Height="40" FontSize="16"  >
+                <MenuItem.Icon>
+                    <Grid>
+                        <Button x:Name="editTaskBtn" Style="{StaticResource mouseOverStyle}" Background="{x:Null}" BorderThickness="0"/>
+                    </Grid>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="dlItem" Header="Delete Task" Background="HotPink"  Width="150" Height="40" FontSize="16" >
+                <MenuItem.Icon>
+                    <Grid>
+                        <Button x:Name="deleteTaskBtn" Style="{StaticResource mouseOverStyle}" Background="{x:Null}" BorderThickness="0"/>
+                    </Grid>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+
         <ContextMenu x:Key="cmPriority" >
             <MenuItem x:Name="highItem" Header="High" Background="White"  Width="150" Height="40" FontSize="16" Click="PriorMenuItem_Click">
                 <MenuItem.Icon>
@@ -54,7 +73,7 @@
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
-        
+
         <!-- Menu dropdown -->
         <ContextMenu x:Key="cmStatus" >
             <MenuItem x:Name="nsItem" Header="Not Started" Background="White"  Width="200" Height="40" FontSize="16" Click="StatusMenuItem_Click" MouseEnter="StatusMenuItem_MouseEnter" MouseLeave="StatusMenuItem_MouseLeave">
@@ -64,7 +83,7 @@
                         <Button x:Name="notStartedBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=notStartedIcon, Path=ActualHeight}"
                                 Width="{Binding ElementName=notStartedIcon, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
-                    </Grid>                    
+                    </Grid>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem x:Name="ipItem" Header="In Progress" Background="White"  Width="200" Height="40" FontSize="16" Click="StatusMenuItem_Click" MouseEnter="StatusMenuItem_MouseEnter" MouseLeave="StatusMenuItem_MouseLeave">
@@ -98,23 +117,31 @@
             <RowDefinition/>
             <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
-        <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Stroke="#FF1E1922" Width="182" Margin="0,0,-42.667,3.333" Grid.ColumnSpan="2"/>
+        <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Stroke="#FF1E1922" Width="187" Margin="0,0,0,3.333" Grid.ColumnSpan="2"/>
 
+        <Grid x:Name="threeDotsGrid" Margin="171,4,13,61.333" Grid.ColumnSpan="2">
 
-        <Grid x:Name="statusGrid" Height="30" Width="30" Margin="148,6,5.333,49.333">
+            <Button x:Name="btnEditDelete" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnEditDelete_Click" RenderTransformOrigin="5.467,0.206" Margin="3,0">
+                <Button.Background>
+                    <ImageBrush ImageSource="../images/threeDots.png"/>
+                </Button.Background>
+            </Button>
+            <!--<Image Source="../images/threeDots.png" RenderTransformOrigin="-15.217,2.754" Margin="0,0,0,-2"/>-->
+
+        </Grid>
+
+        <Grid x:Name="statusGrid" Margin="148,17,14.333,49.333">
             <Grid.Background>
                 <ImageBrush ImageSource="../images/notStarted.png"/>
             </Grid.Background>
-            <Button x:Name="btnStatus" BorderThickness="0" Background="Transparent" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnStatus_Click">
-            </Button>
+            <Button x:Name="btnStatus" BorderThickness="0" Background="Transparent" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnStatus_Click"/>
         </Grid>
-        <Border BorderThickness="1" BorderBrush="Black" Margin="148,45,5.333,10.333" Height="30" Width="30">
-            <Grid x:Name="priorityGrid">
-                <Button x:Name="btnPriority" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnPriority_Click" Margin="0,0,0.333,0.333">
-                </Button>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="148,41,14.333,25.333">
+            <Grid x:Name="priorityGrid" Margin="-1.333,-1.333,0,0">
+                <Button x:Name="btnPriority" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnPriority_Click"/>
             </Grid>
         </Border>
-        <ComboBox x:Name="assigneeCombo" ItemsSource="{Binding AssigneeImages}" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="62" Height="16" RenderTransformOrigin="0.819,0.659" SelectionChanged="assigneeCombo_SelectionChanged">
+        <ComboBox x:Name="assigneeCombo" ItemsSource="{Binding Path=AssigneeName}" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="62" Height="16" RenderTransformOrigin="0.819,0.659" SelectionChanged="assigneeCombo_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -130,8 +157,8 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <DatePicker Margin="10,56,81.333,0" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="23" VerticalAlignment="Top"/>
-        <TextBox x:Name="taskNameTextBox" HorizontalAlignment="Left" Height="21" Margin="10,4,0,0" TextWrapping="Wrap" Text="Task Name" VerticalAlignment="Top" Width="110" FontSize="10"/>
+        <DatePicker  Margin="10,56,81.333,0" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="23" VerticalAlignment="Top"/>
+        <TextBox x:Name="taskNameTextBox" Text="Task Name" HorizontalAlignment="Left" Height="21" Margin="10,4,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110" FontSize="10"/>
 
 
     </Grid>
