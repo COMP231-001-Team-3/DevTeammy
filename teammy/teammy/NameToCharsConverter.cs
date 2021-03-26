@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace teammy
 {
-    class NameToCharsConverter : IValueConverter
+    public class NameToCharsConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

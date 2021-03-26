@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -21,11 +22,14 @@ namespace teammy.ProjectDetail
     /// </summary>
     public partial class TaskBox : UserControl
     {
+        private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
+        List<string> users = new List<string>();
+
         public static readonly DependencyProperty TaskNameProperty = DependencyProperty.Register("TaskName", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string),  typeof(TaskBox));
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskDueDateProperty = DependencyProperty.Register("TaskDueDate", typeof(DateTime), typeof(TaskBox));
-        public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("Assignee", typeof(List<string>), typeof(TaskBox));
+        public static readonly DependencyProperty TaskAssigneeProperty = DependencyProperty.Register("Assignee", typeof(int), typeof(TaskBox));
 
 
 
@@ -47,13 +51,13 @@ namespace teammy.ProjectDetail
         public DateTime TaskDueDate
         {
             get { return (DateTime)GetValue(TaskDueDateProperty); }
-            set { SetValue(TaskProgressProperty, value); }
+            set { SetValue(TaskDueDateProperty, value); }
         }
 
-        public List<string> AssigneeList
+        public int TaskAssignee
         {
-            get { return (List<string>)GetValue(TaskAssigneeListProperty); }
-            set { SetValue(TaskAssigneeListProperty, value); }
+            get { return (int)GetValue(TaskAssigneeProperty); }
+            set { SetValue(TaskAssigneeProperty, value); }
         }
 
 
@@ -66,17 +70,52 @@ namespace teammy.ProjectDetail
         
         public TaskBox()
         {
+            
             InitializeComponent();
+            LoadUsers();
+        }
+        public ObservableCollection<UserListClass> TeamUsers { get; set; }
+        public class UserListClass
+        { 
+            public string TeamMembers { get; set; }
         }
 
+        private void LoadUsers()
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+
+            MySqlCommand getTUsers = new MySqlCommand("SELECT user_name  FROM users", conn);
+            //getTUsers.Parameters.AddWithValue("nameTeam", "DevTeam");
+            MySqlDataReader reader = getTUsers.ExecuteReader();
+            this.DataContext = this;
+            TeamUsers = new ObservableCollection<UserListClass>();
+            using (reader)
+            {
+                while (reader.Read())
+                {   
+                    users.Add(reader[0].ToString());
+                    
+                }
+                for(int i=0; i<users.Count;i++)
+                {
+                    TeamUsers.Add(new UserListClass
+                    {
+                                
+                        TeamMembers = users[i]
+                               
+                    });
+                }
+            }
+                //UserListClass listclass = new UserListClass{TeamMembers=users};
+                
+        }
         private void btnEditDelete_Click(object sender, RoutedEventArgs e)
         {
             ContextMenu cm = FindResource("cmThreeDots") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
-
-            //e.Handled = true;
-            //TaskPriorityChanged?.Invoke(this, EventArgs.Empty);
+            
         }
         private void btnPriority_Click(object sender, RoutedEventArgs e)
         {
@@ -84,8 +123,8 @@ namespace teammy.ProjectDetail
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
 
-            e.Handled = true;
-            TaskPriorityChanged?.Invoke(this, EventArgs.Empty);
+            //e.Handled = true;
+            //TaskPriorityChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnStatus_Click(object sender, RoutedEventArgs e)
@@ -94,8 +133,8 @@ namespace teammy.ProjectDetail
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
 
-            e.Handled = true;
-            TaskProgressChanged?.Invoke(this, EventArgs.Empty);
+            //e.Handled = true;
+            //TaskProgressChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void PriorMenuItem_Click(object sender, RoutedEventArgs e)

@@ -15,7 +15,7 @@
         <Rectangle x:Name="rectInitial" HorizontalAlignment="Left" Height="83" Stroke="#FF1E1922" VerticalAlignment="Top" Width="93" Margin="18,18,0,0" Fill="{Binding Converter={StaticResource ColorConverter}, Path=ProjectProfileBack}"/>
 
         <!-- Profile Text (Placed above the Background) -->
-        <TextBox x:Name="txtInitial" Text="{Binding , Converter={StaticResource NameConverter},Path=Text}" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="80" FontFamily="Gill Sans Ultra Bold" Foreground="White" BorderBrush="{x:Null}" Height="60" Background="{x:Null}" FontSize="40" TextChanged="txtProfText_TextChanged" IsReadOnly="True" IsHitTestVisible="False"/>
+        <!--<TextBox x:Name="txtInitial" Text="{Binding Converter={StaticResource NameConverter}, Path=Text}" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="80" FontFamily="Gill Sans Ultra Bold" Foreground="White" BorderBrush="{x:Null}" Height="60" Background="{x:Null}" FontSize="40" TextChanged="txtProfText_TextChanged" IsReadOnly="True" IsHitTestVisible="False"/>-->
 
     </Grid>
 </UserControl>

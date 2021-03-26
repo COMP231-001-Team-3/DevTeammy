@@ -19,6 +19,7 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\tea
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe.config
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.g.cs
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\assigneeInitialBox.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.g.cs
@@ -27,8 +28,10 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\App
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\App.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.baml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\assigneeInitialBox.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.baml
@@ -40,85 +43,3 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\tea
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe.config
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\teammy.pdb
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Zstandard.Net.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.Streams.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\BouncyCastle.Crypto.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Ubiety.Dns.Core.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Renci.SshNet.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Buffers.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Hash.xxHash.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.xml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe.config
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.g.cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.g.cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.g.cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.g.cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.g.cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\TaskBox.g.cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\App.g.cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.baml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.baml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.baml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.baml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.baml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\TaskBox.baml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.g.resources
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.Properties.Resources.resources
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.GenerateResource.cache
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CoreCompileInputs.cache
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe.config
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.pdb
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\Zstandard.Net.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.Streams.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\BouncyCastle.Crypto.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\Ubiety.Dns.Core.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\Renci.SshNet.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\System.Buffers.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Hash.xxHash.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.xml
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe.config
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.g.cs
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.g.cs
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.g.cs
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.g.cs
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.g.cs
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\TaskBox.g.cs
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\App.g.cs
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.baml
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.baml
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.baml
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.baml
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.baml
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\TaskBox.baml
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.g.resources
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.Properties.Resources.resources
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.GenerateResource.cache
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CoreCompileInputs.cache
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
-C:\Users\user\Desktop\Programming 3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb

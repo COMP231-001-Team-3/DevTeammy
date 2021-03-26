@@ -41,7 +41,7 @@ namespace teammy
         #region Constructor
         public ProjectBox()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
         #endregion
 
@@ -65,6 +65,16 @@ namespace teammy
             e.Handled = true;
             ProjectProfileChanged?.Invoke(this, EventArgs.Empty);
         }
+
         #endregion
+
+        private void btnDetails_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectBox projectBox = new ProjectBox() { ProjectName = txtProjName.Text , ProjectProfile = txtProfText.Text};
+
+            Application.Current.Resources.Add("currentProj", projectBox);            
+            (Application.Current.Resources["BoardCatInstance"] as Window).Show();
+            
+        }
     }
 }

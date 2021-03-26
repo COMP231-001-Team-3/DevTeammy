@@ -9,25 +9,20 @@
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" AllowsTransparency="True">
     <Window.Resources>
-        <Style x:Key="mouseOverStyle" TargetType="Button">
+        <Style x:Key="addButtonStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <!-- Modifying control template of button to give custom mouseover color -->
                     <ControlTemplate TargetType="Button">
                         <Border BorderBrush="{x:Null}"
                         BorderThickness="0">
-                            <Grid>
-                                <Ellipse x:Name="background" Fill="#FFF01FFF"/>
-                                <Label Margin="-3,-21,0,-29.667" Foreground="White" Content="+" FontSize="40" VerticalAlignment="Center" Height="80" RenderTransformOrigin="0.529,0.447"/>
+                            <Grid Margin="0,0,0,-0.333">
+                                <Ellipse x:Name="background" Width="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=ActualWidth}" Height="{Binding ElementName=background, Path=ActualWidth}" Fill="#FFF01FFF"/>
+                                <Label x:Name="lblPlus" Margin="2,-12,-2,-9" Foreground="White" Content="+" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Height="56" RenderTransformOrigin="0.529,0.447" Width="34"/>
                                 <ContentPresenter
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                <Grid>
-
-                                </Grid>
-
                             </Grid>
-
                         </Border>
                         <ControlTemplate.Triggers>
                             <!-- Mouseover trigger -->
@@ -116,8 +111,9 @@
             </StackPanel>
         </ScrollViewer>
         <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
+        
         <Label x:Name="ProjNameLable" Content="ProjectName" HorizontalAlignment="Left" Height="25" Margin="231,39,0,0" VerticalAlignment="Top" Width="160"/>
-        <Button x:Name="AddCategoryButton" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=mouseOverStyle}" Margin="232,58,0,0" VerticalAlignment="Top" Width="34" Height="29" Click="AddCategoryButton_Click" RenderTransformOrigin="-1.108,1.379" Content="">
-        </Button>
+            <Button x:Name="AddCategoryButton" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=addButtonStyle}" Margin="221,61,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="AddCategoryButton_Click" RenderTransformOrigin="-1.108,1.379">
+            </Button>
     </Grid>
 </Window>

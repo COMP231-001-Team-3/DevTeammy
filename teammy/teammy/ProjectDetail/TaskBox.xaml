@@ -39,14 +39,14 @@
         <!-- Menu dropdown -->
 
         <ContextMenu x:Key="cmThreeDots" >
-            <MenuItem x:Name="etItem" Header="Edit Task" Background="HotPink"  Width="150" Height="40" FontSize="16"  >
+            <MenuItem x:Name="etItem" Header="Edit" Background="HotPink"  Width="150" Height="40" FontSize="16"  >
                 <MenuItem.Icon>
                     <Grid>
                         <Button x:Name="editTaskBtn" Style="{StaticResource mouseOverStyle}" Background="{x:Null}" BorderThickness="0"/>
                     </Grid>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="dlItem" Header="Delete Task" Background="HotPink"  Width="150" Height="40" FontSize="16" >
+            <MenuItem x:Name="dlItem" Header="Delete" Background="HotPink"  Width="150" Height="40" FontSize="16" >
                 <MenuItem.Icon>
                     <Grid>
                         <Button x:Name="deleteTaskBtn" Style="{StaticResource mouseOverStyle}" Background="{x:Null}" BorderThickness="0"/>
@@ -119,9 +119,9 @@
         </Grid.RowDefinitions>
         <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Stroke="#FF1E1922" Width="187" Margin="0,0,0,3.333" Grid.ColumnSpan="2"/>
 
-        <Grid x:Name="threeDotsGrid" Margin="171,4,13,61.333" Grid.ColumnSpan="2">
+        <Grid x:Name="threeDotsGrid" Margin="175,4,1.667,61.333">
 
-            <Button x:Name="btnEditDelete" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnEditDelete_Click" RenderTransformOrigin="5.467,0.206" Margin="3,0">
+            <Button x:Name="btnEditDelete" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnEditDelete_Click" RenderTransformOrigin="5.467,0.206">
                 <Button.Background>
                     <ImageBrush ImageSource="../images/threeDots.png"/>
                 </Button.Background>
@@ -129,18 +129,18 @@
             <!--<Image Source="../images/threeDots.png" RenderTransformOrigin="-15.217,2.754" Margin="0,0,0,-2"/>-->
         </Grid>
 
-        <Grid x:Name="statusGrid" Margin="148,17,14.333,49.333">
+        <Grid x:Name="statusGrid" Margin="161,28,4.667,38.333">
             <Grid.Background>
                 <ImageBrush ImageSource="../images/notStarted.png"/>
             </Grid.Background>
             <Button x:Name="btnStatus" BorderThickness="0" Background="Transparent" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnStatus_Click"/>
         </Grid>
-        <Border BorderThickness="1" BorderBrush="Black" Margin="148,41,14.333,25.333">
-            <Grid x:Name="priorityGrid" Margin="-1.333,-1.333,0,0">
-                <Button x:Name="btnPriority" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnPriority_Click"/>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="162,53,4.667,13.333">
+            <Grid x:Name="priorityGrid" Margin="0.667,-0.333,-0.333,0">
+                <Button x:Name="btnPriority" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnPriority_Click" Margin="0,0,0.999,0"/>
             </Grid>
         </Border>
-        <ComboBox x:Name="assigneeCombo" ItemsSource="{Binding Path=AssigneeName}" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="62" Height="16" RenderTransformOrigin="0.819,0.659" SelectionChanged="assigneeCombo_SelectionChanged">
+        <ComboBox x:Name="assigneeCombo" ItemsSource="{Binding TeamUsers}" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="62" Height="16" RenderTransformOrigin="0.819,0.659" SelectionChanged="assigneeCombo_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -150,8 +150,7 @@
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <Image Source="{Binding Img}"></Image>
-                        <TextBlock Text="{Binding ImgName}"/>
+                        <TextBlock Text="{Binding TeamMembers}"/>
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>

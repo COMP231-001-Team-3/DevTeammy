@@ -53,7 +53,7 @@
         <TextBox x:Name="txtProfText" Text="{Binding Path=ProjectProfile}" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="80" FontFamily="Gill Sans Ultra Bold" Foreground="White" BorderBrush="{x:Null}" Height="60" Background="{x:Null}" FontSize="40" TextChanged="txtProfText_TextChanged" IsReadOnly="True" IsHitTestVisible="False"/>
         
         <!-- Button that provides mouseover and click events for the project -->
-        <Button x:Name="btnDetails" Content="" HorizontalAlignment="Left" Margin="2,3,0,0" VerticalAlignment="Top" Width="127" Height="125" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True"/>
+        <Button x:Name="btnDetails" Content="" HorizontalAlignment="Left" Margin="2,3,0,0" VerticalAlignment="Top" Width="127" Height="125" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True" Click="btnDetails_Click"/>
 
     </Grid>
 </UserControl>

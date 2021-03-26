@@ -23,7 +23,7 @@ namespace teammy
     public partial class ProjBoard : Window
     {
         private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
-
+        
         int left, top, right, bottom;
         int catCount = 0;
         int totalCats = 0;
@@ -31,17 +31,18 @@ namespace teammy
         MySqlConnection conn;
 
 
-        //Colors for project cards
-        //Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
-       
+        public ProjectBox currentProj { get; set; } = Application.Current.Resources["currentProj"] as ProjectBox;
         public ProjBoard()
         {
             InitializeComponent();
-            LoadCategorys();
+            LoadCategorys();            
         }
 
         private void LoadCategorys()
         {
+
+            ProjNameLable.Content = currentProj.ProjectName;
+            Console.WriteLine(ProjNameLable.Content);
             left = 0;
             top = 0;
             right = 5;
@@ -50,12 +51,11 @@ namespace teammy
             totalCats = 0;
             caStackPanel.Children.Clear();
 
-            conn = new MySqlConnection(connectionString);
-            
+            conn = new MySqlConnection(connectionString);            
             conn.Open();
             
-            MySqlCommand getCategorys = new MySqlCommand("SELECT category_name FROM categories NATURAL JOIN projects where proj_name = @projName", conn);
-            getCategorys.Parameters.AddWithValue("projName", ProjNameLable.Content.ToString());
+            MySqlCommand getCategorys = new MySqlCommand("SELECT category_name FROM categories NATURAL JOIN projects where Proj_Name = @projName", conn);           
+            getCategorys.Parameters.AddWithValue("projName", currentProj.ProjectName);
             MySqlDataReader categorysReader = getCategorys.ExecuteReader();
                        
             using (categorysReader)
@@ -66,10 +66,13 @@ namespace teammy
                 string catName;
                 while (categorysReader.Read())
                 {
+                    
                     totalCats++;
                     catName = categorysReader[0].ToString();
+                    Application.Current.Resources["catName"] =  catName;
 
                     category = new NewCategory() { CategoryName = catName, Margin = new Thickness(left, top, right, bottom)};
+                    
                     caStackPanel.Children.Add(category);                   
                 }
             }
@@ -116,17 +119,7 @@ namespace teammy
             //Margins indicate position of each box to be placed
             int left = 0, top = 0, right = 5, bottom = 0;
             NewCategory newCategory = new NewCategory() { Margin = new Thickness(left, top, right, bottom) };
-            caStackPanel.Children.Add(newCategory);
-
-            //conn = new MySqlConnection(connectionString);
-            //conn.Open();
-            //MySqlCommand insertCatName = new MySqlCommand("Insert INTO categories VALUES(category_id, @category_name, (SELECT Proj_ID FROM projects WHERE Proj_Name = @projName));", conn);
-            //MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
-            //insertCatName.Parameters.AddWithValue("category_name", toBeInserted.txtCategoryName.Text);
-            //insertCatName.Parameters.AddWithValue("projName", ProjNameLable.Content.ToString());
-
-            //insertCatName.ExecuteNonQuery();
-            //commit.ExecuteNonQuery();
+            caStackPanel.Children.Add(newCategory);           
         }
     }
 }

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:teammy"
              mc:Ignorable="d"
-             DataContext="{Binding RelativeSource={RelativeSource self}}" Width="223" Height="267">
+             DataContext="{Binding RelativeSource={RelativeSource self}}" Width="223" Height="293.583">
     <UserControl.Resources>
         <!-- Value Converter Instance -->
         <local:ColorToBrushConverter x:Key="ColorConverter"/>
@@ -61,10 +61,36 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="addButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!-- Modifying control template of button to give custom mouseover color -->
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{x:Null}"
+                        BorderThickness="0">
+                            <Grid Margin="0,0,0,-0.333">
+                                <Ellipse x:Name="background" Width="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=ActualWidth}" Height="{Binding ElementName=background, Path=ActualWidth}" Fill="#FFF01FFF"/>
+                                <Label x:Name="lblPlus" Margin="2,-12,-2,-9" Foreground="White" Content="+" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Height="56" RenderTransformOrigin="0.529,0.447" Width="34"/>
+                                <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Mouseover trigger -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="background" Property="Fill" Value="#FFF01FFF"/>
+                                <Setter TargetName="background" Property="Opacity" Value="0.5"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid x:Name="containerGrid">
         <Rectangle x:Name="categoryRect" Fill="White" Height="243" Stroke="#FF1E1922" VerticalAlignment="Top" Margin="3,24,-0.333,-0.333" HorizontalAlignment="Left" Width="220"/>
-        <ScrollViewer MaxHeight="382" Margin="3,25,-0.333,-0.333" RenderTransformOrigin="0.5,0.5">
+        <ScrollViewer MaxHeight="382" Margin="3,25,-0.333,26.333" RenderTransformOrigin="0.5,0.5" BorderThickness="0">
             <StackPanel x:Name="taStackPanel" Orientation="Vertical"></StackPanel>
         </ScrollViewer>
         <TextBox x:Name="txtCategoryName" HorizontalAlignment="Left" Text="{Binding Path=CategoryName}" Height="24" Margin="2,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="189" TextChanged="txtCategoryName_TextChanged">
@@ -73,16 +99,11 @@
             </TextBox.Background>
         </TextBox>
 
-        <Button x:Name="addTaskButton" Content="Add" Click="addTask" HorizontalAlignment="Left" Margin="157,225,0,0" VerticalAlignment="Top" Width="42" Height="32">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Ellipse Fill="#FFF01FFF"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+        <Grid x:Name="addGrid" Background="White" Margin="4,267,-0.333,-17.667">
+            <Button x:Name="addTaskButton" Click="addTask" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="35" Height="38" Style="{StaticResource ResourceKey=addButtonStyle}" Margin="185,2,-1,0"/>
+        </Grid>
+        
+
         <Button x:Name="btnCloseC" Content="X" Style="{StaticResource ResourceKey=closeButton}" HorizontalAlignment="Left" Margin="191,0,0,0" VerticalAlignment="Top" Width="32" Height="24" Click="btnCloseC_Click"/>
     </Grid>
 </UserControl>

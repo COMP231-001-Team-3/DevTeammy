@@ -70,6 +70,7 @@
     <Compile Include="ProjectBox.xaml.cs">
       <DependentUpon>ProjectBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserModel.cs" />
     <Page Include="CreateProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
