@@ -173,6 +173,7 @@
 
         <!-- This ScrollViewer houses the grid that ultimately holds the project cards -->
         <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
+        
         <TabControl x:Name="tbCharts" HorizontalAlignment="Left" Height="367" Margin="238,56,0,0" VerticalAlignment="Top" Width="552" BorderBrush="#FFFABAFF" Foreground="#FFB955F2">
             <TabItem x:Name="tbitTeams" Header="Team" BorderBrush="#FFFAAFFF" Foreground="#FFBA54F8">
                 <TabItem.Background>
@@ -181,23 +182,26 @@
                         <GradientStop Color="White" Offset="1"/>
                     </LinearGradientBrush>
                 </TabItem.Background>
-                <Grid Background="White">
-                    <lvc:PieChart>
-                        <lvc:PieChart Name="Chart" LegendLocation="Right" Margin="0,0,0.333,49" Series="{Binding PieSeries}" SeriesColors="{Binding PieColors}">
-                            <lvc:PieChart.ChartLegend>
-                                <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
-                            </lvc:PieChart.ChartLegend>
-                            <lvc:PieChart.DataTooltip>
-                                <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
-                            </lvc:PieChart.DataTooltip>
-                        </lvc:PieChart>
+                <Grid x:Name="tbitTeamsGrid" Background="White" Margin="0,-2,0.333,0">
+                    <lvc:PieChart x:Name="pieProjects" LegendLocation="Right" Series="{Binding ProjectsPie}" SeriesColors="{Binding PieColors}" Margin="0,0,0,35">
+                        <lvc:PieChart.ChartLegend>
+                            <lvc:DefaultLegend BulletSize="20"/>
+                        </lvc:PieChart.ChartLegend>
+                        <lvc:PieChart.DataTooltip>
+                            <lvc:DefaultTooltip BulletSize="20"/>
+                        </lvc:PieChart.DataTooltip>
                     </lvc:PieChart>
+                    <ComboBox x:Name="cmbProjects" Margin="210,310,199,0" SelectionChanged="cmbTeams_SelectionChanged"/>
                 </Grid>
             </TabItem>
+            
             <TabItem x:Name="tbitMember" Header="Member" BorderBrush="#FFF698FC" Foreground="#FFBB4BFF">
-                <Grid x:Name="tbGrid" Background="White"/>
+                <Grid x:Name="tbMemberGrid" Background="White">
+                    <lvc:PieChart/>
+                </Grid>
             </TabItem>
+            
         </TabControl>
-        
+
     </Grid>
 </Window>
