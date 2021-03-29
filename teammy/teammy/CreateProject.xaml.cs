@@ -56,15 +56,19 @@ namespace teammy
             if (cmbTeams.Items.Count == 0)
             {                
                 List<string> teamNames = (from team in dbContext.teams
-                                          join mate in dbContext.team_mates on team.Team_ID equals mate.Team_ID join currUser in dbContext.users on mate.user_id equals currUser.user_id
+                                          join mate in dbContext.team_mates
+                                            on team.Team_ID equals mate.Team_ID 
+                                          join currUser in dbContext.users
+                                            on mate.user_id equals currUser.user_id
                                           where currUser.user_name.Equals(currentUser.user_name)
-                                         select team.Team_Name).ToList();
+                                          select team.Team_Name).ToList();
                 cmbTeams.ItemsSource = teamNames;
                 cmbTeams.SelectedIndex = 0;
             }
 
             List<string> projNames = (from proj in dbContext.projects
-                                      join team in dbContext.teams on proj.Team_ID equals team.Team_ID
+                                      join team in dbContext.teams 
+                                        on proj.Team_ID equals team.Team_ID
                                       where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
                                      select proj.Proj_Name).ToList();
 
@@ -241,8 +245,8 @@ namespace teammy
             {
                 Proj_Name = txtNameInput.Text,
                 Team_ID = (from team in dbContext.teams
-                          where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
-                          select team.Team_ID).Single()
+                           where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                           select team.Team_ID).Single()
             });
 
             dbContext.SaveChanges();

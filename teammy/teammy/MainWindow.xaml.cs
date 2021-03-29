@@ -39,19 +39,27 @@ namespace teammy
 
         public void displaying_assigntome()
         {
-            myTasksData = (from task in dbContext.tasks join assignee in dbContext.assignees on task.assigned_group equals assignee.assigned_group join mate in dbContext.team_mates on assignee.mate_id equals mate.mate_id join user in dbContext.users on mate.user_id equals user.user_id where user.user_name.Equals(currentUser.user_name) select new TasksAssignedtome
-            {
-                taskname = task.task_name,
-                progress = task.progress_code,
-                duedate = task.due_date.ToString()
-            }).ToList();
+            myTasksData = (from task in dbContext.tasks 
+                           join assignee in dbContext.assignees
+                              on task.assigned_group equals assignee.assigned_group
+                           join mate in dbContext.team_mates
+                              on assignee.mate_id equals mate.mate_id
+                           join user in dbContext.users
+                              on mate.user_id equals user.user_id
+                           where user.user_name.Equals(currentUser.user_name)
+                           select new TasksAssignedtome
+                           {
+                               taskname = task.task_name,
+                               progress = task.progress_code,
+                               duedate = task.due_date.ToString()
+                           }).ToList();
 
             AssignedtomeDatagrid.ItemsSource = myTasksData;
         }
 
         public void displaying_comingup()
         {
-            dueWeekData = myTasksData.FindAll(x => DateTime.Parse(x.duedate) <= DateTime.Now.AddDays(7) && DateTime.Parse(x.duedate) >= DateTime.Now);
+            dueWeekData = myTasksData.FindAll(task => DateTime.Parse(task.duedate) <= DateTime.Now.AddDays(7) && DateTime.Parse(task.duedate) >= DateTime.Now);
             ComingDatagrid.ItemsSource = dueWeekData;
         }
 

@@ -55,7 +55,7 @@ namespace teammy
             Parallel.Invoke(() =>
             {
                 List<string> projNames = (from project in dbContext.projects
-                                            select project.Proj_Name).ToList();
+                                          select project.Proj_Name).ToList();
 
                 cmbProjects.ItemsSource = projNames;
                 cmbProjects.SelectedIndex = 0;
@@ -140,13 +140,15 @@ namespace teammy
             Parallel.Invoke(() =>
             {
                 List<string> progress_codes = 
-                (from tasks in dbContext.tasks join projects in dbContext.projects on tasks.proj_id equals projects.Proj_ID
+                (from tasks in dbContext.tasks
+                    join projects in dbContext.projects 
+                        on tasks.proj_id equals projects.Proj_ID
                  where projects.Proj_Name.Equals(cmbProjects.SelectedItem.ToString())
-                  select tasks.progress_code).ToList();
+                 select tasks.progress_code).ToList();
 
-                ProjectsPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(x => x.Equals("NS")).Count) };
-                ProjectsPie[1].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(x => x.Equals("IP")).Count) };
-                ProjectsPie[2].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(x => x.Equals("CO")).Count) };
+                ProjectsPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("NS")).Count) };
+                ProjectsPie[1].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("IP")).Count) };
+                ProjectsPie[2].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("CO")).Count) };
             });
         }
     }
