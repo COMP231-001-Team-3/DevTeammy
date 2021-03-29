@@ -40,6 +40,27 @@ namespace teammy
                 DataLabels = true
             }
         };
+        public SeriesCollection ProjectsMemPie { get; set; } = new SeriesCollection()
+        {
+            new PieSeries
+            {
+                Title = "Not started",
+                Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                DataLabels = true
+            },
+            new PieSeries
+            {
+                Title = "In Progress",
+                Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                DataLabels = true
+            },
+            new PieSeries
+            {
+                Title = "Completed",
+                Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                DataLabels = true
+            }
+        };
 
         public ColorsCollection PieColors { get; set; } = new ColorsCollection()
         {
@@ -48,18 +69,37 @@ namespace teammy
             Colors.MediumSeaGreen
         };
 
+        List<string> projNames;
+        List<string> memNames;
+
         #region Constructor
         public ProgressReport()
         {
             InitializeComponent();
-            Parallel.Invoke(() =>
-            {
-                List<string> projNames = (from project in dbContext.projects
-                                          select project.Proj_Name).ToList();
 
-                cmbProjects.ItemsSource = projNames;
-                cmbProjects.SelectedIndex = 0;
-            });
+            projNames = (from project in dbContext.projects
+                            select project.Proj_Name).ToList();
+
+            cmbProjects.ItemsSource = projNames;
+            cmbMemProjects.ItemsSource = projNames;
+
+            cmbProjects.SelectedIndex = 0;
+            cmbMemProjects.SelectedIndex = 0;
+
+            memNames = (from project in dbContext.projects
+                            join team in dbContext.teams 
+                            on project.Team_ID equals team.Team_ID
+                            join mate in dbContext.team_mates
+                            on team.Team_ID equals mate.Team_ID
+                            join user in dbContext.users 
+                            on mate.user_id equals user.user_id
+                        where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString())
+                            select user.user_name).ToList();
+                
+            cmbMembers.ItemsSource = memNames;
+                               
+            cmbMembers.SelectedIndex = 0;
+            cmbMemProjects.SelectionChanged += new SelectionChangedEventHandler(cmbMem_SelectionChanged);
         }
         #endregion
 
@@ -135,7 +175,7 @@ namespace teammy
             (Application.Current.Resources["mainInstance"] as Window).Show();
         }
 
-        private void cmbTeams_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cmbProjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Parallel.Invoke(() =>
             {
@@ -149,6 +189,29 @@ namespace teammy
                 ProjectsPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("NS")).Count) };
                 ProjectsPie[1].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("IP")).Count) };
                 ProjectsPie[2].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("CO")).Count) };
+            });
+        }
+
+        private void cmbMem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Parallel.Invoke(() =>
+            {
+                List<string> progress_codes =
+                (from task in dbContext.tasks
+                 join project in dbContext.projects
+                     on task.proj_id equals project.Proj_ID
+                 join assignee in dbContext.assignees
+                    on task.assigned_group equals assignee.assigned_group
+                 join mate in dbContext.team_mates
+                    on assignee.mate_id equals mate.mate_id
+                 join user in dbContext.users
+                    on mate.user_id equals user.user_id
+                 where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString()) && user.user_name.Equals(cmbMembers.SelectedItem.ToString())
+                 select task.progress_code).ToList();
+
+                ProjectsMemPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("NS")).Count) };
+                ProjectsMemPie[1].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("IP")).Count) };
+                ProjectsMemPie[2].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("CO")).Count) };
             });
         }
     }

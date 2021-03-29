@@ -191,13 +191,22 @@
                             <lvc:DefaultTooltip BulletSize="20"/>
                         </lvc:PieChart.DataTooltip>
                     </lvc:PieChart>
-                    <ComboBox x:Name="cmbProjects" Margin="210,310,199,0" SelectionChanged="cmbTeams_SelectionChanged"/>
+                    <ComboBox x:Name="cmbProjects" Margin="210,310,199,0" SelectionChanged="cmbProjects_SelectionChanged"/>
                 </Grid>
             </TabItem>
             
             <TabItem x:Name="tbitMember" Header="Member" BorderBrush="#FFF698FC" Foreground="#FFBB4BFF">
                 <Grid x:Name="tbMemberGrid" Background="White">
-                    <lvc:PieChart/>
+                    <lvc:PieChart x:Name="pieMember" LegendLocation="Right" Series="{Binding ProjectsMemPie}" SeriesColors="{Binding PieColors}" Margin="0,0,0,35">
+                        <lvc:PieChart.ChartLegend>
+                            <lvc:DefaultLegend BulletSize="20"/>
+                        </lvc:PieChart.ChartLegend>
+                        <lvc:PieChart.DataTooltip>
+                            <lvc:DefaultTooltip BulletSize="20"/>
+                        </lvc:PieChart.DataTooltip>
+                    </lvc:PieChart>
+                    <ComboBox x:Name="cmbMemProjects" Margin="81,308,327.333,2"/>
+                    <ComboBox x:Name="cmbMembers" Margin="268,308,141.333,2" SelectionChanged="cmbMem_SelectionChanged"/>
                 </Grid>
             </TabItem>
             
