@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MySql.Data.MySqlClient;
 using System.Windows;
 using System.Windows.Input;
@@ -19,14 +20,8 @@ namespace teammy
     /// </summary>
     public partial class ProgressReport : Window
     {
-
-        #region Fields
-        //Hosted DB connection string
-        private static string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
-        MySqlConnection conn = new MySqlConnection(connectionString);
-        #endregion
-
         //public UserModel currentUser { get; set; } = Application.Current.Resources["currentUser"] as UserModel;
+
         public SeriesCollection ProjectsPie { get; set; } = new SeriesCollection()
         {
             new PieSeries
@@ -62,24 +57,11 @@ namespace teammy
             InitializeComponent();
             Parallel.Invoke(() =>
             {
-                conn.Open();
-                try
-                {
-                    MySqlCommand getProjects = new MySqlCommand("SELECT Proj_Name FROM projects;", conn);
+                teammyEntities projContext = new teammyEntities();
+                List<string> projNames = (from project in projContext.projects
+                                            select project.Proj_Name).ToList();
 
-
-                    MySqlDataReader reader = getProjects.ExecuteReader();
-                    using (reader)
-                    {
-                        while (reader.Read())
-                        {
-                            Dispatcher.Invoke(() => cmbProjects.Items.Add(reader[0]));
-                        }
-                    }
-                }
-                catch (MySqlException) { }
-                conn.Close();
-
+                cmbProjects.ItemsSource = projNames;
                 cmbProjects.SelectedIndex = 0;
             });
         }
@@ -161,46 +143,15 @@ namespace teammy
         {
             Parallel.Invoke(() => 
             {
-                int nsCount = 0, ipCount = 0, coCount = 0;
+                teammyEntities teammyContext = new teammyEntities();
+                    List<string> progress_codes = 
+                (from tasks in teammyContext.tasks join projects in teammyContext.projects on tasks.proj_id equals projects.Proj_ID
+                 where projects.Proj_Name.Equals(cmbProjects.SelectedItem.ToString())
+                  select tasks.progress_code).ToList();
 
-                conn.Open();
-                try
-                {
-                    MySqlCommand getTasks = new MySqlCommand("SELECT progress_code FROM tasks NATURAL JOIN projects WHERE Proj_Name = @projectName;", conn);
-                    getTasks.Parameters.AddWithValue("projectName", cmbProjects.SelectedItem.ToString());
-                    MySqlDataReader reader = getTasks.ExecuteReader();
-
-                    using (reader)
-                    {
-                        string progress;
-                        while (reader.Read())
-                        {
-                            progress = reader[0].ToString();
-                            if (progress.Equals("NS"))
-                            {
-                                nsCount++;
-                            }
-                            else if (progress.Equals("IP"))
-                            {
-                                ipCount++;
-                            }
-                            else
-                            {
-                                coCount++;
-                            }
-                        }
-                    }
-                }
-                catch (MySqlException m) 
-                {
-                    MessageBox.Show(m.Message, "MySqlException Thrown", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-
-                ProjectsPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(nsCount) };
-                ProjectsPie[1].Values = new ChartValues<ObservableValue> { new ObservableValue(ipCount) };
-                ProjectsPie[2].Values = new ChartValues<ObservableValue> { new ObservableValue(coCount) };
-
-                conn.Close();
+                ProjectsPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(x => x.Equals("NS")).Count) };
+                ProjectsPie[1].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(x => x.Equals("IP")).Count) };
+                ProjectsPie[2].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(x => x.Equals("CO")).Count) };
             });
         }
     }

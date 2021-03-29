@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="teammyModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="assignees">
+          <Key>
+            <PropertyRef Name="assignee_id" />
+          </Key>
+          <Property Name="assignee_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="assigned_group" Type="int" />
+          <Property Name="mate_id" Type="uint" />
+        </EntityType>
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_name" Type="varchar" MaxLength="40" />
+          <Property Name="Proj_ID" Type="uint" />
+        </EntityType>
+        <EntityType Name="privileges">
+          <Key>
+            <PropertyRef Name="Privilege_Code" />
+          </Key>
+          <Property Name="Privilege_Code" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Privilege" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="progress_indicators">
+          <Key>
+            <PropertyRef Name="Progress_Code" />
+          </Key>
+          <Property Name="Progress_Code" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Progress" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="projects">
+          <Key>
+            <PropertyRef Name="Proj_ID" />
+          </Key>
+          <Property Name="Proj_ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Proj_Name" Type="varchar" MaxLength="45" />
+          <Property Name="Team_ID" Type="uint" />
+        </EntityType>
+        <EntityType Name="tasks">
+          <Key>
+            <PropertyRef Name="task_id" />
+          </Key>
+          <Property Name="task_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="task_name" Type="varchar" MaxLength="45" />
+          <Property Name="proj_id" Type="uint" />
+          <Property Name="assigned_group" Type="int" />
+          <Property Name="priority" Type="varchar" MaxLength="15" />
+          <Property Name="due_date" Type="date" />
+          <Property Name="progress_code" Type="char" MaxLength="2" />
+          <Property Name="category_id" Type="uint" />
+        </EntityType>
+        <EntityType Name="team_mates">
+          <Key>
+            <PropertyRef Name="mate_id" />
+          </Key>
+          <Property Name="mate_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Team_ID" Type="uint" />
+          <Property Name="user_id" Type="uint" />
+        </EntityType>
+        <EntityType Name="teams">
+          <Key>
+            <PropertyRef Name="Team_ID" />
+          </Key>
+          <Property Name="Team_ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Team_Name" Type="varchar" MaxLength="30" />
+          <Property Name="Num_Members" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="35" />
+          <Property Name="password" Type="varchar" MaxLength="20" />
+          <Property Name="privilege_code" Type="char" MaxLength="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'fk_assigned_group' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="fk_assigned_group" />-->
+        <Association Name="fk_category_id">
+          <End Role="categories" Type="Self.categories" Multiplicity="0..1" />
+          <End Role="tasks" Type="Self.tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="tasks">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_mate_id">
+          <End Role="team_mates" Type="Self.team_mates" Multiplicity="0..1" />
+          <End Role="assignees" Type="Self.assignees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team_mates">
+              <PropertyRef Name="mate_id" />
+            </Principal>
+            <Dependent Role="assignees">
+              <PropertyRef Name="mate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_progress_code">
+          <End Role="progress_indicators" Type="Self.progress_indicators" Multiplicity="0..1" />
+          <End Role="tasks" Type="Self.tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="progress_indicators">
+              <PropertyRef Name="Progress_Code" />
+            </Principal>
+            <Dependent Role="tasks">
+              <PropertyRef Name="progress_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_project_id">
+          <End Role="projects" Type="Self.projects" Multiplicity="0..1" />
+          <End Role="tasks" Type="Self.tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="Proj_ID" />
+            </Principal>
+            <Dependent Role="tasks">
+              <PropertyRef Name="proj_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projects_ibfk_1">
+          <End Role="teams" Type="Self.teams" Multiplicity="0..1" />
+          <End Role="projects" Type="Self.projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teams">
+              <PropertyRef Name="Team_ID" />
+            </Principal>
+            <Dependent Role="projects">
+              <PropertyRef Name="Team_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projects_id_fk">
+          <End Role="projects" Type="Self.projects" Multiplicity="0..1" />
+          <End Role="categories" Type="Self.categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="Proj_ID" />
+            </Principal>
+            <Dependent Role="categories">
+              <PropertyRef Name="Proj_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="team_mates_ibfk_1">
+          <End Role="teams" Type="Self.teams" Multiplicity="0..1" />
+          <End Role="team_mates" Type="Self.team_mates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teams">
+              <PropertyRef Name="Team_ID" />
+            </Principal>
+            <Dependent Role="team_mates">
+              <PropertyRef Name="Team_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="team_mates_ibfk_2">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="team_mates" Type="Self.team_mates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="team_mates">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="users_ibfk_1">
+          <End Role="privileges" Type="Self.privileges" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="privileges">
+              <PropertyRef Name="Privilege_Code" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="privilege_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="teammyModelStoreContainer">
+          <EntitySet Name="assignees" EntityType="Self.assignees" Schema="" store:Type="Tables" />
+          <EntitySet Name="categories" EntityType="Self.categories" Schema="" store:Type="Tables" />
+          <EntitySet Name="privileges" EntityType="Self.privileges" Schema="" store:Type="Tables" />
+          <EntitySet Name="progress_indicators" EntityType="Self.progress_indicators" Schema="" store:Type="Tables" />
+          <EntitySet Name="projects" EntityType="Self.projects" Schema="" store:Type="Tables" />
+          <EntitySet Name="tasks" EntityType="Self.tasks" Schema="" store:Type="Tables" />
+          <EntitySet Name="team_mates" EntityType="Self.team_mates" Schema="" store:Type="Tables" />
+          <EntitySet Name="teams" EntityType="Self.teams" Schema="" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="" store:Type="Tables" />
+          <AssociationSet Name="fk_category_id" Association="Self.fk_category_id">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+          <AssociationSet Name="fk_mate_id" Association="Self.fk_mate_id">
+            <End Role="team_mates" EntitySet="team_mates" />
+            <End Role="assignees" EntitySet="assignees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_progress_code" Association="Self.fk_progress_code">
+            <End Role="progress_indicators" EntitySet="progress_indicators" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+          <AssociationSet Name="fk_project_id" Association="Self.fk_project_id">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+          <AssociationSet Name="projects_ibfk_1" Association="Self.projects_ibfk_1">
+            <End Role="teams" EntitySet="teams" />
+            <End Role="projects" EntitySet="projects" />
+          </AssociationSet>
+          <AssociationSet Name="projects_id_fk" Association="Self.projects_id_fk">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="categories" EntitySet="categories" />
+          </AssociationSet>
+          <AssociationSet Name="team_mates_ibfk_1" Association="Self.team_mates_ibfk_1">
+            <End Role="teams" EntitySet="teams" />
+            <End Role="team_mates" EntitySet="team_mates" />
+          </AssociationSet>
+          <AssociationSet Name="team_mates_ibfk_2" Association="Self.team_mates_ibfk_2">
+            <End Role="users" EntitySet="users" />
+            <End Role="team_mates" EntitySet="team_mates" />
+          </AssociationSet>
+          <AssociationSet Name="users_ibfk_1" Association="Self.users_ibfk_1">
+            <End Role="privileges" EntitySet="privileges" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="teammyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="assignee">
+          <Key>
+            <PropertyRef Name="assignee_id" />
+          </Key>
+          <Property Name="assignee_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="assigned_group" Type="Int32" />
+          <Property Name="mate_id" Type="Int64" />
+          <NavigationProperty Name="team_mates" Relationship="Self.fk_mate_id" FromRole="assignees" ToRole="team_mates" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Proj_ID" Type="Int64" />
+          <NavigationProperty Name="tasks" Relationship="Self.fk_category_id" FromRole="categories" ToRole="tasks" />
+          <NavigationProperty Name="project" Relationship="Self.projects_id_fk" FromRole="categories" ToRole="projects" />
+        </EntityType>
+        <EntityType Name="privilege">
+          <Key>
+            <PropertyRef Name="Privilege_Code" />
+          </Key>
+          <Property Name="Privilege_Code" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Privilege1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="users" Relationship="Self.users_ibfk_1" FromRole="privileges" ToRole="users" />
+        </EntityType>
+        <EntityType Name="progress_indicators">
+          <Key>
+            <PropertyRef Name="Progress_Code" />
+          </Key>
+          <Property Name="Progress_Code" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Progress" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tasks" Relationship="Self.fk_progress_code" FromRole="progress_indicators" ToRole="tasks" />
+        </EntityType>
+        <EntityType Name="project">
+          <Key>
+            <PropertyRef Name="Proj_ID" />
+          </Key>
+          <Property Name="Proj_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Proj_Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Team_ID" Type="Int64" />
+          <NavigationProperty Name="categories" Relationship="Self.projects_id_fk" FromRole="projects" ToRole="categories" />
+          <NavigationProperty Name="tasks" Relationship="Self.fk_project_id" FromRole="projects" ToRole="tasks" />
+          <NavigationProperty Name="team" Relationship="Self.projects_ibfk_1" FromRole="projects" ToRole="teams" />
+        </EntityType>
+        <EntityType Name="task">
+          <Key>
+            <PropertyRef Name="task_id" />
+          </Key>
+          <Property Name="task_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="task_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="proj_id" Type="Int64" />
+          <Property Name="assigned_group" Type="Int32" />
+          <Property Name="priority" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="due_date" Type="DateTime" />
+          <Property Name="progress_code" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="category_id" Type="Int64" />
+          <NavigationProperty Name="category" Relationship="Self.fk_category_id" FromRole="tasks" ToRole="categories" />
+          <NavigationProperty Name="progress_indicators" Relationship="Self.fk_progress_code" FromRole="tasks" ToRole="progress_indicators" />
+          <NavigationProperty Name="project" Relationship="Self.fk_project_id" FromRole="tasks" ToRole="projects" />
+        </EntityType>
+        <EntityType Name="team_mates">
+          <Key>
+            <PropertyRef Name="mate_id" />
+          </Key>
+          <Property Name="mate_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Team_ID" Type="Int64" />
+          <Property Name="user_id" Type="Int64" />
+          <NavigationProperty Name="assignees" Relationship="Self.fk_mate_id" FromRole="team_mates" ToRole="assignees" />
+          <NavigationProperty Name="team" Relationship="Self.team_mates_ibfk_1" FromRole="team_mates" ToRole="teams" />
+          <NavigationProperty Name="user" Relationship="Self.team_mates_ibfk_2" FromRole="team_mates" ToRole="users" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="Team_ID" />
+          </Key>
+          <Property Name="Team_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Team_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Num_Members" Type="Int32" />
+          <NavigationProperty Name="projects" Relationship="Self.projects_ibfk_1" FromRole="teams" ToRole="projects" />
+          <NavigationProperty Name="team_mates" Relationship="Self.team_mates_ibfk_1" FromRole="teams" ToRole="team_mates" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="privilege_code" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="privilege" Relationship="Self.users_ibfk_1" FromRole="users" ToRole="privileges" />
+          <NavigationProperty Name="team_mates" Relationship="Self.team_mates_ibfk_2" FromRole="users" ToRole="team_mates" />
+        </EntityType>
+        <Association Name="fk_mate_id">
+          <End Role="team_mates" Type="Self.team_mates" Multiplicity="0..1" />
+          <End Role="assignees" Type="Self.assignee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team_mates">
+              <PropertyRef Name="mate_id" />
+            </Principal>
+            <Dependent Role="assignees">
+              <PropertyRef Name="mate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_category_id">
+          <End Role="categories" Type="Self.category" Multiplicity="0..1" />
+          <End Role="tasks" Type="Self.task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="tasks">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projects_id_fk">
+          <End Role="projects" Type="Self.project" Multiplicity="0..1" />
+          <End Role="categories" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="Proj_ID" />
+            </Principal>
+            <Dependent Role="categories">
+              <PropertyRef Name="Proj_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="users_ibfk_1">
+          <End Role="privileges" Type="Self.privilege" Multiplicity="0..1" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="privileges">
+              <PropertyRef Name="Privilege_Code" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="privilege_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_progress_code">
+          <End Role="progress_indicators" Type="Self.progress_indicators" Multiplicity="0..1" />
+          <End Role="tasks" Type="Self.task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="progress_indicators">
+              <PropertyRef Name="Progress_Code" />
+            </Principal>
+            <Dependent Role="tasks">
+              <PropertyRef Name="progress_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_project_id">
+          <End Role="projects" Type="Self.project" Multiplicity="0..1" />
+          <End Role="tasks" Type="Self.task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="Proj_ID" />
+            </Principal>
+            <Dependent Role="tasks">
+              <PropertyRef Name="proj_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projects_ibfk_1">
+          <End Role="teams" Type="Self.team" Multiplicity="0..1" />
+          <End Role="projects" Type="Self.project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teams">
+              <PropertyRef Name="Team_ID" />
+            </Principal>
+            <Dependent Role="projects">
+              <PropertyRef Name="Team_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="team_mates_ibfk_1">
+          <End Role="teams" Type="Self.team" Multiplicity="0..1" />
+          <End Role="team_mates" Type="Self.team_mates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teams">
+              <PropertyRef Name="Team_ID" />
+            </Principal>
+            <Dependent Role="team_mates">
+              <PropertyRef Name="Team_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="team_mates_ibfk_2">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="team_mates" Type="Self.team_mates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="team_mates">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="teammyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="assignees" EntityType="Self.assignee" />
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="privileges" EntityType="Self.privilege" />
+          <EntitySet Name="progress_indicators" EntityType="Self.progress_indicators" />
+          <EntitySet Name="projects" EntityType="Self.project" />
+          <EntitySet Name="tasks" EntityType="Self.task" />
+          <EntitySet Name="team_mates" EntityType="Self.team_mates" />
+          <EntitySet Name="teams" EntityType="Self.team" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="fk_mate_id" Association="Self.fk_mate_id">
+            <End Role="team_mates" EntitySet="team_mates" />
+            <End Role="assignees" EntitySet="assignees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_category_id" Association="Self.fk_category_id">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+          <AssociationSet Name="projects_id_fk" Association="Self.projects_id_fk">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="categories" EntitySet="categories" />
+          </AssociationSet>
+          <AssociationSet Name="users_ibfk_1" Association="Self.users_ibfk_1">
+            <End Role="privileges" EntitySet="privileges" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_progress_code" Association="Self.fk_progress_code">
+            <End Role="progress_indicators" EntitySet="progress_indicators" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+          <AssociationSet Name="fk_project_id" Association="Self.fk_project_id">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+          <AssociationSet Name="projects_ibfk_1" Association="Self.projects_ibfk_1">
+            <End Role="teams" EntitySet="teams" />
+            <End Role="projects" EntitySet="projects" />
+          </AssociationSet>
+          <AssociationSet Name="team_mates_ibfk_1" Association="Self.team_mates_ibfk_1">
+            <End Role="teams" EntitySet="teams" />
+            <End Role="team_mates" EntitySet="team_mates" />
+          </AssociationSet>
+          <AssociationSet Name="team_mates_ibfk_2" Association="Self.team_mates_ibfk_2">
+            <End Role="users" EntitySet="users" />
+            <End Role="team_mates" EntitySet="team_mates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="teammyModelStoreContainer" CdmEntityContainer="teammyEntities">
+          <EntitySetMapping Name="assignees">
+            <EntityTypeMapping TypeName="teammyModel.assignee">
+              <MappingFragment StoreEntitySet="assignees">
+                <ScalarProperty Name="assignee_id" ColumnName="assignee_id" />
+                <ScalarProperty Name="assigned_group" ColumnName="assigned_group" />
+                <ScalarProperty Name="mate_id" ColumnName="mate_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="teammyModel.category">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="Proj_ID" ColumnName="Proj_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="privileges">
+            <EntityTypeMapping TypeName="teammyModel.privilege">
+              <MappingFragment StoreEntitySet="privileges">
+                <ScalarProperty Name="Privilege_Code" ColumnName="Privilege_Code" />
+                <ScalarProperty Name="Privilege1" ColumnName="Privilege" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="progress_indicators">
+            <EntityTypeMapping TypeName="teammyModel.progress_indicators">
+              <MappingFragment StoreEntitySet="progress_indicators">
+                <ScalarProperty Name="Progress_Code" ColumnName="Progress_Code" />
+                <ScalarProperty Name="Progress" ColumnName="Progress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projects">
+            <EntityTypeMapping TypeName="teammyModel.project">
+              <MappingFragment StoreEntitySet="projects">
+                <ScalarProperty Name="Proj_ID" ColumnName="Proj_ID" />
+                <ScalarProperty Name="Proj_Name" ColumnName="Proj_Name" />
+                <ScalarProperty Name="Team_ID" ColumnName="Team_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tasks">
+            <EntityTypeMapping TypeName="teammyModel.task">
+              <MappingFragment StoreEntitySet="tasks">
+                <ScalarProperty Name="task_id" ColumnName="task_id" />
+                <ScalarProperty Name="task_name" ColumnName="task_name" />
+                <ScalarProperty Name="proj_id" ColumnName="proj_id" />
+                <ScalarProperty Name="assigned_group" ColumnName="assigned_group" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="due_date" ColumnName="due_date" />
+                <ScalarProperty Name="progress_code" ColumnName="progress_code" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="team_mates">
+            <EntityTypeMapping TypeName="teammyModel.team_mates">
+              <MappingFragment StoreEntitySet="team_mates">
+                <ScalarProperty Name="mate_id" ColumnName="mate_id" />
+                <ScalarProperty Name="Team_ID" ColumnName="Team_ID" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teams">
+            <EntityTypeMapping TypeName="teammyModel.team">
+              <MappingFragment StoreEntitySet="teams">
+                <ScalarProperty Name="Team_ID" ColumnName="Team_ID" />
+                <ScalarProperty Name="Team_Name" ColumnName="Team_Name" />
+                <ScalarProperty Name="Num_Members" ColumnName="Num_Members" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="teammyModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="privilege_code" ColumnName="privilege_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

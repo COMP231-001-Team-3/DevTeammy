@@ -2,6 +2,8 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\tea
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.pdb
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\BouncyCastle.Crypto.dll
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.dll
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.SqlServer.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.Streams.dll
@@ -17,6 +19,8 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Sys
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Ubiety.Dns.Core.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Zstandard.Net.dll
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.xml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.SqlServer.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.pdb
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.xml
@@ -56,3 +60,4 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\tea
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy_Content.g.cs
