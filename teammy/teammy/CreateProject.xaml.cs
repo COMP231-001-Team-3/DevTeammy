@@ -21,6 +21,8 @@ namespace teammy
         //Colors for project cards
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
+        teammyEntities dbContext = new teammyEntities();
+
         //Margins indicate position of each box to be placed
         int left, top, right, bottom;
         int boxCount = 0;
@@ -50,8 +52,7 @@ namespace teammy
             boxCount = 0;
             totalBoxes = 0;
             projGrid.Children.Clear();
-            teammyEntities dbContext = new teammyEntities();
-
+            
             if (cmbTeams.Items.Count == 0)
             {                
                 List<string> teamNames = (from team in dbContext.teams
@@ -275,6 +276,16 @@ namespace teammy
             btnDone.Visibility = Visibility.Hidden;
             btnCancel.Visibility = Visibility.Hidden;
             btnCreateProj.Visibility = Visibility.Visible;
+        }
+
+        private void btnCancel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            cancelbtnIcon.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
+        }
+
+        private void btnCancel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            cancelbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
         }
 
         private void txtNameInput_KeyUp(object sender, KeyEventArgs e)

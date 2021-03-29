@@ -1,14 +1,10 @@
-﻿using System;
-using System.Linq;
-using MySql.Data.MySqlClient;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using System.Collections.Generic;
 using LiveCharts;
-using LiveCharts.Charts;
 using LiveCharts.Wpf;
 using LiveCharts.Defaults;
 using System.Threading.Tasks;
@@ -20,7 +16,8 @@ namespace teammy
     /// </summary>
     public partial class ProgressReport : Window
     {
-        //public UserModel currentUser { get; set; } = Application.Current.Resources["currentUser"] as UserModel;
+        //public user currentUser { get; set; } = Application.Current.Resources["currentUser"] as user;
+        teammyEntities dbContext = new teammyEntities();
 
         public SeriesCollection ProjectsPie { get; set; } = new SeriesCollection()
         {
@@ -57,8 +54,7 @@ namespace teammy
             InitializeComponent();
             Parallel.Invoke(() =>
             {
-                teammyEntities projContext = new teammyEntities();
-                List<string> projNames = (from project in projContext.projects
+                List<string> projNames = (from project in dbContext.projects
                                             select project.Proj_Name).ToList();
 
                 cmbProjects.ItemsSource = projNames;
@@ -141,11 +137,10 @@ namespace teammy
 
         private void cmbTeams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Parallel.Invoke(() => 
+            Parallel.Invoke(() =>
             {
-                teammyEntities teammyContext = new teammyEntities();
-                    List<string> progress_codes = 
-                (from tasks in teammyContext.tasks join projects in teammyContext.projects on tasks.proj_id equals projects.Proj_ID
+                List<string> progress_codes = 
+                (from tasks in dbContext.tasks join projects in dbContext.projects on tasks.proj_id equals projects.Proj_ID
                  where projects.Proj_Name.Equals(cmbProjects.SelectedItem.ToString())
                   select tasks.progress_code).ToList();
 

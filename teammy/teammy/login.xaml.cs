@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,11 +14,19 @@ namespace teammy
     /// </summary>
     public partial class LoginWindow : Window
     {
+        List<user> users;
+        teammyEntities dbContext = new teammyEntities();
+
         public LoginWindow()
         {
             InitializeComponent();
 
             Application.Current.Resources["loginInstance"] = this;
+            Parallel.Invoke(()=> 
+            {
+                users = (from user in dbContext.users
+                         select user).ToList();
+            });            
         }
 
         private void signinBtn_Click(object sender, RoutedEventArgs e)
@@ -25,10 +34,6 @@ namespace teammy
             //getting input from userIDtextbox and User Passwordtextbox
             string nameinput = usernameInput.Text;
             string passwordinput = passwordInput.Password;
-
-            teammyEntities dbContext = new teammyEntities();
-            List<user> users = (from user in dbContext.users
-                               select user).ToList();
 
             user userEntered = users.Find((user) => user.user_name.Equals(nameinput));
             bool? validPassword = userEntered?.password.Equals(passwordinput);
