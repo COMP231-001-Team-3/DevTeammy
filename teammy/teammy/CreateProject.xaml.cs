@@ -292,6 +292,12 @@ namespace teammy
             cancelbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            (Application.Current.Resources["progReportInstance"] as Window).Show();
+        }
+
         private void txtNameInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)

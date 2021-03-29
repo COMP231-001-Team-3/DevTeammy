@@ -144,5 +144,11 @@ namespace teammy
             Hide();
             (Application.Current.Resources["mainInstance"] as Window).Show();
         }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            (Application.Current.Resources["progReportInstance"] as Window).Show();
+        }
     }
 }

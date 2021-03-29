@@ -78,7 +78,8 @@
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Progress Report" Background="White"  Width="200" Height="40" FontSize="16"
-                      MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave">
+                      MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave"
+                      Click="MenuItem_Click_1">
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="ProgressIconGrid">

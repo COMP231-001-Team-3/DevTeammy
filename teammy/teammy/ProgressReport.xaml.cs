@@ -16,7 +16,7 @@ namespace teammy
     /// </summary>
     public partial class ProgressReport : Window
     {
-        //public user currentUser { get; set; } = Application.Current.Resources["currentUser"] as user;
+        public user currentUser { get; set; } = Application.Current.Resources["currentUser"] as user;
         teammyEntities dbContext = new teammyEntities();
 
         public SeriesCollection ProjectsPie { get; set; } = new SeriesCollection()
@@ -78,7 +78,14 @@ namespace teammy
             InitializeComponent();
 
             projNames = (from project in dbContext.projects
-                            select project.Proj_Name).ToList();
+                         join team in dbContext.teams
+                            on project.Team_ID equals team.Team_ID
+                         join mate in dbContext.team_mates
+                            on team.Team_ID equals mate.Team_ID
+                         join user in dbContext.users 
+                            on mate.user_id equals user.user_id
+                         where currentUser.user_id.Equals(user.user_id)
+                         select project.Proj_Name).ToList();
 
             cmbProjects.ItemsSource = projNames;
             cmbMemProjects.ItemsSource = projNames;
@@ -86,19 +93,6 @@ namespace teammy
             cmbProjects.SelectedIndex = 0;
             cmbMemProjects.SelectedIndex = 0;
 
-            memNames = (from project in dbContext.projects
-                            join team in dbContext.teams 
-                            on project.Team_ID equals team.Team_ID
-                            join mate in dbContext.team_mates
-                            on team.Team_ID equals mate.Team_ID
-                            join user in dbContext.users 
-                            on mate.user_id equals user.user_id
-                        where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString())
-                            select user.user_name).ToList();
-                
-            cmbMembers.ItemsSource = memNames;
-                               
-            cmbMembers.SelectedIndex = 0;
             cmbMemProjects.SelectionChanged += new SelectionChangedEventHandler(cmbMem_SelectionChanged);
         }
         #endregion
@@ -213,6 +207,27 @@ namespace teammy
                 ProjectsMemPie[1].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("IP")).Count) };
                 ProjectsMemPie[2].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("CO")).Count) };
             });
+        }
+        private void cmbMemProjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            memNames = (from project in dbContext.projects
+                        join team in dbContext.teams
+                        on project.Team_ID equals team.Team_ID
+                        join mate in dbContext.team_mates
+                        on team.Team_ID equals mate.Team_ID
+                        join user in dbContext.users
+                        on mate.user_id equals user.user_id
+                        where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString())
+                        select user.user_name).ToList();
+
+            cmbMembers.ItemsSource = memNames;
+
+            cmbMembers.SelectedIndex = 0;
+        }
+            private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            (Application.Current.Resources["createProjInstance"] as Window).Show();
         }
     }
 }

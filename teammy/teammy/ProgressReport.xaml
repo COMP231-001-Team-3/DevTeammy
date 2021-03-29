@@ -45,21 +45,22 @@
                 <MenuItem.Icon>
                     <Grid x:Name="homeIconGrid">
                         <Image x:Name="homeIconImg" Source="images/protoHome.png" />
-                        <Button x:Name="homeIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
-                                Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
+                        <Button x:Name="homeIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=homeIconImg}, Path=ActualHeight}"
+                                Width="{Binding Source={x:Reference Name=homeIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
 
                     </Grid>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Boards" Background="White"  Width="200" Height="40" FontSize="16"
-                      MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave">
+                      MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave"
+                      Click="MenuItem_Click">
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="boardsIconGrid">
                         <Image x:Name="BoardsIconImg" Source="images/protoBoards.png" />
-                        <Button x:Name="BoardsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
-                                Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
+                        <Button x:Name="BoardsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=BoardsIconImg}, Path=ActualHeight}"
+                                Width="{Binding Source={x:Reference Name=BoardsIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
                     </Grid>
                 </MenuItem.Icon>
@@ -70,8 +71,8 @@
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="TeamsIconGrid">
                         <Image x:Name="TeamsIconImg" Source="images/protoTeams.png" />
-                        <Button x:Name="TeamsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
-                                Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
+                        <Button x:Name="TeamsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=TeamsIconImg}, Path=ActualHeight}"
+                                Width="{Binding Source={x:Reference Name=TeamsIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
                     </Grid>
 
@@ -83,8 +84,8 @@
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="ProgressIconGrid">
                         <Image x:Name="ProgressIconImg" Source="images/protoProgress.jpg" />
-                        <Button x:Name="ProgressIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
-                                Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
+                        <Button x:Name="ProgressIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=ProgressIconImg}, Path=ActualHeight}"
+                                Width="{Binding Source={x:Reference Name=ProgressIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
                     </Grid>
 
@@ -95,8 +96,8 @@
                 <MenuItem.Icon>
                     <Grid x:Name="ScheduleIconGrid">
                         <Image x:Name="ScheduleIconImg" Source="images/protoSchedule.png" />
-                        <Button x:Name="ScheduleIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding ElementName=homeIcon, Path=ActualHeight}"
-                                Width="{Binding ElementName=homeIcon, Path=ActualWidth}" Background="{x:Null}" 
+                        <Button x:Name="ScheduleIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=ScheduleIconImg}, Path=ActualHeight}"
+                                Width="{Binding Source={x:Reference Name=ScheduleIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
                     </Grid>
                 </MenuItem.Icon>
@@ -195,7 +196,7 @@
                 </Grid>
             </TabItem>
             
-            <TabItem x:Name="tbitMember" Header="Member" BorderBrush="#FFF698FC" Foreground="#FFBB4BFF">
+            <TabItem x:Name="tbitMember" Visibility="{Binding Path=currentUser, Converter={StaticResource ResourceKey=PrivConverter}}" Header="Member" BorderBrush="#FFF698FC" Foreground="#FFBB4BFF">
                 <Grid x:Name="tbMemberGrid" Background="White">
                     <lvc:PieChart x:Name="pieMember" LegendLocation="Right" Series="{Binding ProjectsMemPie}" SeriesColors="{Binding PieColors}" Margin="0,0,0,35">
                         <lvc:PieChart.ChartLegend>
@@ -205,7 +206,7 @@
                             <lvc:DefaultTooltip BulletSize="20"/>
                         </lvc:PieChart.DataTooltip>
                     </lvc:PieChart>
-                    <ComboBox x:Name="cmbMemProjects" Margin="81,308,327.333,2"/>
+                    <ComboBox x:Name="cmbMemProjects" Margin="81,308,327.333,2" SelectionChanged="cmbMemProjects_SelectionChanged"/>
                     <ComboBox x:Name="cmbMembers" Margin="268,308,141.333,2" SelectionChanged="cmbMem_SelectionChanged"/>
                 </Grid>
             </TabItem>
