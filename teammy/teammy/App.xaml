@@ -6,6 +6,6 @@
     <Application.Resources>
         <local:MainWindow x:Key="mainInstance"/>
         <local:LoginWindow x:Key="loginInstance"/>
-        <local:ProgressReport x:Key="createProjInstance"/>
+        <local:CreateProject x:Key="createProjInstance"/>
     </Application.Resources>
 </Application>

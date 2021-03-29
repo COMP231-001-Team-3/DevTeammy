@@ -133,7 +133,6 @@
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ColorToBrushConverter.cs" />
-    <Compile Include="DataContext.cs" />
     <Compile Include="privilege.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
@@ -187,7 +186,6 @@
     <Compile Include="user.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

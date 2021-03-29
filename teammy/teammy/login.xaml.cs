@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,33 +13,11 @@ namespace teammy
     /// </summary>
     public partial class LoginWindow : Window
     {
-        //connecting DB
-        string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
-        List<UserModel> users = new List<UserModel>();
-
         public LoginWindow()
         {
             InitializeComponent();
 
             Application.Current.Resources["loginInstance"] = this;
-
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-
-            //Getting password by user_id
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM users", conn);
-            //cmd.Parameters.AddWithValue("@idinput", nameinput);
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            using (reader)
-            {
-                while (reader.Read())
-                {
-                    users.Add(new UserModel(reader[1].ToString(), reader[2].ToString(), reader[3].ToString()));
-                }
-            }
-
         }
 
         private void signinBtn_Click(object sender, RoutedEventArgs e)
@@ -47,13 +26,18 @@ namespace teammy
             string nameinput = usernameInput.Text;
             string passwordinput = passwordInput.Password;
 
-            UserModel userEntered = users.Find((user) => user.Username.Equals(nameinput));
+            teammyEntities dbContext = new teammyEntities();
+            List<user> users = (from user in dbContext.users
+                               select user).ToList();
 
-            if ( userEntered == null || !userEntered.VerifyPassword(passwordinput))
+            user userEntered = users.Find((user) => user.user_name.Equals(nameinput));
+            bool? validPassword = userEntered?.password.Equals(passwordinput);
+
+            if (userEntered == null || !(bool)validPassword)
             {
                 MessageBox.Show("The username/password entered is incorrect!", "Authentication Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
+            else if ((bool)validPassword)
             {//showing homepage if authentication success
                 Application.Current.Resources.Add("currentUser", userEntered);
                 (Application.Current.Resources["mainInstance"] as Window).Show();

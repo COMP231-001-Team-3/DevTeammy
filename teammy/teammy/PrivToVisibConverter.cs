@@ -9,7 +9,7 @@ namespace teammy
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value as UserModel).Privilege.Equals("PM") ? "Visible" : "Hidden";
+            return (value as user).privilege_code.Equals("PM") ? "Visible" : "Hidden";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

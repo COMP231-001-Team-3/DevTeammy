@@ -24,62 +24,31 @@ namespace teammy
     /// </summary>
     public partial class MainWindow : Window
     {
-        public UserModel currentUser { get; set; } = Application.Current.Resources["currentUser"] as UserModel;
+        public user currentUser { get; set; } = Application.Current.Resources["currentUser"] as user;
+
+        List<TasksAssignedtome> myTasksData;
         public MainWindow()
         {
             InitializeComponent();
             displaying_assigntome();
             displaying_comingup();
-
         }
 
         public void displaying_assigntome()
         {
-            ObservableCollection<TasksAssignedtome> list = new ObservableCollection<TasksAssignedtome>();
-            //DB connection
-            string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-
-            //Getting list of assigned tasks by userid
-            MySqlCommand cmd = new MySqlCommand("Select task_name, due_date,progress_code FROM tasks NATURAL JOIN assignees NATURAL JOIN team_mates NATURAL JOIN users WHERE user_name = @nameUser", conn);
-            cmd.Parameters.AddWithValue("nameUser", currentUser.Username);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            using (reader)
+            teammyEntities dbContext = new teammyEntities();
+            myTasksData = (from task in dbContext.tasks join assignee in dbContext.assignees on task.assigned_group equals assignee.assigned_group join mate in dbContext.team_mates on assignee.mate_id equals mate.mate_id join user in dbContext.users on mate.user_id equals user.user_id where user.user_name.Equals(currentUser.user_name) select new TasksAssignedtome
             {
+                taskname = task.task_name,
+                progress = task.due_date.ToString()
+            }).ToList();
 
-
-                while (reader.Read())
-                {
-
-                    list.Add(new TasksAssignedtome { taskname = (string)reader["task_name"], progress = (string)reader["progress_code"] });
-                }
-            }
-            AssignedtomeDatagrid.ItemsSource = list;
+            AssignedtomeDatagrid.ItemsSource = myTasksData;
         }
 
         public void displaying_comingup()
         {
-            ObservableCollection<TasksAssignedtome> list = new ObservableCollection<TasksAssignedtome>();
-            //DB connection
-            string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-
-            //Getting list of assigned tasks by userid
-            MySqlCommand cmd = new MySqlCommand("Select task_name, due_date,progress_code FROM tasks NATURAL JOIN assignees NATURAL JOIN team_mates NATURAL JOIN users WHERE user_name = @nameUser AND NOW() < due_date AND due_date < (NOW() + INTERVAL 7 DAY)", conn);
-            cmd.Parameters.AddWithValue("nameUser", currentUser.Username);
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            using (reader)
-            {
-                while (reader.Read())
-                {
-                    list.Add(new TasksAssignedtome { taskname = (string)reader["task_name"], progress = (string)reader["progress_code"], duedate = "Due on " + reader["due_date"].ToString() });
-                }
-            }
-            ComingDatagrid.ItemsSource = list;
+            ComingDatagrid.ItemsSource = myTasksData;
         }
 
         private void mainWindow_Closed(object sender, EventArgs e)

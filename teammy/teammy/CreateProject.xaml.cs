@@ -1,11 +1,12 @@
-﻿
-using System;
+﻿using System;
 using MySql.Data.MySqlClient;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace teammy
 {
@@ -16,8 +17,6 @@ namespace teammy
     {
 
         #region Fields
-        //Hosted DB connection string
-        private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
 
         //Colors for project cards
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
@@ -27,11 +26,10 @@ namespace teammy
         int boxCount = 0;
         int totalBoxes = 0;
         ProjectBox toBeInserted;
-        MySqlConnection conn;
 
         TextBox txtNameInput;
         #endregion
-        public UserModel currentUser { get; set; } = Application.Current.Resources["currentUser"] as UserModel;
+        public user currentUser { get; set; } = Application.Current.Resources["currentUser"] as user;
 
 
         #region Constructor
@@ -52,73 +50,58 @@ namespace teammy
             boxCount = 0;
             totalBoxes = 0;
             projGrid.Children.Clear();
-
-            //Connection and data retrieval starts here    
-            conn = new MySqlConnection(connectionString);
-            conn.Open();
+            teammyEntities dbContext = new teammyEntities();
 
             if (cmbTeams.Items.Count == 0)
-            {
-                MySqlCommand getTeams = new MySqlCommand("SELECT Team_Name FROM teams NATURAL JOIN team_mates NATURAL JOIN users WHERE user_name = @nameUser", conn);
-                getTeams.Parameters.AddWithValue("nameUser", currentUser.Username);
-                MySqlDataReader teamsReader = getTeams.ExecuteReader();
-
-                using (teamsReader)
-                {
-                    string teamName;
-                    while (teamsReader.Read())
-                    {
-                        teamName = teamsReader[0].ToString();
-                        cmbTeams.Items.Add(teamName);
-                    }
-                }
+            {                
+                List<string> teamNames = (from team in dbContext.teams
+                                          join mate in dbContext.team_mates on team.Team_ID equals mate.Team_ID join currUser in dbContext.users on mate.user_id equals currUser.user_id
+                                          where currUser.user_name.Equals(currentUser.user_name)
+                                         select team.Team_Name).ToList();
+                cmbTeams.ItemsSource = teamNames;
                 cmbTeams.SelectedIndex = 0;
             }
 
+            List<string> projNames = (from proj in dbContext.projects
+                                      join team in dbContext.teams on proj.Team_ID equals team.Team_ID
+                                      where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                                     select proj.Proj_Name).ToList();
 
-            MySqlCommand getProjects = new MySqlCommand("SELECT Proj_Name FROM projects NATURAL JOIN teams WHERE Team_Name = @nameTeam", conn);
-            getProjects.Parameters.AddWithValue("nameTeam", cmbTeams.SelectedItem.ToString());
-            MySqlDataReader projectsReader = getProjects.ExecuteReader();
+            ProjectBox project;
 
-            using (projectsReader)
+            //Variables for usage in loop declared beforehand for performance reasons
+            Random rd = new Random();
+            string projName;
+
+            //Loop to read through results from query
+            for (int i = 0; i < projNames.Count; i++)
             {
-                //Custom Control developed for this app
-                ProjectBox project;
+                totalBoxes++;
+                projName = projNames[i].ToString();
 
-                //Variables for usage in loop declared beforehand for performance reasons
-                Random rd = new Random();
-                string projName;
+                //Creation & Initialization of ProjectBox
+                project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack = backColors[rd.Next(0, 18)] };
 
-                //Loop to read through results from query
-                while (projectsReader.Read())
+                //Adds the newly created ProjectBox to the Grid within the ScrollViewer
+                projGrid.Children.Add(project);
+
+                //Updates margin for the next box
+                left += 175;
+                right -= 175;
+
+                //If 3 boxes have been created...then
+                if (boxCount == 2)
                 {
-                    totalBoxes++;
-                    projName = projectsReader[0].ToString();
-
-                    //Creation & Initialization of ProjectBox
-                    project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack = backColors[rd.Next(0, 18)] };
-
-                    //Adds the newly created ProjectBox to the Grid within the ScrollViewer
-                    projGrid.Children.Add(project);
-
-                    //Updates margin for the next box
-                    left += 175;
-                    right -= 175;
-
-                    //If 3 boxes have been created...then
-                    if (boxCount == 2)
-                    {
-                        //Margin updates for a new ProjectBox in a new row
-                        top += 132;
-                        bottom -= 132;
-                        left = 0;
-                        right = 361;
-                        boxCount = 0;
-                    }
-                    else
-                    {
-                        boxCount++;
-                    }
+                    //Margin updates for a new ProjectBox in a new row
+                    top += 132;
+                    bottom -= 132;
+                    left = 0;
+                    right = 361;
+                    boxCount = 0;
+                }
+                else
+                {
+                    boxCount++;
                 }
             }
         }
@@ -252,15 +235,16 @@ namespace teammy
             toBeInserted.ProjectName = txtNameInput.Text;
             txtNameInput.Visibility = Visibility.Hidden;
 
-            conn = new MySqlConnection(connectionString);
-            conn.Open();
-            MySqlCommand insert = new MySqlCommand("INSERT INTO projects VALUES(Proj_ID, @Proj_Name, (SELECT Team_ID from teams WHERE Team_Name = @nameTeam));", conn);
-            MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
-            insert.Parameters.AddWithValue("Proj_Name", txtNameInput.Text);
-            insert.Parameters.AddWithValue("nameTeam", cmbTeams.SelectedItem.ToString());
+            teammyEntities dbContext = new teammyEntities();
+            dbContext.projects.Add(new project() 
+            {
+                Proj_Name = txtNameInput.Text,
+                Team_ID = (from team in dbContext.teams
+                          where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                          select team.Team_ID).Single()
+            });
 
-            insert.ExecuteNonQuery();
-            commit.ExecuteNonQuery();
+            dbContext.SaveChanges();
 
             btnDone.Visibility = Visibility.Hidden;
             btnCancel.Visibility = Visibility.Hidden;
@@ -300,17 +284,16 @@ namespace teammy
                 toBeInserted.ProjectName = txtNameInput.Text;
                 txtNameInput.Visibility = Visibility.Hidden;
 
-                conn = new MySqlConnection(connectionString);
-                conn.Open();
+                teammyEntities dbContext = new teammyEntities();
+                dbContext.projects.Add(new project()
+                {
+                    Proj_Name = txtNameInput.Text,
+                    Team_ID = (from team in dbContext.teams
+                               where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                               select team.Team_ID).Single()
+                });
 
-                MySqlCommand insert = new MySqlCommand("INSERT INTO projects VALUES(Proj_ID, @Proj_Name, (SELECT Team_ID from teams WHERE Team_Name = @nameTeam));", conn);
-                MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
-                insert.Parameters.AddWithValue("Proj_Name", txtNameInput.Text);
-                insert.Parameters.AddWithValue("nameTeam", cmbTeams.SelectedItem.ToString());
-
-                insert.ExecuteNonQuery();
-                commit.ExecuteNonQuery();
-
+                dbContext.SaveChanges();
                 btnDone.Visibility = Visibility.Hidden;
                 btnCancel.Visibility = Visibility.Hidden;
                 btnCreateProj.Visibility = Visibility.Visible;
