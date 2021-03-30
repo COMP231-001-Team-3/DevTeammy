@@ -38,7 +38,7 @@
         </Style>
         <!-- Menu dropdown -->
 
-        <ContextMenu x:Key="cmThreeDots" >
+        <ContextMenu x:Key="cmThreeDots"  >
             <MenuItem x:Name="etItem" Header="Edit" Background="HotPink"  Width="150" Height="40" FontSize="16"  >
                 <MenuItem.Icon>
                     <Grid>
@@ -108,7 +108,7 @@
             </MenuItem>
         </ContextMenu>
     </UserControl.Resources>
-    <Grid Margin="10,10,-6.333,0" Height="85" VerticalAlignment="Top">
+    <Grid Name="taskGrid" Margin="10,10,-6.333,0" Height="85" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="139*"/>
             <ColumnDefinition Width="10*"/>
@@ -140,7 +140,7 @@
                 <Button x:Name="btnPriority" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnPriority_Click" Margin="0,0,0.999,0"/>
             </Grid>
         </Border>
-        <ComboBox x:Name="assigneeCombo" ItemsSource="{Binding TeamUsers}" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="62" Height="16" RenderTransformOrigin="0.819,0.659" SelectionChanged="assigneeCombo_SelectionChanged">
+        <ComboBox x:Name="assigneeCombo" ItemsSource="{Binding TeamUsers}"  HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="62" Height="16" RenderTransformOrigin="0.819,0.659" DropDownClosed="assigneeCombo_DropDownClosed">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>

@@ -26,12 +26,12 @@ namespace teammy.ProjectDetail
         List<string> users = new List<string>();
 
         public static readonly DependencyProperty TaskNameProperty = DependencyProperty.Register("TaskName", typeof(string), typeof(TaskBox));
-        public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string),  typeof(TaskBox));
+        public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskDueDateProperty = DependencyProperty.Register("TaskDueDate", typeof(DateTime), typeof(TaskBox));
         public static readonly DependencyProperty TaskAssigneeProperty = DependencyProperty.Register("Assignee", typeof(int), typeof(TaskBox));
 
-
+        
 
         public string TaskName
         {
@@ -42,6 +42,7 @@ namespace teammy.ProjectDetail
         {
             get { return (string)GetValue(TaskPriorityProperty); }
             set { SetValue(TaskPriorityProperty, value); }
+            
         }
         public string TaskProgress
         {
@@ -67,16 +68,16 @@ namespace teammy.ProjectDetail
         public event EventHandler<EventArgs> TaskProgressChanged;
         public event EventHandler<EventArgs> TaskDueDateChanged;
         public event EventHandler<EventArgs> TaskAssigneeChanged;
-        
+
         public TaskBox()
         {
-            
+
             InitializeComponent();
             LoadUsers();
         }
         public ObservableCollection<UserListClass> TeamUsers { get; set; }
         public class UserListClass
-        { 
+        {
             public string TeamMembers { get; set; }
         }
 
@@ -93,23 +94,67 @@ namespace teammy.ProjectDetail
             using (reader)
             {
                 while (reader.Read())
-                {   
+                {
                     users.Add(reader[0].ToString());
-                    
+
                 }
-                for(int i=0; i<users.Count;i++)
+                for (int i = 0; i < users.Count; i++)
                 {
                     TeamUsers.Add(new UserListClass
                     {
-                                
+
                         TeamMembers = users[i]
-                               
+
                     });
                 }
             }
-                //UserListClass listclass = new UserListClass{TeamMembers=users};
-                
+            //UserListClass listclass = new UserListClass{TeamMembers=users};
+
         }
+        private void createInitialBox(string assigneeName)
+        {
+            int left = 0, top = 0, right = 361, bottom = 260;
+            int initialBoxCount = 0;
+            //totalBoxes=0;
+            taskGrid.Children.Clear();
+            Random rd = new Random();
+            string  assigneeInitial;
+            string[] nameWords;
+
+            nameWords = assigneeName.Split(' ');
+
+            if (nameWords.Length >= 2)
+            {
+                assigneeInitial = nameWords[0][0] + "" + nameWords[1][0];
+            }
+            else
+            {
+                assigneeInitial = nameWords[0][0] + "" + nameWords[0][1];
+            }
+            //Creation & Initialization of InitialBox
+            assigneeInitialBox initialBox = new assigneeInitialBox();
+            initialBox.txtInitial.Text = assigneeInitial;
+
+            taskGrid.Children.Add(initialBox);
+
+            left += 175;
+            right -= 175;
+            initialBoxCount++;
+            
+        }
+        //MySqlConnection conn = new MySqlConnection(connectionString);
+        //conn.Open();
+        //MySqlCommand getAssignees = new MySqlCommand("SELECT user_name FROM users NATURAL JOIN teams NATURAL JOIN projects NATURAL JOIN tasks WHERE Task_Name = @nameTeam", conn);
+
+
+
+
+        /*assisgneeName = */
+
+    
+
+
+
         private void btnEditDelete_Click(object sender, RoutedEventArgs e)
         {
             ContextMenu cm = FindResource("cmThreeDots") as ContextMenu;
@@ -127,6 +172,7 @@ namespace teammy.ProjectDetail
             //TaskPriorityChanged?.Invoke(this, EventArgs.Empty);
         }
 
+       
         private void btnStatus_Click(object sender, RoutedEventArgs e)
         {
             ContextMenu cm = FindResource("cmStatus") as ContextMenu;
@@ -180,6 +226,35 @@ namespace teammy.ProjectDetail
         private void assigneeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+            ComboBox currentComboBox = sender as ComboBox;
+            if (currentComboBox != null)
+            {
+                string currentItem = (currentComboBox.SelectedItem as UserListClass).TeamMembers;               
+                if (currentItem != null)
+                {
+                    //MessageBox.Show(currentItem.Content.ToString());
+                   
+
+                    createInitialBox(currentItem);
+                }
+            }
+
+            
+                
+        }
+
+        private void assigneeCombo_DropDownClosed(object sender, EventArgs e)
+        {
+            ComboBox currentComboBox = sender as ComboBox;
+            if (currentComboBox != null)
+            {
+                string currentItem = (currentComboBox.SelectedItem as UserListClass).TeamMembers;
+
+                if (currentItem != null)
+                {
+                   createInitialBox(currentItem);
+                }
+            }
         }
     }
 }
