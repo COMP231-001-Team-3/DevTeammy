@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,7 +25,7 @@ namespace teammy
             {
                 users = (from user in dbContext.users
                          select user).ToList();
-            });            
+            });
         }
 
         private void signinBtn_Click(object sender, RoutedEventArgs e)

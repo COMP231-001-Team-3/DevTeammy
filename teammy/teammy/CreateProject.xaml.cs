@@ -294,8 +294,8 @@ namespace teammy
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
             (Application.Current.Resources["progReportInstance"] as Window).Show();
+            Hide();
         }
 
         private void txtNameInput_KeyUp(object sender, KeyEventArgs e)
