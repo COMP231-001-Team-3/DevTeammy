@@ -24,7 +24,6 @@ namespace teammy
         public Schedule()
         {
             InitializeComponent();
-            Checker();
         }
         #region Title Bar Button Event Handlers
         /// <summary>
@@ -131,11 +130,5 @@ namespace teammy
             (globalItems["teamsListInstance"] as Window).Show();
         }
         #endregion
-
-        private void Checker()
-        {
-            DateTime dateTime = new DateTime(2021, 2, 1);
-            MessageBox.Show(dateTime.DayOfWeek.ToString());
-        }
     }
 }
