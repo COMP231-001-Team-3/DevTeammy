@@ -113,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="DayBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Schedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +137,9 @@
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ColorToBrushConverter.cs" />
+    <Compile Include="DayBox.xaml.cs">
+      <DependentUpon>DayBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="preference.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
@@ -274,6 +281,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\arrow.png" />
     <Content Include="teammyDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>teammyDB.Context.cs</LastGenOutput>

@@ -65,3 +65,5 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MyS
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.EntityFramework.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\Schedule.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\Schedule.baml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\DayBox.g.cs
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\DayBox.baml

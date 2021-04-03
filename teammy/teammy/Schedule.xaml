@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:teammy"
         mc:Ignorable="d"
-        Title="Schedule" Height="450" Width="800"
+        Title="Schedule" Height="605" Width="970"
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" 
         DataContext="{Binding RelativeSource={RelativeSource self}}">
@@ -118,7 +118,7 @@
                 <Setter.Value>
                     <!-- Modifying control template of button to give custom mouseover color -->
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0.1">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="#8671CE" BorderThickness="0.1">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -143,7 +143,7 @@
                 <Setter.Value>
                     <!-- Modifying control template of button to give custom mouseover color -->
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0.1">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="#8671CE" BorderThickness="0.1">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -157,23 +157,107 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Background="White">
+    <Grid x:Name="containerGrid" Background="White" RenderTransformOrigin="0.446,0.508">
         <!-- Grid pnlTitle represents Custom title Bar -->
-        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,410" MouseDown="pnlTitle_MouseDown">
-            <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="770,0,0,10" Click="btnClose_Click"/>
-            <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="738,0,32,10" Click="btnMinimize_Click"/>
+        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,555" MouseDown="pnlTitle_MouseDown">
             <Label Content="Teammy" HorizontalAlignment="Left" Margin="35,3,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting"/>
-            <Button x:Name="btnMenu" Background="{x:Null}" Margin="5,0,758,10" BorderBrush="{x:Null}" Click="btnMenu_Click">
+            <Button x:Name="btnMenu" Background="{x:Null}" Margin="5,0,931.667,10" BorderBrush="{x:Null}" Click="btnMenu_Click">
                 <Button.Content>
                     <Grid>
-                        <Image Source="images\menuIcon.png"/>
+                        <Image Source="images\menuIcon.png" Margin="0,0,0.333,0.667"/>
 
                     </Grid>
                 </Button.Content>
 
             </Button>
+            <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="937,0,-0.333,13" Click="btnClose_Click"/>
+            <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="905,2,31.667,16.333" Click="btnMinimize_Click"/>
         </Grid>
 
-        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
+        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,139,0,0" VerticalAlignment="Top" Width="230"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle x:Name="rctSunday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="289,90,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="lblSunday" Content="Sunday" HorizontalAlignment="Left" Margin="289,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctSaturday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="852,90,0,0" VerticalAlignment="Top" Width="91"/>
+        <Label x:Name="lblSaturday" Content="Saturday" HorizontalAlignment="Left" Margin="851,90,0,0" VerticalAlignment="Top" Height="23" Width="92" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctFriday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="759,90,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="lblFriday" Content="Friday" HorizontalAlignment="Left" Margin="759,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctThursday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="664,90,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="lblThursday" Content="Thursday" HorizontalAlignment="Left" Margin="664,90,0,0" VerticalAlignment="Top" Height="23" Width="95" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctWednesday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="569,90,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="lblWednesday" Content="Wednesday" HorizontalAlignment="Left" Margin="570,90,0,0" VerticalAlignment="Top" Height="23" Width="95" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctTuesday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="476,90,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="lblTuesday" Content="Tuesday" HorizontalAlignment="Left" Margin="477,90,0,0" VerticalAlignment="Top" Height="23" Width="93" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctMonday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="383,90,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="lblMonday" Content="Monday" HorizontalAlignment="Left" Margin="383,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="94"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Label Content="1" HorizontalAlignment="Left" Margin="456,112,0,0" VerticalAlignment="Top" Foreground="#FF8671CE" FontSize="16"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="383,178,0,0" VerticalAlignment="Top" Foreground="#FF8671CE" FontSize="9" Width="73"/>
+        <Image HorizontalAlignment="Left" Margin="456,180,0,0" VerticalAlignment="Top" Height="22" Width="17" />
+        <Button x:Name="btnDone" HorizontalAlignment="Left" Margin="289,51,0,0" VerticalAlignment="Top" Width="119" Height="37" Background="White" FontSize="20" BorderBrush="{x:Null}">
+            <Button.Content>
+                <DockPanel>
+                    <Image Source="images/arrow.png" DockPanel.Dock="Left" Width="30" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="179.801"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Label Content="Previous" VerticalAlignment="Center"  Foreground="#FF8671CE" DockPanel.Dock="Right"/>
+                </DockPanel>
+            </Button.Content>
+        </Button>
+        <Button x:Name="btnDone_Copy" HorizontalAlignment="Left" Margin="852,51,0,0" VerticalAlignment="Top" Width="87" Height="37" Background="White" FontSize="20" BorderBrush="{x:Null}">
+            <DockPanel>
+                <Image Source="images/arrow.png" DockPanel.Dock="Right" Width="30">
+                </Image>
+                <Label Content="Next" VerticalAlignment="Center"  Foreground="#FF8671CE" DockPanel.Dock="Left"/>
+            </DockPanel>
+        </Button>
+
     </Grid>
 </Window>
