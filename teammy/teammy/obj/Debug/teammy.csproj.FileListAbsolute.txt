@@ -10,15 +10,11 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\K4o
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Hash.xxHash.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.Wpf.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.EntityFramework.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Renci.SshNet.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Buffers.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Ubiety.Dns.Core.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Zstandard.Net.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.SqlServer.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.pdb
@@ -30,8 +26,6 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Liv
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.Wpf.pdb
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.Wpf.xml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.xml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.EntityFramework.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Renci.SshNet.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Buffers.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.xml
@@ -63,3 +57,9 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\Car
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\TeamsList.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\CardBox.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.dll
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.EntityFramework.dll
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Zstandard.Net.dll
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Ubiety.Dns.Core.dll
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.xml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.EntityFramework.xml

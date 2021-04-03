@@ -27,6 +27,7 @@ namespace teammy
     
         public virtual DbSet<assignee> assignees { get; set; }
         public virtual DbSet<category> categories { get; set; }
+        public virtual DbSet<preference> preferences { get; set; }
         public virtual DbSet<privilege> privileges { get; set; }
         public virtual DbSet<progress_indicators> progress_indicators { get; set; }
         public virtual DbSet<project> projects { get; set; }

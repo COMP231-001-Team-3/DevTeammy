@@ -12,25 +12,18 @@ namespace teammy
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class preference
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
+        public preference()
         {
-            this.team_mates = new HashSet<team_mates>();
+            this.users = new HashSet<user>();
         }
     
-        public long user_id { get; set; }
-        public string user_name { get; set; }
-        public string password { get; set; }
-        public string privilege_code { get; set; }
-        public string email_address { get; set; }
-        public string phone_number { get; set; }
         public string prefer_code { get; set; }
+        public string preference1 { get; set; }
     
-        public virtual preference preference { get; set; }
-        public virtual privilege privilege { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<team_mates> team_mates { get; set; }
+        public virtual ICollection<user> users { get; set; }
     }
 }

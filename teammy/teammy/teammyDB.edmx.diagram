@@ -4,25 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0b7bce9ae5314bd6b806176e03b0e3ed" Name="Diagram1">
-        <EntityTypeShape EntityType="teammyModel.assignee" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="teammyModel.category" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="teammyModel.privilege" Width="1.5" PointX="1.5" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="teammyModel.progress_indicators" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="teammyModel.project" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="teammyModel.task" Width="1.5" PointX="7.5" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="teammyModel.team_mates" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="teammyModel.team" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="teammyModel.user" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <AssociationConnector Association="teammyModel.fk_mate_id" ManuallyRouted="false" />
-        <AssociationConnector Association="teammyModel.fk_category_id" ManuallyRouted="false" />
-        <AssociationConnector Association="teammyModel.projects_id_fk" ManuallyRouted="false" />
-        <AssociationConnector Association="teammyModel.users_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="teammyModel.fk_progress_code" ManuallyRouted="false" />
-        <AssociationConnector Association="teammyModel.fk_project_id" ManuallyRouted="false" />
-        <AssociationConnector Association="teammyModel.projects_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="teammyModel.team_mates_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="teammyModel.team_mates_ibfk_2" ManuallyRouted="false" />
+      <Diagram DiagramId="0b7bce9ae5314bd6b806176e03b0e3ed" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="teammyModel.assignee" Width="1.5" PointX="9.5" PointY="1" />
+        <EntityTypeShape EntityType="teammyModel.category" Width="1.5" PointX="9.5" PointY="5" />
+        <EntityTypeShape EntityType="teammyModel.preference" Width="1.5" PointX="2.75" PointY="4.125" />
+        <EntityTypeShape EntityType="teammyModel.privilege" Width="1.5" PointX="2.75" PointY="1.125" />
+        <EntityTypeShape EntityType="teammyModel.progress_indicators" Width="1.5" PointX="9.5" PointY="8.125" />
+        <EntityTypeShape EntityType="teammyModel.project" Width="1.5" PointX="7.25" PointY="4.875" />
+        <EntityTypeShape EntityType="teammyModel.task" Width="1.5" PointX="11.75" PointY="4.375" />
+        <EntityTypeShape EntityType="teammyModel.team_mates" Width="1.5" PointX="7.25" PointY="0.875" />
+        <EntityTypeShape EntityType="teammyModel.team" Width="1.5" PointX="5" PointY="5" />
+        <EntityTypeShape EntityType="teammyModel.user" Width="1.5" PointX="5" PointY="0.5" />
+        <AssociationConnector Association="teammyModel.fk_mate_id1" />
+        <AssociationConnector Association="teammyModel.fk_category_id1" />
+        <AssociationConnector Association="teammyModel.projects_id_fk1" />
+        <AssociationConnector Association="teammyModel.fk_prefer_code" />
+        <AssociationConnector Association="teammyModel.users_ibfk_11" />
+        <AssociationConnector Association="teammyModel.fk_progress_code1" />
+        <AssociationConnector Association="teammyModel.fk_project_id1" />
+        <AssociationConnector Association="teammyModel.projects_ibfk_11" />
+        <AssociationConnector Association="teammyModel.team_mates_ibfk_11" />
+        <AssociationConnector Association="teammyModel.team_mates_ibfk_21" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
