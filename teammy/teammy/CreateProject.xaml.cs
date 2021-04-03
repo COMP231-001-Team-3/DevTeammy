@@ -1,38 +1,38 @@
 ﻿using System;
-using MySql.Data.MySqlClient;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using System.Linq;
 using System.Collections.Generic;
 
 namespace teammy
 {
     /// <summary>
-    /// Interaction logic for CreateProject.xaml
+    ///     Interaction logic for CreateProject.xaml
     /// </summary>
     public partial class CreateProject : Window
     {
-
         #region Fields
+        private static ResourceDictionary globalItems = Application.Current.Resources;
 
         //Colors for project cards
-        Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
+        private Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
-        teammyEntities dbContext = new teammyEntities();
+        private teammyEntities dbContext = new teammyEntities();
 
         //Margins indicate position of each box to be placed
-        int left, top, right, bottom;
-        int boxCount = 0;
-        int totalBoxes = 0;
-        ProjectBox toBeInserted;
+        private int left, top, right, bottom;
+        private int boxCount = 0;
+        private int totalBoxes = 0;
+        private CardBox toBeInserted;
 
-        TextBox txtNameInput;
+        private TextBox txtNameInput;
         #endregion
-        public user currentUser { get; set; } = Application.Current.Resources["currentUser"] as user;
 
+        #region Properties
+        public user currentUser { get; set; } = globalItems["currentUser"] as user;
+        #endregion
 
         #region Constructor
         public CreateProject()
@@ -43,6 +43,10 @@ namespace teammy
         }
         #endregion
 
+        #region Miscellaneous
+        /// <summary>
+        ///     Loads projects from the database
+        /// </summary>
         private void LoadProjects()
         {
             left = 0;
@@ -72,7 +76,7 @@ namespace teammy
                                       where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
                                      select proj.Proj_Name).ToList();
 
-            ProjectBox project;
+            CardBox project;
 
             //Variables for usage in loop declared beforehand for performance reasons
             Random rd = new Random();
@@ -85,7 +89,7 @@ namespace teammy
                 projName = projNames[i].ToString();
 
                 //Creation & Initialization of ProjectBox
-                project = new ProjectBox() { ProjectName = projName, Margin = new Thickness(left, top, right, bottom), ProjectProfileBack = backColors[rd.Next(0, 18)] };
+                project = new CardBox() { FullName = projName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)] };
 
                 //Adds the newly created ProjectBox to the Grid within the ScrollViewer
                 projGrid.Children.Add(project);
@@ -110,6 +114,33 @@ namespace teammy
                 }
             }
         }
+
+        /// <summary>
+        ///     Inserts project into database when user presses 'Enter' and
+        ///     input TextBox has focus
+        /// </summary>
+        private void txtNameInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                toBeInserted.FullName = txtNameInput.Text;
+                txtNameInput.Visibility = Visibility.Hidden;
+
+                dbContext.projects.Add(new project()
+                {
+                    Proj_Name = txtNameInput.Text,
+                    Team_ID = (from team in dbContext.teams
+                               where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                               select team.Team_ID).Single()
+                });
+
+                dbContext.SaveChanges();
+                btnDone.Visibility = Visibility.Hidden;
+                btnCancel.Visibility = Visibility.Hidden;
+                btnCreateProj.Visibility = Visibility.Visible;
+            }
+        }
+        #endregion
 
         #region Title Bar Button Event Handlers
 
@@ -176,13 +207,12 @@ namespace teammy
             btnIcon.Background = null;
         }
         #endregion
+        
+        #region Button Event Handlers
 
-        private void homeMenu_click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            (Application.Current.Resources["mainInstance"] as Window).Show();
-        }
-
+        /// <summary>
+        ///     Creates the project box and the textbox for input
+        /// </summary>
         private void btnCreateProj_Click(object sender, RoutedEventArgs e)
         {
             btnCreateProj.Visibility = Visibility.Hidden;
@@ -197,7 +227,7 @@ namespace teammy
             }
 
             Random rd = new Random();
-            toBeInserted = new ProjectBox() { ProjectProfileBack = backColors[rd.Next(0, backColors.Length - 1)] };
+            toBeInserted = new CardBox() { ProfileBack = backColors[rd.Next(0, backColors.Length - 1)] };
             txtNameInput = new TextBox() { Height = 25, Width = 120, FontSize = 16 };
 
             toBeInserted.Margin = new Thickness(left, top, right, bottom);
@@ -230,18 +260,15 @@ namespace teammy
             btnCreateProj.Visibility = Visibility.Hidden;
         }
 
-        private void cmbTeams_DropDownClosed(object sender, EventArgs e)
-        {
-            LoadProjects();
-        }
-
+        /// <summary>
+        ///     Inserts the project into the DB.
+        /// </summary>
         private void btnDone_Click(object sender, RoutedEventArgs e)
         {
-            toBeInserted.ProjectName = txtNameInput.Text;
+            toBeInserted.FullName = txtNameInput.Text;
             txtNameInput.Visibility = Visibility.Hidden;
 
-            teammyEntities dbContext = new teammyEntities();
-            dbContext.projects.Add(new project() 
+            dbContext.projects.Add(new project()
             {
                 Proj_Name = txtNameInput.Text,
                 Team_ID = (from team in dbContext.teams
@@ -256,6 +283,9 @@ namespace teammy
             btnCreateProj.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        ///     Resets window to the state before pressing create project
+        /// </summary>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             projGrid.Children.Remove(toBeInserted);
@@ -282,45 +312,69 @@ namespace teammy
             btnCreateProj.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        ///     Hover effect (Icon background) for the cancel button
+        /// </summary>
         private void btnCancel_MouseEnter(object sender, MouseEventArgs e)
         {
             cancelbtnIcon.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
         }
 
+        /// <summary>
+        ///     Hover effect (Icon background) for the cancel button
+        /// </summary>
         private void btnCancel_MouseLeave(object sender, MouseEventArgs e)
         {
             cancelbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
         }
+        #endregion
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        #region ComboBox Event Handlers
+
+        /// <summary>
+        ///     Reloads projects based on team selected
+        /// </summary>
+        private void cmbTeams_DropDownClosed(object sender, EventArgs e)
         {
-            (Application.Current.Resources["progReportInstance"] as Window).Show();
+            LoadProjects();
+        }
+        #endregion
+
+        #region Page Navigation
+
+        /// <summary>
+        ///     Redirects to the Progress Report Page
+        /// </summary>
+        private void progMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            (globalItems["progReportInstance"] as Window).Show();
             Hide();
         }
 
-        private void txtNameInput_KeyUp(object sender, KeyEventArgs e)
+        /// <summary>
+        ///     Redirects to the Teams List Page
+        /// </summary>
+        private void teamsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Enter)
-            {
-                toBeInserted.ProjectName = txtNameInput.Text;
-                txtNameInput.Visibility = Visibility.Hidden;
-
-                teammyEntities dbContext = new teammyEntities();
-                dbContext.projects.Add(new project()
-                {
-                    Proj_Name = txtNameInput.Text,
-                    Team_ID = (from team in dbContext.teams
-                               where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
-                               select team.Team_ID).Single()
-                });
-
-                dbContext.SaveChanges();
-                btnDone.Visibility = Visibility.Hidden;
-                btnCancel.Visibility = Visibility.Hidden;
-                btnCreateProj.Visibility = Visibility.Visible;
-            }
+            Hide();
+            (globalItems["teamsListInstance"] as Window).Show();
         }
 
+        /// <summary>
+        ///     Redirects to the Home Page
+        /// </summary>
+        private void homeMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            (globalItems["mainInstance"] as Window).Show();
+        }
+        #endregion
+
+        #region Placeholder management
+
+        /// <summary>
+        ///     Resets TextBox text to placeholder text when empty
+        /// </summary>
         private void txtNameInput_LostFocus(object sender, RoutedEventArgs e)
         {
             if (txtNameInput.Text.Equals(""))
@@ -330,6 +384,9 @@ namespace teammy
             }
         }
 
+        /// <summary>
+        ///     Removes placeholder text
+        /// </summary>
         private void txtNameInput_GotFocus(object sender, RoutedEventArgs e)
         {
             if (txtNameInput.Text.Equals("Enter Name"))
@@ -338,5 +395,6 @@ namespace teammy
                 txtNameInput.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
+        #endregion
     }
 }

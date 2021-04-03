@@ -12,12 +12,22 @@ using System.Threading.Tasks;
 namespace teammy
 {
     /// <summary>
-    /// Interaction logic for CreateProject.xaml
+    /// Interaction logic for ProgressReport.xaml
     /// </summary>
     public partial class ProgressReport : Window
     {
+        #region Fields
+        //alias for Application resources
+        private static ResourceDictionary globalItems = Application.Current.Resources;
+        private teammyEntities dbContext = new teammyEntities();
+        private List<string> projNames;
+        private List<string> memNames;
+        #endregion
+
+        #region Properties
+
+        //currently logged in user
         public user currentUser { get; set; } = Application.Current.Resources["currentUser"] as user;
-        teammyEntities dbContext = new teammyEntities();
 
         public SeriesCollection ProjectsPie { get; set; } = new SeriesCollection()
         {
@@ -68,15 +78,14 @@ namespace teammy
             Colors.RoyalBlue,
             Colors.MediumSeaGreen
         };
-
-        List<string> projNames;
-        List<string> memNames;
+        #endregion       
 
         #region Constructor
         public ProgressReport()
         {
             InitializeComponent();
 
+            //Query to load all projects of the logged in person
             projNames = (from project in dbContext.projects
                          join team in dbContext.teams
                             on project.Team_ID equals team.Team_ID
@@ -163,16 +172,17 @@ namespace teammy
         }
         #endregion
 
-        private void homeMenu_click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            (Application.Current.Resources["mainInstance"] as Window).Show();
-        }
-
+        #region ComboBox event handlers
+        /// <summary>
+        ///     Reloads the pie chart to reflect data of the newly selected 
+        ///     project
+        /// </summary>
         private void cmbProjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Runs DB query in parallel to the UI Thread
             Parallel.Invoke(() =>
             {
+                //Loads progress status of all tasks associated with the project selected
                 List<string> progress_codes = 
                 (from tasks in dbContext.tasks
                     join projects in dbContext.projects 
@@ -180,16 +190,23 @@ namespace teammy
                  where projects.Proj_Name.Equals(cmbProjects.SelectedItem.ToString())
                  select tasks.progress_code).ToList();
 
+                //Resets Pie chart values
                 ProjectsPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("NS")).Count) };
                 ProjectsPie[1].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("IP")).Count) };
                 ProjectsPie[2].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("CO")).Count) };
             });
         }
 
+        /// <summary>
+        ///     Reloads pie chart to reflect progress status of newly 
+        ///     selected member in the selected project 
+        /// </summary>
         private void cmbMem_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Runs DB query in parallel to the UI Thread
             Parallel.Invoke(() =>
             {
+                //Loads progress status of all tasks associated with the project for the member selected
                 List<string> progress_codes =
                 (from task in dbContext.tasks
                  join project in dbContext.projects
@@ -203,31 +220,67 @@ namespace teammy
                  where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString()) && user.user_name.Equals(cmbMembers.SelectedItem.ToString())
                  select task.progress_code).ToList();
 
+                //Resets Pie Chart values
                 ProjectsMemPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("NS")).Count) };
                 ProjectsMemPie[1].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("IP")).Count) };
                 ProjectsMemPie[2].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("CO")).Count) };
             });
         }
+
+        /// <summary>
+        ///     Reloads team member data for the project selected
+        /// </summary>
         private void cmbMemProjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            memNames = (from project in dbContext.projects
-                        join team in dbContext.teams
-                        on project.Team_ID equals team.Team_ID
-                        join mate in dbContext.team_mates
-                        on team.Team_ID equals mate.Team_ID
-                        join user in dbContext.users
-                        on mate.user_id equals user.user_id
-                        where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString())
-                        select user.user_name).ToList();
+            //Runs DB query in parallel to the UI Thread
+            Parallel.Invoke(() =>
+            {
+                memNames = (from project in dbContext.projects
+                            join team in dbContext.teams
+                            on project.Team_ID equals team.Team_ID
+                            join mate in dbContext.team_mates
+                            on team.Team_ID equals mate.Team_ID
+                            join user in dbContext.users
+                            on mate.user_id equals user.user_id
+                            where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString())
+                            select user.user_name).ToList();
 
-            cmbMembers.ItemsSource = memNames;
-
-            cmbMembers.SelectedIndex = 0;
+                Dispatcher.Invoke(() =>
+                {
+                    cmbMembers.ItemsSource = memNames;
+                    cmbMembers.SelectedIndex = 0;
+                });
+            });
         }
-            private void MenuItem_Click(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region Page Navigation
+        /// <summary>
+        ///     Redirects to the home page
+        /// </summary>
+        private void homeMenuItem_click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            (Application.Current.Resources["mainInstance"] as Window).Show();
+        }
+
+        /// <summary>
+        ///     Redirects to boards page
+        /// </summary>
+        private void boardsMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Hide();
             (Application.Current.Resources["createProjInstance"] as Window).Show();
         }
+
+        /// <summary>
+        ///     Redirects to teams list page
+        /// </summary>
+        private void teamsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            (globalItems["teamsListInstance"] as Window).Show();
+        }
+        #endregion
     }
 }

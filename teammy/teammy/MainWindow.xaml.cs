@@ -1,21 +1,11 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace teammy
 {
@@ -24,7 +14,8 @@ namespace teammy
     /// </summary>
     public partial class MainWindow : Window
     {
-        public user currentUser { get; set; } = Application.Current.Resources["currentUser"] as user;
+        private static ResourceDictionary globalItems = Application.Current.Resources;
+        public user currentUser { get; set; } = globalItems["currentUser"] as user;
 
         List<TasksAssignedtome> myTasksData;
         List<TasksAssignedtome> dueWeekData;
@@ -33,11 +24,11 @@ namespace teammy
         public MainWindow()
         {
             InitializeComponent();
-            displaying_assigntome();
-            displaying_comingup();
+            Display_AssignToMe();
+            Display_ComingUp();
         }
 
-        public void displaying_assigntome()
+        public void Display_AssignToMe()
         {
             myTasksData = (from task in dbContext.tasks 
                            join assignee in dbContext.assignees
@@ -57,7 +48,7 @@ namespace teammy
             AssignedtomeDatagrid.ItemsSource = myTasksData;
         }
 
-        public void displaying_comingup()
+        public void Display_ComingUp()
         {
             dueWeekData = myTasksData.FindAll(task => DateTime.Parse(task.duedate) <= DateTime.Now.AddDays(7) && DateTime.Parse(task.duedate) >= DateTime.Now);
             ComingDatagrid.ItemsSource = dueWeekData;
@@ -68,9 +59,9 @@ namespace teammy
             Application.Current.Shutdown();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void boardsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            (Application.Current.Resources["createProjInstance"] as Window).Show();
+            (globalItems["createProjInstance"] as Window).Show();
             Hide();
         }
         #region Title Bar Button Event Handlers
@@ -93,7 +84,7 @@ namespace teammy
 
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-            ContextMenu cm = this.FindResource("cmButton") as ContextMenu;
+            ContextMenu cm = FindResource("cmButton") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
         }
@@ -139,16 +130,16 @@ namespace teammy
         }
         #endregion
 
-        private void homeMenu_click(object sender, RoutedEventArgs e)
+        private void progMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Hide();
-            (Application.Current.Resources["mainInstance"] as Window).Show();
+            (globalItems["progReportInstance"] as Window).Show();
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        private void teamsMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Hide();
-            (Application.Current.Resources["progReportInstance"] as Window).Show();
+            (globalItems["teamsListInstance"] as Window).Show();
         }
     }
 }

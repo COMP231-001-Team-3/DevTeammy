@@ -121,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="TeamsList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ProgressReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -133,6 +137,9 @@
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ColorToBrushConverter.cs" />
+    <Compile Include="TeamsList.xaml.cs">
+      <DependentUpon>TeamsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="privilege.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
@@ -147,8 +154,8 @@
     <Compile Include="project.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProjectBox.xaml.cs">
-      <DependentUpon>ProjectBox.xaml</DependentUpon>
+    <Compile Include="CardBox.xaml.cs">
+      <DependentUpon>CardBox.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
@@ -200,7 +207,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ProjectBox.xaml">
+    <Page Include="CardBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
