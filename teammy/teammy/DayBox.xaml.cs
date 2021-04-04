@@ -30,6 +30,12 @@ namespace teammy
 
         public static readonly DependencyProperty CurrentMonthProperty = DependencyProperty.Register("CurrentMonth", typeof(bool), typeof(DayBox));
 
+        public event RoutedEventHandler BoxClick
+        {
+            add { btnClicker.Click += value; }
+            remove { btnClicker.Click -= value; }
+        }
+
         public int? Date
         {
             get => (int)GetValue(DateProperty);

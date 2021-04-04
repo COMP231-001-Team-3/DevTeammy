@@ -79,7 +79,7 @@ namespace teammy
             for (int i = 0; i < dateBoxes.Count; ++i)
             {
                 dayBox = dateBoxes[i] as DayBox;
-                dayBox.Date = date++;
+                dayBox.Date = date;
                 dayBox.Status = null;
                 dayBox.DisplayTask = null;
 
@@ -92,10 +92,10 @@ namespace teammy
                         dayBox.DisplayTask = dueThisDay[0].task_name;
                         dayBox.Tasks = dueThisDay;
                         dayBox.Status = dueThisDay[0].progress_code;
-                    }
-                    
-                }              
+                    }                    
+                }
 
+                date++;
                 if (i == startDay - 1 || i == totalDays + startDay - 1)
                 {
                     date = 1;

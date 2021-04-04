@@ -160,10 +160,10 @@
     </Window.Resources>
     <Grid x:Name="containerGrid" Background="White" RenderTransformOrigin="0.503,0.497" Margin="0,1,0,-1">
         <!-- Grid pnlTitle represents Custom title Bar -->
-        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,635" MouseDown="pnlTitle_MouseDown">
-            
+        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,636" MouseDown="pnlTitle_MouseDown">
+
             <Label Content="Teammy" HorizontalAlignment="Left" Margin="35,3,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting"/>
-            
+
             <Button x:Name="btnMenu" Background="{x:Null}" Margin="5,0,931.667,10" BorderBrush="{x:Null}" Click="btnMenu_Click">
                 <Button.Content>
                     <Grid>
@@ -171,17 +171,17 @@
                     </Grid>
                 </Button.Content>
             </Button>
-            
+
             <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="937,0,-0.333,13" Click="btnClose_Click"/>
-            
+
             <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="905,2,31.667,16.333" Click="btnMinimize_Click"/>
         </Grid>
 
         <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="431" Margin="0,175,0,0" VerticalAlignment="Top" Width="261"/>
         <Rectangle x:Name="rctSunday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="289,90,0,0" VerticalAlignment="Top" Width="95"/>
         <Label x:Name="lblSunday" Content="Sunday" HorizontalAlignment="Left" Margin="289,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
-        <Rectangle x:Name="rctSaturday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="848,90,0,0" VerticalAlignment="Top" Width="96"/>
-        <Label x:Name="lblSaturday" Content="Saturday" HorizontalAlignment="Left" Margin="849,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctSaturday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="848,90,0,0" VerticalAlignment="Top" Width="93"/>
+        <Label x:Name="lblSaturday" Content="Saturday" HorizontalAlignment="Left" Margin="849,90,0,0" VerticalAlignment="Top" Height="23" Width="87" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
         <Rectangle x:Name="rctFriday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="755,90,0,0" VerticalAlignment="Top" Width="95"/>
         <Label x:Name="lblFriday" Content="Friday" HorizontalAlignment="Left" Margin="755,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
         <Rectangle x:Name="rctThursday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="661,90,0,0" VerticalAlignment="Top" Width="95"/>
@@ -223,55 +223,55 @@
             </DockPanel>
         </Button>
         <Label x:Name="lblMonthName" HorizontalAlignment="Left" Margin="523,55,0,0" VerticalAlignment="Top" Width="223" Height="30" FontFamily="Lucida Calligraphy" FontSize="16" Foreground="#FF8671CE" HorizontalContentAlignment="Center"/>
-        
-        <Grid x:Name="containerDates">
-            <local:DayBox x:Name="dbRow1Box1" Height="95" Width="95" Margin="289,112,586,479"/>
-            <local:DayBox x:Name="dbRow1Box2" Height="95" Width="95" Margin="381,112,494,479"/>
-            <local:DayBox x:Name="dbRow1Box3" Height="95" Width="95" Margin="474,112,401,479"/>
-            <local:DayBox x:Name="dbRow1Box4" Height="95" Width="95" Margin="568,112,307,479"/>
-            <local:DayBox x:Name="dbRow1Box5" Height="95" Width="95" Margin="661,112,214,479"/>
-            <local:DayBox x:Name="dbRow1Box6" Height="95" Width="95" Margin="755,112,120,479"/>
-            <local:DayBox x:Name="dbRow1Box7" Height="95" Width="95" Margin="849,112,26,479"/>
-            
-            <local:DayBox x:Name="dbRow2Box1" Height="95" Width="95" Margin="289,205,586,386"/>
-            <local:DayBox x:Name="dbRow2Box2" Height="95" Width="95" Margin="381,205,494,386"/>
-            <local:DayBox x:Name="dbRow2Box3" Height="95" Width="95" Margin="474,205,401,386"/>
-            <local:DayBox x:Name="dbRow2Box4" Height="95" Width="95" Margin="568,205,307,386"/>
-            <local:DayBox x:Name="dbRow2Box5" Height="95" Width="95" Margin="661,205,214,386"/>
-            <local:DayBox x:Name="dbRow2Box6" Height="95" Width="95" Margin="755,205,120,386"/>
-            <local:DayBox x:Name="dbRow2Box7" Height="95" Width="95" Margin="849,205,26,386"/>
-            
-            <local:DayBox x:Name="dbRow3Box1" Height="95" Width="95" Margin="289,298,586,293"/>
-            <local:DayBox x:Name="dbRow3Box2" Height="95" Width="95" Margin="381,298,494,293"/>
-            <local:DayBox x:Name="dbRow3Box3" Height="95" Width="95" Margin="474,298,401,293"/>
-            <local:DayBox x:Name="dbRow3Box4" Height="95" Width="95" Margin="568,298,307,293"/>
-            <local:DayBox x:Name="dbRow3Box5" Height="95" Width="95" Margin="661,298,214,293"/>
-            <local:DayBox x:Name="dbRow3Box6" Height="95" Width="95" Margin="755,298,120,293"/>
-            <local:DayBox x:Name="dbRow3Box7" Height="95" Width="95" Margin="849,298,26,293"/>
-            
-            <local:DayBox x:Name="dbRow4Box1" Height="95" Width="95" Margin="289,392,586,199"/>
-            <local:DayBox x:Name="dbRow4Box2" Height="95" Width="95" Margin="381,392,494,199"/>
-            <local:DayBox x:Name="dbRow4Box3" Height="95" Width="95" Margin="474,392,401,199"/>
-            <local:DayBox x:Name="dbRow4Box4" Height="95" Width="95" Margin="568,392,307,199"/>
-            <local:DayBox x:Name="dbRow4Box5" Height="95" Width="95" Margin="661,392,214,199"/>
-            <local:DayBox x:Name="dbRow4Box6" Height="95" Width="95" Margin="755,392,120,199"/>
-            <local:DayBox x:Name="dbRow4Box7" Height="95" Width="95" Margin="849,392,26,199"/>
-            
-            <local:DayBox x:Name="dbRow5Box1" Height="95" Width="95" Margin="289,484,586,107"/>
-            <local:DayBox x:Name="dbRow5Box2" Height="95" Width="95" Margin="381,484,494,107"/>
-            <local:DayBox x:Name="dbRow5Box3" Height="95" Width="95" Margin="474,484,401,107"/>
-            <local:DayBox x:Name="dbRow5Box4" Height="95" Width="95" Margin="568,484,307,107"/>
-            <local:DayBox x:Name="dbRow5Box5" Height="95" Width="95" Margin="661,484,214,107"/>
-            <local:DayBox x:Name="dbRow5Box6" Height="95" Width="95" Margin="755,484,120,107"/>
-            <local:DayBox x:Name="dbRow5Box7" Height="95" Width="95" Margin="849,484,26,107"/>
-            
-            <local:DayBox x:Name="dbRow6Box1" Height="95" Width="95" Margin="289,577,586,14"/>           
-            <local:DayBox x:Name="dbRow6Box2" Height="95" Width="95" Margin="381,577,494,14"/>           
-            <local:DayBox x:Name="dbRow6Box3" Height="95" Width="95" Margin="474,577,401,14"/>    
-            <local:DayBox x:Name="dbRow6Box4" Height="95" Width="95" Margin="568,577,307,14"/>    
-            <local:DayBox x:Name="dbRow6Box5" Height="95" Width="95" Margin="661,577,214,14"/>           
-            <local:DayBox x:Name="dbRow6Box6" Height="95" Width="95" Margin="755,577,120,14"/>           
-            <local:DayBox x:Name="dbRow6Box7" Height="95" Width="95" Margin="849,577,26,14"/>
-        </Grid>        
+
+        <Grid x:Name="containerDates" Margin="291,113,6,0">
+            <local:DayBox x:Name="dbRow1Box1" Height="95" Width="95" Margin="-2,-1,580,479"/>
+            <local:DayBox x:Name="dbRow1Box2" Height="95" Width="95" Margin="90,-1,488,479"/>
+            <local:DayBox x:Name="dbRow1Box3" Height="95" Width="95" Margin="183,-1,395,479"/>
+            <local:DayBox x:Name="dbRow1Box4" Height="95" Width="95" Margin="275,-1,303,479"/>
+            <local:DayBox x:Name="dbRow1Box5" Height="95" Width="95" Margin="368,-1,210,479"/>
+            <local:DayBox x:Name="dbRow1Box6" Height="95" Width="95" Margin="462,-1,116,479"/>
+            <local:DayBox x:Name="dbRow1Box7" Height="95" Width="95" Margin="556,-1,22,479"/>
+
+            <local:DayBox x:Name="dbRow2Box1" Height="95" Width="95" Margin="-2,92,580,386"/>
+            <local:DayBox x:Name="dbRow2Box2" Height="95" Width="95" Margin="90,92,488,386"/>
+            <local:DayBox x:Name="dbRow2Box3" Height="95" Width="95" Margin="183,92,395,386"/>
+            <local:DayBox x:Name="dbRow2Box4" Height="95" Width="95" Margin="275,92,303,386"/>
+            <local:DayBox x:Name="dbRow2Box5" Height="95" Width="95" Margin="368,92,210,386"/>
+            <local:DayBox x:Name="dbRow2Box6" Height="95" Width="95" Margin="462,92,116,386"/>
+            <local:DayBox x:Name="dbRow2Box7" Height="95" Width="95" Margin="556,92,22,386"/>
+
+            <local:DayBox x:Name="dbRow3Box1" Height="95" Width="95" Margin="-2,185,580,293"/>
+            <local:DayBox x:Name="dbRow3Box2" Height="95" Width="95" Margin="90,185,488,293"/>
+            <local:DayBox x:Name="dbRow3Box3" Height="95" Width="95" Margin="183,185,395,293"/>
+            <local:DayBox x:Name="dbRow3Box4" Height="95" Width="95" Margin="275,185,303,293"/>
+            <local:DayBox x:Name="dbRow3Box5" Height="95" Width="95" Margin="368,185,210,293"/>
+            <local:DayBox x:Name="dbRow3Box6" Height="95" Width="95" Margin="462,185,116,293"/>
+            <local:DayBox x:Name="dbRow3Box7" Height="95" Width="95" Margin="556,185,22,293"/>
+
+            <local:DayBox x:Name="dbRow4Box1" Height="95" Width="95" Margin="-2,277,580,201"/>
+            <local:DayBox x:Name="dbRow4Box2" Height="95" Width="95" Margin="90,277,488,201"/>
+            <local:DayBox x:Name="dbRow4Box3" Height="95" Width="95" Margin="183,277,395,201"/>
+            <local:DayBox x:Name="dbRow4Box4" Height="95" Width="95" Margin="275,277,303,201"/>
+            <local:DayBox x:Name="dbRow4Box5" Height="95" Width="95" Margin="368,277,210,201"/>
+            <local:DayBox x:Name="dbRow4Box6" Height="95" Width="95" Margin="462,277,116,201"/>
+            <local:DayBox x:Name="dbRow4Box7" Height="95" Width="95" Margin="556,277,22,201"/>
+
+            <local:DayBox x:Name="dbRow5Box1" Height="95" Width="95" Margin="-2,369,580,109"/>
+            <local:DayBox x:Name="dbRow5Box2" Height="95" Width="95" Margin="90,369,488,109"/>
+            <local:DayBox x:Name="dbRow5Box3" Height="95" Width="95" Margin="183,369,395,109"/>
+            <local:DayBox x:Name="dbRow5Box4" Height="95" Width="95" Margin="275,369,303,109"/>
+            <local:DayBox x:Name="dbRow5Box5" Height="95" Width="95" Margin="368,369,210,109"/>
+            <local:DayBox x:Name="dbRow5Box6" Height="95" Width="95" Margin="462,369,116,109"/>
+            <local:DayBox x:Name="dbRow5Box7" Height="95" Width="95" Margin="556,369,22,109"/>
+
+            <local:DayBox x:Name="dbRow6Box1" Height="95" Width="95" Margin="-2,462,580,16"/>
+            <local:DayBox x:Name="dbRow6Box2" Height="95" Width="95" Margin="90,462,488,16"/>
+            <local:DayBox x:Name="dbRow6Box3" Height="95" Width="95" Margin="183,462,395,16"/>
+            <local:DayBox x:Name="dbRow6Box4" Height="95" Width="95" Margin="275,462,303,16"/>
+            <local:DayBox x:Name="dbRow6Box5" Height="95" Width="95" Margin="368,462,210,16"/>
+            <local:DayBox x:Name="dbRow6Box6" Height="95" Width="95" Margin="462,462,116,16"/>
+            <local:DayBox x:Name="dbRow6Box7" Height="95" Width="95" Margin="556,462,22,16"/>
+        </Grid>
     </Grid>
 </Window>
