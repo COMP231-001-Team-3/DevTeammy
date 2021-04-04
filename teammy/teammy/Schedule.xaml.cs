@@ -52,15 +52,23 @@ namespace teammy
             int totalDays = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
 
             int startDay = (int) monthStart.DayOfWeek;
-            int count = 1;
+            int date = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month - 1) - startDay + 1;
 
             DayBox dayBox;
             UIElementCollection dateBoxes = containerDates.Children;
+            bool isCurrentMonth = false;
 
-            for (int i = startDay; i < totalDays + startDay; ++i)
+            for (int i = 0; i < dateBoxes.Count; ++i)
             {
                 dayBox = dateBoxes[i] as DayBox;
-                dayBox.Date = count++;
+                dayBox.Date = date++;
+                dayBox.CurrentMonth = isCurrentMonth;
+
+                if (i == startDay - 1 || i == totalDays + startDay - 1)
+                {
+                    date = 1;
+                    isCurrentMonth = !isCurrentMonth;
+                }
             }
 
         }

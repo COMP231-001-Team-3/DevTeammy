@@ -133,6 +133,7 @@
     <Compile Include="assignee.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="BoolToColorConverter.cs" />
     <Compile Include="category.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>

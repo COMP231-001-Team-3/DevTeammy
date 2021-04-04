@@ -22,24 +22,38 @@ namespace teammy
     {
         public static readonly DependencyProperty DateProperty = DependencyProperty.Register("Date", typeof(int?), typeof(DayBox));
 
-        public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(string), typeof(DayBox));
+        public static readonly DependencyProperty DisplayTaskProperty = DependencyProperty.Register("DisplayTask", typeof(string), typeof(DayBox));
 
         public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(string), typeof(DayBox));
 
+        public static readonly DependencyProperty TasksProperty = DependencyProperty.Register("Tasks", typeof(List<task>), typeof(DayBox));
+
+        public static readonly DependencyProperty CurrentMonthProperty = DependencyProperty.Register("CurrentMonth", typeof(bool), typeof(DayBox));
+
         public int? Date
         {
-            get => (int?)GetValue(DateProperty);
+            get => (int)GetValue(DateProperty);
             set => SetValue(DateProperty, value);
         }
-        public string Task
+        public string DisplayTask
         {
-            get => GetValue(TaskProperty).ToString();
-            set => SetValue(TaskProperty, value);
+            get => GetValue(DisplayTaskProperty).ToString();
+            set => SetValue(DisplayTaskProperty, value);
         }
         public string Status
         {
             get => GetValue(StatusProperty).ToString();
             set => SetValue(StatusProperty, value);
+        }
+        public List<task> Tasks
+        {
+            get => GetValue(TasksProperty) as List<task>;
+            set => SetValue(TasksProperty, value);
+        }
+        public bool CurrentMonth
+        {
+            get => (bool)GetValue(CurrentMonthProperty);
+            set => SetValue(CurrentMonthProperty, value);
         }
 
         public DayBox()
