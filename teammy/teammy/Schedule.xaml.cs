@@ -82,6 +82,7 @@ namespace teammy
                 dayBox.Date = date;
                 dayBox.Status = null;
                 dayBox.DisplayTask = null;
+                dayBox.Tasks = null;
 
                 if(dayBox.CurrentMonth = isCurrentMonth)
                 {

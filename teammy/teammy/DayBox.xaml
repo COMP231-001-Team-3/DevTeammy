@@ -10,7 +10,8 @@
     <UserControl.Resources>
         <local:StatusToSourceConverter x:Key="statusConverter"/>
         <local:BoolToColorConverter x:Key="boolConverter"/>
-
+        <local:ListToVisibConverter x:Key="listConverter"/>
+        
         <!-- Mouseover style for button that overlays the whole box -->
         <Style x:Key="mouseOverStyle" TargetType="Button">
             <Setter Property="Template">
@@ -44,9 +45,12 @@
 
         <Label x:Name="lblDay" Content="{Binding Date}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{Binding CurrentMonth, Converter={StaticResource ResourceKey=boolConverter}}" FontSize="16" Margin="67,8,0,0"/>
 
-        <TextBlock x:Name="lblTask" Text="{Binding DisplayTask}" TextWrapping="WrapWithOverflow"  HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8671CE" Width="69" Margin="4,51,0,0" Padding="0" FontSize="14" Height="36"/>
+        <TextBlock x:Name="lblTask" Text="{Binding DisplayTask}" TextWrapping="WrapWithOverflow"  HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8671CE" Width="69" Margin="4,39,0,0" Padding="0" FontSize="14" Height="36"/>
 
-        <Image x:Name="imgStatus" Source="{Binding Status, Converter={StaticResource ResourceKey=statusConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="20" Margin="70,58,0,0" />
+        <Image x:Name="imgStatus" Source="{Binding Status, Converter={StaticResource ResourceKey=statusConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="20" Margin="70,48,0,0" />
+        
         <Button x:Name="btnClicker" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Height="95" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True"/>
+
+        <Image x:Name="moreTasksImg" Source="images/threeDots.png" Margin="1,81,75,2" Visibility="{Binding Tasks, Converter={StaticResource ResourceKey=listConverter}}"/>
     </Grid>
 </UserControl>

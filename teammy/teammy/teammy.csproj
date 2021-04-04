@@ -141,6 +141,7 @@
     <Compile Include="DayBox.xaml.cs">
       <DependentUpon>DayBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListToVisibConverter.cs" />
     <Compile Include="preference.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
@@ -284,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\arrow.png" />
+    <Resource Include="images\threeDots.png" />
     <Content Include="teammyDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>teammyDB.Context.cs</LastGenOutput>
