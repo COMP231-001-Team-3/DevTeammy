@@ -193,7 +193,7 @@
         <Rectangle x:Name="rctMonday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="382,90,0,0" VerticalAlignment="Top" Width="95"/>
         <Label x:Name="lblMonday" Content="Monday" HorizontalAlignment="Left" Margin="381,90,0,0" VerticalAlignment="Top" Height="23" Width="96" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
 
-        <Button x:Name="btnPrevious" HorizontalAlignment="Left" Margin="289,59,0,0" VerticalAlignment="Top" Width="89" Height="29" Background="White" FontSize="20" BorderBrush="{x:Null}" MouseEnter="btnPrevious_MouseEnter" MouseLeave="btnPrevious_MouseLeave" Padding="0">
+        <Button x:Name="btnPrevious" HorizontalAlignment="Left" Margin="289,59,0,0" VerticalAlignment="Top" Width="89" Height="29" Background="White" FontSize="20" BorderBrush="{x:Null}" MouseEnter="btnPrevious_MouseEnter" MouseLeave="btnPrevious_MouseLeave" Padding="0" Click="btnPrevious_Click">
             <Button.Content>
                 <DockPanel>
                     <Grid DockPanel.Dock="Left">
@@ -213,7 +213,7 @@
                 </DockPanel>
             </Button.Content>
         </Button>
-        <Button x:Name="btnNext" HorizontalAlignment="Left" Margin="884,64,0,0" VerticalAlignment="Top" Width="58" Height="24" Background="White" FontSize="20" BorderBrush="{x:Null}" MouseEnter="btnNext_MouseEnter" MouseLeave="btnNext_MouseLeave">
+        <Button x:Name="btnNext" HorizontalAlignment="Left" Margin="884,64,0,0" VerticalAlignment="Top" Width="58" Height="24" Background="White" FontSize="20" BorderBrush="{x:Null}" MouseEnter="btnNext_MouseEnter" MouseLeave="btnNext_MouseLeave" Click="btnNext_Click">
             <DockPanel>
                 <Grid DockPanel.Dock="Right">
                     <Image x:Name="nextImg" Source="images/arrow.png" Width="20"/>

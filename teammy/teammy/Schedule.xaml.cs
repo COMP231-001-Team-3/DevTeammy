@@ -33,30 +33,37 @@ namespace teammy
         November,
         December
     }
+
     public partial class Schedule : Window
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
 
+        private int displayYear = DateTime.Now.Year;
+        private int displayMonth = DateTime.Now.Month;
+
         public Schedule()
         {
             InitializeComponent();
-            LoadDates();
+            LoadDates(displayYear, displayMonth);
         }
 
-        private void LoadDates()
+        private void LoadDates(int year, int month)
         {
-            lblMonthName.Content = (Months)DateTime.Now.Month + " " + DateTime.Now.Year;
+            displayMonth = month;
+            displayYear = year;
 
-            DateTime monthStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            lblMonthName.Content = (Months)month + " " + year;
 
-            int totalDays = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+            DateTime monthStart = new DateTime(year, month, 1);
+
+            int totalDays = DateTime.DaysInMonth(year, month);
 
             int startDay = (int) monthStart.DayOfWeek;
-            int date = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month - 1) - startDay + 1;
+            int date = startDay != 0 ? DateTime.DaysInMonth(year, month != 1 ? month - 1 : 12) - startDay + 1 : 1;
 
             DayBox dayBox;
             UIElementCollection dateBoxes = containerDates.Children;
-            bool isCurrentMonth = false;
+            bool isCurrentMonth = date == 1;
 
             for (int i = 0; i < dateBoxes.Count; ++i)
             {
@@ -70,7 +77,6 @@ namespace teammy
                     isCurrentMonth = !isCurrentMonth;
                 }
             }
-
         }
 
         #region Title Bar Button Event Handlers
@@ -197,6 +203,30 @@ namespace teammy
         private void btnPrevious_MouseLeave(object sender, MouseEventArgs e)
         {
             prevbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
+        }
+
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            if (displayMonth == 1)
+            {
+                displayYear--;
+                displayMonth = 13;
+            }
+
+            displayMonth--;
+            LoadDates(displayYear, displayMonth);
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (displayMonth == 12)
+            {
+                displayYear++;
+                displayMonth = 0;
+            }
+
+            displayMonth++;
+            LoadDates(displayYear, displayMonth);
         }
     }
 }
