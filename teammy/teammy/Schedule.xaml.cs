@@ -40,11 +40,20 @@ namespace teammy
 
         private int displayYear = DateTime.Now.Year;
         private int displayMonth = DateTime.Now.Month;
+        private List<task> tasks;
+        private teammyEntities dbContext = new teammyEntities();
 
         public Schedule()
         {
             InitializeComponent();
+            LoadTasks();
             LoadDates(displayYear, displayMonth);
+        }
+
+        private void LoadTasks()
+        {
+            tasks = (from task in dbContext.tasks
+                     select task).ToList();
         }
 
         private void LoadDates(int year, int month)
@@ -55,8 +64,9 @@ namespace teammy
             lblMonthName.Content = (Months)month + " " + year;
 
             DateTime monthStart = new DateTime(year, month, 1);
-
             int totalDays = DateTime.DaysInMonth(year, month);
+
+            List<task> dueThisMonth = tasks.FindAll(task => task.due_date >= monthStart && task.due_date <= new DateTime(year, month, totalDays));
 
             int startDay = (int) monthStart.DayOfWeek;
             int date = startDay != 0 ? DateTime.DaysInMonth(year, month != 1 ? month - 1 : 12) - startDay + 1 : 1;
@@ -64,12 +74,27 @@ namespace teammy
             DayBox dayBox;
             UIElementCollection dateBoxes = containerDates.Children;
             bool isCurrentMonth = date == 1;
+            List<task> dueThisDay;
 
             for (int i = 0; i < dateBoxes.Count; ++i)
             {
                 dayBox = dateBoxes[i] as DayBox;
                 dayBox.Date = date++;
-                dayBox.CurrentMonth = isCurrentMonth;
+                dayBox.Status = null;
+                dayBox.DisplayTask = null;
+
+                if(dayBox.CurrentMonth = isCurrentMonth)
+                {
+                    dueThisDay = dueThisMonth.FindAll(task => task.due_date.Value.Day == date);
+
+                    if(dueThisDay.Count != 0)
+                    {
+                        dayBox.DisplayTask = dueThisDay[0].task_name;
+                        dayBox.Tasks = dueThisDay;
+                        dayBox.Status = dueThisDay[0].progress_code;
+                    }
+                    
+                }              
 
                 if (i == startDay - 1 || i == totalDays + startDay - 1)
                 {

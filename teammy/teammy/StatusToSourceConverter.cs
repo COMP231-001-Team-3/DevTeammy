@@ -16,11 +16,11 @@ namespace teammy
             string status = value != null ? value.ToString() : null;
             switch (status)
             {
-                case "Not Started":
+                case "NS":
                     return "images/notstarted.png";
-                case "In Progress":
+                case "IP":
                     return "images/progressIcon.jpg";
-                case "Complete":
+                case "CO":
                     return "images/complete.png";
                 default:
                     return "";
