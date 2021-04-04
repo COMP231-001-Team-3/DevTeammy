@@ -10,11 +10,40 @@
     <UserControl.Resources>
         <local:StatusToSourceConverter x:Key="statusConverter"/>
         <local:BoolToColorConverter x:Key="boolConverter"/>
+        
+        <!-- Mouseover style for button that overlays the whole box -->
+        <Style x:Key="mouseOverStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!-- Modifying control template of button to give custom mouseover color -->
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Rectangle x:Name="background"
+                                   Fill="{TemplateBinding Background}"/>
+                                <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Mouseover trigger -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="background" Property="Fill" Value="{Binding CurrentMonth, Converter={StaticResource ResourceKey=boolConverter}}"/>
+                                <Setter TargetName="background" Property="Opacity" Value="0.5"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid x:Name="containerGrid" Background="White" Width="95" Height="95">
         <Rectangle Fill="White" HorizontalAlignment="Left" Height="95"  Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
         <Label x:Name="lblDay" Content="{Binding Date}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{Binding CurrentMonth, Converter={StaticResource ResourceKey=boolConverter}}" FontSize="16" Margin="67,8,0,0"/>
         <Label x:Name="lblTask" Content="{Binding DisplayTask}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8671CE" Width="73" Margin="0,59,0,0" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14"/>
         <Image x:Name="imgStatus" Source="{Binding Status, Converter={StaticResource ResourceKey=statusConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="20" Margin="73,58,0,0" />
+        <Button x:Name="btnClicker" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Height="95" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True"/>
     </Grid>
 </UserControl>
