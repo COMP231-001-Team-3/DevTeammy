@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -17,11 +13,11 @@ namespace teammy
             switch (status)
             {
                 case "NS":
-                    return "images/notstarted.png";
+                    return "../images/notstarted.png";
                 case "IP":
-                    return "images/progressIcon.jpg";
+                    return "../images/progressIcon.jpg";
                 case "CO":
-                    return "images/complete.png";
+                    return "../images/complete.png";
                 default:
                     return "";
             }

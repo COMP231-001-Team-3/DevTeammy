@@ -113,74 +113,73 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="DayBox.xaml">
+    <Page Include="UserControls\DayBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Schedule.xaml">
+    <Page Include="Windows\Schedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TeamsList.xaml">
+    <Page Include="Windows\TeamsList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ProgressReport.xaml">
+    <Page Include="Windows\ProgressReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="login.xaml" />
+    <Page Include="Windows\login.xaml" />
     <Compile Include="assignee.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="BoolToColorConverter.cs" />
+    <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="category.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="ColorToBrushConverter.cs" />
-    <Compile Include="DayBox.xaml.cs">
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="UserControls\DayBox.xaml.cs">
       <DependentUpon>DayBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListToVisibConverter.cs" />
+    <Compile Include="Converters\ListToVisibConverter.cs" />
     <Compile Include="preference.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Schedule.xaml.cs">
+    <Compile Include="Windows\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatusToSourceConverter.cs" />
-    <Compile Include="TeamsList.xaml.cs">
+    <Compile Include="Converters\StatusToSourceConverter.cs" />
+    <Compile Include="Windows\TeamsList.xaml.cs">
       <DependentUpon>TeamsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="privilege.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProgressReport.xaml.cs">
+    <Compile Include="Windows\ProgressReport.xaml.cs">
       <DependentUpon>ProgressReport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NameToCharsConverter.cs" />
-    <Compile Include="PrivToVisibConverter.cs" />
+    <Compile Include="Converters\NameToCharsConverter.cs" />
+    <Compile Include="Converters\PrivToVisibConverter.cs" />
     <Compile Include="progress_indicators.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="project.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="CardBox.xaml.cs">
+    <Compile Include="UserControls\CardBox.xaml.cs">
       <DependentUpon>CardBox.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateProject.xaml">
+    <Page Include="Windows\CreateProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="task.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="TasksAssignedtome.cs" />
     <Compile Include="team.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
@@ -209,17 +208,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="login.xaml.cs">
+    <Compile Include="Windows\login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateProject.xaml.cs">
+    <Compile Include="Windows\CreateProject.xaml.cs">
       <DependentUpon>CreateProject.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="CardBox.xaml">
+    <Page Include="UserControls\CardBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

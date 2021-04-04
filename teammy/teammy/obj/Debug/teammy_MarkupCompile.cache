@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
-8-1152161641
+81001050893
 2-1194965406
-32-575208568
+311172876197
 401364737512
-DayBox.xaml;Schedule.xaml;TeamsList.xaml;ProgressReport.xaml;login.xaml;MainWindow.xaml;CreateProject.xaml;CardBox.xaml;
+UserControls\DayBox.xaml;Windows\Schedule.xaml;Windows\TeamsList.xaml;Windows\ProgressReport.xaml;Windows\login.xaml;Windows\MainWindow.xaml;Windows\CreateProject.xaml;UserControls\CardBox.xaml;
 
 False
 

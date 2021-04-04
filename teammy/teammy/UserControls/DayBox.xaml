@@ -31,7 +31,7 @@
                         <ControlTemplate.Triggers>
                             <!-- Mouseover trigger -->
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="background" Property="Fill" Value="{Binding CurrentMonth, Converter={StaticResource ResourceKey=boolConverter}}"/>
+                                <Setter TargetName="background" Property="Fill" Value="{Binding CurrentMonth, Converter={StaticResource ResourceKey=boolConverter}, ConverterParameter='btn'}"/>
                                 <Setter TargetName="background" Property="Opacity" Value="0.5"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -51,6 +51,6 @@
         
         <Button x:Name="btnClicker" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Height="95" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True"/>
 
-        <Image x:Name="moreTasksImg" Source="images/threeDots.png" Margin="1,81,75,2" Visibility="{Binding Tasks, Converter={StaticResource ResourceKey=listConverter}}"/>
+        <Image x:Name="moreTasksImg" Source="../images/threeDots.png" Margin="1,81,75,2" Visibility="{Binding Tasks, Converter={StaticResource ResourceKey=listConverter}}"/>
     </Grid>
 </UserControl>

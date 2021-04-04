@@ -11,6 +11,8 @@
         WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" 
         DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Window.Resources>
+        
+        <!-- Mouseover style for icon image's companion button -->
         <Style x:Key="mouseOverStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -44,7 +46,7 @@
                 <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                 <MenuItem.Icon>
                     <Grid x:Name="homeIconGrid">
-                        <Image x:Name="homeIconImg" Source="images/protoHome.png" />
+                        <Image x:Name="homeIconImg" Source="../images/protoHome.png" />
                         <Button x:Name="homeIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=homeIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=homeIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -59,7 +61,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="boardsIconGrid">
-                        <Image x:Name="BoardsIconImg" Source="images/protoBoards.png" />
+                        <Image x:Name="BoardsIconImg" Source="../images/protoBoards.png" />
                         <Button x:Name="BoardsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=BoardsIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=BoardsIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -73,7 +75,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="TeamsIconGrid">
-                        <Image x:Name="TeamsIconImg" Source="images/protoTeams.png" />
+                        <Image x:Name="TeamsIconImg" Source="../images/protoTeams.png" />
                         <Button x:Name="TeamsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=TeamsIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=TeamsIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -88,7 +90,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="ProgressIconGrid">
-                        <Image x:Name="ProgressIconImg" Source="images/protoProgress.jpg" />
+                        <Image x:Name="ProgressIconImg" Source="../images/protoProgress.jpg" />
                         <Button x:Name="ProgressIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=ProgressIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=ProgressIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -101,7 +103,7 @@
               MouseLeave="MenuItem_MouseLeave">
                 <MenuItem.Icon>
                     <Grid x:Name="ScheduleIconGrid">
-                        <Image x:Name="ScheduleIconImg" Source="images/protoSchedule.png" />
+                        <Image x:Name="ScheduleIconImg" Source="../images/protoSchedule.png" />
                         <Button x:Name="ScheduleIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=ScheduleIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=ScheduleIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -167,7 +169,7 @@
             <Button x:Name="btnMenu" Background="{x:Null}" Margin="5,0,931.667,10" BorderBrush="{x:Null}" Click="btnMenu_Click">
                 <Button.Content>
                     <Grid>
-                        <Image Source="images\menuIcon.png" Margin="0,0,0.333,0.667"/>
+                        <Image Source="..\images\menuIcon.png" Margin="0,0,0.333,0.667"/>
                     </Grid>
                 </Button.Content>
             </Button>
@@ -177,7 +179,9 @@
             <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="905,2,31.667,16.333" Click="btnMinimize_Click"/>
         </Grid>
 
-        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="431" Margin="0,175,0,0" VerticalAlignment="Top" Width="261"/>
+        <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="431" Margin="0,175,0,0" VerticalAlignment="Top" Width="261"/>
+        
+        <!-- The Calendar Day names header starts here -->
         <Rectangle x:Name="rctSunday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="289,90,0,0" VerticalAlignment="Top" Width="95"/>
         <Label x:Name="lblSunday" Content="Sunday" HorizontalAlignment="Left" Margin="289,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
         <Rectangle x:Name="rctSaturday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="848,90,0,0" VerticalAlignment="Top" Width="93"/>
@@ -197,7 +201,7 @@
             <Button.Content>
                 <DockPanel>
                     <Grid DockPanel.Dock="Left">
-                        <Image x:Name="prevImg" Source="images/arrow.png"  Width="20" RenderTransformOrigin="0.5,0.5">
+                        <Image x:Name="prevImg" Source="../images/arrow.png"  Width="20" RenderTransformOrigin="0.5,0.5">
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -216,16 +220,19 @@
         <Button x:Name="btnNext" HorizontalAlignment="Left" Margin="884,64,0,0" VerticalAlignment="Top" Width="58" Height="24" Background="White" FontSize="20" BorderBrush="{x:Null}" MouseEnter="btnNext_MouseEnter" MouseLeave="btnNext_MouseLeave" Click="btnNext_Click">
             <DockPanel>
                 <Grid DockPanel.Dock="Right">
-                    <Image x:Name="nextImg" Source="images/arrow.png" Width="20"/>
+                    <Image x:Name="nextImg" Source="../images/arrow.png" Width="20"/>
                     <Button x:Name="nextbtnIcon" Style="{StaticResource mouseOverStyle}" Background="Transparent" BorderThickness="0" Width="{Binding ActualWidth, Source={x:Reference Name=nextImg}}" Height="{Binding ActualHeight, Source={x:Reference Name=nextImg}}"/>
                 </Grid>
                 <Label Content="Next" VerticalAlignment="Center"  Foreground="#FF8671CE" DockPanel.Dock="Left" FontSize="14" Height="19" Padding="0" Width="33" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,3,0"/>
             </DockPanel>
         </Button>
+        
+        <!-- Displays Month and Year -->
         <Label x:Name="lblMonthName" HorizontalAlignment="Left" Margin="523,55,0,0" VerticalAlignment="Top" Width="223" Height="30" FontFamily="Lucida Calligraphy" FontSize="16" Foreground="#FF8671CE" HorizontalContentAlignment="Center"/>
 
+        <!-- The Dates Display begins here -->
         <Grid x:Name="containerDates" Margin="291,113,6,0">
-            <local:DayBox x:Name="dbRow1Box1" Height="95" Width="95" Margin="-2,-1,580,479"/>
+            <local:DayBox x:Name="dbRow1Box1" Height="95" Width="95" Margin="-2,-1,580,479" BoxClick="dbRowBox_BoxClick"/>
             <local:DayBox x:Name="dbRow1Box2" Height="95" Width="95" Margin="90,-1,488,479"/>
             <local:DayBox x:Name="dbRow1Box3" Height="95" Width="95" Margin="183,-1,395,479"/>
             <local:DayBox x:Name="dbRow1Box4" Height="95" Width="95" Margin="275,-1,303,479"/>

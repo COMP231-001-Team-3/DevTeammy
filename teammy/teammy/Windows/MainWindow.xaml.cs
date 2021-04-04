@@ -17,8 +17,8 @@ namespace teammy
         private static ResourceDictionary globalItems = Application.Current.Resources;
         public user currentUser { get; set; } = globalItems["currentUser"] as user;
 
-        List<TasksAssignedtome> myTasksData;
-        List<TasksAssignedtome> dueWeekData;
+        List<task> myTasksData;
+        List<task> dueWeekData;
         teammyEntities dbContext = new teammyEntities();
 
         public MainWindow()
@@ -38,19 +38,14 @@ namespace teammy
                            join user in dbContext.users
                               on mate.user_id equals user.user_id
                            where user.user_name.Equals(currentUser.user_name)
-                           select new TasksAssignedtome
-                           {
-                               taskname = task.task_name,
-                               progress = task.progress_code,
-                               duedate = task.due_date.ToString()
-                           }).ToList();
+                           select task).ToList();
 
             AssignedtomeDatagrid.ItemsSource = myTasksData;
         }
 
         public void Display_ComingUp()
         {
-            dueWeekData = myTasksData.FindAll(task => DateTime.Parse(task.duedate) <= DateTime.Now.AddDays(7) && DateTime.Parse(task.duedate) >= DateTime.Now);
+            dueWeekData = myTasksData.FindAll(task => task.due_date <= DateTime.Now.AddDays(7) && task.due_date >= DateTime.Now);
             ComingDatagrid.ItemsSource = dueWeekData;
         }
 

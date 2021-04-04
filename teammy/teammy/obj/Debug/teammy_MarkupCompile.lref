@@ -1,11 +1,11 @@
 ﻿
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml;;
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\DayBox.xaml;;
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Schedule.xaml;;
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\TeamsList.xaml;;
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\ProgressReport.xaml;;
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\login.xaml;;
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\MainWindow.xaml;;
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\CreateProject.xaml;;
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\CardBox.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\UserControls\DayBox.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\Schedule.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\TeamsList.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\ProgressReport.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\login.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\MainWindow.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\CreateProject.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\UserControls\CardBox.xaml;;
 

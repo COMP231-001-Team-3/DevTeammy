@@ -1,23 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace teammy
 {
     /// <summary>
-    /// Interaction logic for Schedule.xaml
+    ///     Maps an integer to the corresponding month of a year
     /// </summary>
-    
     public enum Months
     {
         January = 1,
@@ -34,6 +27,9 @@ namespace teammy
         December
     }
 
+    /// <summary>
+    /// Interaction logic for Schedule.xaml
+    /// </summary>
     public partial class Schedule : Window
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
@@ -50,12 +46,23 @@ namespace teammy
             LoadDates(displayYear, displayMonth);
         }
 
+        #region Miscellaneous
+
+        /// <summary>
+        ///     Gets all tasks from the Database
+        /// </summary>
         private void LoadTasks()
         {
             tasks = (from task in dbContext.tasks
                      select task).ToList();
         }
 
+        /// <summary>
+        ///     Prepares the calendar to display dates of the current month and loads
+        ///     and displays tasks on due dates.
+        /// </summary>
+        /// <param name="year">Represents the year to be shown</param>
+        /// <param name="month">Represents the month to be shown</param>
         private void LoadDates(int year, int month)
         {
             displayMonth = month;
@@ -66,16 +73,16 @@ namespace teammy
             DateTime monthStart = new DateTime(year, month, 1);
             int totalDays = DateTime.DaysInMonth(year, month);
 
-            List<task> dueThisMonth = tasks.FindAll(task => task.due_date >= monthStart && task.due_date <= new DateTime(year, month, totalDays));
-
             int startDay = (int) monthStart.DayOfWeek;
             int date = startDay != 0 ? DateTime.DaysInMonth(year, month != 1 ? month - 1 : 12) - startDay + 1 : 1;
 
+            //Fields for use in the loop declared beforehand for performance reasons
             DayBox dayBox;
             UIElementCollection dateBoxes = containerDates.Children;
             bool isCurrentMonth = date == 1;
             List<task> dueThisDay;
 
+            //Loop for telling each DayBox what its date is and what tasks are due on that date
             for (int i = 0; i < dateBoxes.Count; ++i)
             {
                 dayBox = dateBoxes[i] as DayBox;
@@ -84,10 +91,12 @@ namespace teammy
                 dayBox.DisplayTask = null;
                 dayBox.Tasks = null;
 
+                //If the date is of the current month...then
                 if(dayBox.CurrentMonth = isCurrentMonth)
                 {
-                    dueThisDay = dueThisMonth.FindAll(task => task.due_date.Value.Day == date);
+                    dueThisDay = tasks.FindAll(task => task.due_date.Value.Month == month && task.due_date.Value.Year == year && task.due_date.Value.Day == date);
 
+                    //If atleast one task is due on this date...then
                     if(dueThisDay.Count != 0)
                     {
                         dayBox.DisplayTask = dueThisDay[0].task_name;
@@ -97,6 +106,8 @@ namespace teammy
                 }
 
                 date++;
+
+                //If i has reached the end of the prev month or the end of the current month...then
                 if (i == startDay - 1 || i == totalDays + startDay - 1)
                 {
                     date = 1;
@@ -104,6 +115,14 @@ namespace teammy
                 }
             }
         }
+
+        //**TBD An event handler to determine what happens when a date is clicked
+        public void dbRowBox_BoxClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
 
         #region Title Bar Button Event Handlers
         /// <summary>
@@ -211,28 +230,51 @@ namespace teammy
         }
         #endregion
 
+        #region Hover handlers
+
+        /// <summary>
+        ///     Matches the Hover style of the 'Next image' to that of the 'Next 
+        ///     Button'
+        /// </summary>
         private void btnNext_MouseEnter(object sender, MouseEventArgs e)
         {
             nextbtnIcon.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
         }
 
+        /// <summary>
+        ///     Resets the background of the 'Next Image' to normal.
+        /// </summary>
         private void btnNext_MouseLeave(object sender, MouseEventArgs e)
         {
             nextbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
         }
 
+        /// <summary>
+        ///     Matches the Hover style of the 'Previous image' to that of the 'Next 
+        ///     Button'
+        /// </summary>
         private void btnPrevious_MouseEnter(object sender, MouseEventArgs e)
         {
             prevbtnIcon.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
         }
 
+        /// <summary>
+        ///     Resets the background of the 'Previous Image' to normal.
+        /// </summary>
         private void btnPrevious_MouseLeave(object sender, MouseEventArgs e)
         {
             prevbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
         }
+        #endregion
 
+        #region Button Click Event Handlers
+
+        /// <summary>
+        ///     Shifts the calendar to the previous month
+        /// </summary>
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
+            //If current month is January...then
             if (displayMonth == 1)
             {
                 displayYear--;
@@ -243,8 +285,12 @@ namespace teammy
             LoadDates(displayYear, displayMonth);
         }
 
+        /// <summary>
+        ///     Shifts the calendar to the next month
+        /// </summary>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
+            //If current month is December...then
             if (displayMonth == 12)
             {
                 displayYear++;
@@ -254,5 +300,6 @@ namespace teammy
             displayMonth++;
             LoadDates(displayYear, displayMonth);
         }
+        #endregion        
     }
 }
