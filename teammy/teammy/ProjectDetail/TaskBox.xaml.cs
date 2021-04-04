@@ -24,6 +24,7 @@ namespace teammy.ProjectDetail
     {
         private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
         List<string> users = new List<string>();
+        Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
         public static readonly DependencyProperty TaskNameProperty = DependencyProperty.Register("TaskName", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string), typeof(TaskBox));
@@ -111,12 +112,14 @@ namespace teammy.ProjectDetail
             //UserListClass listclass = new UserListClass{TeamMembers=users};
 
         }
+        private List<assigneeInitialBox> assignees = new List<assigneeInitialBox>();
+
         private void createInitialBox(string assigneeName)
         {
-            int left = 0, top = 0, right = 361, bottom = 260;
+            int left = 0, top = 0, right = 0, bottom = 0;
             int initialBoxCount = 0;
-            //totalBoxes=0;
-            taskGrid.Children.Clear();
+            int totalBoxes=0;
+            //assigneeStackPanel.Children.Clear();
             Random rd = new Random();
             string  assigneeInitial;
             string[] nameWords;
@@ -132,28 +135,30 @@ namespace teammy.ProjectDetail
                 assigneeInitial = nameWords[0][0] + "" + nameWords[0][1];
             }
             //Creation & Initialization of InitialBox
-            assigneeInitialBox initialBox = new assigneeInitialBox();
+            assigneeInitialBox initialBox = new assigneeInitialBox(backColors[rd.Next(0, 18)]);
+            initialBox.Margin = new Thickness(left, top, right, bottom);
+            initialBox.txtInitial.Padding = new Thickness(0, 0, 0, 0);
+            
             initialBox.txtInitial.Text = assigneeInitial;
 
-            taskGrid.Children.Add(initialBox);
+            if (++totalBoxes == 3)
+            {
+                totalBoxes--;
+                MessageBox.Show("The maximum limit for assignees per a task is 3!", "Max Assigning completed", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-            left += 175;
-            right -= 175;
+            assigneeStackPanel.Children.Add(initialBox);
+
+            //taskGrid.Children.Add(initialBox);
+            //initialBox.Visibility = Visibility.Visible;
+            
+            left += 25;
+            right -= 25;
             initialBoxCount++;
             
         }
-        //MySqlConnection conn = new MySqlConnection(connectionString);
-        //conn.Open();
-        //MySqlCommand getAssignees = new MySqlCommand("SELECT user_name FROM users NATURAL JOIN teams NATURAL JOIN projects NATURAL JOIN tasks WHERE Task_Name = @nameTeam", conn);
-
-
-
-
-        /*assisgneeName = */
-
-    
-
-
+       
 
         private void btnEditDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -237,10 +242,7 @@ namespace teammy.ProjectDetail
 
                     createInitialBox(currentItem);
                 }
-            }
-
-            
-                
+            } 
         }
 
         private void assigneeCombo_DropDownClosed(object sender, EventArgs e)
@@ -255,6 +257,36 @@ namespace teammy.ProjectDetail
                    createInitialBox(currentItem);
                 }
             }
+        }
+        public event EventHandler<EventArgs> taskNameChanged;
+        public NewCategory currentCategory { get; set; } = Application.Current.Resources["currentCategory"] as NewCategory;
+        private void taskNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+            e.Handled = true;
+            taskNameChanged?.Invoke(this, EventArgs.Empty);
+             
+
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            //MySqlCommand insertTaskName = new MySqlCommand("Insert INTO tasks(task_name) VALUES(@tskName) NATURAL JOIN categories Where category_name = @catName;", conn);
+            MySqlCommand insertTaskName = new MySqlCommand("Update tasks set task_name = @tskName NATURAL JOIN categories Where category_name = @catName;", conn);
+
+            insertTaskName.Parameters.AddWithValue("catName", Application.Current.Resources["catName"]);
+            insertTaskName.Parameters.AddWithValue("tskName", taskNameTextBox.Text);
+            
+
+            MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
+            //insertTaskName.ExecuteNonQuery();                                   //ERROR OCCURED HERE
+            commit.ExecuteNonQuery();
+
+           
+        }
+
+        private void etItem_Click(object sender, RoutedEventArgs e)
+        {
+            EditTaskPage editTaskPage = new EditTaskPage();
+            editTaskPage.Show();
         }
     }
 }

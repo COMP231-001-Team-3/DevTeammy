@@ -3,19 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:teammy"
-             mc:Ignorable="d" Height="16.932" Width="20"
+             xmlns:local="clr-namespace:teammy.ProjectDetail"
+             mc:Ignorable="d" Height="18.043" Width="20"
              DataContext="{Binding RelativeSource={RelativeSource self}}">
     <UserControl.Resources>
         <local:ColorToBrushConverter x:Key="ColorConverter"/>
-        <local:NameToCharsConverter x:Key="NameConverter"/>
+        <!--<local:NameToCharsConverter x:Key="NameConverter"/>-->
     </UserControl.Resources>
     <Grid Margin="1,1,1,0.667">
         <!-- The Background of the Project Profile -->
-        <Rectangle x:Name="rectInitial" HorizontalAlignment="Left" Height="15" Stroke="#FF1E1922" VerticalAlignment="Top" Width="17" Fill="{Binding Converter={StaticResource ColorConverter}, Path=ProjectProfileBack}"/>
-
+        <Rectangle x:Name="rectInitial" HorizontalAlignment="Left" Height="15" Stroke="#FF1E1922" VerticalAlignment="Top" Width="17" Fill="{Binding Converter={StaticResource ColorConverter}, Path=AssigneeProfileBack}"/>
+        <!--<Rectangle x:Name="rectInitial" HorizontalAlignment="Left" Height="16" Stroke="#FF1E1922" VerticalAlignment="Top" Width="17" Margin="0,0,0,-1"/>-->
         <!-- Profile Text (Placed above the Background) -->
-        <TextBox x:Name="txtInitial" Text="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="17" FontFamily="Gill Sans Ultra Bold" Foreground="Black" BorderBrush="{x:Null}" Height="15" Background="{x:Null}" FontSize="40"  IsReadOnly="True" IsHitTestVisible="False"/>
+        <TextBox x:Name="txtInitial"  Text="" TextAlignment ="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" FontFamily="Gill Sans Ultra" Foreground="White" BorderBrush="{x:Null}" Height="16" Background="{x:Null}" FontSize="7"  IsReadOnly="True" IsHitTestVisible="False" Margin="0,2,3,-1.667"/>
 
     </Grid>
 </UserControl>

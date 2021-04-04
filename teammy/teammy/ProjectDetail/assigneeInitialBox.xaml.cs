@@ -20,8 +20,15 @@ namespace teammy.ProjectDetail
     /// </summary>
     public partial class assigneeInitialBox : UserControl
     {
-        public assigneeInitialBox()
+        public static readonly DependencyProperty AssigneeProfileBackProperty = DependencyProperty.Register("AssigneeProfileBack", typeof(Color), typeof(assigneeInitialBox));
+        public Color AssigneeProfileBack
         {
+            get { return (Color)GetValue(AssigneeProfileBackProperty); }
+            set { SetValue(AssigneeProfileBackProperty, value); }
+        }
+        public assigneeInitialBox(Color c)
+        {
+            this.AssigneeProfileBack = c;
             InitializeComponent();
         }
     }

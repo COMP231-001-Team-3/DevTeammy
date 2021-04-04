@@ -87,3 +87,5 @@ C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.c
 C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
 C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
 C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
+C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\EditTaskPage.g.cs
+C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\EditTaskPage.baml

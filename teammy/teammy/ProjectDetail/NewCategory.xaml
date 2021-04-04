@@ -102,7 +102,7 @@
         <Grid x:Name="addGrid" Background="White" Margin="4,267,-0.333,-17.667">
             <Button x:Name="addTaskButton" Click="addTask" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="35" Height="38" Style="{StaticResource ResourceKey=addButtonStyle}" Margin="185,2,-1,0"/>
         </Grid>
-        
+
 
         <Button x:Name="btnCloseC" Content="X" Style="{StaticResource ResourceKey=closeButton}" HorizontalAlignment="Left" Margin="191,0,0,0" VerticalAlignment="Top" Width="32" Height="24" Click="btnCloseC_Click"/>
     </Grid>

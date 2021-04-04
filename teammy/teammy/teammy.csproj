@@ -61,6 +61,10 @@
     <Compile Include="ProjectDetail\assigneeInitialBox.xaml.cs">
       <DependentUpon>assigneeInitialBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProjectDetail\ColorToBrushConverter.cs" />
+    <Compile Include="ProjectDetail\EditTaskPage.xaml.cs">
+      <DependentUpon>EditTaskPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProjectDetail\NewCategory.xaml.cs">
       <DependentUpon>NewCategory.xaml</DependentUpon>
     </Compile>
@@ -91,6 +95,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ProjectDetail\assigneeInitialBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProjectDetail\EditTaskPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
