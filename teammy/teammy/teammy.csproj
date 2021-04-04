@@ -65,6 +65,7 @@
     <Compile Include="ProjectDetail\EditTaskPage.xaml.cs">
       <DependentUpon>EditTaskPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProjectDetail\GetTaskBoxForAssignee.cs" />
     <Compile Include="ProjectDetail\NewCategory.xaml.cs">
       <DependentUpon>NewCategory.xaml</DependentUpon>
     </Compile>

@@ -30,9 +30,9 @@ namespace teammy.ProjectDetail
         public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskDueDateProperty = DependencyProperty.Register("TaskDueDate", typeof(DateTime), typeof(TaskBox));
-        public static readonly DependencyProperty TaskAssigneeProperty = DependencyProperty.Register("Assignee", typeof(int), typeof(TaskBox));
+        //public static readonly DependencyProperty TaskAssigneeProperty = DependencyProperty.Register("Assignee", typeof(int), typeof(TaskBox));
+        public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("AssigneeList", typeof(List<string>), typeof(TaskBox));
 
-        
 
         public string TaskName
         {
@@ -56,10 +56,15 @@ namespace teammy.ProjectDetail
             set { SetValue(TaskDueDateProperty, value); }
         }
 
-        public int TaskAssignee
+        //public int TaskAssignee
+        //{
+        //    get { return (int)GetValue(TaskAssigneeProperty); }
+        //    set { SetValue(TaskAssigneeProperty, value); }
+        //}
+        public List<string> TaskAssigneeList
         {
-            get { return (int)GetValue(TaskAssigneeProperty); }
-            set { SetValue(TaskAssigneeProperty, value); }
+            get { return (List<string>)GetValue(TaskAssigneeListProperty); }
+            set { SetValue(TaskAssigneeListProperty, value); }
         }
 
 
@@ -68,7 +73,8 @@ namespace teammy.ProjectDetail
         public event EventHandler<EventArgs> TaskPriorityChanged;
         public event EventHandler<EventArgs> TaskProgressChanged;
         public event EventHandler<EventArgs> TaskDueDateChanged;
-        public event EventHandler<EventArgs> TaskAssigneeChanged;
+        //public event EventHandler<EventArgs> TaskAssigneeChanged;
+        public event EventHandler<EventArgs> TaskAssigneeListChanged;
 
         public TaskBox()
         {
@@ -109,7 +115,13 @@ namespace teammy.ProjectDetail
                     });
                 }
             }
-            //UserListClass listclass = new UserListClass{TeamMembers=users};
+            if (TaskAssigneeList != null)
+            {
+                foreach (var item in TaskAssigneeList)
+                {
+                    createInitialBox(item);
+                }
+            }
 
         }
         private List<assigneeInitialBox> assignees = new List<assigneeInitialBox>();
@@ -150,8 +162,6 @@ namespace teammy.ProjectDetail
 
             assigneeStackPanel.Children.Add(initialBox);
 
-            //taskGrid.Children.Add(initialBox);
-            //initialBox.Visibility = Visibility.Visible;
             
             left += 25;
             right -= 25;

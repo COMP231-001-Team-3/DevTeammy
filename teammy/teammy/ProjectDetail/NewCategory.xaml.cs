@@ -23,6 +23,7 @@ namespace teammy
     /// </summary>
     public partial class NewCategory : UserControl
     {
+        private List<GetTaskBoxForAssignee> GetTasks = new List<GetTaskBoxForAssignee>();
         private List<TaskBox> tasks = new List<TaskBox>();
 
         private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
@@ -50,15 +51,6 @@ namespace teammy
             e.Handled = true;
             txtCategroyNameChanged?.Invoke(this, EventArgs.Empty);
 
-            //conn = new MySqlConnection(connectionString);
-            //conn.Open();
-            //MySqlCommand insertCatName = new MySqlCommand("Insert INTO categories VALUES(category_id, @category_name, (SELECT Proj_ID FROM projects WHERE Proj_Name = @projName));", conn);
-            //MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
-            //insertCatName.Parameters.AddWithValue("category_name", txtCategoryName.Text);
-            //insertCatName.Parameters.AddWithValue("projName", projBoard.ProjNameLable.Content.ToString());
-
-            //insertCatName.ExecuteNonQuery();
-            //commit.ExecuteNonQuery();
         }
         private void addTask(object sender, RoutedEventArgs e)
         {
@@ -81,8 +73,6 @@ namespace teammy
 
         private void LoadTask()
         {
-            //ProjBoard catNameB = new ProjBoard();
-
             taStackPanel.Children.Clear();
 
             string taskName;
@@ -92,19 +82,15 @@ namespace teammy
             int taskAssigneeNum;
             List<string> userName = new List<string>();
 
+            // bring catname
             conn = new MySqlConnection(connectionString);
             conn.Open();
             MySqlCommand getTasks = new MySqlCommand("SELECT task_name, priority, due_date, progress_code, assigned_group FROM tasks NATURAL JOIN categories where category_name  = @catName", conn);
             getTasks.Parameters.AddWithValue("catName", Application.Current.Resources["catName"] as string);
-            
             MySqlDataReader tasksReader = getTasks.ExecuteReader();
 
             using (tasksReader)
             {
-                //TaskBox taskBox = new TaskBox();
-                
-                //Random rd = new Random();
-                
                 while (tasksReader.Read())
                 {
                     totalBoxes++;
@@ -113,38 +99,36 @@ namespace teammy
                     taskProgre = tasksReader[3].ToString();
                     taskDate = DateTime.Parse(tasksReader[2].ToString());
                     taskAssigneeNum = (int)tasksReader[4];
-                    tasks.Add(new TaskBox { TaskName= taskName , TaskPriority = taskPrio, TaskProgress = taskProgre, TaskDueDate = taskDate, TaskAssignee = taskAssigneeNum});                    
+                    GetTasks.Add(new GetTaskBoxForAssignee { TasknameAssi = taskName, TaskPriorityAssi = taskPrio, TaskProgressAssi = taskProgre, TaskDueDateAssi = taskDate, TaskAssigneeAssi = taskAssigneeNum });
                 }
             }
 
-            for (int signee = 0; signee < tasks.Count; signee++)
+            for (int signee = 0; signee < GetTasks.Count; signee++)
             {
+                TaskBox taskBox;
 
-                //TaskBox assigneeGroup = tasks.Find((assignee) => assignee.TaskAssignee.Equals(tasks[signee]));
-
-                //MySqlCommand getAssingees = new MySqlCommand("SELECT user_name FROM Users NATURAL JOIN Team_Mates Natural JOIN Assignees Natural JOIN Tasks where assigned_group = @assigned_group", conn);
-                //getAssingees.Parameters.AddWithValue("assigned_group", assigneeGroup);
-                //MySqlDataReader assingeeReader = getAssingees.ExecuteReader();
-                //using (assingeeReader)
-                //{
-                //    while (assingeeReader.Read())
-                //    {
-                //        userName.Add((string)assingeeReader["user_name"]);
-                //    }
-                //}
-
-                //taskBox = new TaskBox()
-                //{
-                //    TaskName = taskName,
-                //    Margin = new Thickness(left, top, right, bottom),
-                //    TaskPriority = taskPrio,
-                //    TaskProgress = taskProgre,
-                //    TaskDueDate = taskDate,
-                //    AssigneeList = userName
-                //};
-                //taStackPanel.Children.Add(taskBox);
+                MySqlCommand getAssingees = new MySqlCommand("SELECT user_name FROM users NATURAL JOIN team_mates Natural JOIN assignees Natural JOIN tasks where assigned_group = @assigned_group", conn);
+                getAssingees.Parameters.AddWithValue("assigned_group", GetTasks[signee].TaskAssigneeAssi);
+                MySqlDataReader assingeeReader = getAssingees.ExecuteReader();
+                using (assingeeReader)
+                {
+                    while (assingeeReader.Read())
+                    {
+                        userName.Add((string)assingeeReader["user_name"]);
+                    }
+                }
+                    
+                taskBox = new TaskBox()
+                {
+                    TaskName = GetTasks[signee].TasknameAssi,
+                    TaskPriority = GetTasks[signee].TaskPriorityAssi,
+                    TaskProgress = GetTasks[signee].TaskProgressAssi,
+                    TaskDueDate = GetTasks[signee].TaskDueDateAssi,
+                    TaskAssigneeList = userName
+                };
+                taStackPanel.Children.Add(taskBox);
             }
-            
+
         }
     }
 }
