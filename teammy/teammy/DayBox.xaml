@@ -5,8 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:teammy"
              mc:Ignorable="d" 
-             d:DesignHeight="" d:DesignWidth="800">
-    <Grid Background="White" Margin="0,0,341,0">
-              
+             d:DesignHeight="95" d:DesignWidth="95"
+             DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <UserControl.Resources>
+        <local:StatusToSourceConverter x:Key="statusConverter"/>
+    </UserControl.Resources>
+    <Grid x:Name="containerGrid" Background="White" Width="95" Height="95">
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95"  Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="lblDay" Content="{Binding Date}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8671CE" FontSize="16" Margin="67,8,0,0"/>
+        <Label x:Name="lblTask" Content="{Binding Task}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8671CE" Width="73" Margin="0,59,0,0" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14"/>
+        <Image x:Name="imgStatus" Source="{Binding Status, Converter={StaticResource ResourceKey=statusConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="20" Margin="73,58,0,0" />
     </Grid>
 </UserControl>

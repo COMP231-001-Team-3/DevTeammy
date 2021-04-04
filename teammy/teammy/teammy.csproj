@@ -146,6 +146,7 @@
     <Compile Include="Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatusToSourceConverter.cs" />
     <Compile Include="TeamsList.xaml.cs">
       <DependentUpon>TeamsList.xaml</DependentUpon>
     </Compile>

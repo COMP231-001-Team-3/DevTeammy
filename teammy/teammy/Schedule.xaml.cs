@@ -17,6 +17,22 @@ namespace teammy
     /// <summary>
     /// Interaction logic for Schedule.xaml
     /// </summary>
+    
+    public enum Months
+    {
+        January = 1,
+        February,
+        March,
+        April,
+        May, 
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December
+    }
     public partial class Schedule : Window
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
@@ -24,7 +40,31 @@ namespace teammy
         public Schedule()
         {
             InitializeComponent();
+            LoadDates();
         }
+
+        private void LoadDates()
+        {
+            lblMonthName.Content = (Months)DateTime.Now.Month + " " + DateTime.Now.Year;
+
+            DateTime monthStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
+            int totalDays = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+
+            int startDay = (int) monthStart.DayOfWeek;
+            int count = 1;
+
+            DayBox dayBox;
+            UIElementCollection dateBoxes = containerDates.Children;
+
+            for (int i = startDay; i < totalDays + startDay; ++i)
+            {
+                dayBox = dateBoxes[i] as DayBox;
+                dayBox.Date = count++;
+            }
+
+        }
+
         #region Title Bar Button Event Handlers
         /// <summary>
         ///     Shuts down the application
@@ -130,5 +170,25 @@ namespace teammy
             (globalItems["teamsListInstance"] as Window).Show();
         }
         #endregion
+
+        private void btnNext_MouseEnter(object sender, MouseEventArgs e)
+        {
+            nextbtnIcon.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
+        }
+
+        private void btnNext_MouseLeave(object sender, MouseEventArgs e)
+        {
+            nextbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
+        }
+
+        private void btnPrevious_MouseEnter(object sender, MouseEventArgs e)
+        {
+            prevbtnIcon.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
+        }
+
+        private void btnPrevious_MouseLeave(object sender, MouseEventArgs e)
+        {
+            prevbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
+        }
     }
 }

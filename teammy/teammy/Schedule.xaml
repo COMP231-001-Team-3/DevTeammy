@@ -158,115 +158,120 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid x:Name="containerGrid" Background="White" RenderTransformOrigin="0.446,0.508">
+    <Grid x:Name="containerGrid" Background="White" RenderTransformOrigin="0.503,0.497" Margin="0,1,0,-1">
         <!-- Grid pnlTitle represents Custom title Bar -->
         <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,635" MouseDown="pnlTitle_MouseDown">
+            
             <Label Content="Teammy" HorizontalAlignment="Left" Margin="35,3,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting"/>
+            
             <Button x:Name="btnMenu" Background="{x:Null}" Margin="5,0,931.667,10" BorderBrush="{x:Null}" Click="btnMenu_Click">
                 <Button.Content>
                     <Grid>
                         <Image Source="images\menuIcon.png" Margin="0,0,0.333,0.667"/>
-
                     </Grid>
                 </Button.Content>
-
             </Button>
+            
             <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="937,0,-0.333,13" Click="btnClose_Click"/>
+            
             <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="905,2,31.667,16.333" Click="btnMinimize_Click"/>
         </Grid>
 
-        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="431" Margin="0,135,0,0" VerticalAlignment="Top" Width="261"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle x:Name="rctSunday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="289,90,0,0" VerticalAlignment="Top" Width="94"/>
+        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="431" Margin="0,175,0,0" VerticalAlignment="Top" Width="261"/>
+        <Rectangle x:Name="rctSunday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="289,90,0,0" VerticalAlignment="Top" Width="95"/>
         <Label x:Name="lblSunday" Content="Sunday" HorizontalAlignment="Left" Margin="289,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
-        <Rectangle x:Name="rctSaturday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="852,90,0,0" VerticalAlignment="Top" Width="91"/>
-        <Label x:Name="lblSaturday" Content="Saturday" HorizontalAlignment="Left" Margin="851,90,0,0" VerticalAlignment="Top" Height="23" Width="92" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
-        <Rectangle x:Name="rctFriday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="759,90,0,0" VerticalAlignment="Top" Width="94"/>
-        <Label x:Name="lblFriday" Content="Friday" HorizontalAlignment="Left" Margin="759,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
-        <Rectangle x:Name="rctThursday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="664,90,0,0" VerticalAlignment="Top" Width="95"/>
-        <Label x:Name="lblThursday" Content="Thursday" HorizontalAlignment="Left" Margin="664,90,0,0" VerticalAlignment="Top" Height="23" Width="95" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctSaturday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="848,90,0,0" VerticalAlignment="Top" Width="96"/>
+        <Label x:Name="lblSaturday" Content="Saturday" HorizontalAlignment="Left" Margin="849,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctFriday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="755,90,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="lblFriday" Content="Friday" HorizontalAlignment="Left" Margin="755,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctThursday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="661,90,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="lblThursday" Content="Thursday" HorizontalAlignment="Left" Margin="661,90,0,0" VerticalAlignment="Top" Height="23" Width="95" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
         <Rectangle x:Name="rctWednesday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="569,90,0,0" VerticalAlignment="Top" Width="95"/>
-        <Label x:Name="lblWednesday" Content="Wednesday" HorizontalAlignment="Left" Margin="570,90,0,0" VerticalAlignment="Top" Height="23" Width="95" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
-        <Rectangle x:Name="rctTuesday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="476,90,0,0" VerticalAlignment="Top" Width="94"/>
-        <Label x:Name="lblTuesday" Content="Tuesday" HorizontalAlignment="Left" Margin="477,90,0,0" VerticalAlignment="Top" Height="23" Width="93" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
-        <Rectangle x:Name="rctMonday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="383,90,0,0" VerticalAlignment="Top" Width="94"/>
-        <Label x:Name="lblMonday" Content="Monday" HorizontalAlignment="Left" Margin="383,90,0,0" VerticalAlignment="Top" Height="23" Width="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="94"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,112,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,391,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,299,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,206,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,484,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Label Content="1" HorizontalAlignment="Left" Margin="456,112,0,0" VerticalAlignment="Top" Foreground="#FF8671CE" FontSize="16"/>
-        <Label Content="" HorizontalAlignment="Left" Margin="383,178,0,0" VerticalAlignment="Top" Foreground="#FF8671CE" FontSize="9" Width="73"/>
-        <Image HorizontalAlignment="Left" Margin="456,180,0,0" VerticalAlignment="Top" Height="22" Width="17" />
-        <Button x:Name="btnDone" HorizontalAlignment="Left" Margin="289,51,0,0" VerticalAlignment="Top" Width="119" Height="37" Background="White" FontSize="20" BorderBrush="{x:Null}">
+        <Label x:Name="lblWednesday" Content="Wednesday" HorizontalAlignment="Left" Margin="568,90,0,0" VerticalAlignment="Top" Height="23" Width="95" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctTuesday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="476,90,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="lblTuesday" Content="Tuesday" HorizontalAlignment="Left" Margin="475,90,0,0" VerticalAlignment="Top" Height="23" Width="95" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+        <Rectangle x:Name="rctMonday" Fill="#FF8671CE" HorizontalAlignment="Left" Height="23" Margin="382,90,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="lblMonday" Content="Monday" HorizontalAlignment="Left" Margin="381,90,0,0" VerticalAlignment="Top" Height="23" Width="96" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Perpetua Titling MT" Foreground="White"/>
+
+        <Button x:Name="btnPrevious" HorizontalAlignment="Left" Margin="289,59,0,0" VerticalAlignment="Top" Width="89" Height="29" Background="White" FontSize="20" BorderBrush="{x:Null}" MouseEnter="btnPrevious_MouseEnter" MouseLeave="btnPrevious_MouseLeave" Padding="0">
             <Button.Content>
                 <DockPanel>
-                    <Image Source="images/arrow.png" DockPanel.Dock="Left" Width="30" RenderTransformOrigin="0.5,0.5">
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="179.801"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <Label Content="Previous" VerticalAlignment="Center"  Foreground="#FF8671CE" DockPanel.Dock="Right"/>
+                    <Grid DockPanel.Dock="Left">
+                        <Image x:Name="prevImg" Source="images/arrow.png"  Width="20" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="180"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <Button x:Name="prevbtnIcon" Style="{StaticResource mouseOverStyle}" Background="Transparent" BorderThickness="0" Width="{Binding ActualWidth, Source={x:Reference Name=prevImg}}" Height="{Binding ActualHeight, Source={x:Reference Name=prevImg}}"/>
+                    </Grid>
+                    <Label Content="Previous"  Foreground="#FF8671CE" DockPanel.Dock="Right" FontSize="14" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Margin="3,0,0,0"/>
                 </DockPanel>
             </Button.Content>
         </Button>
-        <Button x:Name="btnDone_Copy" HorizontalAlignment="Left" Margin="852,51,0,0" VerticalAlignment="Top" Width="87" Height="37" Background="White" FontSize="20" BorderBrush="{x:Null}">
+        <Button x:Name="btnNext" HorizontalAlignment="Left" Margin="884,64,0,0" VerticalAlignment="Top" Width="58" Height="24" Background="White" FontSize="20" BorderBrush="{x:Null}" MouseEnter="btnNext_MouseEnter" MouseLeave="btnNext_MouseLeave">
             <DockPanel>
-                <Image Source="images/arrow.png" DockPanel.Dock="Right" Width="30">
-                </Image>
-                <Label Content="Next" VerticalAlignment="Center"  Foreground="#FF8671CE" DockPanel.Dock="Left"/>
+                <Grid DockPanel.Dock="Right">
+                    <Image x:Name="nextImg" Source="images/arrow.png" Width="20"/>
+                    <Button x:Name="nextbtnIcon" Style="{StaticResource mouseOverStyle}" Background="Transparent" BorderThickness="0" Width="{Binding ActualWidth, Source={x:Reference Name=nextImg}}" Height="{Binding ActualHeight, Source={x:Reference Name=nextImg}}"/>
+                </Grid>
+                <Label Content="Next" VerticalAlignment="Center"  Foreground="#FF8671CE" DockPanel.Dock="Left" FontSize="14" Height="19" Padding="0" Width="33" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,3,0"/>
             </DockPanel>
         </Button>
-        <Label x:Name="lblMonthName" Content="April 2021" HorizontalAlignment="Left" Margin="523,55,0,0" VerticalAlignment="Top" Width="223" Height="30" FontFamily="Lucida Calligraphy" FontSize="16" Foreground="#FF8671CE" HorizontalContentAlignment="Center"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="289,578,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="383,578,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="475,578,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="568,578,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="661,578,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="755,578,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95" Margin="848,578,0,0" Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
-
+        <Label x:Name="lblMonthName" HorizontalAlignment="Left" Margin="523,55,0,0" VerticalAlignment="Top" Width="223" Height="30" FontFamily="Lucida Calligraphy" FontSize="16" Foreground="#FF8671CE" HorizontalContentAlignment="Center"/>
+        
+        <Grid x:Name="containerDates">
+            <local:DayBox x:Name="dbRow1Box1" Height="95" Width="95" Margin="289,112,586,479"/>
+            <local:DayBox x:Name="dbRow1Box2" Height="95" Width="95" Margin="381,112,494,479"/>
+            <local:DayBox x:Name="dbRow1Box3" Height="95" Width="95" Margin="474,112,401,479"/>
+            <local:DayBox x:Name="dbRow1Box4" Height="95" Width="95" Margin="568,112,307,479"/>
+            <local:DayBox x:Name="dbRow1Box5" Height="95" Width="95" Margin="661,112,214,479"/>
+            <local:DayBox x:Name="dbRow1Box6" Height="95" Width="95" Margin="755,112,120,479"/>
+            <local:DayBox x:Name="dbRow1Box7" Height="95" Width="95" Margin="849,112,26,479"/>
+            
+            <local:DayBox x:Name="dbRow2Box1" Height="95" Width="95" Margin="289,205,586,386"/>
+            <local:DayBox x:Name="dbRow2Box2" Height="95" Width="95" Margin="381,205,494,386"/>
+            <local:DayBox x:Name="dbRow2Box3" Height="95" Width="95" Margin="474,205,401,386"/>
+            <local:DayBox x:Name="dbRow2Box4" Height="95" Width="95" Margin="568,205,307,386"/>
+            <local:DayBox x:Name="dbRow2Box5" Height="95" Width="95" Margin="661,205,214,386"/>
+            <local:DayBox x:Name="dbRow2Box6" Height="95" Width="95" Margin="755,205,120,386"/>
+            <local:DayBox x:Name="dbRow2Box7" Height="95" Width="95" Margin="849,205,26,386"/>
+            
+            <local:DayBox x:Name="dbRow3Box1" Height="95" Width="95" Margin="289,298,586,293"/>
+            <local:DayBox x:Name="dbRow3Box2" Height="95" Width="95" Margin="381,298,494,293"/>
+            <local:DayBox x:Name="dbRow3Box3" Height="95" Width="95" Margin="474,298,401,293"/>
+            <local:DayBox x:Name="dbRow3Box4" Height="95" Width="95" Margin="568,298,307,293"/>
+            <local:DayBox x:Name="dbRow3Box5" Height="95" Width="95" Margin="661,298,214,293"/>
+            <local:DayBox x:Name="dbRow3Box6" Height="95" Width="95" Margin="755,298,120,293"/>
+            <local:DayBox x:Name="dbRow3Box7" Height="95" Width="95" Margin="849,298,26,293"/>
+            
+            <local:DayBox x:Name="dbRow4Box1" Height="95" Width="95" Margin="289,392,586,199"/>
+            <local:DayBox x:Name="dbRow4Box2" Height="95" Width="95" Margin="381,392,494,199"/>
+            <local:DayBox x:Name="dbRow4Box3" Height="95" Width="95" Margin="474,392,401,199"/>
+            <local:DayBox x:Name="dbRow4Box4" Height="95" Width="95" Margin="568,392,307,199"/>
+            <local:DayBox x:Name="dbRow4Box5" Height="95" Width="95" Margin="661,392,214,199"/>
+            <local:DayBox x:Name="dbRow4Box6" Height="95" Width="95" Margin="755,392,120,199"/>
+            <local:DayBox x:Name="dbRow4Box7" Height="95" Width="95" Margin="849,392,26,199"/>
+            
+            <local:DayBox x:Name="dbRow5Box1" Height="95" Width="95" Margin="289,484,586,107"/>
+            <local:DayBox x:Name="dbRow5Box2" Height="95" Width="95" Margin="381,484,494,107"/>
+            <local:DayBox x:Name="dbRow5Box3" Height="95" Width="95" Margin="474,484,401,107"/>
+            <local:DayBox x:Name="dbRow5Box4" Height="95" Width="95" Margin="568,484,307,107"/>
+            <local:DayBox x:Name="dbRow5Box5" Height="95" Width="95" Margin="661,484,214,107"/>
+            <local:DayBox x:Name="dbRow5Box6" Height="95" Width="95" Margin="755,484,120,107"/>
+            <local:DayBox x:Name="dbRow5Box7" Height="95" Width="95" Margin="849,484,26,107"/>
+            
+            <local:DayBox x:Name="dbRow6Box1" Height="95" Width="95" Margin="289,577,586,14"/>           
+            <local:DayBox x:Name="dbRow6Box2" Height="95" Width="95" Margin="381,577,494,14"/>           
+            <local:DayBox x:Name="dbRow6Box3" Height="95" Width="95" Margin="474,577,401,14"/>    
+            <local:DayBox x:Name="dbRow6Box4" Height="95" Width="95" Margin="568,577,307,14"/>    
+            <local:DayBox x:Name="dbRow6Box5" Height="95" Width="95" Margin="661,577,214,14"/>           
+            <local:DayBox x:Name="dbRow6Box6" Height="95" Width="95" Margin="755,577,120,14"/>           
+            <local:DayBox x:Name="dbRow6Box7" Height="95" Width="95" Margin="849,577,26,14"/>
+        </Grid>        
     </Grid>
 </Window>

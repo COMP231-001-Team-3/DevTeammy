@@ -20,6 +20,28 @@ namespace teammy
     /// </summary>
     public partial class DayBox : UserControl
     {
+        public static readonly DependencyProperty DateProperty = DependencyProperty.Register("Date", typeof(int?), typeof(DayBox));
+
+        public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(string), typeof(DayBox));
+
+        public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(string), typeof(DayBox));
+
+        public int? Date
+        {
+            get => (int?)GetValue(DateProperty);
+            set => SetValue(DateProperty, value);
+        }
+        public string Task
+        {
+            get => GetValue(TaskProperty).ToString();
+            set => SetValue(TaskProperty, value);
+        }
+        public string Status
+        {
+            get => GetValue(StatusProperty).ToString();
+            set => SetValue(StatusProperty, value);
+        }
+
         public DayBox()
         {
             InitializeComponent();
