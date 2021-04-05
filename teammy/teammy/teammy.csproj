@@ -117,6 +117,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\PopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Schedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +148,9 @@
     <Compile Include="Converters\ListToVisibConverter.cs" />
     <Compile Include="preference.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PopUp.xaml.cs">
+      <DependentUpon>PopUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>

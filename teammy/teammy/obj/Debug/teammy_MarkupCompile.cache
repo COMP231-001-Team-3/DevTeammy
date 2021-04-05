@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\
+D:\Last Semester\Teammy\New folder\teammy\teammy\obj\Debug\
 teammy
 none
 false
 DEBUG;TRACE
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml
-81001050893
+D:\Last Semester\Teammy\New folder\teammy\teammy\App.xaml
+9-1712971447
 2-1194965406
-311172876197
-401364737512
-UserControls\DayBox.xaml;Windows\Schedule.xaml;Windows\TeamsList.xaml;Windows\ProgressReport.xaml;Windows\login.xaml;Windows\MainWindow.xaml;Windows\CreateProject.xaml;UserControls\CardBox.xaml;
+32-1776618455
+40-1176168353
+UserControls\DayBox.xaml;UserControls\PopUp.xaml;Windows\Schedule.xaml;Windows\TeamsList.xaml;Windows\ProgressReport.xaml;Windows\login.xaml;Windows\MainWindow.xaml;Windows\CreateProject.xaml;UserControls\CardBox.xaml;
 
-False
+True
 

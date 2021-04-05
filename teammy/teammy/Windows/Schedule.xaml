@@ -162,7 +162,7 @@
     </Window.Resources>
     <Grid x:Name="containerGrid" Background="White" RenderTransformOrigin="0.503,0.497" Margin="0,1,0,-1">
         <!-- Grid pnlTitle represents Custom title Bar -->
-        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,636" MouseDown="pnlTitle_MouseDown">
+        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,636" MouseDown="pnlTitle_MouseDown" HorizontalAlignment="Right" Width="970">
 
             <Label Content="Teammy" HorizontalAlignment="Left" Margin="35,3,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting"/>
 

@@ -161,9 +161,14 @@
 
     <!-- UI Elements' declaration start here -->
     <Grid x:Name="containerGrid" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="85*"/>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="57*"/>
+        </Grid.ColumnDefinitions>
 
         <!-- Grid pnlTitle represents Custom title Bar -->
-        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,410" MouseDown="pnlTitle_MouseDown">
+        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,410" MouseDown="pnlTitle_MouseDown" Grid.ColumnSpan="3">
             <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="770,0,0,10" Click="btnClose_Click"/>
             <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="738,0,32,10" Click="btnMinimize_Click"/>
             <Label Content="Teammy" HorizontalAlignment="Left" Margin="35,3,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting"/>
@@ -179,12 +184,12 @@
         </Grid>
 
         <!-- This ScrollViewer houses the grid that ultimately holds the project cards -->
-        <ScrollViewer MaxHeight="382" Margin="220,58,10,75">
+        <ScrollViewer MaxHeight="382" Margin="220,58,10,75" Grid.ColumnSpan="3">
             <Grid MinHeight="400" x:Name="projGrid" Margin="0,0,0,0"/>
         </ScrollViewer>
         <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
-        <Button x:Name="btnCreateProj" HorizontalAlignment="Left" Margin="601,401,0,0" VerticalAlignment="Top" Width="189" Height="39" FontSize="20" Background="White" BorderBrush="{x:Null}"
-                Click="btnCreateProj_Click" Visibility="{Binding Converter={StaticResource PrivConverter}, Path=currentUser}">
+        <Button x:Name="btnCreateProj" HorizontalAlignment="Left" Margin="86,401,0,0" VerticalAlignment="Top" Width="189" Height="39" FontSize="20" Background="White" BorderBrush="{x:Null}"
+                Click="btnCreateProj_Click" Visibility="{Binding Converter={StaticResource PrivConverter}, Path=currentUser}" Grid.Column="2">
             <Button.Content>
                 <DockPanel>
                     <Grid DockPanel.Dock="Left">
@@ -195,8 +200,8 @@
                 </DockPanel>
             </Button.Content>
         </Button>
-        <ComboBox x:Name="cmbTeams" HorizontalAlignment="Left" Margin="357,410,0,0" VerticalAlignment="Top" Width="155" Height="27" BorderBrush="White"/>
-        <Button x:Name="btnDone" HorizontalAlignment="Left" Margin="593,403,0,0" VerticalAlignment="Top" Width="99" Height="37" Background="White" FontSize="20" BorderBrush="{x:Null}" Visibility="Hidden" Click="btnDone_Click">
+        <ComboBox x:Name="cmbTeams" HorizontalAlignment="Left" Margin="357,410,0,0" VerticalAlignment="Top" Width="155" Height="27" BorderBrush="White" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnDone" HorizontalAlignment="Left" Margin="78,403,0,0" VerticalAlignment="Top" Width="99" Height="37" Background="White" FontSize="20" BorderBrush="{x:Null}" Visibility="Hidden" Click="btnDone_Click" Grid.Column="2">
             <Button.Content>
                 <DockPanel>
                     <Image Source="images/protoDone.png" DockPanel.Dock="Left"/>
@@ -204,7 +209,7 @@
                 </DockPanel>
             </Button.Content>
         </Button>
-        <Button x:Name="btnCancel" HorizontalAlignment="Left" Margin="697,404,0,0" VerticalAlignment="Top" Width="103" Height="36" Background="White" FontSize="20" BorderBrush="{x:Null}" Visibility="Hidden" Click="btnCancel_Click" MouseEnter="btnCancel_MouseEnter" MouseLeave="btnCancel_MouseLeave">
+        <Button x:Name="btnCancel" HorizontalAlignment="Left" Margin="182,404,0,0" VerticalAlignment="Top" Width="103" Height="36" Background="White" FontSize="20" BorderBrush="{x:Null}" Visibility="Hidden" Click="btnCancel_Click" MouseEnter="btnCancel_MouseEnter" MouseLeave="btnCancel_MouseLeave" Grid.Column="2">
             <DockPanel>
                 <Grid DockPanel.Dock="Left" Width="31">
                     <Image x:Name="cancelImg" Source="images/cancel.png" />
