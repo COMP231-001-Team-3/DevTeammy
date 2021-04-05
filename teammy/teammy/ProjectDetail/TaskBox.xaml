@@ -158,9 +158,9 @@
         </ComboBox>
         <DatePicker  Margin="10,56,81.333,0" Text="{Binding TaskDueDate}" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="23" VerticalAlignment="Top"/>
         <TextBox x:Name="taskNameTextBox" Text="{Binding TaskName}" HorizontalAlignment="Left" Height="21" Margin="10,4,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110" FontSize="10" TextChanged="taskNameTextBox_TextChanged"/>
-
+        
         <StackPanel x:Name="assigneeStackPanel" Orientation ="Horizontal" HorizontalAlignment="Left" Height="28"  VerticalAlignment="Top" Width="80" Margin="77,28,0,0"/>
-
+               
 
     </Grid>
 </UserControl>

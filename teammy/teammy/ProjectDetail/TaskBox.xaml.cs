@@ -31,7 +31,7 @@ namespace teammy.ProjectDetail
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskDueDateProperty = DependencyProperty.Register("TaskDueDate", typeof(DateTime), typeof(TaskBox));
         //public static readonly DependencyProperty TaskAssigneeProperty = DependencyProperty.Register("Assignee", typeof(int), typeof(TaskBox));
-        public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("AssigneeList", typeof(List<string>), typeof(TaskBox));
+        //public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("AssigneeList", typeof(List<string>), typeof(TaskBox));
 
 
         public string TaskName
@@ -61,10 +61,11 @@ namespace teammy.ProjectDetail
         //    get { return (int)GetValue(TaskAssigneeProperty); }
         //    set { SetValue(TaskAssigneeProperty, value); }
         //}
-        public List<string> TaskAssigneeList
+
+        public List<string> TaskAssigneeList = new List<string>();
+        public TaskBox(List<string> assigneesL)
         {
-            get { return (List<string>)GetValue(TaskAssigneeListProperty); }
-            set { SetValue(TaskAssigneeListProperty, value); }
+            TaskAssigneeList = assigneesL;
         }
 
 
@@ -74,7 +75,7 @@ namespace teammy.ProjectDetail
         public event EventHandler<EventArgs> TaskProgressChanged;
         public event EventHandler<EventArgs> TaskDueDateChanged;
         //public event EventHandler<EventArgs> TaskAssigneeChanged;
-        public event EventHandler<EventArgs> TaskAssigneeListChanged;
+        
 
         public TaskBox()
         {
@@ -82,12 +83,12 @@ namespace teammy.ProjectDetail
             InitializeComponent();
             LoadUsers();
         }
-        public ObservableCollection<UserListClass> TeamUsers { get; set; }
+        public ObservableCollection<UserListClass> TeamUsers { get; set; }      
         public class UserListClass
         {
             public string TeamMembers { get; set; }
         }
-
+       
         private void LoadUsers()
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -115,11 +116,28 @@ namespace teammy.ProjectDetail
                     });
                 }
             }
-            if (TaskAssigneeList != null)
+            string signStr = Application.Current.Resources["assigneeNum"] as string;
+            int signNum = Int32.Parse(signStr);
+            List<string> userName = new List<string>();
+
+            MySqlCommand getAssingees = new MySqlCommand("SELECT user_name FROM users NATURAL JOIN team_mates Natural JOIN assignees Natural JOIN tasks where assigned_group = @assigned_group", conn);
+            getAssingees.Parameters.AddWithValue("assigned_group", signNum);
+            MySqlDataReader assingeeReader = getAssingees.ExecuteReader();
+            using (assingeeReader)
             {
-                foreach (var item in TaskAssigneeList)
+                while (assingeeReader.Read())
                 {
-                    createInitialBox(item);
+
+                    userName.Add((string)assingeeReader["user_name"]);
+                }
+            }
+
+            if (userName != null)
+            {
+
+                foreach (var item in userName)
+                {
+                    createInitialBox(item.ToString());
                 }
             }
 
@@ -130,8 +148,7 @@ namespace teammy.ProjectDetail
         {
             int left = 0, top = 0, right = 0, bottom = 0;
             int initialBoxCount = 0;
-            int totalBoxes=0;
-            //assigneeStackPanel.Children.Clear();
+            int totalBoxes=0;           
             Random rd = new Random();
             string  assigneeInitial;
             string[] nameWords;
@@ -160,9 +177,10 @@ namespace teammy.ProjectDetail
                 return;
             }
 
+            
             assigneeStackPanel.Children.Add(initialBox);
 
-            
+
             left += 25;
             right -= 25;
             initialBoxCount++;
