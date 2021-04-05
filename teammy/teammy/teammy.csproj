@@ -117,7 +117,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\PopUp.xaml">
+    <Page Include="Windows\PopUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,7 +149,7 @@
     <Compile Include="preference.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\PopUp.xaml.cs">
+    <Compile Include="Windows\PopUp.xaml.cs">
       <DependentUpon>PopUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Schedule.xaml.cs">

@@ -22,7 +22,7 @@
                         BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>
                                 <Rectangle x:Name="background"
-                                   Fill="{TemplateBinding Background}"/>
+                                   Fill="Transparent"/>
                                 <ContentPresenter
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -49,7 +49,7 @@
 
         <Image x:Name="imgStatus" Source="{Binding Status, Converter={StaticResource ResourceKey=statusConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="20" Margin="70,48,0,0" />
         
-        <Button x:Name="btnClicker" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Height="95" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True" Click="btnClicker_Click"/>
+        <Button x:Name="btnClicker" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Height="95" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True"/>
 
         <Image x:Name="moreTasksImg" Source="../images/threeDots.png" Margin="1,81,75,2" Visibility="{Binding Tasks, Converter={StaticResource ResourceKey=listConverter}}"/>
     </Grid>

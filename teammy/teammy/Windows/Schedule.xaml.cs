@@ -102,7 +102,8 @@ namespace teammy
                         dayBox.DisplayTask = dueThisDay[0].task_name;
                         dayBox.Tasks = dueThisDay;
                         dayBox.Status = dueThisDay[0].progress_code;
-                    }                    
+                        dayBox.BoxClick += new RoutedEventHandler(dayBox_Click);
+                    }       
                 }
 
                 date++;
@@ -301,5 +302,15 @@ namespace teammy
             LoadDates(displayYear, displayMonth);
         }
         #endregion        
+
+        private void dayBox_Click(object sender, RoutedEventArgs e)
+        {
+            Button sent = sender as Button;
+            DayBox dateClicked = (sent.Parent as Grid).Parent as DayBox;
+
+            PopUp taskDetail = new PopUp() { date = dateClicked.Date.Value, month = ((Months)displayMonth).ToString(), year = displayYear};
+
+            taskDetail.ShowDialog();
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using teammy.UserControls;
 
 namespace teammy
 {
@@ -11,7 +10,6 @@ namespace teammy
    
     public partial class DayBox : UserControl
     {
-        PopUp pop = new PopUp();
         public static readonly DependencyProperty DateProperty = DependencyProperty.Register("Date", typeof(int?), typeof(DayBox));
 
         public static readonly DependencyProperty DisplayTaskProperty = DependencyProperty.Register("DisplayTask", typeof(string), typeof(DayBox));
@@ -60,12 +58,6 @@ namespace teammy
         public DayBox()
         {
             InitializeComponent();
-        }
-
-        private void btnClicker_Click(object sender, RoutedEventArgs e)
-        {
-            pop.Show();
-
-        }
+        }        
     }
 }

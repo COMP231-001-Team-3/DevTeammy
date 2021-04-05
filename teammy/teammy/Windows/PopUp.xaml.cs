@@ -12,21 +12,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace teammy.UserControls
+namespace teammy
 {
     /// <summary>
     /// Interaction logic for PopUp.xaml
     /// </summary>
     public partial class PopUp : Window
     {
+        public int date, year;
+        public string month;
+
         public PopUp()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
+
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            Close();
         }
+
+        private void popupWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            lblDateHeader.Content = month + " " + date + ", " + year;
+        }
+
         private void pnlTitle_MouseDown(object sender, MouseEventArgs e)
         {
             DragMove();
