@@ -419,6 +419,11 @@ namespace teammy.ProjectDetail
             EditTaskPage editTaskPage = new EditTaskPage();
             editTaskPage.Show();
         }
+
+        private void svItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 
