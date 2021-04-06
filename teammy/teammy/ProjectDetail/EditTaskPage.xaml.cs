@@ -24,6 +24,41 @@ namespace teammy.ProjectDetail
         private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
         List<string> users = new List<string>();
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
+
+        public static readonly DependencyProperty EditTaskNameProperty = DependencyProperty.Register("EditTaskName", typeof(string), typeof(TaskBox));
+        public static readonly DependencyProperty EditTaskPriorityProperty = DependencyProperty.Register("EditTaskPriority", typeof(string), typeof(TaskBox));
+        public static readonly DependencyProperty EditTaskProgressProperty = DependencyProperty.Register("EditTaskProgress", typeof(string), typeof(TaskBox));
+        public static readonly DependencyProperty EditTaskDueDateProperty = DependencyProperty.Register("EditTaskDueDate", typeof(DateTime), typeof(TaskBox));
+        //public static readonly DependencyProperty EditTaskAssigneeProperty = DependencyProperty.Register("Assignee", typeof(int), typeof(TaskBox));
+
+        public string EditTaskName
+        {
+            get { return (string)GetValue(EditTaskNameProperty); }
+            set { SetValue(EditTaskNameProperty, value); }
+        }
+        public string EditTaskPriority
+        {
+            get { return (string)GetValue(EditTaskPriorityProperty); }
+            set { SetValue(EditTaskPriorityProperty, value); }
+
+        }
+        public string EditTaskProgress
+        {
+            get { return (string)GetValue(EditTaskProgressProperty); }
+            set { SetValue(EditTaskProgressProperty, value); }
+        }
+        public DateTime EditTaskDueDate
+        {
+            get { return (DateTime)GetValue(EditTaskDueDateProperty); }
+            set { SetValue(EditTaskDueDateProperty, value); }
+        }
+
+        //public int TaskAssignee
+        //{
+        //    get { return (int)GetValue(TaskAssigneeProperty); }
+        //    set { SetValue(TaskAssigneeProperty, value); }
+        //}
+
         public EditTaskPage()
         {
             InitializeComponent();
@@ -78,8 +113,6 @@ namespace teammy.ProjectDetail
                     });
                 }
             }
-            //UserListClass listclass = new UserListClass{TeamMembers=users};
-
         }
         private List<assigneeInitialBox> assignees = new List<assigneeInitialBox>();
 
@@ -119,13 +152,6 @@ namespace teammy.ProjectDetail
 
             assigneeStackPanel.Children.Add(initialBox);
 
-            //taskGrid.Children.Add(initialBox);
-            //initialBox.Visibility = Visibility.Visible;
-
-            left += 25;
-            right -= 25;
-            initialBoxCount++;
-
         }
         private void assigneeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -137,8 +163,6 @@ namespace teammy.ProjectDetail
                 if (currentItem != null)
                 {
                     //MessageBox.Show(currentItem.Content.ToString());
-
-
                     createInitialBox(currentItem);
                 }
             }
@@ -157,6 +181,9 @@ namespace teammy.ProjectDetail
             }
         }
 
-        
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

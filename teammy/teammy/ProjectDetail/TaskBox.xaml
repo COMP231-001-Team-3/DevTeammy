@@ -54,7 +54,7 @@
                     </Grid>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="dlItem" Header="Delete" Background="HotPink"  Width="150" Height="40" FontSize="16" >
+            <MenuItem x:Name="dlItem" Header="Delete" Background="HotPink"  Width="150" Height="40" FontSize="16" Click="dlItem_Click" >
                 <MenuItem.Icon>
                     <Grid>
                         <Button x:Name="deleteTaskBtn" Style="{StaticResource mouseOverStyle}" Background="{x:Null}" BorderThickness="0"/>
@@ -128,13 +128,12 @@
         <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Stroke="#FF1E1922" Width="184" Margin="0,0,0,3"/>
 
         <Grid x:Name="threeDotsGrid" Margin="175,4,1.667,61.333">
-
+            <!--<Image x:Name="moreTasksImg" Source="../images/threeDots.png" Margin="1,81,75,2" Visibility="{Binding Tasks, Converter={StaticResource ResourceKey=listConverter}}"/>-->
             <Button x:Name="btnEditDelete" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnEditDelete_Click" RenderTransformOrigin="5.467,0.206">
                 <Button.Background>
                     <ImageBrush ImageSource="../images/threeDots.png"/>
                 </Button.Background>
             </Button>
-            <!--<Image Source="../images/threeDots.png" RenderTransformOrigin="-15.217,2.754" Margin="0,0,0,-2"/>-->
         </Grid>
 
         <Grid x:Name="statusGrid" Margin="161,28,4.667,38.333">
@@ -163,8 +162,8 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <DatePicker  Margin="10,56,81.333,0" Text="{Binding TaskDueDate}" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="23" VerticalAlignment="Top"/>
-        <TextBox x:Name="taskNameTextBox" Text="{Binding TaskName}" HorizontalAlignment="Left" Height="21" Margin="10,4,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110" FontSize="10" TextChanged="taskNameTextBox_TextChanged"/>
+        <DatePicker  Margin="10,56,81.333,0" Text="{Binding TaskDueDate, RelativeSource={RelativeSource AncestorType=local:TaskBox}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="23" VerticalAlignment="Top"/>
+        <TextBox x:Name="taskNameTextBox" Text="{Binding TaskName, RelativeSource={RelativeSource AncestorType=local:TaskBox}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="21" Margin="10,4,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110" FontSize="10" TextChanged="taskNameTextBox_TextChanged"/>
         
         <StackPanel x:Name="assigneeStackPanel" Orientation ="Horizontal" HorizontalAlignment="Left" Height="28"  VerticalAlignment="Top" Width="80" Margin="77,28,0,0"/>
                

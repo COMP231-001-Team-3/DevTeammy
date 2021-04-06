@@ -35,7 +35,7 @@ namespace teammy
         {
             InitializeComponent();
             LoadTask();
-        }
+        }       
 
         public static readonly DependencyProperty CategoryNameProperty = DependencyProperty.Register("CategoryName", typeof(string), typeof(NewCategory));
         public string CategoryName
@@ -59,15 +59,21 @@ namespace teammy
                 MessageBox.Show("The maximum limit for task per category is 9!", "Max tasks completed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            Application.Current.Resources["assigneeNum"] = null;
+            Application.Current.Resources["priority"] = null;
+            Application.Current.Resources["status"] = null;
+            toBeInserted = new TaskBox() { TaskName = "", TaskPriority = "", TaskProgress = "", TaskDueDate = DateTime.Now };
 
-            
-            toBeInserted = new TaskBox();
             taStackPanel.Children.Add(toBeInserted);
         }
 
         private void btnCloseC_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (MessageBox.Show("Are you sure you want to delete this category?", "Delete Category", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                StackPanel catPnlParent = this.Parent as StackPanel;
+                catPnlParent.Children.Remove(this);
+            }
         }
         
 
@@ -78,37 +84,38 @@ namespace teammy
             string taskName;
             string taskPrio;
             string taskProgre;
-            DateTime taskDate;           
-            
+            DateTime taskDate;
 
-            // bring catname
-            conn = new MySqlConnection(connectionString);
-            conn.Open();
-            MySqlCommand getTasks = new MySqlCommand("SELECT task_name, priority, due_date, progress_code, assigned_group FROM tasks NATURAL JOIN categories where category_name  = @catName", conn);
-            getTasks.Parameters.AddWithValue("catName", Application.Current.Resources["catName"] as string);
-            MySqlDataReader tasksReader = getTasks.ExecuteReader();
-
-            using (tasksReader)
+            if (Application.Current.Resources["catName"] as string != null)
             {
-                while (tasksReader.Read())
-                {
-                    totalBoxes++;
-                    taskName = tasksReader[0].ToString();
-                    Application.Current.Resources["priority"] = tasksReader[1].ToString();
-                    Application.Current.Resources["status"] = tasksReader[3].ToString();
-                    taskDate = DateTime.Parse(tasksReader[2].ToString());                    
-                    Application.Current.Resources["assigneeNum"] = tasksReader[4].ToString();
-                    taskBox = new TaskBox()
-                    {
-                        TaskName = taskName,
-                        //TaskPriority = taskPrio,
-                        //TaskProgress = taskProgre,
-                        TaskDueDate = taskDate,
-                    };                    
-                    taStackPanel.Children.Add(taskBox);
-                }
-            }            
+                // bring catname
+                conn = new MySqlConnection(connectionString);
+                conn.Open();
+                MySqlCommand getTasks = new MySqlCommand("SELECT task_name, priority, due_date, progress_code, assigned_group FROM tasks NATURAL JOIN categories where category_name  = @catName", conn);
+                getTasks.Parameters.AddWithValue("catName", Application.Current.Resources["catName"] as string);
+                MySqlDataReader tasksReader = getTasks.ExecuteReader();
 
+                using (tasksReader)
+                {
+                    while (tasksReader.Read())
+                    {
+                        totalBoxes++;
+                        taskName = tasksReader[0].ToString();
+                        Application.Current.Resources["priority"] = tasksReader[1].ToString();
+                        Application.Current.Resources["status"] = tasksReader[3].ToString();
+                        taskDate = DateTime.Parse(tasksReader[2].ToString());
+                        Application.Current.Resources["assigneeNum"] = tasksReader[4].ToString();
+                        taskBox = new TaskBox()
+                        {
+                            TaskName = taskName,
+                            //TaskPriority = taskPrio,
+                            //TaskProgress = taskProgre,
+                            TaskDueDate = taskDate,
+                        };
+                        taStackPanel.Children.Add(taskBox);
+                    }
+                }
+            }
         }
     }
 }

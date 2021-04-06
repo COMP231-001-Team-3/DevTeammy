@@ -107,3 +107,7 @@ C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teamm
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.SqlServer.xml

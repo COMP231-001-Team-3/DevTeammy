@@ -115,10 +115,9 @@ namespace teammy
                 totalCats--;
                 MessageBox.Show("The maximum limit for categorys per project is 9!", "Max categorys completed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
-            }
-            //Margins indicate position of each box to be placed
-            int left = 0, top = 0, right = 5, bottom = 0;
-            NewCategory newCategory = new NewCategory() { Margin = new Thickness(left, top, right, bottom) };
+            }            
+            Application.Current.Resources["catName"] = null;
+            NewCategory newCategory = new NewCategory();
             caStackPanel.Children.Add(newCategory);           
         }
     }

@@ -2,17 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace teammy.ProjectDetail
@@ -26,14 +20,14 @@ namespace teammy.ProjectDetail
         List<string> users = new List<string>();
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
-        
+        private teammyEntities dbContext = new teammyEntities();
 
         public static readonly DependencyProperty TaskNameProperty = DependencyProperty.Register("TaskName", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskDueDateProperty = DependencyProperty.Register("TaskDueDate", typeof(DateTime), typeof(TaskBox));
-        //public static readonly DependencyProperty TaskAssigneeProperty = DependencyProperty.Register("Assignee", typeof(int), typeof(TaskBox));
-        //public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("AssigneeList", typeof(List<string>), typeof(TaskBox));
+        public static readonly DependencyProperty TaskAssigneeProperty = DependencyProperty.Register("Assignee", typeof(int), typeof(TaskBox));
+       
 
 
         public string TaskName
@@ -63,20 +57,14 @@ namespace teammy.ProjectDetail
         //    get { return (int)GetValue(TaskAssigneeProperty); }
         //    set { SetValue(TaskAssigneeProperty, value); }
         //}
-
-        public List<string> TaskAssigneeList = new List<string>();
-        public TaskBox(List<string> assigneesL)
-        {
-            TaskAssigneeList = assigneesL;
-        }
-
+       
 
         //Events for change on the text properties
         public event EventHandler<EventArgs> TaskNameChanged;
         public event EventHandler<EventArgs> TaskPriorityChanged;
         public event EventHandler<EventArgs> TaskProgressChanged;
         public event EventHandler<EventArgs> TaskDueDateChanged;
-        //public event EventHandler<EventArgs> TaskAssigneeChanged;
+        public event EventHandler<EventArgs> TaskAssigneeChanged;
         
 
         public TaskBox()
@@ -84,8 +72,7 @@ namespace teammy.ProjectDetail
 
             InitializeComponent();
             LoadUsers();
-            
-        }
+        }        
         public ObservableCollection<UserListClass> TeamUsers { get; set; }      
         public class UserListClass
         {
@@ -93,7 +80,7 @@ namespace teammy.ProjectDetail
         }
        
         private void LoadUsers()
-        {
+        {            
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
@@ -122,69 +109,60 @@ namespace teammy.ProjectDetail
 
             //Get All Assigneded people
             string signStr = Application.Current.Resources["assigneeNum"] as string;
-            int signNum = Int32.Parse(signStr);
-            List<string> userName = new List<string>();
-
-            MySqlCommand getAssingees = new MySqlCommand("SELECT user_name FROM users NATURAL JOIN team_mates Natural JOIN assignees Natural JOIN tasks where assigned_group = @assigned_group", conn);
-            getAssingees.Parameters.AddWithValue("assigned_group", signNum);
-            MySqlDataReader assingeeReader = getAssingees.ExecuteReader();
-            using (assingeeReader)
+            if (signStr != null)
             {
-                while (assingeeReader.Read())
-                {
+                int signNum = Int32.Parse(signStr);
+                List<string> userName = new List<string>();
 
-                    userName.Add((string)assingeeReader["user_name"]);
+                MySqlCommand getAssingees = new MySqlCommand("SELECT user_name FROM users NATURAL JOIN team_mates Natural JOIN assignees Natural JOIN tasks where assigned_group = @assigned_group", conn);
+                getAssingees.Parameters.AddWithValue("assigned_group", signNum);
+                MySqlDataReader assingeeReader = getAssingees.ExecuteReader();
+                using (assingeeReader)
+                {
+                    while (assingeeReader.Read())
+                    {
+
+                        userName.Add((string)assingeeReader["user_name"]);
+                    }
                 }
-            }
 
-            if (userName != null)
-            {
-
-                foreach (var item in userName)
+                if (userName != null)
                 {
-                    createInitialBox(item.ToString());
+
+                    foreach (var item in userName)
+                    {
+                        createInitialBox(item.ToString());
+                    }
                 }
             }
             loadPriorityPicture();
             loadStatusPicture();
-
-
-
         }
         private List<assigneeInitialBox> assignees = new List<assigneeInitialBox>();
 
         private void loadStatusPicture()
         {
-
-            if (Application.Current.Resources["status"] as string == "NS")
-            {
-                var imgBrush = new ImageBrush();
-                imgBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\images\notStarted.png"));
-                statusGrid.Background=imgBrush;
-
-
-            }
-
             if (Application.Current.Resources["status"] as string == "IP")
             {
                 var imgBrush = new ImageBrush();
-                imgBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\images\progressIcon.jpg"));
+                imgBrush.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/images/progressIcon.jpg"));
                 statusGrid.Background = imgBrush;
-                //statusGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage() { UriSource = new Uri(@"../images/progressIcon.jpg") });
-
-
+                //statusGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage() { UriSource = new Uri(@"../images/progressIcon.jpg") }); 
 
             }
-            if (Application.Current.Resources["status"] as string == "CO")
+            else if (Application.Current.Resources["status"] as string == "CO")
             {
                 var imgBrush = new ImageBrush();
-                imgBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\images\complete.png"));
+                imgBrush.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/images/complete.png"));
                 statusGrid.Background = imgBrush;
                 //statusGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage() { UriSource = new Uri(@"../images/complete.png") });
-
-
             }
-
+            else
+            {
+                var imgBrush = new ImageBrush();
+                imgBrush.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/images/notStarted.png"));
+                statusGrid.Background = imgBrush;
+            }
 
         }
         
@@ -192,27 +170,17 @@ namespace teammy.ProjectDetail
         { 
              
             if (Application.Current.Resources["priority"] as string== "High")
-                    {
+            {
                 btnPriority.Background = Brushes.Red;
-                        
-
-                    }
-
-                    if (Application.Current.Resources["priority"] as string == "Medium")
-                    {
+            }
+            if (Application.Current.Resources["priority"] as string == "Medium")
+            {
                 btnPriority.Background = Brushes.Yellow;
-
-
-
             }
-                    if (Application.Current.Resources["priority"] as string == "Low")
-                    {
+            if (Application.Current.Resources["priority"] as string == "Low")
+            {
                 btnPriority.Background = Brushes.Blue;
-
-
-            }
-
-                
+            }                
         }
         private void createInitialBox(string assigneeName)
         {
@@ -247,11 +215,9 @@ namespace teammy.ProjectDetail
                 MessageBox.Show("The maximum limit for assignees per a task is 3!", "Max Assigning completed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
             
             assigneeStackPanel.Children.Add(initialBox);
-
-
+            
             left += 25;
             right -= 25;
             initialBoxCount++;
@@ -264,10 +230,7 @@ namespace teammy.ProjectDetail
             
             ContextMenu cm = FindResource("cmThreeDots") as ContextMenu;
             cm.PlacementTarget = sender as Button;
-            cm.IsOpen = true;
-            
-
-
+            cm.IsOpen = true;           
         }
         private void btnPriority_Click(object sender, RoutedEventArgs e)
         {
@@ -350,8 +313,7 @@ namespace teammy.ProjectDetail
                 string currentItem = (currentComboBox.SelectedItem as UserListClass).TeamMembers;               
                 if (currentItem != null)
                 {
-                    //MessageBox.Show(currentItem.Content.ToString());
-                   
+                    //MessageBox.Show(currentItem.Content.ToString());                  
 
                     createInitialBox(currentItem);
                 }
@@ -376,54 +338,32 @@ namespace teammy.ProjectDetail
         public TaskBox currentTask { get; set; } = Application.Current.Resources["currentTask"] as TaskBox;
         private void taskNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-            //e.Handled = true;
-            //taskNameChanged?.Invoke(this, EventArgs.Empty);
-
-
-            //MySqlConnection conn = new MySqlConnection(connectionString);
-            //conn.Open();
-            //MySqlCommand getTaskName = new MySqlCommand("select task_name from tasks", conn);
-            //// getTaskName.Parameters.AddWithValue("tskName", currentTask.TaskName);
-            //MySqlDataReader reader = getTaskName.ExecuteReader();
-            //reader.Read();
-            //string taskNameInDatabase = reader[0].ToString();
-            //reader.Close();
-
-            //if (taskNameInDatabase == null)                   //if task name of current taskbox is null in database
-            //{
-            //    MySqlCommand insertTaskName = new MySqlCommand("Insert INTO tasks(task_name) VALUES(@tskName) NATURAL JOIN categories Where category_name = @catName;", conn);
-            //    insertTaskName.Parameters.AddWithValue("catName", Application.Current.Resources["catName"] as string);
-            //    insertTaskName.Parameters.AddWithValue("tskName", taskNameTextBox.Text);
-
-            //    MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
-            //    insertTaskName.ExecuteNonQuery();                                   //ERROR OCCURED HERE
-            //    commit.ExecuteNonQuery();
-            //}
-            //else                //if the task name of the current taskbox already exists in database
-            //{
-
-            //    MySqlCommand updateTaskName = new MySqlCommand("Update tasks set task_name = @tskName NATURAL JOIN categories Where category_name = @catName;", conn);
-            //    updateTaskName.Parameters.AddWithValue("catName", Application.Current.Resources["catName"] as string);
-            //    updateTaskName.Parameters.AddWithValue("tskName", taskNameTextBox.Text);
-            //    MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
-            //    updateTaskName.ExecuteNonQuery();                                   //ERROR OCCURED HERE
-            //    commit.ExecuteNonQuery();
-
-
-            //}
+            
         }
 
         private void etItem_Click(object sender, RoutedEventArgs e)
         {
-            EditTaskPage editTaskPage = new EditTaskPage();
-            editTaskPage.Show();
+            //TaskBox taskBox = (TaskBox)sender;
+            //EditTaskPage taskDetail = new EditTaskPage() { EditTaskName = , EditTaskDueDate =  };
+            //taskDetail.ShowDialog();
         }
 
         private void svItem_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
+
+        private void dlItem_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (MessageBox.Show("Are you sure you want to delete this task?", "Delete Task", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                StackPanel taskPnlParent = this.Parent as StackPanel;
+                taskPnlParent.Children.Remove(this);
+            }
+                      
+        }
+
     }
 }
 
