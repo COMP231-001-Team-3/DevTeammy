@@ -113,7 +113,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="UserControls\AssigneeEllipse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\DayBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PopTaskBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,12 +150,19 @@
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Converters\PriorityToColorConverter.cs" />
+    <Compile Include="UserControls\AssigneeEllipse.xaml.cs">
+      <DependentUpon>AssigneeEllipse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\DayBox.xaml.cs">
       <DependentUpon>DayBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ListToVisibConverter.cs" />
     <Compile Include="preference.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PopTaskBox.xaml.cs">
+      <DependentUpon>PopTaskBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\PopUp.xaml.cs">
       <DependentUpon>PopUp.xaml</DependentUpon>

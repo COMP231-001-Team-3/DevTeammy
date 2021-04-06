@@ -21,6 +21,7 @@ namespace teammy
     {
         public int date, year;
         public string month;
+        public List<task> Tasks;
 
         public PopUp()
         {
@@ -35,6 +36,11 @@ namespace teammy
         private void popupWindow_Loaded(object sender, RoutedEventArgs e)
         {
             lblDateHeader.Content = month + " " + date + ", " + year;
+            
+            foreach(var task in Tasks)
+            {
+                pnlTasks.Children.Add(new PopTaskBox() { Task = task });
+            }
         }
 
         private void pnlTitle_MouseDown(object sender, MouseEventArgs e)

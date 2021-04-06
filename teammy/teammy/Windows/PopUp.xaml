@@ -37,22 +37,13 @@
 
 
     <Grid x:Name="containerGrid" Background="White">
-        <!--<Grid.ColumnDefinitions>-->
-        <!--<ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>-->
 
         <!-- Grid pnlTitle represents Custom title Bar -->
         <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="0,0,0,361" MouseDown="pnlTitle_MouseDown" RenderTransformOrigin="0.5,0.5" Height="35" VerticalAlignment="Bottom">
-            <!--<Grid.ColumnDefinitions>
-                <ColumnDefinition Width="65*"/>
-                <ColumnDefinition Width="7*"/>
-            </Grid.ColumnDefinitions>-->
             <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="472,0,0,6" Click="btnClose_Click" Width="24" RenderTransformOrigin="0.333,-0.333" Height="Auto"/>
         </Grid>
 
         <Label x:Name="TaskDueLabel" Content="Tasks due" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Height="35" Width="95" FontSize="18" Foreground="White" />
-
 
         <Border x:Name="GridBorder" BorderBrush="#8671CE" BorderThickness="1" Margin="23,39,21,48">
             <Grid x:Name="DetailsGrid" HorizontalAlignment="Left" Height="309" Margin="-1.333,-1.333,-1.333,-1" VerticalAlignment="Top" Width="452">
@@ -65,24 +56,25 @@
                     <RowDefinition Height="244"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Border x:Name="Cell1Border" BorderBrush="#8671CE" BorderThickness="0.5" Margin="0,0,0,0.333">
+                <Border x:Name="Cell1Border" BorderBrush="#8671CE" BorderThickness="0.5" Grid.Column="0" Grid.Row="0">
                     <Label x:Name="lblDate" Content="Date"  FontSize="24" Background="White" Foreground="#FFF01FFF" Margin="5.667,8.667,38.667,18" />
                 </Border>
-                <Border x:Name="Cell2Border" BorderBrush="#8671CE" BorderThickness="0.5" Margin="0,65,0,0.333" Grid.RowSpan="2">
+                <Border x:Name="Cell2Border" BorderBrush="#8671CE" BorderThickness="0.5" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
                     <Label x:Name="lblTasksDue" Content="Tasks due" Grid.Row="1" FontSize="22" Background="White" Foreground="#FFF01FFF" Margin="1.667,9.667,8.667,134"/>
                 </Border>
-                <Border x:Name="Cell3Border" BorderBrush="#8671CE" BorderThickness="0.5" Margin="0,0,-126.667,0.333" Grid.Column="1">
-                    <Label x:Name="lblDateHeader" Content="abc" Grid.Column="1" Margin="11.667,8.667,19.667,9" FontFamily="Perpetua" FontSize="20" Foreground="#FF8671CE"/>
+                <Border x:Name="Cell3Border" BorderBrush="#8671CE" BorderThickness="0.5" Grid.Column="1" Grid.Row="0" Margin="0,0,-129.667,0.333">
+                    <Label x:Name="lblDateHeader" Content="" Grid.Column="1" Margin="11.667,8.667,19.667,9" FontFamily="Perpetua" FontSize="20" Foreground="#FF8671CE"/>
                 </Border>
-
-
+                <Border x:Name="Cell4Border" BorderBrush="#8671CE" BorderThickness="0.5" Grid.Column="1" Margin="0,65,-129.667,0.333" Grid.RowSpan="2">
+                    <ScrollViewer MaxHeight="250">
+                        <StackPanel x:Name="pnlTasks" MinHeight="250" Orientation="Vertical">
+                            
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
             </Grid>
         </Border>
 
         <Button x:Name="btnOk" Content="OK" HorizontalAlignment="Left" Margin="391,353,0,0" VerticalAlignment="Top" Width="84" Height="33" Foreground="#FF9100FF" FontFamily="Berlin Sans FB" FontWeight="Bold" Background="#55F7FF00" BorderBrush="{x:Null}" Click="btnClose_Click"/>
-
-
-
-
     </Grid>
 </Window>

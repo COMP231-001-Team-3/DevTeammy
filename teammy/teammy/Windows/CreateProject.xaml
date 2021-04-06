@@ -45,7 +45,7 @@
                 <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                 <MenuItem.Icon>
                     <Grid x:Name="homeIconGrid">
-                        <Image x:Name="homeIconImg" Source="images/protoHome.png" />
+                        <Image x:Name="homeIconImg" Source="../images/protoHome.png" />
                         <Button x:Name="homeIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=homeIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=homeIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -59,7 +59,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="boardsIconGrid">
-                        <Image x:Name="BoardsIconImg" Source="images/protoBoards.png" />
+                        <Image x:Name="BoardsIconImg" Source="../images/protoBoards.png" />
                         <Button x:Name="BoardsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=BoardsIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=BoardsIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -73,7 +73,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="TeamsIconGrid">
-                        <Image x:Name="TeamsIconImg" Source="images/protoTeams.png" />
+                        <Image x:Name="TeamsIconImg" Source="../images/protoTeams.png" />
                         <Button x:Name="TeamsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=TeamsIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=TeamsIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -88,7 +88,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="ProgressIconGrid">
-                        <Image x:Name="ProgressIconImg" Source="images/protoProgress.jpg" />
+                        <Image x:Name="ProgressIconImg" Source="../images/protoProgress.jpg" />
                         <Button x:Name="ProgressIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=ProgressIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=ProgressIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -101,7 +101,7 @@
               MouseLeave="MenuItem_MouseLeave">
                 <MenuItem.Icon>
                     <Grid x:Name="ScheduleIconGrid">
-                        <Image x:Name="ScheduleIconImg" Source="images/protoSchedule.png" />
+                        <Image x:Name="ScheduleIconImg" Source="../images/protoSchedule.png" />
                         <Button x:Name="ScheduleIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=ScheduleIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=ScheduleIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -175,7 +175,7 @@
             <Button x:Name="btnMenu" Background="{x:Null}" Margin="5,0,758,10" BorderBrush="{x:Null}" Click="btnMenu_Click">
                 <Button.Content>
                     <Grid>
-                        <Image Source="images\menuIcon.png"/>
+                        <Image Source="..\images\menuIcon.png"/>
 
                     </Grid>
                 </Button.Content>
@@ -187,7 +187,7 @@
         <ScrollViewer MaxHeight="382" Margin="220,58,10,75" Grid.ColumnSpan="3">
             <Grid MinHeight="400" x:Name="projGrid" Margin="0,0,0,0"/>
         </ScrollViewer>
-        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
+        <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
         <Button x:Name="btnCreateProj" HorizontalAlignment="Left" Margin="86,401,0,0" VerticalAlignment="Top" Width="189" Height="39" FontSize="20" Background="White" BorderBrush="{x:Null}"
                 Click="btnCreateProj_Click" Visibility="{Binding Converter={StaticResource PrivConverter}, Path=currentUser}" Grid.Column="2">
             <Button.Content>
@@ -204,7 +204,7 @@
         <Button x:Name="btnDone" HorizontalAlignment="Left" Margin="78,403,0,0" VerticalAlignment="Top" Width="99" Height="37" Background="White" FontSize="20" BorderBrush="{x:Null}" Visibility="Hidden" Click="btnDone_Click" Grid.Column="2">
             <Button.Content>
                 <DockPanel>
-                    <Image Source="images/protoDone.png" DockPanel.Dock="Left"/>
+                    <Image Source="../images/protoDone.png" DockPanel.Dock="Left"/>
                     <Label Content="Done" VerticalAlignment="Center"  Foreground="#FF66CC44" DockPanel.Dock="Right"/>
                 </DockPanel>
             </Button.Content>
@@ -212,7 +212,7 @@
         <Button x:Name="btnCancel" HorizontalAlignment="Left" Margin="182,404,0,0" VerticalAlignment="Top" Width="103" Height="36" Background="White" FontSize="20" BorderBrush="{x:Null}" Visibility="Hidden" Click="btnCancel_Click" MouseEnter="btnCancel_MouseEnter" MouseLeave="btnCancel_MouseLeave" Grid.Column="2">
             <DockPanel>
                 <Grid DockPanel.Dock="Left" Width="31">
-                    <Image x:Name="cancelImg" Source="images/cancel.png" />
+                    <Image x:Name="cancelImg" Source="../images/cancel.png" />
                     <Button x:Name="cancelbtnIcon" Style="{StaticResource mouseOverStyle}" Background="Transparent" BorderThickness="0" Width="{Binding ActualWidth, Source={x:Reference Name=cancelImg}}" Height="{Binding ActualHeight, Source={x:Reference Name=cancelImg}}" Margin="0,0,0,0.333"/>
                 </Grid>
                 <Label Content="Cancel" VerticalAlignment="Center" Foreground="#FFF60000" DockPanel.Dock="Right" Height="32"/>

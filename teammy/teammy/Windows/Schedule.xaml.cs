@@ -308,7 +308,7 @@ namespace teammy
             Button sent = sender as Button;
             DayBox dateClicked = (sent.Parent as Grid).Parent as DayBox;
 
-            PopUp taskDetail = new PopUp() { date = dateClicked.Date.Value, month = ((Months)displayMonth).ToString(), year = displayYear};
+            PopUp taskDetail = new PopUp() { date = dateClicked.Date.Value, month = ((Months)displayMonth).ToString(), year = displayYear, Tasks = dateClicked.Tasks};
 
             taskDetail.ShowDialog();
         }

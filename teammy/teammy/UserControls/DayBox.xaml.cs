@@ -24,10 +24,7 @@ namespace teammy
         {
             add { btnClicker.Click += value; }
             remove { btnClicker.Click -= value; }
-            
-             
-           
-    }
+        }
 
         public int? Date
         {

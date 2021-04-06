@@ -9,23 +9,26 @@ namespace teammy
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string[] nameWords = value.ToString().Split(' ');
-            string profChars;
+            string profChars = null;
+            if (value != null)
+            {
+                string[] nameWords = value.ToString().Split(' ');          
 
-            bool emptyName = nameWords[0].Equals("");
+                bool emptyName = nameWords[0].Equals("");
 
-            //If Project name has two or more words...then
-            if (nameWords.Length >= 2 && !nameWords[1].Equals(""))
-            {
-                profChars = nameWords[0][0] + "" + nameWords[1][0];
-            }
-            else if (!emptyName)
-            {
-                profChars = nameWords[0][0] + "" + nameWords[0][1];
-            }
-            else
-            {
-                profChars = "";
+                //If Project name has two or more words...then
+                if (nameWords.Length >= 2 && !nameWords[1].Equals(""))
+                {
+                    profChars = nameWords[0][0] + "" + nameWords[1][0];
+                }
+                else if (!emptyName)
+                {
+                    profChars = nameWords[0][0] + "" + nameWords[0][1];
+                }
+                else
+                {
+                    profChars = "";
+                }                
             }
             return profChars;
         }
