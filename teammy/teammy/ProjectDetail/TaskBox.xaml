@@ -40,6 +40,13 @@
         <!-- Menu dropdown -->
 
         <ContextMenu x:Key="cmThreeDots"  >
+            <MenuItem x:Name="svItem" Header="Save" Background="HotPink"  Width="150" Height="40" FontSize="16" Click="svItem_Click"  >
+                <MenuItem.Icon>
+                    <Grid>
+                        <Button x:Name="saveTaskBtn" Style="{StaticResource mouseOverStyle}" Background="{x:Null}" BorderThickness="0"/>
+                    </Grid>
+                </MenuItem.Icon>
+            </MenuItem>
             <MenuItem x:Name="etItem" Header="Edit" Background="HotPink"  Width="150" Height="40" FontSize="16" Click="etItem_Click"  >
                 <MenuItem.Icon>
                     <Grid>
