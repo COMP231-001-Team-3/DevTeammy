@@ -116,6 +116,7 @@ namespace teammy.ProjectDetail
                     });
                 }
             }
+            //Get All Assigneded people
             string signStr = Application.Current.Resources["assigneeNum"] as string;
             int signNum = Int32.Parse(signStr);
             List<string> userName = new List<string>();
