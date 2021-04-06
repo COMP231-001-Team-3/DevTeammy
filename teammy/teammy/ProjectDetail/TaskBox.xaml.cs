@@ -26,6 +26,8 @@ namespace teammy.ProjectDetail
         List<string> users = new List<string>();
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
+        
+
         public static readonly DependencyProperty TaskNameProperty = DependencyProperty.Register("TaskName", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
@@ -82,6 +84,7 @@ namespace teammy.ProjectDetail
 
             InitializeComponent();
             LoadUsers();
+            
         }
         public ObservableCollection<UserListClass> TeamUsers { get; set; }      
         public class UserListClass
@@ -116,6 +119,7 @@ namespace teammy.ProjectDetail
                     });
                 }
             }
+
             //Get All Assigneded people
             string signStr = Application.Current.Resources["assigneeNum"] as string;
             int signNum = Int32.Parse(signStr);
@@ -141,10 +145,75 @@ namespace teammy.ProjectDetail
                     createInitialBox(item.ToString());
                 }
             }
+            loadPriorityPicture();
+            loadStatusPicture();
+
+
 
         }
         private List<assigneeInitialBox> assignees = new List<assigneeInitialBox>();
 
+        private void loadStatusPicture()
+        {
+
+            if (Application.Current.Resources["status"] as string == "NS")
+            {
+                var imgBrush = new ImageBrush();
+                imgBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\images\notStarted.png"));
+                statusGrid.Background=imgBrush;
+
+
+            }
+
+            if (Application.Current.Resources["status"] as string == "IP")
+            {
+                var imgBrush = new ImageBrush();
+                imgBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\images\progressIcon.jpg"));
+                statusGrid.Background = imgBrush;
+                //statusGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage() { UriSource = new Uri(@"../images/progressIcon.jpg") });
+
+
+
+            }
+            if (Application.Current.Resources["status"] as string == "CO")
+            {
+                var imgBrush = new ImageBrush();
+                imgBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\images\complete.png"));
+                statusGrid.Background = imgBrush;
+                //statusGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage() { UriSource = new Uri(@"../images/complete.png") });
+
+
+            }
+
+
+        }
+        
+        private void loadPriorityPicture()
+        { 
+             
+            if (Application.Current.Resources["priority"] as string== "High")
+                    {
+                btnPriority.Background = Brushes.Red;
+                        
+
+                    }
+
+                    if (Application.Current.Resources["priority"] as string == "Medium")
+                    {
+                btnPriority.Background = Brushes.Yellow;
+
+
+
+            }
+                    if (Application.Current.Resources["priority"] as string == "Low")
+                    {
+                btnPriority.Background = Brushes.Blue;
+
+
+            }
+
+                
+        }
         private void createInitialBox(string assigneeName)
         {
             int left = 0, top = 0, right = 0, bottom = 0;
@@ -164,6 +233,7 @@ namespace teammy.ProjectDetail
             {
                 assigneeInitial = nameWords[0][0] + "" + nameWords[0][1];
             }
+
             //Creation & Initialization of InitialBox
             assigneeInitialBox initialBox = new assigneeInitialBox(backColors[rd.Next(0, 18)]);
             initialBox.Margin = new Thickness(left, top, right, bottom);
@@ -191,16 +261,20 @@ namespace teammy.ProjectDetail
 
         private void btnEditDelete_Click(object sender, RoutedEventArgs e)
         {
+            
             ContextMenu cm = FindResource("cmThreeDots") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
             
+
+
         }
         private void btnPriority_Click(object sender, RoutedEventArgs e)
         {
             ContextMenu cm = FindResource("cmPriority") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
+            
 
             //e.Handled = true;
             //TaskPriorityChanged?.Invoke(this, EventArgs.Empty);
@@ -209,9 +283,11 @@ namespace teammy.ProjectDetail
        
         private void btnStatus_Click(object sender, RoutedEventArgs e)
         {
+            
             ContextMenu cm = FindResource("cmStatus") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
+            
 
             //e.Handled = true;
             //TaskProgressChanged?.Invoke(this, EventArgs.Empty);
@@ -219,6 +295,9 @@ namespace teammy.ProjectDetail
 
         private void PriorMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            //initiate the button color to default
+            btnPriority.Background = Brushes.Transparent;
+
             Brush chosenPriority = ((sender as MenuItem).Icon as Rectangle).Fill;
             priorityGrid.Background = chosenPriority;
         }
@@ -245,6 +324,11 @@ namespace teammy.ProjectDetail
 
         private void StatusMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            //initiate the grid background image to default
+            var imgBrush = new ImageBrush();
+            imgBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\images\notStarted.png"));
+            statusGrid.Background = imgBrush;
+
             //The Grid encompassing all the icon elements for the menu item
             Grid MenuItem = (sender as MenuItem).Icon as Grid;
 
@@ -289,27 +373,45 @@ namespace teammy.ProjectDetail
         }
         public event EventHandler<EventArgs> taskNameChanged;
         public NewCategory currentCategory { get; set; } = Application.Current.Resources["currentCategory"] as NewCategory;
+        public TaskBox currentTask { get; set; } = Application.Current.Resources["currentTask"] as TaskBox;
         private void taskNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
-            e.Handled = true;
-            taskNameChanged?.Invoke(this, EventArgs.Empty);
-             
 
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            //MySqlCommand insertTaskName = new MySqlCommand("Insert INTO tasks(task_name) VALUES(@tskName) NATURAL JOIN categories Where category_name = @catName;", conn);
-            MySqlCommand insertTaskName = new MySqlCommand("Update tasks set task_name = @tskName NATURAL JOIN categories Where category_name = @catName;", conn);
+            //e.Handled = true;
+            //taskNameChanged?.Invoke(this, EventArgs.Empty);
 
-            insertTaskName.Parameters.AddWithValue("catName", Application.Current.Resources["catName"]);
-            insertTaskName.Parameters.AddWithValue("tskName", taskNameTextBox.Text);
-            
 
-            MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
-            //insertTaskName.ExecuteNonQuery();                                   //ERROR OCCURED HERE
-            commit.ExecuteNonQuery();
+            //MySqlConnection conn = new MySqlConnection(connectionString);
+            //conn.Open();
+            //MySqlCommand getTaskName = new MySqlCommand("select task_name from tasks", conn);
+            //// getTaskName.Parameters.AddWithValue("tskName", currentTask.TaskName);
+            //MySqlDataReader reader = getTaskName.ExecuteReader();
+            //reader.Read();
+            //string taskNameInDatabase = reader[0].ToString();
+            //reader.Close();
 
-           
+            //if (taskNameInDatabase == null)                   //if task name of current taskbox is null in database
+            //{
+            //    MySqlCommand insertTaskName = new MySqlCommand("Insert INTO tasks(task_name) VALUES(@tskName) NATURAL JOIN categories Where category_name = @catName;", conn);
+            //    insertTaskName.Parameters.AddWithValue("catName", Application.Current.Resources["catName"] as string);
+            //    insertTaskName.Parameters.AddWithValue("tskName", taskNameTextBox.Text);
+
+            //    MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
+            //    insertTaskName.ExecuteNonQuery();                                   //ERROR OCCURED HERE
+            //    commit.ExecuteNonQuery();
+            //}
+            //else                //if the task name of the current taskbox already exists in database
+            //{
+
+            //    MySqlCommand updateTaskName = new MySqlCommand("Update tasks set task_name = @tskName NATURAL JOIN categories Where category_name = @catName;", conn);
+            //    updateTaskName.Parameters.AddWithValue("catName", Application.Current.Resources["catName"] as string);
+            //    updateTaskName.Parameters.AddWithValue("tskName", taskNameTextBox.Text);
+            //    MySqlCommand commit = new MySqlCommand("COMMIT;", conn);
+            //    updateTaskName.ExecuteNonQuery();                                   //ERROR OCCURED HERE
+            //    commit.ExecuteNonQuery();
+
+
+            //}
         }
 
         private void etItem_Click(object sender, RoutedEventArgs e)

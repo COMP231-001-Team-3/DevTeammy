@@ -94,15 +94,15 @@ namespace teammy
                 {
                     totalBoxes++;
                     taskName = tasksReader[0].ToString();
-                    taskPrio = tasksReader[1].ToString();
-                    taskProgre = tasksReader[3].ToString();
+                    Application.Current.Resources["priority"] = tasksReader[1].ToString();
+                    Application.Current.Resources["status"] = tasksReader[3].ToString();
                     taskDate = DateTime.Parse(tasksReader[2].ToString());                    
                     Application.Current.Resources["assigneeNum"] = tasksReader[4].ToString();
                     taskBox = new TaskBox()
                     {
                         TaskName = taskName,
-                        TaskPriority = taskPrio,
-                        TaskProgress = taskProgre,
+                        //TaskPriority = taskPrio,
+                        //TaskProgress = taskProgre,
                         TaskDueDate = taskDate,
                     };                    
                     taStackPanel.Children.Add(taskBox);

@@ -59,7 +59,7 @@
 
         <ContextMenu x:Key="cmPriority" >
             <MenuItem x:Name="highItem" Header="High" Background="White"  Width="150" Height="40" FontSize="16" Click="PriorMenuItem_Click">
-                <MenuItem.Icon>
+                <MenuItem.Icon >
                     <Rectangle Fill="Red" Height="20" Width="40"/>
                 </MenuItem.Icon>
             </MenuItem>
