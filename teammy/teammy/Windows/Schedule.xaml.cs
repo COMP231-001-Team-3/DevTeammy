@@ -38,6 +38,7 @@ namespace teammy
         private int displayMonth = DateTime.Now.Month;
         private List<task> tasks;
         private teammyEntities dbContext = new teammyEntities();
+        private user currentUser = Application.Current.Resources["currentUser"] as user;
 
         public Schedule()
         {
@@ -53,8 +54,31 @@ namespace teammy
         /// </summary>
         private void LoadTasks()
         {
-            tasks = (from task in dbContext.tasks
-                     select task).ToList();
+            if(!currentUser.privilege_code.Equals("PM"))
+            {
+                tasks = (from task in dbContext.tasks
+                         join assignee in dbContext.assignees
+                            on task.assigned_group equals assignee.assigned_group
+                         join mate in dbContext.team_mates
+                            on assignee.mate_id equals mate.mate_id
+                         where mate.user.user_id == currentUser.user_id
+                         select task).ToList();
+            }
+            else
+            {
+                var teamsOfPm = (from user in dbContext.users
+                                 join mate in dbContext.team_mates
+                                    on user.user_id equals mate.user_id
+                                 join team in dbContext.teams
+                                    on mate.Team_ID equals team.Team_ID
+                                 where user.user_id == currentUser.user_id
+                                 select team.Team_ID).ToList();
+
+                tasks = (from task in dbContext.tasks
+                         select task).ToList();
+
+                tasks = tasks.FindAll(task => teamsOfPm.Contains(task.project.team.Team_ID));
+            }
         }
 
         /// <summary>
@@ -90,6 +114,7 @@ namespace teammy
                 dayBox.Status = null;
                 dayBox.DisplayTask = null;
                 dayBox.Tasks = null;
+                dayBox.BoxClick -= new RoutedEventHandler(dayBox_Click);
 
                 //If the date is of the current month...then
                 if(dayBox.CurrentMonth = isCurrentMonth)
@@ -115,12 +140,6 @@ namespace teammy
                     isCurrentMonth = !isCurrentMonth;
                 }
             }
-        }
-
-        //**TBD An event handler to determine what happens when a date is clicked
-        public void dbRowBox_BoxClick(object sender, RoutedEventArgs e)
-        {
-
         }
 
         #endregion

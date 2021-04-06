@@ -44,10 +44,8 @@ namespace teammy
                                       on task.assigned_group equals assignee.assigned_group
                                    join mate in dbContext.team_mates
                                       on assignee.mate_id equals mate.mate_id
-                                   join user in dbContext.users
-                                      on mate.user_id equals user.user_id
                                    where task.task_id == Task.task_id
-                                   select user).ToList();
+                                   select mate.user).ToList();
 
             Random rd = new Random();
             foreach (var assignee in assignees)

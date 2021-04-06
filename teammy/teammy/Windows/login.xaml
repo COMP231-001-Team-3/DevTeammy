@@ -68,14 +68,14 @@
             <Button x:Name="btnMenu" Background="{x:Null}" Margin="0,0,968.6,10.4" BorderBrush="{x:Null}" Click="btnMenu_Click">
                 <Button.Content>
                     <Grid>
-                        <Image Source="images\menuIcon.png"/>
+                        <Image Source="..\images\menuIcon.png"/>
                     </Grid>
                 </Button.Content>
 
             </Button>
         </Grid>
 
-        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="370" Margin="70,172,0,0" VerticalAlignment="Top" Width="280"/>
+        <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="370" Margin="70,172,0,0" VerticalAlignment="Top" Width="280"/>
         <TextBox x:Name="usernameInput" HorizontalAlignment="Left" Height="49" Margin="430,242,0,0" TextWrapping="Wrap" Text="Enter your user name" VerticalAlignment="Top" Width="362" Opacity="0.8" FontSize="18" Foreground="Gray" GotFocus="usernameInput_GotFocus" LostFocus="usernameInput_LostFocus"/>
         <PasswordBox x:Name="passwordInput" Height="50" Width="363"  Margin="430,354,0,0" LostFocus="passwordInput_LostFocus"
           HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.8" FontSize="18"/>

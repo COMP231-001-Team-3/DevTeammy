@@ -11,7 +11,6 @@
         WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" 
         DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Window.Resources>
-        
         <!-- Mouseover style for icon image's companion button -->
         <Style x:Key="mouseOverStyle" TargetType="Button">
             <Setter Property="Template">
@@ -232,7 +231,7 @@
 
         <!-- The Dates Display begins here -->
         <Grid x:Name="containerDates" Margin="291,113,6,0">
-            <local:DayBox x:Name="dbRow1Box1" Height="95" Width="95" Margin="-2,-1,580,479" BoxClick="dbRowBox_BoxClick"/>
+            <local:DayBox x:Name="dbRow1Box1" Height="95" Width="95" Margin="-2,-1,580,479"/>
             <local:DayBox x:Name="dbRow1Box2" Height="95" Width="95" Margin="90,-1,488,479"/>
             <local:DayBox x:Name="dbRow1Box3" Height="95" Width="95" Margin="183,-1,395,479"/>
             <local:DayBox x:Name="dbRow1Box4" Height="95" Width="95" Margin="275,-1,303,479"/>

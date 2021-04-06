@@ -136,5 +136,11 @@ namespace teammy
             Hide();
             (globalItems["teamsListInstance"] as Window).Show();
         }
+
+        private void schedMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            (globalItems["scheduleInstance"] as Window).Show();
+        }
     }
 }

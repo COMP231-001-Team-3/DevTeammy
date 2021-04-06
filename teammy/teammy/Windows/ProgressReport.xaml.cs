@@ -282,5 +282,11 @@ namespace teammy
             (globalItems["teamsListInstance"] as Window).Show();
         }
         #endregion
+
+        private void schedMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            (globalItems["scheduleInstance"] as Window).Show();
+        }
     }
 }

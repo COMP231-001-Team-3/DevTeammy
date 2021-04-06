@@ -46,7 +46,7 @@
                 <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                 <MenuItem.Icon>
                     <Grid x:Name="homeIconGrid">
-                        <Image x:Name="homeIconImg" Source="images/protoHome.png" />
+                        <Image x:Name="homeIconImg" Source="../images/protoHome.png" />
                         <Button x:Name="homeIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=homeIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=homeIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -59,7 +59,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="boardsIconGrid">
-                        <Image x:Name="BoardsIconImg" Source="images/protoBoards.png" />
+                        <Image x:Name="BoardsIconImg" Source="../images/protoBoards.png" />
                         <Button x:Name="BoardsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=BoardsIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=BoardsIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -73,7 +73,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="TeamsIconGrid">
-                        <Image x:Name="TeamsIconImg" Source="images/protoTeams.png" />
+                        <Image x:Name="TeamsIconImg" Source="../images/protoTeams.png" />
                         <Button x:Name="TeamsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=TeamsIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=TeamsIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -87,7 +87,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="ProgressIconGrid">
-                        <Image x:Name="ProgressIconImg" Source="images/protoProgress.jpg" />
+                        <Image x:Name="ProgressIconImg" Source="../images/protoProgress.jpg" />
                         <Button x:Name="ProgressIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=ProgressIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=ProgressIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -97,10 +97,11 @@
             </MenuItem>
             <MenuItem x:Name="schedMenuItem" Header="Schedule" Background="White"  Width="200" Height="40" FontSize="16" 
               MouseEnter="MenuItem_MouseEnter"
-              MouseLeave="MenuItem_MouseLeave">
+              MouseLeave="MenuItem_MouseLeave"
+                      Click="schedMenuItem_Click">
                 <MenuItem.Icon>
                     <Grid x:Name="ScheduleIconGrid">
-                        <Image x:Name="ScheduleIconImg" Source="images/protoSchedule.png" />
+                        <Image x:Name="ScheduleIconImg" Source="../images/protoSchedule.png" />
                         <Button x:Name="ScheduleIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=ScheduleIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=ScheduleIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -169,7 +170,7 @@
             <Button x:Name="btnMenu" Background="{x:Null}" Margin="5,0,758,10" BorderBrush="{x:Null}" Click="btnMenu_Click">
                 <Button.Content>
                     <Grid>
-                        <Image Source="images\menuIcon.png"/>
+                        <Image Source="..\images\menuIcon.png"/>
 
                     </Grid>
                 </Button.Content>
@@ -178,7 +179,7 @@
         </Grid>
 
         <!-- This ScrollViewer houses the grid that ultimately holds the project cards -->
-        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
+        <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
         
         <TabControl x:Name="tbCharts" HorizontalAlignment="Left" Height="367" Margin="238,56,0,0" VerticalAlignment="Top" Width="552" BorderBrush="#FFFABAFF" Foreground="#FFB955F2">
             <TabItem x:Name="tbitTeams" Header="Team" BorderBrush="#FFFAAFFF" Foreground="#FFBA54F8">

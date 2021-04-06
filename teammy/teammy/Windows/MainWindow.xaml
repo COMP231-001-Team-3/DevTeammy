@@ -9,6 +9,7 @@
         Title="Teammy" Height="620" Width="1000" WindowStartupLocation="CenterScreen" Closed="mainWindow_Closed"
         WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Window.Resources>
+        <local:StatusToSourceConverter x:Key="progConverter"/>
         <Style x:Key="mouseOverStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -44,11 +45,10 @@
                 <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                 <MenuItem.Icon>
                     <Grid x:Name="homeIconGrid">
-                        <Image x:Name="homeIconImg" Source="images/protoHome.png" />
+                        <Image x:Name="homeIconImg" Source="../images/protoHome.png" />
                         <Button x:Name="homeIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=homeIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=homeIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
-
                     </Grid>
                 </MenuItem.Icon>
             </MenuItem>
@@ -58,7 +58,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="boardsIconGrid">
-                        <Image x:Name="BoardsIconImg" Source="images/protoBoards.png" />
+                        <Image x:Name="BoardsIconImg" Source="../images/protoBoards.png" />
                         <Button x:Name="BoardsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=BoardsIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=BoardsIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -72,7 +72,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="TeamsIconGrid">
-                        <Image x:Name="TeamsIconImg" Source="images/protoTeams.png" />
+                        <Image x:Name="TeamsIconImg" Source="../images/protoTeams.png" />
                         <Button x:Name="TeamsIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=TeamsIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=TeamsIconImg}, Path=ActualWidth}" Background="{x:Null}"
                                 BorderThickness="0"/>
@@ -87,7 +87,7 @@
                 <MenuItem.Icon>
                     <!-- The Whole Grid constitutes the icon (The Button is invisible) -->
                     <Grid x:Name="ProgressIconGrid">
-                        <Image x:Name="ProgressIconImg" Source="images/protoProgress.jpg" />
+                        <Image x:Name="ProgressIconImg" Source="../images/protoProgress.jpg" />
                         <Button x:Name="ProgressIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=ProgressIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=ProgressIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -97,10 +97,11 @@
             </MenuItem>
             <MenuItem x:Name="schedMenuItem" Header="Schedule" Background="White"  Width="200" Height="40" FontSize="16" 
               MouseEnter="MenuItem_MouseEnter" 
-              MouseLeave="MenuItem_MouseLeave">
+              MouseLeave="MenuItem_MouseLeave"
+                      Click="schedMenuItem_Click">
                 <MenuItem.Icon>
                     <Grid x:Name="ScheduleIconGrid">
-                        <Image x:Name="ScheduleIconImg" Source="images/protoSchedule.png" />
+                        <Image x:Name="ScheduleIconImg" Source="../images/protoSchedule.png" />
                         <Button x:Name="ScheduleIconBtn" Style="{StaticResource mouseOverStyle}" Height="{Binding Source={x:Reference Name=ScheduleIconImg}, Path=ActualHeight}"
                                 Width="{Binding Source={x:Reference Name=ScheduleIconImg}, Path=ActualWidth}" Background="{x:Null}" 
                                 BorderThickness="0"/>
@@ -166,14 +167,14 @@
             <Button x:Name="btnMenu" Background="{x:Null}" Margin="0,0,968.6,10.4" BorderBrush="{x:Null}" Click="btnMenu_Click">
                 <Button.Content>
                     <Grid>
-                        <Image Source="images\menuIcon.png"/>
+                        <Image Source="..\images\menuIcon.png"/>
                     </Grid>
                 </Button.Content>
 
             </Button>
         </Grid>
 
-        <Image Source="images\jelly.jpg" HorizontalAlignment="Left" Height="446" Margin="30,125,0,0" VerticalAlignment="Top" Width="274"/>
+        <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="446" Margin="30,125,0,0" VerticalAlignment="Top" Width="274"/>
         <Label x:Name="welcomeLabel" Content="Welcome Back, User!" HorizontalAlignment="Left" Margin="362,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.644,0.235" FontFamily="Yet R" FontSize="36" FontWeight="Bold" Foreground="#FF1F1F1F"/>
 
         <GroupBox x:Name="AssignedGroup" HorizontalAlignment="Left" Height="217" Margin="359,125,0,0" VerticalAlignment="Top" Width="593" Foreground="#FF262625" BorderBrush="#FF181818"  BorderThickness="2">
@@ -182,15 +183,15 @@
                 <TextBlock x:Name="text1" FontSize="14" Foreground="White" FontWeight="Bold" FontFamily="Yu Gothic" Background="#FFCE82E8" Width="500" Height="30" Margin="0,0,0,1.2">Assigned to me</TextBlock>
             </GroupBox.Header>
             <DataGrid x:Name="AssignedtomeDatagrid" DataGrid.GridLinesVisibility="Horizontal" HorizontalAlignment="Left" Height="180" Margin="26,0,0,-1.6" VerticalAlignment="Top" Width="529" AutoGenerateColumns="False" HeadersVisibility="None" FontSize="14" CanUserAddRows="false" IsReadOnly="True">
-                <DataGrid.Columns >
+                <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Status" Width="43">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Height="28" Width="28" Source="{Binding progress}"/>
+                                <Image Height="28" Width="28" Source="{Binding progress_code, Converter={StaticResource ResourceKey=progConverter}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Name" Foreground="#FFCE82E8" Binding="{Binding taskname}" Width="400"/>
+                    <DataGridTextColumn Header="Name" Foreground="#FFCE82E8" Binding="{Binding task_name}" Width="400"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -205,12 +206,12 @@
                     <DataGridTemplateColumn Header="Status" Width="43">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Height="28" Width="28" Source="{Binding progress}"/>
+                                <Image Height="28" Width="28" Source="{Binding progress_code, Converter={StaticResource ResourceKey=progConverter}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Name"  Binding="{Binding taskname}" Foreground="#FFCE82E8" Width="295"/>
-                    <DataGridTextColumn Header="Due date" Binding="{Binding duedate}" Width="200" Foreground="Red"/>
+                    <DataGridTextColumn Header="Name"  Binding="{Binding task_name}" Foreground="#FFCE82E8" Width="295"/>
+                    <DataGridTextColumn Header="Due date" Binding="{Binding due_date}" Width="200" Foreground="Red"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
