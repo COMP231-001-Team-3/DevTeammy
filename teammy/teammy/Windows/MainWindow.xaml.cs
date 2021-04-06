@@ -54,11 +54,6 @@ namespace teammy
             Application.Current.Shutdown();
         }
 
-        private void boardsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            (globalItems["createProjInstance"] as Window).Show();
-            Hide();
-        }
         #region Title Bar Button Event Handlers
 
         /// <summary>
@@ -79,7 +74,7 @@ namespace teammy
 
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-            ContextMenu cm = FindResource("cmButton") as ContextMenu;
+            ContextMenu cm = globalItems["cmButton"] as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
         }
@@ -94,53 +89,6 @@ namespace teammy
         {
             DragMove();
         }
-
-        /// <summary>
-        ///     The method sets the background of the Button it contains to the same color as if it were hovered 
-        ///     upon.
-        /// </summary>
-        /// <param name="sender">The MenuItem triggering this event</param>
-        private void MenuItem_MouseEnter(object sender, MouseEventArgs e)
-        {
-            //The Grid encompassing all the icon elements for the menu item
-            Grid MenuItem = (sender as MenuItem).Icon as Grid;
-
-            //The Button whose background is to be set
-            Button btnIcon = MenuItem.Children[1] as Button;
-            btnIcon.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
-        }
-
-        /// <summary>
-        ///     The method sets the background of the Button it contains to the same color as if it lost focus.
-        /// </summary>
-        /// <param name="sender">The MenuItem triggering this event</param>
-        private void MenuItem_MouseLeave(object sender, MouseEventArgs e)
-        {
-            //The Grid encompassing all the icon elements for the menu item
-            Grid MenuItem = (sender as MenuItem).Icon as Grid;
-
-            //The Button whose background is to be set
-            Button btnIcon = MenuItem.Children[1] as Button;
-            btnIcon.Background = null;
-        }
         #endregion
-
-        private void progMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            (globalItems["progReportInstance"] as Window).Show();
-        }
-
-        private void teamsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            (globalItems["teamsListInstance"] as Window).Show();
-        }
-
-        private void schedMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            (globalItems["scheduleInstance"] as Window).Show();
-        }
     }
 }

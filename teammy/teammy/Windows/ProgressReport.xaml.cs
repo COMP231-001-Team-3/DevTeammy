@@ -126,7 +126,7 @@ namespace teammy
 
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-            ContextMenu cm = FindResource("cmButton") as ContextMenu;
+            ContextMenu cm = globalItems["cmButton"] as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
         }
@@ -140,35 +140,6 @@ namespace teammy
         private void pnlTitle_MouseDown(object sender, MouseEventArgs e)
         {
             DragMove();
-        }
-
-        /// <summary>
-        ///     The method sets the background of the Button it contains to the same color as if it were hovered 
-        ///     upon.
-        /// </summary>
-        /// <param name="sender">The MenuItem triggering this event</param>
-        private void MenuItem_MouseEnter(object sender, MouseEventArgs e)
-        {
-            //The Grid encompassing all the icon elements for the menu item
-            Grid MenuItem = (sender as MenuItem).Icon as Grid;
-
-            //The Button whose background is to be set
-            Button btnIcon = MenuItem.Children[1] as Button;
-            btnIcon.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
-        }
-
-        /// <summary>
-        ///     The method sets the background of the Button it contains to the same color as if it lost focus.
-        /// </summary>
-        /// <param name="sender">The MenuItem triggering this event</param>
-        private void MenuItem_MouseLeave(object sender, MouseEventArgs e)
-        {
-            //The Grid encompassing all the icon elements for the menu item
-            Grid MenuItem = (sender as MenuItem).Icon as Grid;
-
-            //The Button whose background is to be set
-            Button btnIcon = MenuItem.Children[1] as Button;
-            btnIcon.Background = null;
         }
         #endregion
 
@@ -253,40 +224,5 @@ namespace teammy
             });
         }
         #endregion
-
-        #region Page Navigation
-        /// <summary>
-        ///     Redirects to the home page
-        /// </summary>
-        private void homeMenuItem_click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            (Application.Current.Resources["mainInstance"] as Window).Show();
-        }
-
-        /// <summary>
-        ///     Redirects to boards page
-        /// </summary>
-        private void boardsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            (Application.Current.Resources["createProjInstance"] as Window).Show();
-        }
-
-        /// <summary>
-        ///     Redirects to teams list page
-        /// </summary>
-        private void teamsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            (globalItems["teamsListInstance"] as Window).Show();
-        }
-        #endregion
-
-        private void schedMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            (globalItems["scheduleInstance"] as Window).Show();
-        }
     }
 }
