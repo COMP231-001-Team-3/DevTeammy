@@ -6,14 +6,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:teammy"
         mc:Ignorable="d"
-        Title="TeamsContactlist" Height="450" Width="800" DataContext="{Binding RelativeSource={RelativeSource self}}" Loaded="contactWindow_Loaded">
+        WindowStartupLocation="CenterScreen"
+        Title="TeamsContactlist" Background="#F9858B" Height="500" Width="602" DataContext="{Binding RelativeSource={RelativeSource self}}" Loaded="contactWindow_Loaded">
+    <Window.Resources>
+        <Style x:Key="CenterGridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#ED335F"/>
+        </Style>
+        <Style x:Key="DataStyle" TargetType="DataGridCell">
+    
+                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+       
+        </Style>
+
+    </Window.Resources>
     <Grid>
-        <DataGrid x:Name="datagrid"  HorizontalAlignment="Left" Height="348" Margin="105,34,0,0" VerticalAlignment="Top" Width="602" AutoGenerateColumns="False">
+        <DataGrid x:Name="datagrid" IsReadOnly="True"  HorizontalAlignment="Left" Height="348" Margin="45,112,0,0" VerticalAlignment="Top" Width="511" AutoGenerateColumns="False" RenderTransformOrigin="0.68,0.478" BorderThickness="2" BorderBrush="White">
             <DataGrid.Columns>
-                <DataGridTextColumn  Binding="{Binding user_name}" Width="150" Header="Name"></DataGridTextColumn>
-                <DataGridTextColumn  Binding="{Binding email_address}" Width="150" Header="Email"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding phone_number}"  Width="150" Header="Phone"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource CenterGridHeaderStyle}" CellStyle="{StaticResource DataStyle}" Binding="{Binding user_name}" Width="170" Header="Name"></DataGridTextColumn>
+
+                <DataGridTextColumn HeaderStyle="{StaticResource CenterGridHeaderStyle}" CellStyle="{StaticResource DataStyle}"  Binding="{Binding email_address}" Width="170" Header="Email"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource CenterGridHeaderStyle}" CellStyle="{StaticResource DataStyle}" Binding="{Binding phone_number}"  Width="170" Header="Phone"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Label x:Name="teamnamelabel" Foreground="#761137"  Content="" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Top" Height="78" Width="344" FontSize="50" FontWeight="Bold" FontFamily="Segoe UI Black"/>
     </Grid>
 </Window>
