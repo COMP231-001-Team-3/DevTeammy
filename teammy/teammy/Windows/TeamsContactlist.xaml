@@ -1,0 +1,18 @@
+﻿<Window x:Class="teammy.Windows.TeamsContactlist"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:teammy.Windows"
+        mc:Ignorable="d"
+        Title="TeamsContactlist" Height="450" Width="800" DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <Grid>
+        <DataGrid x:Name="datagrid"  HorizontalAlignment="Left" Height="348" Margin="105,34,0,0" VerticalAlignment="Top" Width="602" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Binding="{Binding user_name}" Width="150" Header="Name"></DataGridTextColumn>
+                <DataGridTextColumn  Binding="{Binding email_address}" Width="150" Header="Email"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding phone_number}"  Width="150" Header="Phone"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
