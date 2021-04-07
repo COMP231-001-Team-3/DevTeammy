@@ -14,19 +14,16 @@ using System.Windows.Shapes;
 using System.Data;
 using System.Collections.ObjectModel;
 
-namespace teammy.Windows
+namespace teammy
 {
     /// <summary>
     /// Interaction logic for TeamsContactlist.xaml
     /// </summary>
-    /// 
-  
-
     public partial class TeamsContactlist : Window
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
         public user currentUser { get; set; } = globalItems["currentUser"] as user;
-        public team currentTeam { get; set; } = globalItems["currentTeam"] as team;
+        public team currentTeam { get; set; }
         string proname;
 
         List<user> contactinfo;
@@ -34,21 +31,20 @@ namespace teammy.Windows
         public TeamsContactlist()
         {
             InitializeComponent();
-            showingcontact();
         }
-        public void showingcontact()
+
+        private void contactWindow_Loaded(object sender, RoutedEventArgs e)
         {
             
-    
-                contactinfo = (from user in dbContext.users
-                               join mate in dbContext.team_mates
-                               on user.user_id equals mate.user_id
-                               join teams in dbContext.teams
-                               on mate.Team_ID equals teams.Team_ID
-                               where teams.Team_Name == proname 
-                               select user).ToList();
+            contactinfo = (from user in dbContext.users
+                           join mate in dbContext.team_mates
+                           on user.user_id equals mate.user_id
+                           join teams in dbContext.teams
+                           on mate.Team_ID equals teams.Team_ID
+                           where teams.Team_Name == proname
+                           select user).ToList();
 
- 
+
 
             datagrid.ItemsSource = contactinfo;
         }

@@ -14,6 +14,9 @@ namespace teammy
         public static readonly DependencyProperty FullNameProperty = DependencyProperty.Register("FullName", typeof(string), typeof(CardBox));
         public static readonly DependencyProperty ProfileBackProperty = DependencyProperty.Register("ProfileBack", typeof(Color), typeof(CardBox));
         public static readonly DependencyProperty ProfileProperty = DependencyProperty.Register("Profile", typeof(string), typeof(CardBox));
+
+        public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register("Project", typeof(project), typeof(CardBox));
+        public static readonly DependencyProperty TeamProperty = DependencyProperty.Register("Team", typeof(team), typeof(CardBox));
         #endregion
 
         #region Public Properties of the Dependency properties
@@ -32,11 +35,27 @@ namespace teammy
             get { return (Color)GetValue(ProfileBackProperty); }
             set { SetValue(ProfileBackProperty, value); }
         }
+        public project Project
+        {
+            get { return GetValue(ProjectProperty) as project; }
+            set { SetValue(ProjectProperty, value); }
+        }
+        public team Team
+        {
+            get { return GetValue(TeamProperty) as team; }
+            set { SetValue(TeamProperty, value); }
+        }
         #endregion
 
         //Events for change on the text properties
         public event EventHandler<EventArgs> ProjectNameChanged;
         public event EventHandler<EventArgs> ProjectProfileChanged;
+
+        public event RoutedEventHandler CardClick
+        {
+            add { btnDetails.Click += value; }
+            remove { btnDetails.Click -= value; }
+        }
 
         #region Constructor
         public CardBox()

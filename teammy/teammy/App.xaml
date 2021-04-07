@@ -9,6 +9,7 @@
         <local:CreateProject x:Key="createProjInstance"/>
         <local:ProgressReport x:Key="progReportInstance"/>
         <local:TeamsList x:Key="teamsListInstance"/>
+        <local:TeamsContactlist x:Key="contactInstance"/>
         <local:Schedule x:Key="scheduleInstance"/>
 
 
