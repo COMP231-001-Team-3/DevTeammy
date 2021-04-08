@@ -14,18 +14,23 @@
             <Setter Property="Foreground" Value="#ED335F"/>
         </Style>
         <Style x:Key="DataStyle" TargetType="DataGridCell">
-    
-                <Setter Property="TextBlock.TextAlignment" Value="Center" />
-       
-        </Style>
 
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        </Style>
     </Window.Resources>
+    
     <Grid>
         <DataGrid x:Name="datagrid" IsReadOnly="True"  HorizontalAlignment="Left" Height="348" Margin="45,112,0,0" VerticalAlignment="Top" Width="511" AutoGenerateColumns="False" RenderTransformOrigin="0.68,0.478" BorderThickness="2" BorderBrush="White">
             <DataGrid.Columns>
                 <DataGridTextColumn HeaderStyle="{StaticResource CenterGridHeaderStyle}" CellStyle="{StaticResource DataStyle}" Binding="{Binding user_name}" Width="170" Header="Name"></DataGridTextColumn>
 
-                <DataGridTextColumn HeaderStyle="{StaticResource CenterGridHeaderStyle}" CellStyle="{StaticResource DataStyle}"  Binding="{Binding email_address}" Width="170" Header="Email"></DataGridTextColumn>
+                <DataGridHyperlinkColumn HeaderStyle="{StaticResource CenterGridHeaderStyle}" CellStyle="{StaticResource DataStyle}"  Binding="{Binding email_address}" Width="170" Header="Email">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="Mail_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
                 <DataGridTextColumn HeaderStyle="{StaticResource CenterGridHeaderStyle}" CellStyle="{StaticResource DataStyle}" Binding="{Binding phone_number}"  Width="170" Header="Phone"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
