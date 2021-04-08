@@ -28,6 +28,7 @@ namespace teammy
         private CardBox toBeInserted;
 
         private TextBox txtNameInput;
+        private string prevSelection;
         #endregion
 
         #region Properties
@@ -49,31 +50,38 @@ namespace teammy
         /// </summary>
         private void LoadProjects()
         {
-            left = 0;
-            right = 361;
-            top = 0;
-            bottom = 260;
-            boxCount = 0;
-            totalBoxes = 0;
-            projGrid.Children.Clear();
+            string currSelection = cmbTeams.SelectedItem?.ToString();
             
             if (cmbTeams.Items.Count == 0)
-            {                
+            {
                 List<string> teamNames = (from team in dbContext.teams
                                           join mate in dbContext.team_mates
-                                            on team.Team_ID equals mate.Team_ID 
+                                            on team.Team_ID equals mate.Team_ID
                                           join currUser in dbContext.users
                                             on mate.user_id equals currUser.user_id
                                           where currUser.user_name.Equals(currentUser.user_name)
                                           select team.Team_Name).ToList();
                 cmbTeams.ItemsSource = teamNames;
                 cmbTeams.SelectedIndex = 0;
+                currSelection = cmbTeams.SelectedItem.ToString();
             }
+            else if ((bool)prevSelection?.Equals(currSelection))
+            {
+                return;
+            }
+
+            left = 0;
+            right = 361;
+            top = 0;
+            bottom = 260;
+            boxCount = 0;
+            totalBoxes = 0;
+            projGrid.Children.Clear();                    
 
             List<string> projNames = (from proj in dbContext.projects
                                       join team in dbContext.teams 
                                         on proj.Team_ID equals team.Team_ID
-                                      where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                                      where team.Team_Name.Equals(currSelection)
                                      select proj.Proj_Name).ToList();
 
             CardBox project;
@@ -88,7 +96,7 @@ namespace teammy
                 totalBoxes++;
                 projName = projNames[i].ToString();
 
-                //Creation & Initialization of ProjectBox
+                //Creation & Initialization of Project Box
                 project = new CardBox() { FullName = projName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)] };
 
                 //Adds the newly created ProjectBox to the Grid within the ScrollViewer
@@ -113,6 +121,7 @@ namespace teammy
                     boxCount++;
                 }
             }
+            prevSelection = currSelection;
         }
 
         /// <summary>

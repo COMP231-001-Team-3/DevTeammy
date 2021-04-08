@@ -14,9 +14,6 @@ namespace teammy
         public static readonly DependencyProperty FullNameProperty = DependencyProperty.Register("FullName", typeof(string), typeof(CardBox));
         public static readonly DependencyProperty ProfileBackProperty = DependencyProperty.Register("ProfileBack", typeof(Color), typeof(CardBox));
         public static readonly DependencyProperty ProfileProperty = DependencyProperty.Register("Profile", typeof(string), typeof(CardBox));
-
-        public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register("Project", typeof(project), typeof(CardBox));
-        public static readonly DependencyProperty TeamProperty = DependencyProperty.Register("Team", typeof(team), typeof(CardBox));
         #endregion
 
         #region Public Properties of the Dependency properties
@@ -35,21 +32,11 @@ namespace teammy
             get { return (Color)GetValue(ProfileBackProperty); }
             set { SetValue(ProfileBackProperty, value); }
         }
-        public project Project
-        {
-            get { return GetValue(ProjectProperty) as project; }
-            set { SetValue(ProjectProperty, value); }
-        }
-        public team Team
-        {
-            get { return GetValue(TeamProperty) as team; }
-            set { SetValue(TeamProperty, value); }
-        }
         #endregion
 
         //Events for change on the text properties
-        public event EventHandler<EventArgs> ProjectNameChanged;
-        public event EventHandler<EventArgs> ProjectProfileChanged;
+        public event EventHandler<EventArgs> FullNameChanged;
+        public event EventHandler<EventArgs> ProfileChanged;
 
         public event RoutedEventHandler CardClick
         {
@@ -69,10 +56,10 @@ namespace teammy
         ///     Invokes any events related to the ProjectNameProperty when
         ///     Project Name Textbox's Text changes.
         /// </summary>
-        private void txtProjName_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtFullName_TextChanged(object sender, TextChangedEventArgs e)
         {
             e.Handled = true;
-            ProjectNameChanged?.Invoke(this, EventArgs.Empty);
+            FullNameChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -82,7 +69,7 @@ namespace teammy
         private void txtProfText_TextChanged(object sender, TextChangedEventArgs e)
         {
             e.Handled = true;
-            ProjectProfileChanged?.Invoke(this, EventArgs.Empty);
+            ProfileChanged?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }

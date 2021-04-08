@@ -19,8 +19,15 @@ namespace teammy
         /// </summary>
         private void progMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive).Hide();
+            Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
             (Current.Resources["progReportInstance"] as Window).Show();
+
+            Window newWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            if (newWindow == null)
+            {
+                return;
+            }
+            currWindow.Hide();
         }
 
         /// <summary>
@@ -28,14 +35,28 @@ namespace teammy
         /// </summary>
         private void teamsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive).Hide();
+            Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
             (Current.Resources["teamsListInstance"] as Window).Show();
+
+            Window newWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            if (newWindow == null)
+            {
+                return;
+            }
+            currWindow.Hide();
         }
 
         private void schedMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive).Hide();
-            (Current.Resources["scheduleInstance"] as Window).Show();
+            Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            (Current.Resources["scheduleInstance"] as Window).Show();       
+
+            Window newWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            if (newWindow == null)
+            {
+                return;
+            }
+            currWindow.Hide();
         }
 
         /// <summary>
@@ -43,14 +64,28 @@ namespace teammy
         /// </summary>
         private void homeMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive).Hide();
+            Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
             (Current.Resources["mainInstance"] as Window).Show();
+
+            Window newWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            if (newWindow == null)
+            {
+                return;
+            }
+            currWindow.Hide();
         }
 
         private void boardsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive).Hide();
+            Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
             (Current.Resources["createProjInstance"] as Window).Show();
+
+            Window newWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            if (newWindow == null)
+            {
+                return;
+            }
+            currWindow.Hide();
         }
         #endregion
 

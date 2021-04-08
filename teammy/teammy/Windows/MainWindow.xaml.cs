@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,7 +26,7 @@ namespace teammy
         {
             InitializeComponent();
             Display_AssignToMe();
-            Display_ComingUp();
+            Display_ComingUp();            
         }
 
         public void Display_AssignToMe()
@@ -90,5 +91,13 @@ namespace teammy
             DragMove();
         }
         #endregion
+
+        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window boardsWindow = globalItems["createProjInstance"] as Window;
+            Window teamsWindow = globalItems["teamsListInstance"] as Window;
+            Window schedWindow = globalItems["scheduleInstance"] as Window;
+            Window progWindow = globalItems["progReportInstance"] as Window;
+        }
     }
 }

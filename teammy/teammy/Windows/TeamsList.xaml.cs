@@ -28,6 +28,7 @@ namespace teammy
         private CardBox toBeInserted;
 
         private TextBox txtNameInput;
+        private List<team> teams;
         #endregion
 
         #region Properties
@@ -57,7 +58,7 @@ namespace teammy
             totalBoxes = 0;
             teamsGrid.Children.Clear();
 
-            List<team> teams = (from team in dbContext.teams
+            teams = (from team in dbContext.teams
                                       join mate in dbContext.team_mates
                                         on team.Team_ID equals mate.Team_ID
                                       join user in dbContext.users
@@ -78,7 +79,7 @@ namespace teammy
                 teamName = teams[i].Team_Name.ToString();
 
                 //Creation & Initialization of teamBox
-                teamBox = new CardBox() { FullName = teamName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)], Team =  teams[i]};
+                teamBox = new CardBox() { FullName = teamName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)]};
                 teamBox.CardClick += new RoutedEventHandler(teamBox_CardClick);
 
                 //Adds the newly created teamBox to the Grid within the ScrollViewer
@@ -107,11 +108,11 @@ namespace teammy
 
         public void teamBox_CardClick(object sender, RoutedEventArgs e)
         {
-            TeamsContactlist contactPage = globalItems["contactInstance"] as TeamsContactlist;
-
             CardBox current = ((sender as Button).Parent as Grid).Parent as CardBox;
 
-            contactPage.currentTeam = current.Team;
+            TeamsContactlist contactPage = new TeamsContactlist() { currentTeam = (from team in teams
+                               where team.Team_Name.Equals(current.FullName)
+                               select team).Single() };
 
             contactPage.Show();
         }
