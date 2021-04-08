@@ -20,14 +20,13 @@ namespace teammy
         private void progMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
-            (Current.Resources["progReportInstance"] as Window).Show();
+            Window toDisplay = Current.Resources["progReportInstance"] as Window;
 
-            Window newWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
-            if (newWindow == null)
+            if (!toDisplay.Name.Equals(currWindow.Name))
             {
-                return;
+                toDisplay.Show();
+                currWindow.Hide();
             }
-            currWindow.Hide();
         }
 
         /// <summary>
@@ -36,27 +35,25 @@ namespace teammy
         private void teamsMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
-            (Current.Resources["teamsListInstance"] as Window).Show();
+            Window toDisplay = Current.Resources["teamsListInstance"] as Window;
 
-            Window newWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
-            if (newWindow == null)
+            if (!toDisplay.Name.Equals(currWindow.Name))
             {
-                return;
+                toDisplay.Show();
+                currWindow.Hide();
             }
-            currWindow.Hide();
         }
 
         private void schedMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
-            (Current.Resources["scheduleInstance"] as Window).Show();       
+            Window toDisplay = Current.Resources["scheduleInstance"] as Window;
 
-            Window newWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
-            if (newWindow == null)
+            if (!toDisplay.Name.Equals(currWindow.Name))
             {
-                return;
+                toDisplay.Show();
+                currWindow.Hide();
             }
-            currWindow.Hide();
         }
 
         /// <summary>
@@ -65,27 +62,25 @@ namespace teammy
         private void homeMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
-            (Current.Resources["mainInstance"] as Window).Show();
+            Window toDisplay = Current.Resources["mainInstance"] as Window;
 
-            Window newWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
-            if (newWindow == null)
+            if (!toDisplay.Name.Equals(currWindow.Name))
             {
-                return;
+                toDisplay.Show();
+                currWindow.Hide();
             }
-            currWindow.Hide();
         }
 
         private void boardsMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
-            (Current.Resources["createProjInstance"] as Window).Show();
+            Window toDisplay = Current.Resources["createProjInstance"] as Window;
 
-            Window newWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
-            if (newWindow == null)
+            if (!toDisplay.Name.Equals(currWindow.Name))
             {
-                return;
+                toDisplay.Show();
+                currWindow.Hide();
             }
-            currWindow.Hide();
         }
         #endregion
 
