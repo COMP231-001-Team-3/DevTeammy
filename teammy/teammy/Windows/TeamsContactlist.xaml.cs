@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace teammy
 {
@@ -24,7 +25,7 @@ namespace teammy
         private static ResourceDictionary globalItems = Application.Current.Resources;
         public user currentUser { get; set; } = globalItems["currentUser"] as user;
         public team currentTeam { get; set; }
-        
+
 
         List<user> contactinfo;
          teammyEntities dbContext = new teammyEntities();
@@ -48,6 +49,11 @@ namespace teammy
 
 
             datagrid.ItemsSource = contactinfo;
+        }
+
+        private void Mail_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("mailto:" + datagrid.ToString());
         }
     }
 }
