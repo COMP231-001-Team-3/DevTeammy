@@ -135,18 +135,28 @@ namespace teammy
                 toBeInserted.FullName = txtNameInput.Text;
                 txtNameInput.Visibility = Visibility.Hidden;
 
-                dbContext.projects.Add(new project()
-                {
-                    Proj_Name = txtNameInput.Text,
-                    Team_ID = (from team in dbContext.teams
-                               where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
-                               select team.Team_ID).Single()
-                });
+                List<project> existent = (from project in dbContext.projects
+                                          where project.Proj_Name.Equals(txtNameInput.Text)
+                                          select project).ToList();
 
-                dbContext.SaveChanges();
-                btnDone.Visibility = Visibility.Hidden;
-                btnCancel.Visibility = Visibility.Hidden;
-                btnCreateProj.Visibility = Visibility.Visible;
+                if (existent.Count == 0)
+                {
+                    dbContext.projects.Add(new project()
+                    {
+                        Proj_Name = txtNameInput.Text,
+                        Team_ID = (from team in dbContext.teams
+                                   where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                                   select team.Team_ID).Single()
+                    });
+
+                    dbContext.SaveChanges();
+                    btnDone.Visibility = Visibility.Hidden;
+                    btnCancel.Visibility = Visibility.Hidden;
+                    btnCreateProj.Visibility = Visibility.Visible;
+                    return;
+                }
+                MessageBox.Show("The project name that you have entered has already been used! Please try again!", "Duplicate Project Name", MessageBoxButton.OK, MessageBoxImage.Error);
+                btnCancel_Click(new object(), new RoutedEventArgs());
             }
         }
         #endregion
@@ -247,20 +257,28 @@ namespace teammy
         {
             toBeInserted.FullName = txtNameInput.Text;
             txtNameInput.Visibility = Visibility.Hidden;
+            List<project> existent = (from project in dbContext.projects
+                                      where project.Proj_Name.Equals(txtNameInput.Text)
+                                     select project).ToList();
 
-            dbContext.projects.Add(new project()
+            if(existent.Count == 0)
             {
-                Proj_Name = txtNameInput.Text,
-                Team_ID = (from team in dbContext.teams
-                           where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
-                           select team.Team_ID).Single()
-            });
+                dbContext.projects.Add(new project()
+                {
+                    Proj_Name = txtNameInput.Text,
+                    Team_ID = (from team in dbContext.teams
+                               where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                               select team.Team_ID).Single()
+                });
 
-            dbContext.SaveChanges();
-
-            btnDone.Visibility = Visibility.Hidden;
-            btnCancel.Visibility = Visibility.Hidden;
-            btnCreateProj.Visibility = Visibility.Visible;
+                dbContext.SaveChanges();
+                btnDone.Visibility = Visibility.Hidden;
+                btnCancel.Visibility = Visibility.Hidden;
+                btnCreateProj.Visibility = Visibility.Visible;
+                return;
+            }
+            MessageBox.Show("The project name that you have entered has already been used! Please try again!", "Duplicate Project Name", MessageBoxButton.OK, MessageBoxImage.Error);
+            btnCancel_Click(new object(), new RoutedEventArgs());       
         }
 
         /// <summary>
