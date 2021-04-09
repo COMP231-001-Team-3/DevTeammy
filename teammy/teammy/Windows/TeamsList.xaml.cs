@@ -114,7 +114,7 @@ namespace teammy
                                where team.Team_Name.Equals(current.FullName)
                                select team).Single() };
 
-            contactPage.Show();
+            contactPage.ShowDialog();
         }
 
         /// <summary>

@@ -27,8 +27,8 @@ namespace teammy
         public team currentTeam { get; set; }
 
 
-        List<user> contactinfo;
-         teammyEntities dbContext = new teammyEntities();
+        private List<user> contactinfo;
+        private teammyEntities dbContext = new teammyEntities();
         public TeamsContactlist()
         {
             InitializeComponent();
@@ -40,20 +40,57 @@ namespace teammy
             
             contactinfo = (from user in dbContext.users
                            join mate in dbContext.team_mates
-                           on user.user_id equals mate.user_id
+                              on user.user_id equals mate.user_id
                            join teams in dbContext.teams
-                           on mate.Team_ID equals teams.Team_ID
+                              on mate.Team_ID equals teams.Team_ID
                            where teams.Team_Name == currentTeam.Team_Name
                            select user).ToList();
 
 
 
-            datagrid.ItemsSource = contactinfo;
+            dtgTeamMates.ItemsSource = contactinfo;
+        }
+        #region Title Bar Button Event Handlers
+        /// <summary>
+        ///     Shuts down the application
+        /// </summary>
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
+        /// <summary>
+        ///     Minimizes the current window
+        /// </summary>
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        /// <summary>
+        ///     Displays page menu when button is clicked
+        /// </summary>
+        private void btnMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ContextMenu cm = globalItems["cmButton"] as ContextMenu;
+            cm.PlacementTarget = sender as Button;
+            cm.IsOpen = true;
+        }
+        #endregion
+
+        #region Title Pane Event Handlers
+
+        /// <summary>
+        ///     Moves the window along with the title pane when it is dragged
+        /// </summary>
+        private void pnlTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            DragMove();
+        }
+        #endregion
         private void Mail_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("mailto:" + datagrid.ToString());
+            Process.Start("mailto:" + (dtgTeamMates.SelectedItem as user).email_address);
         }
     }
 }

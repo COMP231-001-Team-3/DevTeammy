@@ -92,12 +92,9 @@ namespace teammy
         }
         #endregion
 
-        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            Window boardsWindow = globalItems["createProjInstance"] as Window;
-            Window teamsWindow = globalItems["teamsListInstance"] as Window;
-            Window schedWindow = globalItems["scheduleInstance"] as Window;
-            Window progWindow = globalItems["progReportInstance"] as Window;
-        }
+        //private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        //{
+            
+        //}
     }
 }

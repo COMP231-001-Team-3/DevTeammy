@@ -156,9 +156,9 @@ namespace teammy
                 //Loads progress status of all tasks associated with the project selected
                 List<string> progress_codes = 
                 (from tasks in dbContext.tasks
-                    join projects in dbContext.projects 
-                        on tasks.proj_id equals projects.Proj_ID
-                 where projects.Proj_Name.Equals(cmbProjects.SelectedItem.ToString())
+                 join project in dbContext.projects 
+                    on tasks.proj_id equals project.Proj_ID
+                 where project.Proj_Name.Equals(cmbProjects.SelectedItem.ToString())
                  select tasks.progress_code).ToList();
 
                 //Resets Pie chart values

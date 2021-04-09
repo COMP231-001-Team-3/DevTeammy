@@ -114,5 +114,14 @@ namespace teammy
             Button btnIcon = MenuItem.Children[1] as Button;
             btnIcon.Background = null;
         }
+
+        private void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            Current.Resources["mainInstance"] = Current.Resources["mainInstance"] as Window;
+            Current.Resources["createProjInstance"] = Current.Resources["createProjInstance"] as Window;
+            Current.Resources["teamsListInstance"] = Current.Resources["teamsListInstance"] as Window;
+            Current.Resources["scheduleInstance"] = Current.Resources["scheduleInstance"] as Window;
+            Current.Resources["progReportInstance"] = Current.Resources["progReportInstance"] as Window;
+        }
     }
 }
