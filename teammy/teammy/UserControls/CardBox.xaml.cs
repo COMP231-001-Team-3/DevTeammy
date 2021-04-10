@@ -14,6 +14,8 @@ namespace teammy
         public static readonly DependencyProperty FullNameProperty = DependencyProperty.Register("FullName", typeof(string), typeof(CardBox));
         public static readonly DependencyProperty ProfileBackProperty = DependencyProperty.Register("ProfileBack", typeof(Color), typeof(CardBox));
         public static readonly DependencyProperty ProfileProperty = DependencyProperty.Register("Profile", typeof(string), typeof(CardBox));
+        public static readonly DependencyProperty SelectorVisibleProperty = DependencyProperty.Register("SelectorVisible", typeof(bool), typeof(CardBox));
+        public static readonly DependencyProperty SelectedProperty = DependencyProperty.Register("Selected", typeof(bool), typeof(CardBox));
         #endregion
 
         #region Public Properties of the Dependency properties
@@ -32,6 +34,16 @@ namespace teammy
             get { return (Color)GetValue(ProfileBackProperty); }
             set { SetValue(ProfileBackProperty, value); }
         }
+        public bool SelectorVisible
+        {
+            get { return (bool)GetValue(SelectorVisibleProperty); }
+            set { SetValue(SelectorVisibleProperty, value); }
+        }
+        public bool Selected
+        {
+            get { return (bool)GetValue(SelectedProperty); }
+            set { SetValue(SelectedProperty, value); }
+        }
         #endregion
 
         //Events for change on the text properties
@@ -43,6 +55,18 @@ namespace teammy
             add { btnDetails.Click += value; }
             remove { btnDetails.Click -= value; }
         }
+        public event RoutedEventHandler CardSelected
+        {
+            add { chkSelector.Checked += value; }
+            remove { chkSelector.Checked -= value; }
+        }
+        public event RoutedEventHandler CardUnselected
+        {
+            add { chkSelector.Unchecked += value; }
+            remove { chkSelector.Unchecked -= value; }
+        }
+
+        TriggerCollection trgHovers;
 
         #region Constructor
         public CardBox()
@@ -71,6 +95,7 @@ namespace teammy
             e.Handled = true;
             ProfileChanged?.Invoke(this, EventArgs.Empty);
         }
+
         #endregion
     }
 }

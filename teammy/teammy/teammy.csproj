@@ -149,10 +149,12 @@
     <Compile Include="assignee.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToBackConverter.cs" />
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="category.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToVisibConverter.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\PriorityToColorConverter.cs" />
     <Compile Include="UserControls\AssigneeEllipse.xaml.cs">
