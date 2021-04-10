@@ -13,8 +13,9 @@ namespace teammy
     /// </summary>
     public partial class LoginWindow : Window
     {
-        List<user> users;
-        teammyEntities dbContext = new teammyEntities();
+        private static ResourceDictionary globalItems = Application.Current.Resources;
+        private List<user> users;
+        private teammyEntities dbContext = new teammyEntities();
 
         public LoginWindow()
         {

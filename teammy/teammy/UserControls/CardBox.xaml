@@ -44,13 +44,13 @@
         <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Height="125" Stroke="#FF1E1922" VerticalAlignment="Top" Width="127" Margin="2,3,-13,-14"/>
 
         <!-- Project Name -->
-        <TextBox x:Name="txtProjName" Text="{Binding Path=FullName}" HorizontalAlignment="Left" Margin="5,106,-10,-11" VerticalAlignment="Top" Width="121" FontFamily="Georgia" Foreground="#FF0A98F7" BorderBrush="{x:Null}" TextChanged="txtProjName_TextChanged" IsReadOnly="True" Height="19" IsHitTestVisible="False"/>
+        <TextBox x:Name="txtFullName" Text="{Binding Path=FullName}" HorizontalAlignment="Left" Margin="5,106,-10,-11" VerticalAlignment="Top" Width="121" FontFamily="Georgia" Foreground="#FF0A98F7" BorderBrush="{x:Null}" TextChanged="txtFullName_TextChanged" IsReadOnly="True" Height="19" IsHitTestVisible="False"/>
         
         <!-- The Background of the Project Profile -->
         <Rectangle x:Name="rectProfile" HorizontalAlignment="Left" Height="83" Stroke="#FF1E1922" VerticalAlignment="Top" Width="93" Margin="18,18,0,0" Fill="{Binding Converter={StaticResource ColorConverter}, Path=ProfileBack}"/>
         
         <!-- Profile Text (Placed above the Background) -->
-        <TextBox x:Name="txtProfText" Text="{Binding ElementName=txtProjName, Converter={StaticResource NameConverter},Path=Text}" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="80" FontFamily="Gill Sans Ultra Bold" Foreground="White" BorderBrush="{x:Null}" Height="60" Background="{x:Null}" FontSize="40" TextChanged="txtProfText_TextChanged" IsReadOnly="True" IsHitTestVisible="False"/>
+        <TextBox x:Name="txtProfText" Text="{Binding ElementName=txtFullName, Converter={StaticResource NameConverter}, Path=Text}" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="80" FontFamily="Gill Sans Ultra Bold" Foreground="White" BorderBrush="{x:Null}" Height="60" Background="{x:Null}" FontSize="40" TextChanged="txtProfText_TextChanged" IsReadOnly="True" IsHitTestVisible="False"/>
         
         <!-- Button that provides mouseover and click events for the project -->
         <Button x:Name="btnDetails" Content="" HorizontalAlignment="Left" Margin="2,3,0,0" VerticalAlignment="Top" Width="127" Height="125" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True"/>

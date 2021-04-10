@@ -19,8 +19,14 @@ namespace teammy
         /// </summary>
         private void progMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive).Hide();
-            (Current.Resources["progReportInstance"] as Window).Show();
+            Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            Window toDisplay = Current.Resources["progReportInstance"] as Window;
+
+            if (!toDisplay.Name.Equals(currWindow.Name))
+            {
+                toDisplay.Show();
+                currWindow.Hide();
+            }
         }
 
         /// <summary>
@@ -28,14 +34,26 @@ namespace teammy
         /// </summary>
         private void teamsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive).Hide();
-            (Current.Resources["teamsListInstance"] as Window).Show();
+            Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            Window toDisplay = Current.Resources["teamsListInstance"] as Window;
+
+            if (!toDisplay.Name.Equals(currWindow.Name))
+            {
+                toDisplay.Show();
+                currWindow.Hide();
+            }
         }
 
         private void schedMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive).Hide();
-            (Current.Resources["scheduleInstance"] as Window).Show();
+            Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            Window toDisplay = Current.Resources["scheduleInstance"] as Window;
+
+            if (!toDisplay.Name.Equals(currWindow.Name))
+            {
+                toDisplay.Show();
+                currWindow.Hide();
+            }
         }
 
         /// <summary>
@@ -43,14 +61,26 @@ namespace teammy
         /// </summary>
         private void homeMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive).Hide();
-            (Current.Resources["mainInstance"] as Window).Show();
+            Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            Window toDisplay = Current.Resources["mainInstance"] as Window;
+
+            if (!toDisplay.Name.Equals(currWindow.Name))
+            {
+                toDisplay.Show();
+                currWindow.Hide();
+            }
         }
 
         private void boardsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive).Hide();
-            (Current.Resources["createProjInstance"] as Window).Show();
+            Window currWindow = Current.Windows.OfType<Window>().SingleOrDefault(window => window.IsActive);
+            Window toDisplay = Current.Resources["createProjInstance"] as Window;
+
+            if (!toDisplay.Name.Equals(currWindow.Name))
+            {
+                toDisplay.Show();
+                currWindow.Hide();
+            }
         }
         #endregion
 
@@ -83,6 +113,15 @@ namespace teammy
             //The Button whose background is to be set
             Button btnIcon = MenuItem.Children[1] as Button;
             btnIcon.Background = null;
+        }
+
+        private void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            Current.Resources["mainInstance"] = Current.Resources["mainInstance"] as Window;
+            Current.Resources["createProjInstance"] = Current.Resources["createProjInstance"] as Window;
+            Current.Resources["teamsListInstance"] = Current.Resources["teamsListInstance"] as Window;
+            Current.Resources["scheduleInstance"] = Current.Resources["scheduleInstance"] as Window;
+            Current.Resources["progReportInstance"] = Current.Resources["progReportInstance"] as Window;
         }
     }
 }

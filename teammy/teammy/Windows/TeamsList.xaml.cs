@@ -28,6 +28,7 @@ namespace teammy
         private CardBox toBeInserted;
 
         private TextBox txtNameInput;
+        private List<team> teams;
         #endregion
 
         #region Properties
@@ -57,13 +58,13 @@ namespace teammy
             totalBoxes = 0;
             teamsGrid.Children.Clear();
 
-            List<string> teamNames = (from team in dbContext.teams
+            teams = (from team in dbContext.teams
                                       join mate in dbContext.team_mates
                                         on team.Team_ID equals mate.Team_ID
                                       join user in dbContext.users
                                         on mate.user_id equals user.user_id
                                       where user.user_id == currentUser.user_id
-                                      select team.Team_Name).ToList();
+                                      select team).ToList();
 
             CardBox teamBox;
 
@@ -72,13 +73,14 @@ namespace teammy
             string teamName;
 
             //Loop to read through results from query
-            for (int i = 0; i < teamNames.Count; i++)
+            for (int i = 0; i < teams.Count; i++)
             {
                 totalBoxes++;
-                teamName = teamNames[i].ToString();
+                teamName = teams[i].Team_Name.ToString();
 
                 //Creation & Initialization of teamBox
-                teamBox = new CardBox() { FullName = teamName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)] };
+                teamBox = new CardBox() { FullName = teamName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)]};
+                teamBox.CardClick += new RoutedEventHandler(teamBox_CardClick);
 
                 //Adds the newly created teamBox to the Grid within the ScrollViewer
                 teamsGrid.Children.Add(teamBox);
@@ -102,6 +104,17 @@ namespace teammy
                     boxCount++;
                 }
             }
+        }
+
+        public void teamBox_CardClick(object sender, RoutedEventArgs e)
+        {
+            CardBox current = ((sender as Button).Parent as Grid).Parent as CardBox;
+
+            TeamsContactlist contactPage = new TeamsContactlist() { currentTeam = (from team in teams
+                               where team.Team_Name.Equals(current.FullName)
+                               select team).Single() };
+
+            contactPage.ShowDialog();
         }
 
         /// <summary>

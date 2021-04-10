@@ -35,8 +35,14 @@ namespace teammy
         #endregion
 
         //Events for change on the text properties
-        public event EventHandler<EventArgs> ProjectNameChanged;
-        public event EventHandler<EventArgs> ProjectProfileChanged;
+        public event EventHandler<EventArgs> FullNameChanged;
+        public event EventHandler<EventArgs> ProfileChanged;
+
+        public event RoutedEventHandler CardClick
+        {
+            add { btnDetails.Click += value; }
+            remove { btnDetails.Click -= value; }
+        }
 
         #region Constructor
         public CardBox()
@@ -50,10 +56,10 @@ namespace teammy
         ///     Invokes any events related to the ProjectNameProperty when
         ///     Project Name Textbox's Text changes.
         /// </summary>
-        private void txtProjName_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtFullName_TextChanged(object sender, TextChangedEventArgs e)
         {
             e.Handled = true;
-            ProjectNameChanged?.Invoke(this, EventArgs.Empty);
+            FullNameChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -63,7 +69,7 @@ namespace teammy
         private void txtProfText_TextChanged(object sender, TextChangedEventArgs e)
         {
             e.Handled = true;
-            ProjectProfileChanged?.Invoke(this, EventArgs.Empty);
+            ProfileChanged?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }

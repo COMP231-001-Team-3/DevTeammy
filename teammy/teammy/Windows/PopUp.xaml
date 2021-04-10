@@ -43,7 +43,7 @@
             <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="472,0,0,6" Click="btnClose_Click" Width="24" RenderTransformOrigin="0.333,-0.333" Height="Auto"/>
         </Grid>
 
-        <Label x:Name="TaskDueLabel" Content="Tasks due" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Height="35" Width="95" FontSize="18" Foreground="White" />
+        <Label x:Name="TaskDueLabel" Content="Tasks due" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Height="35" Width="112" FontSize="18" Foreground="White" FontFamily="Lucida Handwriting"/>
 
         <Border x:Name="GridBorder" BorderBrush="#8671CE" BorderThickness="1" Margin="23,39,21,48">
             <Grid x:Name="DetailsGrid" HorizontalAlignment="Left" Height="309" Margin="-1.333,-1.333,-1.333,-1" VerticalAlignment="Top" Width="452">

@@ -1,68 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using System.Data;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace teammy
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TeamsContactlist.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TeamsContactlist : Window
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
         public user currentUser { get; set; } = globalItems["currentUser"] as user;
+        public team currentTeam { get; set; }
 
-        List<task> myTasksData;
-        List<task> dueWeekData;
-        teammyEntities dbContext = new teammyEntities();
 
-        public MainWindow()
+        private List<user> contactinfo;
+        private teammyEntities dbContext = new teammyEntities();
+        public TeamsContactlist()
         {
             InitializeComponent();
-            Display_AssignToMe();
-            Display_ComingUp();            
         }
 
-        public void Display_AssignToMe()
+        private void contactWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            myTasksData = (from task in dbContext.tasks 
-                           join assignee in dbContext.assignees
-                              on task.assigned_group equals assignee.assigned_group
+            teamnamelabel.Content = currentTeam.Team_Name;
+            
+            contactinfo = (from user in dbContext.users
                            join mate in dbContext.team_mates
-                              on assignee.mate_id equals mate.mate_id
-                           join user in dbContext.users
-                              on mate.user_id equals user.user_id
-                           where user.user_name.Equals(currentUser.user_name)
-                           select task).ToList();
+                              on user.user_id equals mate.user_id
+                           join teams in dbContext.teams
+                              on mate.Team_ID equals teams.Team_ID
+                           where teams.Team_Name == currentTeam.Team_Name
+                           select user).ToList();
 
-            AssignedtomeDatagrid.ItemsSource = myTasksData;
+
+
+            dtgTeamMates.ItemsSource = contactinfo;
         }
-
-        public void Display_ComingUp()
-        {
-            dueWeekData = myTasksData.FindAll(task => task.due_date <= DateTime.Now.AddDays(7) && task.due_date >= DateTime.Now);
-            ComingDatagrid.ItemsSource = dueWeekData;
-        }
-
-        private void mainWindow_Closed(object sender, EventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
         #region Title Bar Button Event Handlers
-
         /// <summary>
         ///     Shuts down the application
         /// </summary>
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            Close();
         }
 
         /// <summary>
@@ -73,6 +67,9 @@ namespace teammy
             WindowState = WindowState.Minimized;
         }
 
+        /// <summary>
+        ///     Displays page menu when button is clicked
+        /// </summary>
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
             ContextMenu cm = globalItems["cmButton"] as ContextMenu;
@@ -91,10 +88,9 @@ namespace teammy
             DragMove();
         }
         #endregion
-
-        //private void mainWindow_Loaded(object sender, RoutedEventArgs e)
-        //{
-            
-        //}
+        private void Mail_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("mailto:" + (dtgTeamMates.SelectedItem as user).email_address);
+        }
     }
 }

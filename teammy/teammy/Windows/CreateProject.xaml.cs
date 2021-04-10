@@ -28,6 +28,7 @@ namespace teammy
         private CardBox toBeInserted;
 
         private TextBox txtNameInput;
+        private string prevSelection;
         #endregion
 
         #region Properties
@@ -49,31 +50,38 @@ namespace teammy
         /// </summary>
         private void LoadProjects()
         {
-            left = 0;
-            right = 361;
-            top = 0;
-            bottom = 260;
-            boxCount = 0;
-            totalBoxes = 0;
-            projGrid.Children.Clear();
+            string currSelection = cmbTeams.SelectedItem?.ToString();
             
             if (cmbTeams.Items.Count == 0)
-            {                
+            {
                 List<string> teamNames = (from team in dbContext.teams
                                           join mate in dbContext.team_mates
-                                            on team.Team_ID equals mate.Team_ID 
+                                            on team.Team_ID equals mate.Team_ID
                                           join currUser in dbContext.users
                                             on mate.user_id equals currUser.user_id
                                           where currUser.user_name.Equals(currentUser.user_name)
                                           select team.Team_Name).ToList();
                 cmbTeams.ItemsSource = teamNames;
                 cmbTeams.SelectedIndex = 0;
+                currSelection = cmbTeams.SelectedItem.ToString();
             }
+            else if ((bool)prevSelection?.Equals(currSelection))
+            {
+                return;
+            }
+
+            left = 0;
+            right = 361;
+            top = 0;
+            bottom = 260;
+            boxCount = 0;
+            totalBoxes = 0;
+            projGrid.Children.Clear();                    
 
             List<string> projNames = (from proj in dbContext.projects
                                       join team in dbContext.teams 
                                         on proj.Team_ID equals team.Team_ID
-                                      where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                                      where team.Team_Name.Equals(currSelection)
                                      select proj.Proj_Name).ToList();
 
             CardBox project;
@@ -116,6 +124,7 @@ namespace teammy
                     boxCount++;
                 }
             }
+            prevSelection = currSelection;
         }
 
         private void chkProject_Unchecked(object sender, RoutedEventArgs e)
@@ -164,18 +173,28 @@ namespace teammy
                 toBeInserted.FullName = txtNameInput.Text;
                 txtNameInput.Visibility = Visibility.Hidden;
 
-                dbContext.projects.Add(new project()
-                {
-                    Proj_Name = txtNameInput.Text,
-                    Team_ID = (from team in dbContext.teams
-                               where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
-                               select team.Team_ID).Single()
-                });
+                List<project> existent = (from project in dbContext.projects
+                                          where project.Proj_Name.Equals(txtNameInput.Text)
+                                          select project).ToList();
 
-                dbContext.SaveChanges();
-                btnDone.Visibility = Visibility.Hidden;
-                btnCancel.Visibility = Visibility.Hidden;
-                btnCreateProj.Visibility = Visibility.Visible;
+                if (existent.Count == 0)
+                {
+                    dbContext.projects.Add(new project()
+                    {
+                        Proj_Name = txtNameInput.Text,
+                        Team_ID = (from team in dbContext.teams
+                                   where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                                   select team.Team_ID).Single()
+                    });
+
+                    dbContext.SaveChanges();
+                    btnDone.Visibility = Visibility.Hidden;
+                    btnCancel.Visibility = Visibility.Hidden;
+                    btnCreateProj.Visibility = Visibility.Visible;
+                    return;
+                }
+                MessageBox.Show("The project name that you have entered has already been used! Please try again!", "Duplicate Project Name", MessageBoxButton.OK, MessageBoxImage.Error);
+                btnCancel_Click(new object(), new RoutedEventArgs());
             }
         }
         #endregion
@@ -277,21 +296,28 @@ namespace teammy
         {
             toBeInserted.FullName = txtNameInput.Text;
             txtNameInput.Visibility = Visibility.Hidden;
+            List<project> existent = (from project in dbContext.projects
+                                      where project.Proj_Name.Equals(txtNameInput.Text)
+                                     select project).ToList();
 
-            dbContext.projects.Add(new project()
+            if(existent.Count == 0)
             {
-                Proj_Name = txtNameInput.Text,
-                Team_ID = (from team in dbContext.teams
-                           where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
-                           select team.Team_ID).Single()
-            });
+                dbContext.projects.Add(new project()
+                {
+                    Proj_Name = txtNameInput.Text,
+                    Team_ID = (from team in dbContext.teams
+                               where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
+                               select team.Team_ID).Single()
+                });
 
-            dbContext.SaveChanges();
-
-            btnDone.Visibility = Visibility.Hidden;
-            btnCancel.Visibility = Visibility.Hidden;
-            btnCreateProj.Visibility = Visibility.Visible;
-            btnDelete.Visibility = Visibility.Visible;
+                dbContext.SaveChanges();
+                btnDone.Visibility = Visibility.Hidden;
+                btnCancel.Visibility = Visibility.Hidden;
+                btnCreateProj.Visibility = Visibility.Visible;
+                return;
+            }
+            MessageBox.Show("The project name that you have entered has already been used! Please try again!", "Duplicate Project Name", MessageBoxButton.OK, MessageBoxImage.Error);
+            btnCancel_Click(new object(), new RoutedEventArgs());       
         }
 
         /// <summary>
