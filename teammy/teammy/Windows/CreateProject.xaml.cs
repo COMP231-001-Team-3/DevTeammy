@@ -77,7 +77,7 @@ namespace teammy
                                      select proj.Proj_Name).ToList();
 
             CardBox project;
-
+            CheckBox chkProject;
             //Variables for usage in loop declared beforehand for performance reasons
             Random rd = new Random();
             string projName;
@@ -89,10 +89,13 @@ namespace teammy
                 projName = projNames[i].ToString();
 
                 //Creation & Initialization of ProjectBox
-                project = new CardBox() { FullName = projName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)] };
-
+                project = new CardBox() { Name = "crdBox" + i,FullName = projName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)] };
+                chkProject = new CheckBox() { Name = "chkProj" + i, Margin = new Thickness(left + 34, top + 11, right - 125, bottom - 125), Visibility = Visibility.Hidden };
+                chkProject.Checked += new RoutedEventHandler(chkProject_Checked);
+                chkProject.Unchecked += new RoutedEventHandler(chkProject_Unchecked);
                 //Adds the newly created ProjectBox to the Grid within the ScrollViewer
                 projGrid.Children.Add(project);
+                projGrid.Children.Add(chkProject);
 
                 //Updates margin for the next box
                 left += 175;
@@ -113,6 +116,41 @@ namespace teammy
                     boxCount++;
                 }
             }
+        }
+
+        private void chkProject_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox chkSent = sender as CheckBox;
+            int boxNum = int.Parse(chkSent.Name.Substring(chkSent.Name.Length - 1));
+            List<CardBox> cardsList = new List<CardBox>();
+
+            for (int i = 0; i < projGrid.Children.Count; i++)
+            {
+                if (projGrid.Children[i].GetType() == typeof(CardBox))
+                {
+                    cardsList.Add(projGrid.Children[i] as CardBox);
+                }
+            }
+
+            cardsList[boxNum].btnDetails.Background = new SolidColorBrush(Colors.Transparent);
+        }
+
+        private void chkProject_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox chkSent = sender as CheckBox;
+            int boxNum = int.Parse(chkSent.Name.Substring(chkSent.Name.Length - 1));
+            List<CardBox> cardsList = new List<CardBox>();
+
+            for (int i = 0; i < projGrid.Children.Count; i++)
+            {
+                if (projGrid.Children[i].GetType() == typeof(CardBox))
+                {
+                    cardsList.Add(projGrid.Children[i] as CardBox);
+                }
+            }
+
+            cardsList[boxNum].btnDetails.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
+
         }
 
         /// <summary>
@@ -229,6 +267,7 @@ namespace teammy
             txtNameInput.KeyUp += new KeyEventHandler(txtNameInput_KeyUp);
 
             btnCreateProj.Visibility = Visibility.Hidden;
+            btnDelete.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -252,6 +291,7 @@ namespace teammy
             btnDone.Visibility = Visibility.Hidden;
             btnCancel.Visibility = Visibility.Hidden;
             btnCreateProj.Visibility = Visibility.Visible;
+            btnDelete.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -259,24 +299,41 @@ namespace teammy
         /// </summary>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            projGrid.Children.Remove(toBeInserted);
-            projGrid.Children.Remove(txtNameInput);
-
-            if (boxCount == 0)
+            if(toBeInserted != null)
             {
-                boxCount = 2;
-                left = 350;
-                right = 11;
-                top -= 132;
-                bottom += 132;
+                projGrid.Children.Remove(toBeInserted);
+                projGrid.Children.Remove(txtNameInput);
+
+                if (boxCount == 0)
+                {
+                    boxCount = 2;
+                    left = 350;
+                    right = 11;
+                    top -= 132;
+                    bottom += 132;
+                }
+                else
+                {
+                    left -= 175;
+                    right += 175;
+                    --boxCount;
+                }
+                --totalBoxes;
             }
             else
             {
-                left -= 175;
-                right += 175;
-                --boxCount;
+                UIElement currElement;
+                for (int i = 0; i < projGrid.Children.Count; i++)
+                {
+                    currElement = projGrid.Children[i];
+                    if (currElement.GetType() == typeof(CheckBox))
+                    {
+                        CheckBox chkProj = currElement as CheckBox;
+                        chkProj.IsChecked = false;
+                        chkProj.Visibility = Visibility.Hidden;
+                    }
+                }
             }
-            --totalBoxes;
 
             btnDone.Visibility = Visibility.Hidden;
             btnCancel.Visibility = Visibility.Hidden;
@@ -297,6 +354,20 @@ namespace teammy
         private void btnCancel_MouseLeave(object sender, MouseEventArgs e)
         {
             cancelbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < projGrid.Children.Count; i++)
+            {
+                if(projGrid.Children[i].GetType() == typeof(CheckBox))
+                {
+                    projGrid.Children[i].Visibility = Visibility.Visible;
+                }
+            }
+            btnCreateProj.Visibility = Visibility.Hidden;
+            btnCancel.Visibility = Visibility.Visible;
+            btnDone.Visibility = Visibility.Visible;
         }
         #endregion
 

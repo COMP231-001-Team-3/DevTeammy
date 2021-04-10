@@ -307,6 +307,7 @@
   <ItemGroup>
     <Resource Include="images\arrow.png" />
     <Resource Include="images\threeDots.png" />
+    <Resource Include="images\btnRemove.jpg" />
     <Content Include="teammyDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>teammyDB.Context.cs</LastGenOutput>

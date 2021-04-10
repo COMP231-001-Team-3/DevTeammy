@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Window.Resources>
-        <local:PrivToVisibConverter x:Key="PrivConverter"/>        
+        <local:PrivToVisibConverter x:Key="PrivConverter"/>
     </Window.Resources>
 
     <!-- UI Elements' declaration start here -->
@@ -70,6 +70,8 @@
             </DockPanel>
 
         </Button>
-
+        <Button x:Name="btnDelete" Background="Transparent" BorderThickness="0" Margin="39.667,405,210.333,12" Click="btnDelete_Click" Visibility="{Binding Converter={StaticResource PrivConverter}, Path=currentUser}" Grid.Column="2">
+            <Image Source="../images/btnRemove.jpg" Height="32" Width="32"/>
+        </Button>
     </Grid>
 </Window>
