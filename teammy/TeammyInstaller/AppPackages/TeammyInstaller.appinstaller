@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppInstaller
+	Uri="https://github.com/COMP231-001-Team-3/InstallTeammy/TeammyInstaller.appinstaller"
+	Version="1.0.3.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2017/2">
+	<MainBundle
+		Name="68efdbe8-b73e-400f-a81f-ff38d5ad8949"
+		Version="1.0.3.0"
+		Publisher="CN=aniru"
+		Uri="https://github.com/COMP231-001-Team-3/InstallTeammy/TeammyInstaller_1.0.3.0_Test/TeammyInstaller_1.0.3.0_x86_x64.msixbundle" />
+	<UpdateSettings>
+		<OnLaunch
+			HoursBetweenUpdateChecks="0" />
+	</UpdateSettings>
+</AppInstaller>

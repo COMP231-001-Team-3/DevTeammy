@@ -31,7 +31,7 @@ namespace teammy
         MySqlConnection conn;
 
 
-        public ProjectBox currentProj { get; set; } = Application.Current.Resources["currentProj"] as ProjectBox;
+        public CardBox currentProj { get; set; } = Application.Current.Resources["currentProj"] as CardBox;
         public ProjBoard()
         {
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace teammy
         private void LoadCategorys()
         {
 
-            ProjNameLable.Content = currentProj.ProjectName;
+            ProjNameLable.Content = currentProj.FullName;
             Console.WriteLine(ProjNameLable.Content);
             left = 0;
             top = 0;
@@ -55,7 +55,7 @@ namespace teammy
             conn.Open();
             
             MySqlCommand getCategorys = new MySqlCommand("SELECT category_name FROM categories NATURAL JOIN projects where Proj_Name = @projName", conn);           
-            getCategorys.Parameters.AddWithValue("projName", currentProj.ProjectName);
+            getCategorys.Parameters.AddWithValue("projName", currentProj.FullName);
             MySqlDataReader categorysReader = getCategorys.ExecuteReader();
                        
             using (categorysReader)

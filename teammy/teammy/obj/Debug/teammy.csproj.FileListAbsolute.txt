@@ -1,105 +1,83 @@
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe.config
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\teammy.pdb
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Zstandard.Net.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.Streams.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\BouncyCastle.Crypto.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Ubiety.Dns.Core.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Renci.SshNet.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Buffers.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Hash.xxHash.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.xml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe.config
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.g.cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.g.cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\assigneeInitialBox.g.cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.g.cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.g.cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.g.cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\TaskBox.g.cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\App.g.cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\App.baml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.baml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.baml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\assigneeInitialBox.baml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.baml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.baml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.baml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\TaskBox.baml
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.g.resources
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.Properties.Resources.resources
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.GenerateResource.cache
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CoreCompileInputs.cache
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe.config
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\bin\Debug\teammy.pdb
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.g.cs
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.g.cs
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\assigneeInitialBox.g.cs
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.g.cs
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.g.cs
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.g.cs
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\TaskBox.g.cs
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\App.g.cs
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\App.baml
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.baml
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.baml
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\assigneeInitialBox.baml
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.baml
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.baml
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.baml
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\TaskBox.baml
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.g.resources
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.Properties.Resources.resources
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.GenerateResource.cache
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CoreCompileInputs.cache
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\EditTaskPage.g.cs
-C:\Users\user\Desktop\COMP231\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\EditTaskPage.baml
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe.config
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\teammy.exe
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\teammy.pdb
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.EntityFramework.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Renci.SshNet.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Buffers.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Zstandard.Net.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.pdb
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Google.Protobuf.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.pdb
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\MySql.Data.EntityFramework.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\Renci.SshNet.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Buffers.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.g.cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.g.cs
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\assigneeInitialBox.g.cs
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\EditTaskPage.g.cs
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.g.cs
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.g.cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.g.cs
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\TaskBox.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\AssigneeEllipse.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\DayBox.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\PopTaskBox.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\PopUp.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\Schedule.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\TeamsContactlist.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\TeamsList.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\ProgressReport.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\login.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\MainWindow.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\CreateProject.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\CardBox.g.cs
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\App.g.cs
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy_Content.g.cs
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.cache
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy_MarkupCompile.lref
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\App.baml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\CreateProject.baml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\MainWindow.baml
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\assigneeInitialBox.baml
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\EditTaskPage.baml
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\NewCategory.baml
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\ProjBoard.baml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectBox.baml
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\ProjectDetail\TaskBox.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\AssigneeEllipse.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\DayBox.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\PopTaskBox.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\PopUp.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\Schedule.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\TeamsContactlist.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\TeamsList.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\ProgressReport.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\login.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\MainWindow.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\Windows\CreateProject.baml
+C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\CardBox.baml
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.g.resources
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.Properties.Resources.resources
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.GenerateResource.cache
@@ -107,7 +85,3 @@ C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teamm
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
 C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.xml
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.SqlServer.xml

@@ -25,7 +25,7 @@ namespace teammy
     {
         private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=dev; pwd=rds8w77c0ehnw2fx; port=25060;";
         private static ResourceDictionary globalItems = Application.Current.Resources;
-        public UserModel currentUser { get; set; } = globalItems["AssignieeUser"] as UserModel;  
+        public user currentUser { get; set; } = globalItems["AssignieeUser"] as user;  
 
         int totalBoxes = 0;
         TaskBox toBeInserted;

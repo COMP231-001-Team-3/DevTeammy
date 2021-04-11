@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Source>D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\TeammyLogo.png</Source>
+    <SmallTileSource>D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\TeammyLogo.png</SmallTileSource>
+    <MediumTileSource>D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\TeammyLogo.png</MediumTileSource>
+    <WideTileSource>D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\TeammyLogo.png</WideTileSource>
+    <LargeTileSource>D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\TeammyLogo.png</LargeTileSource>
+    <AppIconSource>D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\TeammyLogo.png</AppIconSource>
+    <SplashScreenSource>D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\TeammyLogo.png</SplashScreenSource>
+    <PackageLogoSource>D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\TeammyLogo.png</PackageLogoSource>
+    <UapAppxPackageBuildMode>SideloadOnly</UapAppxPackageBuildMode>
+    <AppxShowAllApps>False</AppxShowAllApps>
+    <AppxBuildConfigurationSelection>x86|x64</AppxBuildConfigurationSelection>
+    <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
+  </PropertyGroup>
+</Project>
