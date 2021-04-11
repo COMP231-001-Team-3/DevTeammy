@@ -20,7 +20,6 @@ namespace teammy
         public LoginWindow()
         {
             InitializeComponent();
-
             Application.Current.Resources["loginInstance"] = this;
             Parallel.Invoke(()=> 
             {
@@ -151,5 +150,6 @@ namespace teammy
             btnIcon.Background = null;
         }
         #endregion
+
     }
 }

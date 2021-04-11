@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="login"  Height="620" Width="1000" Closed="loginWindow_Closed"
          WindowStartupLocation="CenterScreen" 
-        WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" DataContext="{Binding RelativeSource={RelativeSource self}}" >
+        WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" DataContext="{Binding RelativeSource={RelativeSource self}}"  >
     <Window.Resources>
         <Style x:Key="closeButton" TargetType="Button">
             <Setter Property="Background" Value="White"/>
@@ -82,8 +82,8 @@
         <TextBox x:Name="passwordPlaceholder" HorizontalAlignment="Left" Height="49" Margin="430,355,0,0" TextWrapping="Wrap" Text="Enter your Password" VerticalAlignment="Top" Width="362" Opacity="0.8" FontSize="18" Foreground="Gray" GotFocus="passwordPlaceholder_GotFocus"/>
         <Label x:Name="usernameLabel" Content="Username" HorizontalAlignment="Left" Margin="430,197,0,0" VerticalAlignment="Top" FontSize="22"/>
         <Label x:Name="passwordLabel" Content="Password" HorizontalAlignment="Left" Margin="430,308,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <Label x:Name="noticeLabel" Content="Please Enter Your credentials to login" HorizontalAlignment="Left" Margin="430,120,0,0" VerticalAlignment="Top" FontSize="30" Foreground="#FFFDB237"/>
-        <Label x:Name="welcomeLable" Content="Welcome Back!" HorizontalAlignment="Left" Margin="70,109,0,0" VerticalAlignment="Top" FontSize="36"/>
+        <Label x:Name="noticeLabel" Content="Please Enter Your credentials to login" HorizontalAlignment="Left" Margin="430,120,0,0" VerticalAlignment="Top" FontSize="30" Foreground="#8671CE"/>
+        <Label x:Name="welcomeLable" Content="Welcome Back!" HorizontalAlignment="Left" Margin="70,109,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#8671CE"/>
         <Button x:Name="signinBtn" Content="Sign In" HorizontalAlignment="Left" Margin="430,439,0,0" VerticalAlignment="Top" Width="123" FontSize="24" Background="#FFFDB237" Foreground="White" Click="signinBtn_Click">
             <Button.Resources>
                 <Style TargetType="Border">

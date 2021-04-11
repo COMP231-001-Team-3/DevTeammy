@@ -373,6 +373,7 @@
     <Resource Include="images\arrow.png" />
     <Resource Include="images\threeDots.png" />
     <Resource Include="images\btnRemove.jpg" />
+    <SplashScreen Include="images\splashScreen.png" />
     <Content Include="teammyDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>teammyDB.Context.cs</LastGenOutput>
