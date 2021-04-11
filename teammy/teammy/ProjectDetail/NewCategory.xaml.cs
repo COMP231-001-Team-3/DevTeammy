@@ -23,7 +23,7 @@ namespace teammy
     /// </summary>
     public partial class NewCategory : UserControl
     {
-        private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
+        private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=dev; pwd=rds8w77c0ehnw2fx; port=25060;";
         private static ResourceDictionary globalItems = Application.Current.Resources;
         public UserModel currentUser { get; set; } = globalItems["AssignieeUser"] as UserModel;  
 
@@ -115,6 +115,7 @@ namespace teammy
                         taStackPanel.Children.Add(taskBox);
                     }
                 }
+                conn.Close();
             }
         }
     }

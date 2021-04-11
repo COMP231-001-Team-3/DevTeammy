@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:teammy.ProjectDetail"
         mc:Ignorable="d"
-        Height="331.333" Width="534.333">
+        Height="331.333" Width="534.333" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- Mouseover style for button that covers the whole card -->
         <Style x:Key="mouseOverStyle" TargetType="Button">

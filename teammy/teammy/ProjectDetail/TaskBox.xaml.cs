@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using teammy.ProjectDetail;
 
 namespace teammy.ProjectDetail
 {
@@ -16,8 +17,9 @@ namespace teammy.ProjectDetail
     /// </summary>
     public partial class TaskBox : UserControl
     {
-        private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
+        private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=dev; pwd=rds8w77c0ehnw2fx; port=25060;";
         List<string> users = new List<string>();
+        static List<TaskBox> objTask = new List<TaskBox>();
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
         private teammyEntities dbContext = new teammyEntities();
@@ -27,7 +29,7 @@ namespace teammy.ProjectDetail
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskDueDateProperty = DependencyProperty.Register("TaskDueDate", typeof(DateTime), typeof(TaskBox));
         public static readonly DependencyProperty TaskAssigneeProperty = DependencyProperty.Register("Assignee", typeof(int), typeof(TaskBox));
-       
+        public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("AssigneeList", typeof(List<string>), typeof(TaskBox));
 
 
         public string TaskName
@@ -52,12 +54,17 @@ namespace teammy.ProjectDetail
             set { SetValue(TaskDueDateProperty, value); }
         }
 
-        //public int TaskAssignee
-        //{
-        //    get { return (int)GetValue(TaskAssigneeProperty); }
-        //    set { SetValue(TaskAssigneeProperty, value); }
-        //}
-       
+        public int TaskAssignee
+        {
+            get { return (int)GetValue(TaskAssigneeProperty); }
+            set { SetValue(TaskAssigneeProperty, value); }
+        }
+        public List<string> TaskAssigneeList
+        {
+            get { return (List<string>)GetValue(TaskAssigneeListProperty); }
+            set { SetValue(TaskAssigneeListProperty, value); }
+        }
+
 
         //Events for change on the text properties
         public event EventHandler<EventArgs> TaskNameChanged;
@@ -69,8 +76,8 @@ namespace teammy.ProjectDetail
 
         public TaskBox()
         {
-
             InitializeComponent();
+            TaskAssigneeList = new List<string>();
             LoadUsers();
         }        
         public ObservableCollection<UserListClass> TeamUsers { get; set; }      
@@ -80,7 +87,8 @@ namespace teammy.ProjectDetail
         }
        
         private void LoadUsers()
-        {            
+        {
+            
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
@@ -112,7 +120,7 @@ namespace teammy.ProjectDetail
             if (signStr != null)
             {
                 int signNum = Int32.Parse(signStr);
-                List<string> userName = new List<string>();
+                
 
                 MySqlCommand getAssingees = new MySqlCommand("SELECT user_name FROM users NATURAL JOIN team_mates Natural JOIN assignees Natural JOIN tasks where assigned_group = @assigned_group", conn);
                 getAssingees.Parameters.AddWithValue("assigned_group", signNum);
@@ -122,14 +130,14 @@ namespace teammy.ProjectDetail
                     while (assingeeReader.Read())
                     {
 
-                        userName.Add((string)assingeeReader["user_name"]);
+                        TaskAssigneeList.Add(assingeeReader["user_name"].ToString());
                     }
                 }
 
-                if (userName != null)
+                if (TaskAssigneeList != null)
                 {
 
-                    foreach (var item in userName)
+                    foreach (var item in TaskAssigneeList)
                     {
                         createInitialBox(item.ToString());
                     }
@@ -137,6 +145,8 @@ namespace teammy.ProjectDetail
             }
             loadPriorityPicture();
             loadStatusPicture();
+            conn.Close();
+            objTask.Add(this); // Taskassigneelist = userNma
         }
         private List<assigneeInitialBox> assignees = new List<assigneeInitialBox>();
 
@@ -334,8 +344,7 @@ namespace teammy.ProjectDetail
             }
         }
         public event EventHandler<EventArgs> taskNameChanged;
-        public NewCategory currentCategory { get; set; } = Application.Current.Resources["currentCategory"] as NewCategory;
-        public TaskBox currentTask { get; set; } = Application.Current.Resources["currentTask"] as TaskBox;
+       
         private void taskNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             
@@ -343,9 +352,23 @@ namespace teammy.ProjectDetail
 
         private void etItem_Click(object sender, RoutedEventArgs e)
         {
-            //TaskBox taskBox = (TaskBox)sender;
-            //EditTaskPage taskDetail = new EditTaskPage() { EditTaskName = , EditTaskDueDate =  };
-            //taskDetail.ShowDialog();
+            string selectedName = taskNameTextBox.Text;
+            
+            for (int i = 0; i < objTask.Count; i++) 
+            {             
+
+                if (selectedName == objTask[i].TaskName)
+                {
+                    EditTaskPage taskDetail = new EditTaskPage() 
+                    { EditTaskName = objTask[i].TaskName, 
+                      EditTaskDueDate = objTask[i].TaskDueDate,
+                      EditTaskPriority = objTask[i].TaskPriority,
+                      EditTaskAssignee = objTask[i].TaskAssigneeList
+                    };
+                    taskDetail.ShowDialog();
+                }
+            }
+            
         }
 
         private void svItem_Click(object sender, RoutedEventArgs e)

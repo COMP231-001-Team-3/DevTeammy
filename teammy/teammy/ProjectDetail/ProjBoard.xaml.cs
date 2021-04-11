@@ -22,7 +22,7 @@ namespace teammy
     /// </summary>
     public partial class ProjBoard : Window
     {
-        private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=admin; pwd=sxx0uix39f5ty52d; port=25060;";
+        private string connectionString = @"server=db-mysql-tor1-21887-do-user-8838717-0.b.db.ondigitalocean.com; database=teammy; uid=dev; pwd=rds8w77c0ehnw2fx; port=25060;";
         
         int left, top, right, bottom;
         int catCount = 0;
@@ -76,6 +76,7 @@ namespace teammy
                     caStackPanel.Children.Add(category);                   
                 }
             }
+            conn.Close();
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
