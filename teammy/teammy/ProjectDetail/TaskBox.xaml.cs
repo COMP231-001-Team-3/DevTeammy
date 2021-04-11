@@ -195,9 +195,7 @@ namespace teammy.ProjectDetail
         }
         private void createInitialBox(string assigneeName)
         {
-            int left = 0, top = 0, right = 0, bottom = 0;
-            int initialBoxCount = 0;
-            int totalBoxes=0;           
+            int left = 0, top = 0, right = 0, bottom = 0;        
             Random rd = new Random();
             string  assigneeInitial;
             string[] nameWords;
@@ -219,9 +217,7 @@ namespace teammy.ProjectDetail
             initialBox.txtInitial.Padding = new Thickness(0, 0, 0, 0);
             
             initialBox.txtInitial.Text = assigneeInitial;
-            assigneeStackPanel.Children.Add(initialBox);          
-            
-            
+            assigneeStackPanel.Children.Add(initialBox);  
         }
        
 
@@ -242,7 +238,6 @@ namespace teammy.ProjectDetail
        
         private void btnStatus_Click(object sender, RoutedEventArgs e)
         {
-            
             ContextMenu cm = FindResource("cmStatus") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
