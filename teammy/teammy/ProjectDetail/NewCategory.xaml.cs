@@ -108,8 +108,8 @@ namespace teammy
                         taskBox = new TaskBox()
                         {
                             TaskName = taskName,
-                            //TaskPriority = taskPrio,
-                            //TaskProgress = taskProgre,
+                            TaskPriority = tasksReader[1].ToString(),
+                            TaskProgress = tasksReader[3].ToString(),
                             TaskDueDate = taskDate,
                         };
                         taStackPanel.Children.Add(taskBox);

@@ -97,5 +97,14 @@ namespace teammy
         }
 
         #endregion
+
+        private void btnDetails_Click(object sender, RoutedEventArgs e)
+        {
+            CardBox cardbox = new CardBox() { FullName = txtFullName.Text, Profile = txtProfText.Text };
+
+            Application.Current.Resources.Add("currentProj", cardbox);            
+            (Application.Current.Resources["BoardCatInstance"] as Window).Show();
+            
+        }
     }
 }

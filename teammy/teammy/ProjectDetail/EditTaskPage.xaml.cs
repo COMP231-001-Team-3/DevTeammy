@@ -106,9 +106,13 @@ namespace teammy.ProjectDetail
                     });
                 }
             }
+            loadPriorityPicture();
             if (EditTaskAssignee != null)
-            { 
-             
+            {
+                foreach (var item in EditTaskAssignee)
+                {
+                    createInitialBox(item.ToString());
+                }
             }
         }
         
@@ -150,6 +154,23 @@ namespace teammy.ProjectDetail
             assigneeStackPanel.Children.Add(initialBox);
 
         }
+        private void loadPriorityPicture()
+        {
+
+            if (EditTaskPriority == "High")
+            {
+                btnPriority.Background = Brushes.Red;
+            }
+            if (EditTaskPriority == "Medium")
+            {
+                btnPriority.Background = Brushes.Yellow;
+            }
+            if (EditTaskPriority == "Low")
+            {
+                btnPriority.Background = Brushes.Blue;
+            }
+        }
+
         private void assigneeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -177,8 +198,7 @@ namespace teammy.ProjectDetail
                     {
                         createInitialBox(currentItem);
                     }
-                }
-                
+                }                
             }
         }
 

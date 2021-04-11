@@ -77,7 +77,7 @@ namespace teammy.ProjectDetail
         public TaskBox()
         {
             InitializeComponent();
-            TaskAssigneeList = new List<string>();
+            TaskAssigneeList = new List<string>();            
             LoadUsers();
         }        
         public ObservableCollection<UserListClass> TeamUsers { get; set; }      
@@ -143,16 +143,18 @@ namespace teammy.ProjectDetail
                     }
                 }
             }
+            TaskPriority = Application.Current.Resources["priority"] as string;
+            TaskProgress = Application.Current.Resources["status"] as string;
             loadPriorityPicture();
             loadStatusPicture();
-            conn.Close();
+            conn.Close();            
             objTask.Add(this); // Taskassigneelist = userNma
         }
         private List<assigneeInitialBox> assignees = new List<assigneeInitialBox>();
 
         private void loadStatusPicture()
         {
-            if (Application.Current.Resources["status"] as string == "IP")
+            if (TaskProgress == "IP")
             {
                 var imgBrush = new ImageBrush();
                 imgBrush.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/images/progressIcon.jpg"));
@@ -160,7 +162,7 @@ namespace teammy.ProjectDetail
                 //statusGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage() { UriSource = new Uri(@"../images/progressIcon.jpg") }); 
 
             }
-            else if (Application.Current.Resources["status"] as string == "CO")
+            else if (TaskProgress == "CO")
             {
                 var imgBrush = new ImageBrush();
                 imgBrush.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/images/complete.png"));
@@ -179,15 +181,15 @@ namespace teammy.ProjectDetail
         private void loadPriorityPicture()
         { 
              
-            if (Application.Current.Resources["priority"] as string== "High")
+            if (TaskPriority == "High")
             {
                 btnPriority.Background = Brushes.Red;
             }
-            if (Application.Current.Resources["priority"] as string == "Medium")
+            if (TaskPriority == "Medium")
             {
                 btnPriority.Background = Brushes.Yellow;
             }
-            if (Application.Current.Resources["priority"] as string == "Low")
+            if (TaskPriority == "Low")
             {
                 btnPriority.Background = Brushes.Blue;
             }                
