@@ -66,7 +66,7 @@
             <Button x:Name="btnPriority" Background="Transparent" Foreground="White" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnPriority_Click" RenderTransformOrigin="0.5,0.5" Height="30" VerticalAlignment="Bottom"/>
         </Grid>
 
-        <Button  BorderThickness="0" Background="hotpink" Foreground="White" Content="Save" HorizontalAlignment="Left" Margin="206,247,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="saveBtn" BorderThickness="0" Background="hotpink" Foreground="White" Content="Save" HorizontalAlignment="Left" Margin="206,247,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" Click="saveBtn_Click" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>

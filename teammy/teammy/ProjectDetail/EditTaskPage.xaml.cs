@@ -63,12 +63,11 @@ namespace teammy.ProjectDetail
             ContextMenu cm = FindResource("cmPriority") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
-
-            //e.Handled = true;
-            //TaskPriorityChanged?.Invoke(this, EventArgs.Empty);
         }
         private void PriorMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            //initiate the button color to default
+            btnPriority.Background = Brushes.Transparent;
             string chosenPriority = (sender as MenuItem).Header.ToString();
             btnPriority.Content = chosenPriority;
             Brush chosenPriorityColour = ((sender as MenuItem).Icon as Rectangle).Fill;
@@ -85,7 +84,6 @@ namespace teammy.ProjectDetail
             conn.Open();
 
             MySqlCommand getTUsers = new MySqlCommand("SELECT user_name  FROM users", conn);
-            //getTUsers.Parameters.AddWithValue("nameTeam", "DevTeam");
             MySqlDataReader reader = getTUsers.ExecuteReader();
             this.DataContext = this;
             TeamUsers = new ObservableCollection<UserListClass>();
@@ -120,9 +118,6 @@ namespace teammy.ProjectDetail
         private void createInitialBox(string assigneeName)
         {
             int left = 0, top = 0, right = 0, bottom = 0;
-            int initialBoxCount = 0;
-            int totalBoxes = 0;
-            //assigneeStackPanel.Children.Clear();
             Random rd = new Random();
             string assigneeInitial;
             string[] nameWords;
@@ -203,6 +198,11 @@ namespace teammy.ProjectDetail
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadUsers();
+        }
+
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
