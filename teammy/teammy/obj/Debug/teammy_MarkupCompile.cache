@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\obj\Debug\
+C:\Users\user\Desktop\COMP231 final\comp231-001_team3\teammy\teammy\obj\Debug\
 teammy
 none
 false
 DEBUG;TRACE
-C:\Users\user\Desktop\4 semester\COMP231-Soft\Teammycode\comp231-001_team3\teammy\teammy\App.xaml
+C:\Users\user\Desktop\COMP231 final\comp231-001_team3\teammy\teammy\App.xaml
 17-1121657977
 2-1194965406
 44-163043162
-401450181313
+40-1661530522
 ProjectDetail\assigneeInitialBox.xaml;ProjectDetail\EditTaskPage.xaml;ProjectDetail\NewCategory.xaml;ProjectDetail\ProjBoard.xaml;ProjectDetail\TaskBox.xaml;UserControls\AssigneeEllipse.xaml;UserControls\DayBox.xaml;UserControls\PopTaskBox.xaml;Windows\PopUp.xaml;Windows\Schedule.xaml;Windows\TeamsContactlist.xaml;Windows\TeamsList.xaml;Windows\ProgressReport.xaml;Windows\login.xaml;Windows\MainWindow.xaml;Windows\CreateProject.xaml;UserControls\CardBox.xaml;
 images\splashscreen.png
-False
+True
 

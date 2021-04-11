@@ -92,8 +92,7 @@ namespace teammy.ProjectDetail
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
-            MySqlCommand getTUsers = new MySqlCommand("SELECT user_name  FROM users", conn);
-            //getTUsers.Parameters.AddWithValue("nameTeam", "DevTeam");
+            MySqlCommand getTUsers = new MySqlCommand("SELECT user_name  FROM users", conn);            
             MySqlDataReader reader = getTUsers.ExecuteReader();
             this.DataContext = this;
             TeamUsers = new ObservableCollection<UserListClass>();
@@ -159,7 +158,7 @@ namespace teammy.ProjectDetail
                 var imgBrush = new ImageBrush();
                 imgBrush.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/images/progressIcon.jpg"));
                 statusGrid.Background = imgBrush;
-                //statusGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage() { UriSource = new Uri(@"../images/progressIcon.jpg") }); 
+                 
 
             }
             else if (TaskProgress == "CO")
@@ -167,7 +166,7 @@ namespace teammy.ProjectDetail
                 var imgBrush = new ImageBrush();
                 imgBrush.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/images/complete.png"));
                 statusGrid.Background = imgBrush;
-                //statusGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage() { UriSource = new Uri(@"../images/complete.png") });
+                
             }
             else
             {
@@ -220,19 +219,8 @@ namespace teammy.ProjectDetail
             initialBox.txtInitial.Padding = new Thickness(0, 0, 0, 0);
             
             initialBox.txtInitial.Text = assigneeInitial;
-
-            if (++totalBoxes == 3)
-            {
-                totalBoxes--;
-                MessageBox.Show("The maximum limit for assignees per a task is 3!", "Max Assigning completed", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            assigneeStackPanel.Children.Add(initialBox);          
             
-            assigneeStackPanel.Children.Add(initialBox);
-            
-            left += 25;
-            right -= 25;
-            initialBoxCount++;
             
         }
        
@@ -249,10 +237,6 @@ namespace teammy.ProjectDetail
             ContextMenu cm = FindResource("cmPriority") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
-            
-
-            //e.Handled = true;
-            //TaskPriorityChanged?.Invoke(this, EventArgs.Empty);
         }
 
        
@@ -262,10 +246,6 @@ namespace teammy.ProjectDetail
             ContextMenu cm = FindResource("cmStatus") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
-            
-
-            //e.Handled = true;
-            //TaskProgressChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void PriorMenuItem_Click(object sender, RoutedEventArgs e)
@@ -325,9 +305,7 @@ namespace teammy.ProjectDetail
                 string currentItem = (currentComboBox.SelectedItem as UserListClass).TeamMembers;               
                 if (currentItem != null)
                 {
-                    //MessageBox.Show(currentItem.Content.ToString());                  
-
-                    createInitialBox(currentItem);
+                   createInitialBox(currentItem);
                 }
             } 
         }

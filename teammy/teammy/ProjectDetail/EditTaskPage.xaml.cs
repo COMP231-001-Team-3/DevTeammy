@@ -144,13 +144,6 @@ namespace teammy.ProjectDetail
 
             initialBox.txtInitial.Text = assigneeInitial;
 
-            if (++totalBoxes == 3)
-            {
-                totalBoxes--;
-                MessageBox.Show("The maximum limit for assignees per a task is 3!", "Max Assigning completed", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
             assigneeStackPanel.Children.Add(initialBox);
 
         }
