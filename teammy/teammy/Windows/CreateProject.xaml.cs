@@ -29,6 +29,7 @@ namespace teammy
 
         private TextBox txtNameInput;
         private string prevSelection;
+        private List<ProjBoard> projectBrds = new List<ProjBoard>();
         #endregion
 
         #region Properties
@@ -48,7 +49,7 @@ namespace teammy
         /// <summary>
         ///     Loads projects from the database
         /// </summary>
-        private void LoadProjects(string sender = "")
+        public void LoadProjects(string sender = "")
         {
             string currSelection = cmbTeams.SelectedItem?.ToString();
             
@@ -100,6 +101,8 @@ namespace teammy
 
                 project.CardClick += new RoutedEventHandler(project_CardClick);
 
+                project_CardClick(project, null);
+
                 //Adds the newly created ProjectBox to the Grid within the ScrollViewer
                 projGrid.Children.Add(project);
 
@@ -127,12 +130,20 @@ namespace teammy
 
         private void project_CardClick(object sender, RoutedEventArgs e)
         {
-            CardBox current = ((sender as Button).Parent as Grid).Parent as CardBox;
-
-            ProjBoard projDetails = new ProjBoard() { projName = current.FullName };
-
-            projDetails.Show();
-            Hide();
+            CardBox current;
+            if (e == null)
+            {
+                current = sender as CardBox;
+                ProjBoard projDetails = new ProjBoard() { projName = current.FullName };
+                projDetails.LoadCategories();
+                projectBrds.Add(projDetails);
+            }
+            else
+            {
+                current = ((sender as Button).Parent as Grid).Parent as CardBox;
+                projectBrds[projGrid.Children.IndexOf(current)].Show();
+                Hide();
+            }
         }
 
         /// <summary>

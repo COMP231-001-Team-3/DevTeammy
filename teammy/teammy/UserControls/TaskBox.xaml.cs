@@ -50,7 +50,7 @@ namespace teammy
             TaskAssigneeList = new List<string>();        
         }        
                
-        private void LoadUsers()
+        public void LoadUsers()
         {
             List<string> teamMembers = (from mate in dbContext.team_mates
                                      where mate.Team_ID == Task.project.Team_ID
@@ -62,7 +62,7 @@ namespace teammy
                                  where task.task_name.Equals(Task.task_name) && task.assigned_group.HasValue
                                  select task.assigned_group).Single();
 
-            if(assigned_group != null)
+            if(assigned_group.HasValue)
             {
                 List<string> assignees = (from assignee in dbContext.assignees
                                        where assignee.assigned_group == assigned_group
@@ -70,7 +70,7 @@ namespace teammy
                 assignees.ForEach(TaskAssigneeList.Add);
                 foreach (var item in TaskAssigneeList)
                 {
-                    CreateAssigneeBox(item.ToString());
+                    CreateAssigneeBox(item);
                 }
             }
 
@@ -79,13 +79,16 @@ namespace teammy
 
         private void CreateAssigneeBox(string assigneeName)
         {
-            Random rd = new Random();      
-            
+            Random rd = new Random();
+
             //Creation & Initialization of InitialBox
-            AssigneeEllipseTask epsAssignee = new AssigneeEllipseTask();
-            epsAssignee.User = assigneeName;
-            epsAssignee.BackColor = backColors[rd.Next(0, backColors.Length - 1)];
-            assigneeStackPanel.Children.Add(epsAssignee);  
+            AssigneeEllipseTask epsAssignee = new AssigneeEllipseTask
+            {
+                User = assigneeName,
+                BackColor = backColors[rd.Next(0, backColors.Length - 1)]
+            };
+
+            assigneeStackPanel.Children.Add(epsAssignee);
         }
        
 
@@ -225,11 +228,6 @@ namespace teammy
                 StackPanel taskPnlParent = Parent as StackPanel;
                 taskPnlParent.Children.Remove(this);
             }                      
-        }
-
-        private void taskBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadUsers();
         }
     }
 }

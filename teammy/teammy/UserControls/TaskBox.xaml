@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:teammy" 
-             mc:Ignorable="d" Width="204.181" Height="106.07" Loaded="taskBox_Loaded" DataContext="{Binding RelativeSource={RelativeSource self}}">
+             mc:Ignorable="d" Width="204.181" Height="106.07"  DataContext="{Binding RelativeSource={RelativeSource self}}">
     <UserControl.Resources>
         <!-- Value Converter Instance -->
         <local:ColorToBrushConverter x:Key="ColorConverter"/>

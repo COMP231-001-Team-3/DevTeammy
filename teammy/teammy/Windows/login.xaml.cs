@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,8 +45,14 @@ namespace teammy
             else if ((bool)validPassword)
             {//showing homepage if authentication success
                 Application.Current.Resources.Add("currentUser", userEntered);
+
+                SplashScreen sp = new SplashScreen("../images/splashScreen.png");
+                sp.Show(true);
+
+                (Application.Current.Resources["createProjInstance"] as CreateProject).LoadProjects();
+                
                 (Application.Current.Resources["mainInstance"] as Window).Show();
-                Hide();
+                Hide();                
             }
         }
 

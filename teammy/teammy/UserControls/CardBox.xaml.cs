@@ -6,7 +6,7 @@ using System.Windows.Media;
 namespace teammy
 {
     /// <summary>
-    /// Interaction logic for ProjectBox.xaml
+    /// Interaction logic for CardBox.xaml
     /// </summary>
     public partial class CardBox : UserControl
     {
@@ -66,8 +66,6 @@ namespace teammy
             remove { chkSelector.Unchecked -= value; }
         }
 
-        TriggerCollection trgHovers;
-
         #region Constructor
         public CardBox()
         {
@@ -97,11 +95,5 @@ namespace teammy
         }
 
         #endregion
-
-        private void btnDetails_Click(object sender, RoutedEventArgs e)
-        {
-            
-            
-        }
     }
 }

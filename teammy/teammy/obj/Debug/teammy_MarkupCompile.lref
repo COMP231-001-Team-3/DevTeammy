@@ -1,7 +1,8 @@
 ﻿
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\App.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\UserControls\AssigneeEllipseTask.xaml;;
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\EditTaskPage.xaml;;
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\UserControls\Category.xaml;;
+FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\UserControls\ProjCategory.xaml;;
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\ProjBoard.xaml;;
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\UserControls\TaskBox.xaml;;
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\UserControls\AssigneeEllipse.xaml;;
@@ -16,5 +17,4 @@ FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\logi
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\MainWindow.xaml;;
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\Windows\CreateProject.xaml;;
 FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\UserControls\CardBox.xaml;;
-FD:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\UserControls\AssigneeEllipseTask.xaml;;
 

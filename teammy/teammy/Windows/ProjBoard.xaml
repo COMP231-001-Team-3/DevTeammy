@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="ProjBoard" Height="450" Width="800"
         WindowStartupLocation="CenterScreen" 
-        WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" AllowsTransparency="True" Loaded="projBoard_Loaded">
+        WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" AllowsTransparency="True">
     <Window.Resources>
         <Style x:Key="addButtonStyle" TargetType="Button">
             <Setter Property="Template">

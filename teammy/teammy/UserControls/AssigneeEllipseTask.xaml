@@ -11,6 +11,6 @@
     </UserControl.Resources>
     <Grid x:Name="containerGrid" Width="20" Height="20" ToolTip="{Binding User}">
         <Ellipse x:Name="epsBack" Fill="{Binding BackColor, Converter={StaticResource ColorConverter}}" Height="15" Width="15"/>
-        <Label x:Name="lblAssigneeChars" Content="{Binding User, Converter={StaticResource NameConverter}}" Margin="0,3,0,0" FontFamily="Berlin Sans FB" Foreground="White" Padding="0" HorizontalContentAlignment="Center" FontSize="9.5" FontWeight="Bold" />
+        <Label x:Name="lblAssigneeChars" Content="{Binding User, Converter={StaticResource NameConverter}}" Margin="0,5,0,0" FontFamily="Berlin Sans FB" Foreground="White" Padding="0" HorizontalContentAlignment="Center" FontSize="9.5" FontWeight="Bold" />
     </Grid>
 </UserControl>

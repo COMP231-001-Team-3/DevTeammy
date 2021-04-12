@@ -24,11 +24,7 @@ namespace teammy
         private static ResourceDictionary globalItems = Application.Current.Resources;
         
         int left, top, right, bottom;
-        int catCount = 0;
         int totalCats = 0;
-        NewCategory toBeInserted;
-        MySqlConnection conn;
-
 
         public string projName { get; set; }
 
@@ -36,17 +32,16 @@ namespace teammy
 
         public ProjBoard()
         {
-            InitializeComponent();          
+            InitializeComponent();
         }
 
-        private void LoadCategories()
+        public void LoadCategories()
         {
             lblProjName.Content = projName;
             left = 0;
             top = 0;
             right = 5;
             bottom = 0;
-            catCount = 0;
             totalCats = 0;
             caStackPanel.Children.Clear();
 
@@ -55,17 +50,17 @@ namespace teammy
                                             select project.categories).Single().ToList();
 
             string catName;
-            NewCategory toBeAdded;
+            ProjCategory toBeAdded = null;
             for (int i = 0; i < projCategories.Count; i++)
             {
                 totalCats++;
                 catName = projCategories[i].category_name.ToString();
-                Application.Current.Resources["catName"] = catName;
 
-                toBeAdded = new NewCategory() { CategoryName = catName, Margin = new Thickness(left, top, right, bottom) };
+                toBeAdded = new ProjCategory() { CategoryName = catName, Margin = new Thickness(left, top, right, bottom) };
 
                 caStackPanel.Children.Add(toBeAdded);
-            }
+                toBeAdded.LoadTasks();
+            }            
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -85,12 +80,7 @@ namespace teammy
             ContextMenu cm = globalItems["cmButton"] as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
-        }
-
-        private void projBoard_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadCategories();
-        }
+        }      
 
         /// <summary>
         ///     Moves the window along with the title pane when it is dragged
@@ -114,8 +104,8 @@ namespace teammy
                 return;
             }            
             Application.Current.Resources["catName"] = null;
-            NewCategory newlyAdded = new NewCategory();
+            ProjCategory newlyAdded = new ProjCategory();
             caStackPanel.Children.Add(newlyAdded);           
-        }
+        }   
     }
 }

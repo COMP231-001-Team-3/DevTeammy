@@ -10,7 +10,7 @@
         <local:ProgressReport x:Key="progReportInstance"/>
         <local:TeamsList x:Key="teamsListInstance"/>
         <local:Schedule x:Key="scheduleInstance"/>
-        <local:NewCategory x:Key="catNameInstance"/>
+        <local:ProjCategory x:Key="catNameInstance"/>
 
         <Style x:Key="mouseOverStyle" TargetType="Button">
             <Setter Property="Template">

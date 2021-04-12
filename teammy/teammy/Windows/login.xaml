@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="login"  Height="620" Width="1000" Closed="loginWindow_Closed"
          WindowStartupLocation="CenterScreen" 
-        WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" DataContext="{Binding RelativeSource={RelativeSource self}}"  >
+        WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Window.Resources>
         <Style x:Key="closeButton" TargetType="Button">
             <Setter Property="Background" Value="White"/>

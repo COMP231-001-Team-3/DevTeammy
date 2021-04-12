@@ -174,8 +174,8 @@
     <Compile Include="Windows\EditTaskPage.xaml.cs">
       <DependentUpon>EditTaskPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Category.xaml.cs">
-      <DependentUpon>Category.xaml</DependentUpon>
+    <Compile Include="UserControls\ProjCategory.xaml.cs">
+      <DependentUpon>ProjCategory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ProjBoard.xaml.cs">
       <DependentUpon>ProjBoard.xaml</DependentUpon>
@@ -188,7 +188,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\Category.xaml">
+    <Page Include="UserControls\ProjCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
