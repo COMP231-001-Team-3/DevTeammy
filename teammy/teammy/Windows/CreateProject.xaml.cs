@@ -97,6 +97,9 @@ namespace teammy
 
                 //Creation & Initialization of ProjectBox
                 project = new CardBox() { Name = "crdBox" + i, FullName = projName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)] };
+
+                project.CardClick += new RoutedEventHandler(project_CardClick);
+
                 //Adds the newly created ProjectBox to the Grid within the ScrollViewer
                 projGrid.Children.Add(project);
 
@@ -120,6 +123,16 @@ namespace teammy
                 }
             }
             prevSelection = currSelection;
+        }
+
+        private void project_CardClick(object sender, RoutedEventArgs e)
+        {
+            CardBox current = ((sender as Button).Parent as Grid).Parent as CardBox;
+
+            ProjBoard projDetails = new ProjBoard() { projName = current.FullName };
+
+            projDetails.Show();
+            Hide();
         }
 
         /// <summary>

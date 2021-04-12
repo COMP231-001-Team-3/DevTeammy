@@ -10,8 +10,6 @@
         <local:ProgressReport x:Key="progReportInstance"/>
         <local:TeamsList x:Key="teamsListInstance"/>
         <local:Schedule x:Key="scheduleInstance"/>
-        <local:CardBox x:Key="prjectInstance"/>
-        <local:ProjBoard x:Key="BoardCatInstance"/>
         <local:NewCategory x:Key="catNameInstance"/>
 
         <Style x:Key="mouseOverStyle" TargetType="Button">

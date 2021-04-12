@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace teammy.ProjectDetail
+namespace teammy
 {
     /// <summary>
     /// Interaction logic for EditTaskPage.xaml
@@ -104,7 +104,7 @@ namespace teammy.ProjectDetail
                     });
                 }
             }
-            loadPriorityPicture();
+
             if (EditTaskAssignee != null)
             {
                 foreach (var item in EditTaskAssignee)
@@ -118,45 +118,12 @@ namespace teammy.ProjectDetail
         private void createInitialBox(string assigneeName)
         {
             int left = 0, top = 0, right = 0, bottom = 0;
-            Random rd = new Random();
-            string assigneeInitial;
-            string[] nameWords;
-
-            nameWords = assigneeName.Split(' ');
-
-            if (nameWords.Length >= 2)
-            {
-                assigneeInitial = nameWords[0][0] + "" + nameWords[1][0];
-            }
-            else
-            {
-                assigneeInitial = nameWords[0][0] + "" + nameWords[0][1];
-            }
+            
             //Creation & Initialization of InitialBox
-            assigneeInitialBox initialBox = new assigneeInitialBox(backColors[rd.Next(0, 18)]);
-            initialBox.Margin = new Thickness(left, top, right, bottom);
-            initialBox.txtInitial.Padding = new Thickness(0, 0, 0, 0);
-
-            initialBox.txtInitial.Text = assigneeInitial;
-
-            assigneeStackPanel.Children.Add(initialBox);
-
-        }
-        private void loadPriorityPicture()
-        {
-
-            if (EditTaskPriority == "High")
-            {
-                btnPriority.Background = Brushes.Red;
-            }
-            if (EditTaskPriority == "Medium")
-            {
-                btnPriority.Background = Brushes.Yellow;
-            }
-            if (EditTaskPriority == "Low")
-            {
-                btnPriority.Background = Brushes.Blue;
-            }
+            AssigneeEllipse assigneeBox = new AssigneeEllipse();
+            assigneeBox.Margin = new Thickness(left, top, right, bottom);
+            assigneeBox.Name = assigneeName;
+            assigneeStackPanel.Children.Add(assigneeBox);
         }
 
         private void assigneeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)

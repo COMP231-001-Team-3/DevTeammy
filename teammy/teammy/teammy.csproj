@@ -168,33 +168,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ProjectDetail\ColorToBrushConverter.cs" />
-    <Compile Include="ProjectDetail\EditTaskPage.xaml.cs">
+    <Compile Include="UserControls\AssigneeEllipseTask.xaml.cs">
+      <DependentUpon>AssigneeEllipseTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditTaskPage.xaml.cs">
       <DependentUpon>EditTaskPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProjectDetail\NewCategory.xaml.cs">
-      <DependentUpon>NewCategory.xaml</DependentUpon>
+    <Compile Include="UserControls\Category.xaml.cs">
+      <DependentUpon>Category.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProjectDetail\ProjBoard.xaml.cs">
+    <Compile Include="Windows\ProjBoard.xaml.cs">
       <DependentUpon>ProjBoard.xaml</DependentUpon>
     </Compile>
-    <Page Include="ProjectDetail\assigneeInitialBox.xaml">
+    <Page Include="UserControls\AssigneeEllipseTask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\EditTaskPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProjectDetail\EditTaskPage.xaml">
+    <Page Include="UserControls\Category.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProjectDetail\NewCategory.xaml">
+    <Page Include="Windows\ProjBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProjectDetail\ProjBoard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ProjectDetail\TaskBox.xaml" />
+    <Page Include="UserControls\TaskBox.xaml" />
     <Page Include="UserControls\AssigneeEllipse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,9 +246,6 @@
     </Compile>
     <Compile Include="UserControls\DayBox.xaml.cs">
       <DependentUpon>DayBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectDetail\assigneeInitialBox.xaml.cs">
-      <DependentUpon>assigneeInitialBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ListToVisibConverter.cs" />
     <Compile Include="preference.cs">
@@ -340,7 +339,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProjectDetail\TaskBox.xaml.cs">
+    <Compile Include="UserControls\TaskBox.xaml.cs">
       <DependentUpon>TaskBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
