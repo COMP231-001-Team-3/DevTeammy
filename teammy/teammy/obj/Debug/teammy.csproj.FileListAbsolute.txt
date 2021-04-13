@@ -17,6 +17,7 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Sys
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\WpfAnimatedGif.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Zstandard.Net.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Ubiety.Dns.Core.dll
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\EntityFramework.xml
@@ -37,8 +38,11 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\Sys
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Memory.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Numerics.Vectors.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\WpfAnimatedGif.pdb
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\bin\Debug\WpfAnimatedGif.xml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\AssigneeEllipseTask.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\Windows\EditTaskPage.g.cs
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\ProjCategory.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\Windows\ProjBoard.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\TaskBox.g.cs
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\AssigneeEllipse.g.cs
@@ -61,6 +65,7 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\tea
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\App.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\AssigneeEllipseTask.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\Windows\EditTaskPage.baml
+D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\ProjCategory.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\Windows\ProjBoard.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\TaskBox.baml
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\AssigneeEllipse.baml
@@ -82,6 +87,3 @@ D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\tea
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csproj.CopyComplete
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.exe
 D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.pdb
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\teammy.csprojAssemblyReference.cache
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\ProjCategory.g.cs
-D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\teammy\obj\Debug\UserControls\ProjCategory.baml

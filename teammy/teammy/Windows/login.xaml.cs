@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace teammy
 {
@@ -43,16 +46,15 @@ namespace teammy
                 MessageBox.Show("The username/password entered is incorrect!", "Authentication Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if ((bool)validPassword)
-            {//showing homepage if authentication success
+            {
+                //showing homepage if authentication success
                 Application.Current.Resources.Add("currentUser", userEntered);
-
-                SplashScreen sp = new SplashScreen("../images/splashScreen.png");
-                sp.Show(true);
-
+                SplashScreen splashLog = new SplashScreen("../images/splashLogging.png");
+                splashLog.Show(true);
                 (Application.Current.Resources["createProjInstance"] as CreateProject).LoadProjects();
-                
                 (Application.Current.Resources["mainInstance"] as Window).Show();
-                Hide();                
+                
+                Hide();
             }
         }
 
