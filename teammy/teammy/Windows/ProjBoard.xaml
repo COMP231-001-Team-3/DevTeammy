@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="ProjBoard" Height="450" Width="800"
         WindowStartupLocation="CenterScreen" 
-        WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" AllowsTransparency="True">
+        WindowStyle="None" Background="#FFF01FFF" ResizeMode="NoResize" AllowsTransparency="True" DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Window.Resources>
         <Style x:Key="addButtonStyle" TargetType="Button">
             <Setter Property="Template">
@@ -35,7 +35,8 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>        
+        </Style>
+        <local:PrivToVisibConverter x:Key="PrivConverter"/>
     </Window.Resources>
 
     <!-- UI Elements' declaration start here -->
@@ -66,7 +67,7 @@
         <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
         
         <Label x:Name="lblProjName" Content="ProjectName" HorizontalAlignment="Left" Height="25" Margin="231,39,0,0" VerticalAlignment="Top" Width="160"/>
-        <Button x:Name="AddCategoryButton" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=addButtonStyle}" Margin="221,61,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="AddCategoryButton_Click" RenderTransformOrigin="-1.108,1.379">
+        <Button x:Name="AddCategoryButton" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=addButtonStyle}" Margin="221,61,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="AddCategoryButton_Click" Visibility="{Binding Path=currentUser, Converter={StaticResource ResourceKey=PrivConverter}}" RenderTransformOrigin="-1.108,1.379">
         </Button>
     </Grid>
 </Window>

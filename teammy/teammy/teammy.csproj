@@ -171,6 +171,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\PrivToEnabledConverter.cs" />
+    <Compile Include="Converters\PrivToBoolConverter.cs" />
     <Compile Include="UserControls\AssigneeEllipseTask.xaml.cs">
       <DependentUpon>AssigneeEllipseTask.xaml</DependentUpon>
     </Compile>

@@ -16,7 +16,8 @@ namespace teammy
     /// </summary>
     public partial class TaskBox : UserControl
     {
-        static List<TaskBox> objTask = new List<TaskBox>();
+        private static ResourceDictionary globalItems = Application.Current.Resources;
+        private static List<TaskBox> objTask = new List<TaskBox>();
         private Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
         private teammyEntities dbContext = new teammyEntities();
 
@@ -51,6 +52,9 @@ namespace teammy
         }
 
         public ObservableCollection<MenuItem> TeamUsers { get; set; } = new ObservableCollection<MenuItem>();
+
+        public static user currentUser { get; set; } = globalItems["currentUser"] as user;
+        public DateTime DisplayDateStart { get; set; } = currentUser.privilege_code.Equals("PM") ? DateTime.Now : DateTime.MaxValue;
 
         public TaskBox()
         {

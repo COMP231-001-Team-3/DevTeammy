@@ -12,6 +12,7 @@ namespace teammy
     /// </summary>
     public partial class ProjCategory : UserControl
     {
+        private static ResourceDictionary globalItems = Application.Current.Resources;
         private teammyEntities dbContext = new teammyEntities();
         private int totalBoxes = 0;
         private TaskBox toBeInserted;
@@ -30,6 +31,7 @@ namespace teammy
             get { return (ObservableCollection<TaskBox>)GetValue(TasksProperty); }
             set { SetValue(TasksProperty, value); }
         }
+        public user currentUser { get; set; } = globalItems["currentUser"] as user;
 
         public ProjCategory()
         {
@@ -45,10 +47,6 @@ namespace teammy
                 MessageBox.Show("The maximum limit for task per category is 9!", "Max tasks completed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            Application.Current.Resources["assigneeNum"] = null;
-            Application.Current.Resources["priority"] = null;
-            Application.Current.Resources["status"] = null;
             toBeInserted = new TaskBox() { Task = new task()};
 
             Tasks.Add(toBeInserted);

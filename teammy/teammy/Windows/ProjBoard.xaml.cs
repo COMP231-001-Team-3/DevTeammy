@@ -29,6 +29,7 @@ namespace teammy
         public string projName { get; set; }
 
         private teammyEntities dbContext = new teammyEntities();
+        public user currentUser { get; set; } = globalItems["currentUser"] as user;
 
         public ProjBoard()
         {
@@ -102,8 +103,7 @@ namespace teammy
                 totalCats--;
                 MessageBox.Show("The maximum limit for categories per project is 9!", "Max categories completed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
-            }            
-            Application.Current.Resources["catName"] = null;
+            }
             ProjCategory newlyAdded = new ProjCategory();
             caStackPanel.Children.Add(newlyAdded);           
         }   
