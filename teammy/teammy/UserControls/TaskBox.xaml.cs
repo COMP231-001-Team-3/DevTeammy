@@ -21,42 +21,50 @@ namespace teammy
         private teammyEntities dbContext = new teammyEntities();
 
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(task), typeof(TaskBox));
-        public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("TaskAssigneeList", typeof(List<string>), typeof(TaskBox));
+        public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
+        public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string), typeof(TaskBox));
+        public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("TaskAssigneeList", typeof(ObservableCollection<AssigneeEllipseTask>), typeof(TaskBox));
+        private int LoadCounter = 0;
 
         public task Task
         {
             get { return (task)GetValue(TaskProperty); }
             set { SetValue(TaskProperty, value); }
         }
-        public List<string> TaskAssigneeList
+        public string TaskProgress
         {
-            get { return (List<string>)GetValue(TaskAssigneeListProperty); }
+            get { return GetValue(TaskProgressProperty).ToString(); }
+            set 
+            {
+                SetValue(TaskProgressProperty, value);
+            }
+        }
+        public string TaskPriority
+        {
+            get { return GetValue(TaskPriorityProperty).ToString(); }
+            set { SetValue(TaskPriorityProperty, value); }
+        }
+        public ObservableCollection<AssigneeEllipseTask> TaskAssigneeList
+        {
+            get { return (ObservableCollection<AssigneeEllipseTask>)GetValue(TaskAssigneeListProperty); }
             set { SetValue(TaskAssigneeListProperty, value); }
         }
 
-
-        //Events for change
-        //public event EventHandler<EventArgs> TaskNameChanged;
-        //public event EventHandler<EventArgs> TaskPriorityChanged;
-        //public event EventHandler<EventArgs> TaskProgressChanged;
-        //public event EventHandler<EventArgs> TaskDueDateChanged;
-        //public event EventHandler<EventArgs> TaskAssigneeChanged;
-
-        public ObservableCollection<string> TeamUsers { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<MenuItem> TeamUsers { get; set; } = new ObservableCollection<MenuItem>();
 
         public TaskBox()
         {
             InitializeComponent();
-            TaskAssigneeList = new List<string>();        
-        }        
-               
+            TaskAssigneeList = new ObservableCollection<AssigneeEllipseTask>();
+        }
+
         public void LoadUsers()
         {
             List<string> teamMembers = (from mate in dbContext.team_mates
                                      where mate.Team_ID == Task.project.Team_ID
                                      select mate.user.user_name).ToList();
 
-            teamMembers.ForEach(TeamUsers.Add);
+            teamMembers.ForEach(member => TeamUsers.Add(new MenuItem() { Header = member, HorizontalContentAlignment= HorizontalAlignment.Left, VerticalContentAlignment = VerticalAlignment.Center}));
 
             int? assigned_group = (from task in dbContext.tasks
                                  where task.task_name.Equals(Task.task_name) && task.assigned_group.HasValue
@@ -67,8 +75,8 @@ namespace teammy
                 List<string> assignees = (from assignee in dbContext.assignees
                                        where assignee.assigned_group == assigned_group
                                        select assignee.team_mates.user.user_name).ToList();
-                assignees.ForEach(TaskAssigneeList.Add);
-                foreach (var item in TaskAssigneeList)
+
+                foreach (var item in assignees)
                 {
                     CreateAssigneeBox(item);
                 }
@@ -88,7 +96,7 @@ namespace teammy
                 BackColor = backColors[rd.Next(0, backColors.Length - 1)]
             };
 
-            assigneeStackPanel.Children.Add(epsAssignee);
+            TaskAssigneeList.Add(epsAssignee);
         }
        
 
@@ -118,8 +126,12 @@ namespace teammy
             //initiate the button color to default
             btnPriority.Background = Brushes.Transparent;
 
-            Brush chosenPriority = ((sender as MenuItem).Icon as Rectangle).Fill;
-            priorityGrid.Background = chosenPriority;
+            string priorName = (sender as MenuItem).Name.Replace("Item", "");
+            string formatted = (priorName[0] + "").ToUpper() + priorName.Substring(1).ToLower();
+
+            TaskPriority = formatted;
+            dbContext.tasks.Find(Task.task_id).priority = TaskPriority;
+            dbContext.SaveChanges();
         }
 
         private void StatusMenuItem_MouseEnter(object sender, MouseEventArgs e)
@@ -154,44 +166,17 @@ namespace teammy
             {
                 Task.progress_code = statusWords[0][0] + "" + statusWords[0][1];
             }
-            string imagePath = null;
-            switch (Task.progress_code)
-            {
-                case "NS":
-                    imagePath = "pack://application:,,,/images/notstarted.png";
-                    break;
-                case "IP":
-                    imagePath = "pack://application:,,,/images/progressIcon.jpg";
-                    break;
-                case "CO":
-                    imagePath = "pack://application:,,,/images/complete.png";
-                    break;
-            }
-
-            statusGrid.Background = new ImageBrush() { ImageSource = new BitmapImage(new Uri(imagePath)) };
-        }
-
-        private void btnAssignee_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void assigneeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox currentComboBox = sender as ComboBox;
-            if (currentComboBox != null)
-            {
-                string currentItem = currentComboBox.SelectedItem.ToString();
-                if (currentItem != null)
-                {
-                    CreateAssigneeBox(currentItem);
-                }
-            }
+            TaskProgress = Task.progress_code;
+            dbContext.tasks.Find(Task.task_id).progress_code = TaskProgress;
+            dbContext.SaveChanges();
         }
        
         private void taskNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            TaskProgress = Task.progress_code;
+            TaskPriority = Task.priority;
+            dbContext.tasks.Find(Task.task_id).task_name = taskNameTextBox.Text;
+            dbContext.SaveChanges();
         }
 
         private void editItem_Click(object sender, RoutedEventArgs e)
@@ -228,6 +213,53 @@ namespace teammy
                 StackPanel taskPnlParent = Parent as StackPanel;
                 taskPnlParent.Children.Remove(this);
             }                      
+        }
+
+        private void btnAddAssignee_Click(object sender, RoutedEventArgs e)
+        {
+            ContextMenu cm = FindResource("cmAssignees") as ContextMenu;
+            cm.PlacementTarget = sender as Button;
+            cm.IsOpen = true;
+        }
+
+        private void AssigneeMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            string username = (sender as MenuItem).Header.ToString();
+            if(TaskAssigneeList.Count <= 4)
+            {
+                CreateAssigneeBox(username);
+                dbContext.assignees.Add(new assignee()
+                {
+                    assigned_group = Task.assigned_group,
+                    mate_id = (from mate in dbContext.team_mates
+                               where mate.user.user_name.Equals(username) && mate.Team_ID == Task.project.Team_ID
+                               select mate.mate_id).Single()
+                });
+            }
+            else
+            {
+                MessageBox.Show("The Maximum number of assignees per task is 4.", "Max Assignees Exceeded!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            ContextMenu cm = FindResource("cmAssignees") as ContextMenu;
+
+            if (LoadCounter == 0 && cm.Items.Count != 0)
+            {
+                foreach (MenuItem menuItem in cm.Items)
+                {
+                    menuItem.Click += new RoutedEventHandler(AssigneeMenuItem_Click);
+                }
+                LoadCounter++;
+            }
+        }
+
+        private void taskDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dbContext.tasks.Find(Task.task_id).due_date = taskDate.SelectedDate;
+            dbContext.SaveChanges();
         }
     }
 }

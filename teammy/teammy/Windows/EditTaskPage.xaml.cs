@@ -25,31 +25,12 @@ namespace teammy
         List<string> users = new List<string>();
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
-        public static readonly DependencyProperty EditTaskNameProperty = DependencyProperty.Register("EditTaskName", typeof(string), typeof(TaskBox));
-        public static readonly DependencyProperty EditTaskPriorityProperty = DependencyProperty.Register("EditTaskPriority", typeof(string), typeof(TaskBox));
-       
-        public static readonly DependencyProperty EditTaskDueDateProperty = DependencyProperty.Register("EditTaskDueDate", typeof(DateTime), typeof(TaskBox));
-        //public static readonly DependencyProperty EditTaskAssigneeProperty = DependencyProperty.Register("Assignee", typeof(int), typeof(TaskBox));
+        public string EditTaskName { get; set; }
+        public string EditTaskPriority { get; set; }
 
-        public string EditTaskName
-        {
-            get { return (string)GetValue(EditTaskNameProperty); }
-            set { SetValue(EditTaskNameProperty, value); }
-        }
-        public string EditTaskPriority
-        {
-            get { return (string)GetValue(EditTaskPriorityProperty); }
-            set { SetValue(EditTaskPriorityProperty, value); }
+        public DateTime EditTaskDueDate { get; set; }
 
-        }
-
-        public DateTime EditTaskDueDate
-        {
-            get { return (DateTime)GetValue(EditTaskDueDateProperty); }
-            set { SetValue(EditTaskDueDateProperty, value); }
-        }
-
-        public List<string> EditTaskAssignee { get; set; }
+        public ObservableCollection<AssigneeEllipseTask> EditTaskAssignee { get; set; }
 
 
         public EditTaskPage()

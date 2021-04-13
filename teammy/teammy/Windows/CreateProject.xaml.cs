@@ -141,7 +141,18 @@ namespace teammy
             else
             {
                 current = ((sender as Button).Parent as Grid).Parent as CardBox;
-                projectBrds[projGrid.Children.IndexOf(current)].Show();
+                int indexOfDetails = projGrid.Children.IndexOf(current);
+
+                string item;
+                for (int i = 0; i < cmbTeams.SelectedIndex; i++)
+                {
+                    item = cmbTeams.Items[i].ToString();
+                    indexOfDetails += (from team in dbContext.teams
+                                      where item.Equals(team.Team_Name)
+                                      select team.projects.Count).Single();
+                }
+
+                projectBrds[indexOfDetails].Show();
                 Hide();
             }
         }
@@ -176,7 +187,7 @@ namespace teammy
                     btnCancel.Visibility = Visibility.Hidden;
                     btnCreateProj.Visibility = Visibility.Visible;
                     btnDelete.Visibility = Visibility.Visible;
-
+                    project_CardClick(toBeInserted, null);
                     toBeInserted = null;
                     return;
                 }                
@@ -244,6 +255,7 @@ namespace teammy
 
             Random rd = new Random();
             toBeInserted = new CardBox() { ProfileBack = backColors[rd.Next(0, backColors.Length - 1)], Margin = new Thickness(left, top, right, bottom) };
+            toBeInserted.CardClick += new RoutedEventHandler(project_CardClick);            
 
             txtNameInput = new TextBox() { Height = 25, Width = 120, FontSize = 16, Margin = new Thickness(left, top + 93, right, bottom - 3) };
 
