@@ -59,9 +59,15 @@
         </Grid>
 
         <!-- This ScrollViewer houses the grid that ultimately holds the project cards -->
-        <ScrollViewer MaxHeight="382" Margin="231,64,-1,10" RenderTransformOrigin="0.489,0.49" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+        <ScrollViewer MaxHeight="382" Margin="230,80,-1,10" RenderTransformOrigin="0.489,0.49" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
             <StackPanel x:Name="caStackPanel" Orientation="Horizontal">
-                
+                <ItemsControl ItemsSource="{Binding Categories}" Height="354">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
             </StackPanel>
         </ScrollViewer>
         <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>

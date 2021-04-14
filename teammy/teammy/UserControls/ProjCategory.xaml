@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:teammy"
              mc:Ignorable="d"
-             DataContext="{Binding RelativeSource={RelativeSource self}}" Width="223" Height="293.583">
+             DataContext="{Binding RelativeSource={RelativeSource self}}" Width="223" Height="312">
     <UserControl.Resources>
         <!-- Value Converter Instance -->
         <local:ColorToBrushConverter x:Key="ColorConverter"/>
@@ -92,10 +92,9 @@
     </UserControl.Resources>
     <Grid x:Name="containerGrid">
         <Rectangle x:Name="categoryRect" Fill="White" Height="243" Stroke="#FF1E1922" VerticalAlignment="Top" Margin="3,24,-0.333,-0.333" HorizontalAlignment="Left" Width="220"/>
-        <ScrollViewer MaxHeight="382" Margin="3,25,-0.333,26.333" RenderTransformOrigin="0.5,0.5" BorderThickness="0">
+        <ScrollViewer MaxHeight="382" Margin="3,25,-0.333,45" RenderTransformOrigin="0.5,0.5" BorderThickness="0">
             <StackPanel x:Name="taStackPanel" Orientation="Vertical">
-                <ItemsControl ItemsSource="{Binding Tasks}">
-                    
+                <ItemsControl ItemsSource="{Binding Tasks}">          
                 </ItemsControl>
             </StackPanel>
         </ScrollViewer>
@@ -105,7 +104,7 @@
             </TextBox.Background>
         </TextBox>
 
-        <Grid x:Name="addGrid" Background="White" Margin="4,267,-0.333,-17.667">
+        <Grid x:Name="addGrid" Background="White" Margin="4,267,-0.333,0">
             <Button x:Name="addTaskButton" Click="addTask" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="35" Height="38" Style="{StaticResource ResourceKey=addButtonStyle}" Margin="185,2,-1,0" Visibility="{Binding currentUser, Converter={StaticResource ResourceKey=PrivConverter}}"/>
         </Grid>
 

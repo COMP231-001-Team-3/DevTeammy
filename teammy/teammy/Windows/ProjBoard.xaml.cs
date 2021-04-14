@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,23 +21,31 @@ namespace teammy
         public string projName { get; set; }
 
         private teammyEntities dbContext = new teammyEntities();
-        public static List<ProjCategory> categoryBoxes = new List<ProjCategory>();
+
+        public ObservableCollection<ProjCategory> Categories
+        {
+            get { return (ObservableCollection<ProjCategory>)GetValue(CategoriesProperty); }
+            set { SetValue(CategoriesProperty, value); }
+        }
         public user currentUser { get; set; } = globalItems["currentUser"] as user;
+
+        public static readonly DependencyProperty CategoriesProperty = DependencyProperty.Register("Categories", typeof(ObservableCollection<ProjCategory>), typeof(ProjBoard));
 
         public ProjBoard()
         {
             InitializeComponent();
+            Categories = new ObservableCollection<ProjCategory>();
         }
 
         public void LoadCategories()
         {
             lblProjName.Content = projName;
             left = 0;
-            top = 10;
+            top = 0;
             right = 3;
             bottom = 0;
             totalCats = 0;
-            caStackPanel.Children.Clear();
+            Categories.Clear();
 
             List<category> projCategories = (from project in dbContext.projects
                                             where project.Proj_Name.Equals(projName)
@@ -47,15 +56,19 @@ namespace teammy
             for (int i = 0; i < projCategories.Count; i++)
             {
                 totalCats++;
-                catName = projCategories[i].category_name.ToString();
+                catName = projCategories[i].category_name?.ToString();
 
-                toBeAdded = new ProjCategory() { CategoryName = catName, Margin = new Thickness(left, top, right, bottom), Project = (from project in dbContext.projects
-                    where project.Proj_Name.Equals(projName)
-                    select project).Single() };
+                toBeAdded = new ProjCategory() 
+                {
+                    CategoryName = catName,
+                    Margin = new Thickness(left, top, right, bottom), 
+                    Project = (from project in dbContext.projects
+                               where project.Proj_Name.Equals(projName)
+                               select project).Single() 
+                };
 
-                caStackPanel.Children.Add(toBeAdded);
+                Categories.Add(toBeAdded);
                 toBeAdded.LoadTasks();
-                categoryBoxes.Add(toBeAdded);
             }
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -105,8 +118,14 @@ namespace teammy
                            where project.Proj_Name.Equals(projName)
                            select project).Single()
             };
-            caStackPanel.Children.Add(newlyAdded);
-            categoryBoxes.Add(newlyAdded);
+            Categories.Add(newlyAdded);
+            dbContext.categories.Add(new category()
+            {
+                project = (from project in dbContext.projects
+                           where project.Proj_Name.Equals(projName)
+                           select project).Single()
+            });
+            dbContext.SaveChanges();
         }   
     }
 }

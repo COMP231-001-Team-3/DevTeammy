@@ -100,13 +100,13 @@ namespace teammy
             {
                 int? maxAssign = (from task in dbContext.tasks
                     select task.assigned_group).Max();
+
                 if(dbContext.tasks.Find(Task.task_id).assigned_group == null)
                 {
                     dbContext.tasks.Find(Task.task_id).assigned_group = maxAssign.Value + 1;
-                }
-                 
-                dbContext.SaveChanges();
-                Task.assigned_group = maxAssign.Value + 1;
+                    dbContext.SaveChanges();
+                    Task.assigned_group = maxAssign.Value + 1;
+                }            
             }          
         }
 
@@ -232,14 +232,13 @@ namespace teammy
         {            
             if (MessageBox.Show("Are you sure you want to delete this task?", "Delete Task", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                ProjCategory currentCat = ProjBoard.categoryBoxes.Find(cat => cat.CategoryName.Equals(Task.category.category_name));
+                ProjCategory currentCat = Application.Current.Windows.OfType<ProjBoard>().Where(w => w.IsActive).Single().Categories.ToList().Find(cat => cat.CategoryName.Equals(Task.category.category_name));
 
                 currentCat.Tasks.Remove(this);
-                dbContext.tasks.Remove(dbContext.tasks.Find(Task.task_id));
-                
                 dbContext.assignees.RemoveRange((from assignee in dbContext.assignees
                                                  where assignee.assigned_group == Task.assigned_group
                                                  select assignee).ToList());
+                dbContext.tasks.Remove(dbContext.tasks.Find(Task.task_id));                
                 dbContext.SaveChanges();
             }                      
         }
@@ -254,17 +253,28 @@ namespace teammy
         private void AssigneeMenuItem_Click(object sender, RoutedEventArgs e)
         {
             string username = (sender as MenuItem).Header.ToString();
-            if(TaskAssigneeList.Count <= 4)
+            if(TaskAssigneeList.Count < 4)
             {
-                CreateAssigneeBox(username);
-                dbContext.assignees.Add(new assignee()
+                List<string> currAssignees = (from assignee in dbContext.assignees
+                                               where assignee.assigned_group == Task.assigned_group
+                                              select assignee.team_mates.user.user_name).ToList();
+
+                if (!currAssignees.Contains(username))
                 {
-                    assigned_group = Task.assigned_group,
-                    mate_id = (from mate in dbContext.team_mates
-                               where mate.user.user_name.Equals(username) &&  mate.Team_ID == Task.project.Team_ID
-                               select mate.mate_id).Single()
-                });
-                dbContext.SaveChanges();
+                    CreateAssigneeBox(username);
+                    dbContext.assignees.Add(new assignee()
+                    {
+                        assigned_group = Task.assigned_group,
+                        mate_id = (from mate in dbContext.team_mates
+                                   where mate.user.user_name.Equals(username) && mate.Team_ID == Task.project.Team_ID
+                                   select mate.mate_id).Single()
+                    });
+                    dbContext.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("This person has already been assigned to this task.", "Duplicate Assignee", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             else
             {

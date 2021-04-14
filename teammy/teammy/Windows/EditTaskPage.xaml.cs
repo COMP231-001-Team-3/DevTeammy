@@ -121,7 +121,7 @@ namespace teammy
             
             dbContext.SaveChanges();
 
-            ProjCategory catOfTask = ProjBoard.categoryBoxes.Find(ctg => TaskToBeEdited.category.category_name.Equals(ctg.CategoryName));
+            ProjCategory catOfTask = Application.Current.Windows.OfType<ProjBoard>().Where(w => w.IsActive).Single().Categories.ToList().Find(ctg => TaskToBeEdited.category.category_name.Equals(ctg.CategoryName));
             TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_name);
             TaskToBeEdited.due_date = TaskDue;
             TaskToBeEdited.priority = EditTaskPriority;
