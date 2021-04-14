@@ -81,13 +81,9 @@ namespace teammy
 
             teamMembers.ForEach(member => TeamUsers.Add(new MenuItem() { Header = member, HorizontalContentAlignment = HorizontalAlignment.Left, VerticalContentAlignment = VerticalAlignment.Center }));
 
-            int? assigned_group = null;
-            if (TaskName != null)
-            {
-                assigned_group = (from task in dbContext.tasks
-                                        where task.task_name.Equals(TaskName) && task.assigned_group.HasValue
-                                        select task.assigned_group).Single();
-            }                
+            int? assigned_group = (from task in dbContext.tasks
+                                   where task.task_id == Task.task_id && task.assigned_group.HasValue
+                                   select task.assigned_group).SingleOrDefault();              
 
             if (assigned_group.HasValue)
             {
@@ -104,7 +100,11 @@ namespace teammy
             {
                 int? maxAssign = (from task in dbContext.tasks
                     select task.assigned_group).Max();
-                dbContext.tasks.Find(Task.task_id).assigned_group = maxAssign.Value + 1;
+                if(dbContext.tasks.Find(Task.task_id).assigned_group == null)
+                {
+                    dbContext.tasks.Find(Task.task_id).assigned_group = maxAssign.Value + 1;
+                }
+                 
                 dbContext.SaveChanges();
                 Task.assigned_group = maxAssign.Value + 1;
             }          
@@ -236,6 +236,10 @@ namespace teammy
 
                 currentCat.Tasks.Remove(this);
                 dbContext.tasks.Remove(dbContext.tasks.Find(Task.task_id));
+                
+                dbContext.assignees.RemoveRange((from assignee in dbContext.assignees
+                                                 where assignee.assigned_group == Task.assigned_group
+                                                 select assignee).ToList());
                 dbContext.SaveChanges();
             }                      
         }

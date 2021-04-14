@@ -105,6 +105,15 @@ namespace teammy
             {
                 StackPanel catPnlParent = Parent as StackPanel;
                 catPnlParent.Children.Remove(this);
+
+                dbContext.tasks.RemoveRange((from task in dbContext.tasks
+                                             where task.category.category_name.Equals(CategoryName)
+                                             select task).ToList());
+                dbContext.categories.Remove((from category in dbContext.categories
+                                            where category.category_name.Equals(CategoryName)
+                                            select category).Single());
+                dbContext.SaveChanges();
+
             }
         }
 
