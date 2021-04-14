@@ -70,9 +70,10 @@ namespace teammy
             Tasks.Add(toBeInserted);
             dbContext.tasks.Add(newTask);
             dbContext.SaveChanges();
+            LoadTasks("new");
         }
 
-        public void LoadTasks()
+        public void LoadTasks(string taskAge = "")
         {
             if(CategoryName != null)
             {
@@ -81,6 +82,7 @@ namespace teammy
                                               where task.category.category_name.Equals(CategoryName)
                                               select task).ToList();
 
+                Tasks.Clear();
                 for (int i = 0; i < tasksOfCategory.Count; i++)
                 {
                     taskBox = new TaskBox()
@@ -92,7 +94,7 @@ namespace teammy
                         TaskProgress = tasksOfCategory[i].progress_code
                     };
                     Tasks.Add(taskBox);
-                    taskBox.LoadUsers();
+                    taskBox.LoadUsers(taskAge);
                 }
             }            
         }

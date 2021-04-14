@@ -73,9 +73,9 @@ namespace teammy
             TaskAssigneeList = new ObservableCollection<AssigneeEllipseTask>();
         }
 
-        public void LoadUsers()
+        public void LoadUsers(string sender = "")
         {
-            if(TaskName != null)
+            if(TaskName != null || sender.Equals("new"))
             {
                 List<string> teamMembers = (from mate in dbContext.team_mates
                                             where mate.Team_ID == Task.project.Team_ID
@@ -83,9 +83,13 @@ namespace teammy
 
                 teamMembers.ForEach(member => TeamUsers.Add(new MenuItem() { Header = member, HorizontalContentAlignment = HorizontalAlignment.Left, VerticalContentAlignment = VerticalAlignment.Center }));
 
-                int? assigned_group = (from task in dbContext.tasks
-                                       where task.task_name.Equals(TaskName) && task.assigned_group.HasValue
-                                       select task.assigned_group).Single();
+                int? assigned_group = null;
+                if (!sender.Equals("new"))
+                {
+                    assigned_group = (from task in dbContext.tasks
+                                           where task.task_name.Equals(TaskName) && task.assigned_group.HasValue
+                                           select task.assigned_group).Single();
+                }                
 
                 if (assigned_group.HasValue)
                 {
@@ -97,6 +101,14 @@ namespace teammy
                     {
                         CreateAssigneeBox(item);
                     }
+                }
+                else
+                {
+                    int? maxAssign = (from assignee in dbContext.assignees
+                     select assignee.assigned_group).Max();
+                    dbContext.tasks.Find(Task.task_id).assigned_group = maxAssign.Value + 1;
+                    dbContext.SaveChanges();
+                    Task.assigned_group = maxAssign.Value + 1;
                 }
             }            
         }
