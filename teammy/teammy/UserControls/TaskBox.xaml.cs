@@ -75,42 +75,39 @@ namespace teammy
 
         public void LoadUsers(string sender = "")
         {
-            if(TaskName != null || sender.Equals("new"))
+            List<string> teamMembers = (from mate in dbContext.team_mates
+                                        where mate.Team_ID == Task.project.Team_ID
+                                        select mate.user.user_name).ToList();
+
+            teamMembers.ForEach(member => TeamUsers.Add(new MenuItem() { Header = member, HorizontalContentAlignment = HorizontalAlignment.Left, VerticalContentAlignment = VerticalAlignment.Center }));
+
+            int? assigned_group = null;
+            if (TaskName != null)
             {
-                List<string> teamMembers = (from mate in dbContext.team_mates
-                                            where mate.Team_ID == Task.project.Team_ID
-                                            select mate.user.user_name).ToList();
+                assigned_group = (from task in dbContext.tasks
+                                        where task.task_name.Equals(TaskName) && task.assigned_group.HasValue
+                                        select task.assigned_group).Single();
+            }                
 
-                teamMembers.ForEach(member => TeamUsers.Add(new MenuItem() { Header = member, HorizontalContentAlignment = HorizontalAlignment.Left, VerticalContentAlignment = VerticalAlignment.Center }));
+            if (assigned_group.HasValue)
+            {
+                List<string> assignees = (from assignee in dbContext.assignees
+                                            where assignee.assigned_group == assigned_group
+                                            select assignee.team_mates.user.user_name).ToList();
 
-                int? assigned_group = null;
-                if (!sender.Equals("new"))
+                foreach (var item in assignees)
                 {
-                    assigned_group = (from task in dbContext.tasks
-                                           where task.task_name.Equals(TaskName) && task.assigned_group.HasValue
-                                           select task.assigned_group).Single();
-                }                
-
-                if (assigned_group.HasValue)
-                {
-                    List<string> assignees = (from assignee in dbContext.assignees
-                                              where assignee.assigned_group == assigned_group
-                                              select assignee.team_mates.user.user_name).ToList();
-
-                    foreach (var item in assignees)
-                    {
-                        CreateAssigneeBox(item);
-                    }
+                    CreateAssigneeBox(item);
                 }
-                else
-                {
-                    int? maxAssign = (from assignee in dbContext.assignees
-                     select assignee.assigned_group).Max();
-                    dbContext.tasks.Find(Task.task_id).assigned_group = maxAssign.Value + 1;
-                    dbContext.SaveChanges();
-                    Task.assigned_group = maxAssign.Value + 1;
-                }
-            }            
+            }
+            else
+            {
+                int? maxAssign = (from task in dbContext.tasks
+                    select task.assigned_group).Max();
+                dbContext.tasks.Find(Task.task_id).assigned_group = maxAssign.Value + 1;
+                dbContext.SaveChanges();
+                Task.assigned_group = maxAssign.Value + 1;
+            }          
         }
 
         private void CreateAssigneeBox(string assigneeName)
