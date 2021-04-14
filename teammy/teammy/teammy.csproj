@@ -405,7 +405,6 @@
     <SplashScreen Include="images\splashScreen.png" />
     <Resource Include="images\cancel.png" />
     <Resource Include="images\protoDone.png" />
-    <Resource Include="images\Loading.gif" />
     <Resource Include="images\splashLogging.png" />
     <Resource Include="images\splashLoading.png" />
     <Content Include="teammyDB.Context.tt">

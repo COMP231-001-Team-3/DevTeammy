@@ -99,7 +99,7 @@
                 </ItemsControl>
             </StackPanel>
         </ScrollViewer>
-        <TextBox x:Name="txtCategoryName" HorizontalAlignment="Left" Text="{Binding Path=CategoryName}" Height="24" Margin="2,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="189">
+        <TextBox x:Name="txtCategoryName" HorizontalAlignment="Left" Text="{Binding Path=CategoryName}" Height="24" Margin="2,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="189" KeyUp="txtCategoryName_KeyUp">
             <TextBox.Background>
                 <SolidColorBrush Color="Azure" Opacity="0.5" />
             </TextBox.Background>

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace teammy
 {
@@ -17,6 +18,7 @@ namespace teammy
         private int totalBoxes = 0;
         private TaskBox toBeInserted;
         public static readonly DependencyProperty CategoryNameProperty = DependencyProperty.Register("CategoryName", typeof(string), typeof(ProjCategory));
+        public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register("Project", typeof(project), typeof(ProjCategory));
 
         public static readonly DependencyProperty TasksProperty = DependencyProperty.Register("Tasks", typeof(ObservableCollection<TaskBox>), typeof(ProjCategory));
 
@@ -30,6 +32,11 @@ namespace teammy
         {
             get { return (ObservableCollection<TaskBox>)GetValue(TasksProperty); }
             set { SetValue(TasksProperty, value); }
+        }
+        public project Project
+        {
+            get { return (project)GetValue(ProjectProperty); }
+            set { SetValue(ProjectProperty, value); }
         }
         public user currentUser { get; set; } = globalItems["currentUser"] as user;
 
@@ -102,6 +109,19 @@ namespace teammy
         public TaskBox FindTaskBox(string taskName)
         {
             return Tasks.ToList().Find(taskbox => taskbox.Task.task_name.Equals(taskName));
+        }
+
+        private void txtCategoryName_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                dbContext.categories.Add(new category()
+                {
+                    category_name = txtCategoryName.Text,
+                    Proj_ID = Project.Proj_ID
+                });
+                dbContext.SaveChanges();
+            }            
         }
     }
 }

@@ -49,7 +49,9 @@ namespace teammy
                 totalCats++;
                 catName = projCategories[i].category_name.ToString();
 
-                toBeAdded = new ProjCategory() { CategoryName = catName, Margin = new Thickness(left, top, right, bottom) };
+                toBeAdded = new ProjCategory() { CategoryName = catName, Margin = new Thickness(left, top, right, bottom), Project = (from project in dbContext.projects
+                    where project.Proj_Name.Equals(projName)
+                    select project).Single() };
 
                 caStackPanel.Children.Add(toBeAdded);
                 toBeAdded.LoadTasks();
@@ -97,7 +99,12 @@ namespace teammy
                 MessageBox.Show("The maximum limit for categories per project is 9!", "Max categories completed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            ProjCategory newlyAdded = new ProjCategory();
+            ProjCategory newlyAdded = new ProjCategory() 
+            {
+                Project = (from project in dbContext.projects
+                           where project.Proj_Name.Equals(projName)
+                           select project).Single()
+            };
             caStackPanel.Children.Add(newlyAdded);
             categoryBoxes.Add(newlyAdded);
         }   
