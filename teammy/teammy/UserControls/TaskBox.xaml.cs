@@ -261,9 +261,10 @@ namespace teammy
                 {
                     assigned_group = Task.assigned_group,
                     mate_id = (from mate in dbContext.team_mates
-                               where mate.user.user_name.Equals(username) && mate.Team_ID == Task.project.Team_ID
+                               where mate.user.user_name.Equals(username) &&  mate.Team_ID == Task.project.Team_ID
                                select mate.mate_id).Single()
                 });
+                dbContext.SaveChanges();
             }
             else
             {
