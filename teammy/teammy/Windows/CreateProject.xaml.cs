@@ -29,7 +29,7 @@ namespace teammy
 
         private TextBox txtNameInput;
         private string prevSelection;
-        private List<ProjBoard> projectBrds = new List<ProjBoard>();
+        private List<List<ProjBoard>> projectBrds = new List<List<ProjBoard>>();
         #endregion
 
         #region Properties
@@ -63,12 +63,22 @@ namespace teammy
                                           where currUser.user_name.Equals(currentUser.user_name)
                                           select team.Team_Name).ToList();
                 cmbTeams.ItemsSource = teamNames;
+
+                for (int i = 0; i < teamNames.Count; i++)
+                {
+                    projectBrds.Add(new List<ProjBoard>());
+                }
+
                 cmbTeams.SelectedIndex = 0;
                 currSelection = cmbTeams.SelectedItem.ToString();
             }
             else if ((bool)prevSelection?.Equals(currSelection) && sender.Equals(""))
             {
                 return;
+            }
+            else if (sender.Equals("Reset"))
+            {
+                projectBrds[cmbTeams.SelectedIndex].Clear();
             }
 
             left = 0;
@@ -133,26 +143,22 @@ namespace teammy
             CardBox current;
             if (e == null)
             {
+                if (IsLoaded)
+                {
+                    SplashScreen spLoader = new SplashScreen("../images/splashLoading.png");
+                    spLoader.Show(true);
+                }
                 current = sender as CardBox;
                 ProjBoard projDetails = new ProjBoard() { projName = current.FullName };
                 projDetails.LoadCategories();
-                projectBrds.Add(projDetails);
+                projectBrds[cmbTeams.SelectedIndex].Add(projDetails);
             }
             else
             {
                 current = ((sender as Button).Parent as Grid).Parent as CardBox;
                 int indexOfDetails = projGrid.Children.IndexOf(current);
 
-                string item;
-                for (int i = 0; i < cmbTeams.SelectedIndex; i++)
-                {
-                    item = cmbTeams.Items[i].ToString();
-                    indexOfDetails += (from team in dbContext.teams
-                                      where item.Equals(team.Team_Name)
-                                      select team.projects.Count).Single();
-                }
-
-                projectBrds[indexOfDetails].Show();
+                projectBrds[cmbTeams.SelectedIndex][indexOfDetails].Show();
                 Hide();
             }
         }
@@ -165,35 +171,7 @@ namespace teammy
         {
             if (e.Key == Key.Enter)
             {
-                toBeInserted.FullName = txtNameInput.Text;
-                txtNameInput.Visibility = Visibility.Hidden;
-
-                List<project> existent = (from project in dbContext.projects
-                                          where project.Proj_Name.Equals(txtNameInput.Text)
-                                          select project).ToList();
-
-                if (existent.Count == 0 && !txtNameInput.Equals(""))
-                {
-                    dbContext.projects.Add(new project()
-                    {
-                        Proj_Name = txtNameInput.Text,
-                        Team_ID = (from team in dbContext.teams
-                                   where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
-                                   select team.Team_ID).Single()
-                    });
-
-                    dbContext.SaveChanges();
-                    btnDone.Visibility = Visibility.Hidden;
-                    btnCancel.Visibility = Visibility.Hidden;
-                    btnCreateProj.Visibility = Visibility.Visible;
-                    btnDelete.Visibility = Visibility.Visible;
-                    project_CardClick(toBeInserted, null);
-                    toBeInserted = null;
-                    return;
-                }                
-                MessageBox.Show("The project name that you have entered has already been used! Please try again!", "Duplicate Project Name", MessageBoxButton.OK, MessageBoxImage.Error);
-                btnCancel_Click(new object(), new RoutedEventArgs());
-                toBeInserted = null;
+                btnDone_Click(sender, new RoutedEventArgs());
             }
         }
         #endregion
@@ -311,7 +289,8 @@ namespace teammy
                     });
 
                     dbContext.SaveChanges();
-                    toBeInserted = null;
+                    LoadProjects("Reset");
+                    toBeInserted = null;                    
                     btnDone.Visibility = Visibility.Hidden;
                     btnCancel.Visibility = Visibility.Hidden;
                     btnCreateProj.Visibility = Visibility.Visible;

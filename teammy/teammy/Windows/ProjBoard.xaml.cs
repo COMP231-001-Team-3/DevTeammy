@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using MySql.Data.MySqlClient;
-using System.Windows.Shapes;
 
 namespace teammy
 {
@@ -29,6 +20,7 @@ namespace teammy
         public string projName { get; set; }
 
         private teammyEntities dbContext = new teammyEntities();
+        public static List<ProjCategory> categoryBoxes = new List<ProjCategory>();
         public user currentUser { get; set; } = globalItems["currentUser"] as user;
 
         public ProjBoard()
@@ -40,8 +32,8 @@ namespace teammy
         {
             lblProjName.Content = projName;
             left = 0;
-            top = 0;
-            right = 5;
+            top = 10;
+            right = 3;
             bottom = 0;
             totalCats = 0;
             caStackPanel.Children.Clear();
@@ -61,7 +53,8 @@ namespace teammy
 
                 caStackPanel.Children.Add(toBeAdded);
                 toBeAdded.LoadTasks();
-            }            
+                categoryBoxes.Add(toBeAdded);
+            }
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -93,7 +86,7 @@ namespace teammy
 
         private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
         {
-            AddCategory();            
+            AddCategory();
         }
 
         private void AddCategory()
@@ -105,7 +98,8 @@ namespace teammy
                 return;
             }
             ProjCategory newlyAdded = new ProjCategory();
-            caStackPanel.Children.Add(newlyAdded);           
+            caStackPanel.Children.Add(newlyAdded);
+            categoryBoxes.Add(newlyAdded);
         }   
     }
 }

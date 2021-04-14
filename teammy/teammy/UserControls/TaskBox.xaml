@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:teammy" 
-             mc:Ignorable="d" Width="204.181" Height="106.07"  DataContext="{Binding RelativeSource={RelativeSource self}}">
+             mc:Ignorable="d" Width="204.625" Height="102.737"  DataContext="{Binding RelativeSource={RelativeSource self}}">
     <UserControl.Resources>
         <!-- Value Converter Instance -->
         <local:ColorToBrushConverter x:Key="ColorConverter"/>
@@ -42,13 +42,6 @@
         <!-- Menu dropdown -->
 
         <ContextMenu x:Key="cmThreeDots">
-            <MenuItem x:Name="svItem" Header="Save" Background="HotPink"  Width="150" Height="40" FontSize="16" Click="svItem_Click">
-                <MenuItem.Icon>
-                    <Grid>
-                        <Button x:Name="saveTaskBtn" Style="{StaticResource mouseOverStyle}" Background="{x:Null}" BorderThickness="0"/>
-                    </Grid>
-                </MenuItem.Icon>
-            </MenuItem>
             <MenuItem x:Name="editItem" Header="Edit" Background="HotPink"  Width="150" Height="40" FontSize="16" Click="editItem_Click"  >
                 <MenuItem.Icon>
                     <Grid>
@@ -153,7 +146,7 @@
     </UserControl.Resources>
     <Border BorderThickness="0.2" BorderBrush="#F01FFF">
         <Grid Name="taskGrid" Margin="10,10,10,0" Height="85" VerticalAlignment="Top">
-            <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Stroke="#FF1E1922" Width="184" Margin="0,0,0,3"/>
+            <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Stroke="#FFFF01FF" Width="184" Margin="0,0,0,3"/>
 
             <Grid x:Name="threeDotsGrid" Margin="175,4,1.667,61.333">
                 <Button x:Name="btnEditDelete" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnEditDelete_Click" Visibility="{Binding currentUser, Converter={StaticResource ResourceKey=PrivConverter}}" RenderTransformOrigin="5.467,0.206" Margin="-2,0,0.333,2">
@@ -172,8 +165,8 @@
                     <Button x:Name="btnPriority" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnPriority_Click" Margin="0,0,0.999,0" Visibility="{Binding currentUser, Converter={StaticResource ResourceKey=PrivConverter}}"/>
                 </Grid>
             </Border>
-            <DatePicker x:Name="taskDate" Margin="10,56,81.333,0" Text="{Binding Path=Task.due_date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Focusable="{Binding currentUser, Converter={StaticResource ResourceKey=PrivBoolConverter}}" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="23" VerticalAlignment="Top" DisplayDateStart="{Binding DisplayDateStart}" SelectedDateChanged="taskDate_SelectedDateChanged"/>
-            <TextBox x:Name="taskNameTextBox" Text="{Binding Path=Task.task_name}" IsReadOnly="{Binding currentUser, Converter={StaticResource ResourceKey=PrivEnaConverter}}"  HorizontalAlignment="Left" Height="21" Margin="10,4,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110" FontSize="10" TextChanged="taskNameTextBox_TextChanged"/>
+            <DatePicker x:Name="taskDate" Margin="10,56,81.333,0" Text="{Binding Path=TaskDue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Focusable="{Binding currentUser, Converter={StaticResource ResourceKey=PrivBoolConverter}}" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="23" VerticalAlignment="Top" DisplayDateStart="{Binding DisplayDateStart}" SelectedDateChanged="taskDate_SelectedDateChanged"/>
+            <TextBox x:Name="taskNameTextBox" Text="{Binding Path=TaskName}" IsReadOnly="{Binding currentUser, Converter={StaticResource ResourceKey=PrivEnaConverter}}"  HorizontalAlignment="Left" Height="21" Margin="10,4,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110" FontSize="10" TextChanged="taskNameTextBox_TextChanged"/>
 
             <StackPanel x:Name="assigneeStackPanel" Orientation="Horizontal" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="138" Margin="10,28,0,0" >
 

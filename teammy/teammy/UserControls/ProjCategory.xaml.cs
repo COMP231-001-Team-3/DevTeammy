@@ -47,9 +47,22 @@ namespace teammy
                 MessageBox.Show("The maximum limit for task per category is 9!", "Max tasks completed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            toBeInserted = new TaskBox() { Task = new task()};
+
+            task newTask = new task()
+            {
+                category = (from cat in dbContext.categories
+                           where cat.category_name.Equals(CategoryName)
+                           select cat).Single(),
+                project = (from cat in dbContext.categories
+                           where cat.category_name.Equals(CategoryName)
+                           select cat.project).Single(),
+                progress_code = "NS"
+            };
+            toBeInserted = new TaskBox() { Task = newTask };
 
             Tasks.Add(toBeInserted);
+            dbContext.tasks.Add(newTask);
+            dbContext.SaveChanges();
         }
 
         public void LoadTasks()
@@ -65,7 +78,11 @@ namespace teammy
                 {
                     taskBox = new TaskBox()
                     {
-                        Task = tasksOfCategory[i]
+                        Task = tasksOfCategory[i],
+                        TaskName = tasksOfCategory[i].task_name,
+                        TaskDue = tasksOfCategory[i].due_date,
+                        TaskPriority = tasksOfCategory[i].priority,
+                        TaskProgress = tasksOfCategory[i].progress_code
                     };
                     Tasks.Add(taskBox);
                     taskBox.LoadUsers();
@@ -80,6 +97,11 @@ namespace teammy
                 StackPanel catPnlParent = Parent as StackPanel;
                 catPnlParent.Children.Remove(this);
             }
+        }
+
+        public TaskBox FindTaskBox(string taskName)
+        {
+            return Tasks.ToList().Find(taskbox => taskbox.Task.task_name.Equals(taskName));
         }
     }
 }

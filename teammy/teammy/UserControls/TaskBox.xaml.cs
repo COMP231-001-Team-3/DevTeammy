@@ -5,8 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Linq;
 
 namespace teammy
@@ -17,12 +15,13 @@ namespace teammy
     public partial class TaskBox : UserControl
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
-        private static List<TaskBox> objTask = new List<TaskBox>();
         private Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
         private teammyEntities dbContext = new teammyEntities();
 
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(task), typeof(TaskBox));
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
+        public static readonly DependencyProperty TaskNameProperty = DependencyProperty.Register("TaskName", typeof(string), typeof(TaskBox));
+        public static readonly DependencyProperty TaskDueProperty = DependencyProperty.Register("TaskDue", typeof(DateTime?), typeof(TaskBox));
         public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("TaskAssigneeList", typeof(ObservableCollection<AssigneeEllipseTask>), typeof(TaskBox));
         private int LoadCounter = 0;
@@ -32,19 +31,31 @@ namespace teammy
             get { return (task)GetValue(TaskProperty); }
             set { SetValue(TaskProperty, value); }
         }
+
+        public string TaskName
+        {
+            get { return (string)GetValue(TaskNameProperty); }
+            set { SetValue(TaskNameProperty, value); }
+        }
+
+        public DateTime? TaskDue
+        {
+            get { return (DateTime?)GetValue(TaskDueProperty); }
+            set { SetValue(TaskDueProperty, value); }
+        }
+
         public string TaskProgress
         {
-            get { return GetValue(TaskProgressProperty).ToString(); }
-            set 
-            {
-                SetValue(TaskProgressProperty, value);
-            }
+            get { return (string)GetValue(TaskProgressProperty); }
+            set { SetValue(TaskProgressProperty, value); }
         }
+
         public string TaskPriority
         {
             get { return GetValue(TaskPriorityProperty).ToString(); }
             set { SetValue(TaskPriorityProperty, value); }
         }
+
         public ObservableCollection<AssigneeEllipseTask> TaskAssigneeList
         {
             get { return (ObservableCollection<AssigneeEllipseTask>)GetValue(TaskAssigneeListProperty); }
@@ -64,29 +75,30 @@ namespace teammy
 
         public void LoadUsers()
         {
-            List<string> teamMembers = (from mate in dbContext.team_mates
-                                     where mate.Team_ID == Task.project.Team_ID
-                                     select mate.user.user_name).ToList();
-
-            teamMembers.ForEach(member => TeamUsers.Add(new MenuItem() { Header = member, HorizontalContentAlignment= HorizontalAlignment.Left, VerticalContentAlignment = VerticalAlignment.Center}));
-
-            int? assigned_group = (from task in dbContext.tasks
-                                 where task.task_name.Equals(Task.task_name) && task.assigned_group.HasValue
-                                 select task.assigned_group).Single();
-
-            if(assigned_group.HasValue)
+            if(TaskName != null)
             {
-                List<string> assignees = (from assignee in dbContext.assignees
-                                       where assignee.assigned_group == assigned_group
-                                       select assignee.team_mates.user.user_name).ToList();
+                List<string> teamMembers = (from mate in dbContext.team_mates
+                                            where mate.Team_ID == Task.project.Team_ID
+                                            select mate.user.user_name).ToList();
 
-                foreach (var item in assignees)
+                teamMembers.ForEach(member => TeamUsers.Add(new MenuItem() { Header = member, HorizontalContentAlignment = HorizontalAlignment.Left, VerticalContentAlignment = VerticalAlignment.Center }));
+
+                int? assigned_group = (from task in dbContext.tasks
+                                       where task.task_name.Equals(TaskName) && task.assigned_group.HasValue
+                                       select task.assigned_group).Single();
+
+                if (assigned_group.HasValue)
                 {
-                    CreateAssigneeBox(item);
-                }
-            }
+                    List<string> assignees = (from assignee in dbContext.assignees
+                                              where assignee.assigned_group == assigned_group
+                                              select assignee.team_mates.user.user_name).ToList();
 
-            objTask.Add(this);
+                    foreach (var item in assignees)
+                    {
+                        CreateAssigneeBox(item);
+                    }
+                }
+            }            
         }
 
         private void CreateAssigneeBox(string assigneeName)
@@ -174,48 +186,48 @@ namespace teammy
             dbContext.tasks.Find(Task.task_id).progress_code = TaskProgress;
             dbContext.SaveChanges();
         }
-       
+
         private void taskNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TaskProgress = Task.progress_code;
-            TaskPriority = Task.priority;
-            dbContext.tasks.Find(Task.task_id).task_name = taskNameTextBox.Text;
-            dbContext.SaveChanges();
+            if(Task != null)
+            {
+                dbContext.tasks.Find(Task.task_id).task_name = taskNameTextBox.Text;
+                dbContext.SaveChanges();
+            }            
         }
 
         private void editItem_Click(object sender, RoutedEventArgs e)
         {
-            string selectedName = taskNameTextBox.Text;
-            
-            for (int i = 0; i < objTask.Count; i++) 
+            EditTaskPage taskDetail = new EditTaskPage() 
             {
-                if (selectedName.Equals(objTask[i].Task.task_name))
+                TaskToBeEdited = Task,
+                TaskName = TaskName,
+                TaskDue = TaskDue,
+                EditTaskPriority = TaskPriority,
+                TeamUsers = TeamUsers
+            };
+
+            TaskAssigneeList.ToList().ForEach(eps =>
+            {
+                taskDetail.EditTaskAssignees.Add(new AssigneeEllipse()
                 {
-                    EditTaskPage taskDetail = new EditTaskPage() 
-                    { 
-                        EditTaskName = objTask[i].Task.task_name, 
-                        EditTaskDueDate = objTask[i].Task.due_date.Value,
-                        EditTaskPriority = objTask[i].Task.priority,
-                        EditTaskAssignee = objTask[i].TaskAssigneeList
-                    };
+                    BackColor = eps.BackColor,
+                    User = eps.User
+                });
+            });
 
-                    taskDetail.ShowDialog();
-                }
-            }
-            
-        }
-
-        private void svItem_Click(object sender, RoutedEventArgs e)
-        {
-           
+            taskDetail.ShowDialog();            
         }
 
         private void dlItem_Click(object sender, RoutedEventArgs e)
         {            
             if (MessageBox.Show("Are you sure you want to delete this task?", "Delete Task", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                StackPanel taskPnlParent = Parent as StackPanel;
-                taskPnlParent.Children.Remove(this);
+                ProjCategory currentCat = ProjBoard.categoryBoxes.Find(cat => cat.CategoryName.Equals(Task.category.category_name));
+
+                currentCat.Tasks.Remove(this);
+                dbContext.tasks.Remove(dbContext.tasks.Find(Task.task_id));
+                dbContext.SaveChanges();
             }                      
         }
 
@@ -262,8 +274,11 @@ namespace teammy
 
         private void taskDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            dbContext.tasks.Find(Task.task_id).due_date = taskDate.SelectedDate;
-            dbContext.SaveChanges();
+            if(Task != null)
+            {
+                dbContext.tasks.Find(Task.task_id).due_date = taskDate.SelectedDate;
+                dbContext.SaveChanges();
+            }            
         }
     }
 }

@@ -407,6 +407,7 @@
     <Resource Include="images\protoDone.png" />
     <Resource Include="images\Loading.gif" />
     <Resource Include="images\splashLogging.png" />
+    <Resource Include="images\splashLoading.png" />
     <Content Include="teammyDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>teammyDB.Context.cs</LastGenOutput>
