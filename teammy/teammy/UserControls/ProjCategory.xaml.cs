@@ -128,9 +128,9 @@ namespace teammy
             }
         }
 
-        public TaskBox FindTaskBox(string taskName)
+        public TaskBox FindTaskBox(long taskID)
         {
-            return Tasks.ToList().Find(taskbox => taskbox.TaskName.Equals(taskName));
+            return Tasks.ToList().Find(taskbox => taskbox.Task.task_id.Equals(taskID));
         }
 
         private void txtCategoryName_KeyUp(object sender, KeyEventArgs e)

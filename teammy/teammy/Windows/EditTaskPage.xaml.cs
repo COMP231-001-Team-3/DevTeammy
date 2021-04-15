@@ -101,7 +101,7 @@ namespace teammy
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
             ProjCategory catOfTask = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(TaskToBeEdited.project.Proj_Name)).Categories.ToList().Find(ctg => TaskToBeEdited.category.category_name.Equals(ctg.CategoryName));
-            TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_name);
+            TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_id);
             TaskToBeEdited.due_date = TaskDue;
             TaskToBeEdited.priority = EditTaskPriority;
             TaskToBeEdited.task_name = TaskName;            
@@ -186,7 +186,7 @@ namespace teammy
             if (LoadCounter == 0 && cm.Items.Count != 0)
             {
                 ProjCategory catOfTask = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(TaskToBeEdited.project.Proj_Name)).Categories.ToList().Find(ctg => TaskToBeEdited.category.category_name.Equals(ctg.CategoryName));
-                TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_name);
+                TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_id);
 
                 foreach (MenuItem menuItem in cm.Items)
                 {
