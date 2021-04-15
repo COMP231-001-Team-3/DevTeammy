@@ -24,7 +24,7 @@ namespace teammy
         public static readonly DependencyProperty TaskDueProperty = DependencyProperty.Register("TaskDue", typeof(DateTime?), typeof(TaskBox));
         public static readonly DependencyProperty TaskPriorityProperty = DependencyProperty.Register("TaskPriority", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("TaskAssigneeList", typeof(ObservableCollection<AssigneeEllipseTask>), typeof(TaskBox));
-        private int LoadCounter = 0;
+        public int LoadCounter = 0;
 
         public task Task
         {
@@ -52,7 +52,7 @@ namespace teammy
 
         public string TaskPriority
         {
-            get { return GetValue(TaskPriorityProperty).ToString(); }
+            get { return (string)GetValue(TaskPriorityProperty); }
             set { SetValue(TaskPriorityProperty, value); }
         }
 

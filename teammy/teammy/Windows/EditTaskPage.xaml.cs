@@ -89,7 +89,11 @@ namespace teammy
         {
             TaskToBeEdited = dbContext.tasks.Find(TaskToBeEdited.task_id);
             string priority = dbContext.tasks.Find(TaskToBeEdited.task_id).priority;
-            EditTaskPriority = (priority[0] + "").ToUpper() + priority.Substring(1).ToLower();
+            if(priority != null)
+            {
+                EditTaskPriority = (priority[0] + "").ToUpper() + priority.Substring(1).ToLower();
+            }
+            
             TaskName = dbContext.tasks.Find(TaskToBeEdited.task_id).task_name;
             TaskDue = dbContext.tasks.Find(TaskToBeEdited.task_id).due_date;
         }
@@ -187,7 +191,10 @@ namespace teammy
                 foreach (MenuItem menuItem in cm.Items)
                 {
                     menuItem.Click += new RoutedEventHandler(AssigneeEdMenuItem_Click);
-                    menuItem.Click -= new RoutedEventHandler(boxOfTask.AssigneeMenuItem_Click);
+                    if(boxOfTask.LoadCounter == 1)
+                    {
+                        menuItem.Click -= new RoutedEventHandler(boxOfTask.AssigneeMenuItem_Click);
+                    }                    
                 }
                 LoadCounter++;
             }

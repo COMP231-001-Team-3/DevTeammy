@@ -9,7 +9,7 @@
   <Identity
     Name="68efdbe8-b73e-400f-a81f-ff38d5ad8949"
     Publisher="CN=aniru"
-    Version="1.0.25.0" />
+    Version="1.0.26.0" />
 
   <Properties>
     <DisplayName>TeammyInstaller</DisplayName>
