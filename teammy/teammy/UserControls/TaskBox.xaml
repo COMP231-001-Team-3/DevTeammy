@@ -76,7 +76,7 @@
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
-        <ContextMenu x:Key="cmAssignees" ItemsSource="{Binding TeamUsers}" Opened="ContextMenu_Opened">
+        <ContextMenu x:Key="cmAssignees" ItemsSource="{Binding TeamUsers}" Opened="AssigneeMenu_Opened">
         </ContextMenu>
 
         <!-- Menu dropdown -->

@@ -88,7 +88,8 @@ namespace teammy
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             TaskToBeEdited = dbContext.tasks.Find(TaskToBeEdited.task_id);
-            EditTaskPriority = dbContext.tasks.Find(TaskToBeEdited.task_id).progress_code;
+            string priority = dbContext.tasks.Find(TaskToBeEdited.task_id).priority;
+            EditTaskPriority = (priority[0] + "").ToUpper() + priority.Substring(1).ToLower();
             TaskName = dbContext.tasks.Find(TaskToBeEdited.task_id).task_name;
             TaskDue = dbContext.tasks.Find(TaskToBeEdited.task_id).due_date;
         }
@@ -147,7 +148,7 @@ namespace teammy
 
         private void btnAddAssignee_Click(object sender, RoutedEventArgs e)
         {
-            ContextMenu cm = FindResource("cmAssignees") as ContextMenu;
+            ContextMenu cm = FindResource("cmEdAssignees") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
         }
@@ -158,6 +159,7 @@ namespace teammy
             List<string> assignees = (from assignee in dbContext.assignees
                                       where assignee.assigned_group == TaskToBeEdited.assigned_group
                                       select assignee.team_mates.user.user_name).ToList();
+
             if (assignees.Contains(assigneeName))
             {
                 MessageBox.Show("This member is already assigned to the task!", "Duplicate assignee entry", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -172,23 +174,29 @@ namespace teammy
 
             EditTaskAssignees.Add(epsAssignee);
         }
+
         private void ContextMenu_Opened(object sender, RoutedEventArgs e)
         {
-            ContextMenu cm = FindResource("cmAssignees") as ContextMenu;
+            ContextMenu cm = FindResource("cmEdAssignees") as ContextMenu;
 
             if (LoadCounter == 0 && cm.Items.Count != 0)
             {
+                ProjCategory catOfTask = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(TaskToBeEdited.project.Proj_Name)).Categories.ToList().Find(ctg => TaskToBeEdited.category.category_name.Equals(ctg.CategoryName));
+                TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_name);
+
                 foreach (MenuItem menuItem in cm.Items)
                 {
-                    menuItem.Click += new RoutedEventHandler(AssigneeMenuItem_Click);
+                    menuItem.Click += new RoutedEventHandler(AssigneeEdMenuItem_Click);
+                    menuItem.Click -= new RoutedEventHandler(boxOfTask.AssigneeMenuItem_Click);
                 }
                 LoadCounter++;
             }
         }
-        private void AssigneeMenuItem_Click(object sender, RoutedEventArgs e)
+
+        private void AssigneeEdMenuItem_Click(object sender, RoutedEventArgs e)
         {
             string username = (sender as MenuItem).Header.ToString();
-            if (EditTaskAssignees.Count <= 4)
+            if (EditTaskAssignees.Count < 4)
             {
                 CreateAssigneeBox(username);
             }

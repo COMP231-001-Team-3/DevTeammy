@@ -250,13 +250,13 @@ namespace teammy
             cm.IsOpen = true;
         }
 
-        private void AssigneeMenuItem_Click(object sender, RoutedEventArgs e)
+        public void AssigneeMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            string username = (sender as MenuItem).Header.ToString();
-            if(TaskAssigneeList.Count < 4)
+                string username = (sender as MenuItem).Header.ToString();
+            if (TaskAssigneeList.Count < 4)
             {
                 List<string> currAssignees = (from assignee in dbContext.assignees
-                                               where assignee.assigned_group == Task.assigned_group
+                                              where assignee.assigned_group == Task.assigned_group
                                               select assignee.team_mates.user.user_name).ToList();
 
                 if (!currAssignees.Contains(username))
@@ -282,7 +282,7 @@ namespace teammy
             }
         }
 
-        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        private void AssigneeMenu_Opened(object sender, RoutedEventArgs e)
         {
             ContextMenu cm = FindResource("cmAssignees") as ContextMenu;
 

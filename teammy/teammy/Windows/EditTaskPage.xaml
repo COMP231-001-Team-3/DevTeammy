@@ -81,7 +81,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <ContextMenu x:Key="cmAssignees" ItemsSource="{Binding TeamUsers}" Opened="ContextMenu_Opened">
+        <ContextMenu x:Key="cmEdAssignees" ItemsSource="{Binding TeamUsers}" Opened="ContextMenu_Opened">
         </ContextMenu>
     </Window.Resources>
 
