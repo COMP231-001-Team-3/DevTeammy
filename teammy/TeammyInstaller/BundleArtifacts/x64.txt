@@ -1,6 +1,6 @@
-MainPackage=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\bin\x64\Release\TeammyInstaller_1.0.23.0_x64.msix
-SymbolPackage=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\obj\x64\Release\Symbols\TeammyInstaller_1.0.23.0_x64.appxsym
-ResourcePack=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\bin\x64\Release\TeammyInstaller_1.0.23.0_scale-100.msix
-ResourcePack=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\bin\x64\Release\TeammyInstaller_1.0.23.0_scale-125.msix
-ResourcePack=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\bin\x64\Release\TeammyInstaller_1.0.23.0_scale-150.msix
-ResourcePack=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\bin\x64\Release\TeammyInstaller_1.0.23.0_scale-400.msix
+MainPackage=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\bin\x64\Release\TeammyInstaller_1.0.24.0_x64.msix
+SymbolPackage=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\obj\x64\Release\Symbols\TeammyInstaller_1.0.24.0_x64.appxsym
+ResourcePack=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\bin\x64\Release\TeammyInstaller_1.0.24.0_scale-100.msix
+ResourcePack=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\bin\x64\Release\TeammyInstaller_1.0.24.0_scale-125.msix
+ResourcePack=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\bin\x64\Release\TeammyInstaller_1.0.24.0_scale-150.msix
+ResourcePack=D:\source\repos\COMP231-001-Team-3\comp231-001_team3\teammy\TeammyInstaller\bin\x64\Release\TeammyInstaller_1.0.24.0_scale-400.msix

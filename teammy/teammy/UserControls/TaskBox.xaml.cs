@@ -232,7 +232,7 @@ namespace teammy
         {
             if (MessageBox.Show("Are you sure you want to delete this task?", "Delete Task", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                ProjCategory currentCat = Application.Current.Windows.OfType<ProjBoard>().Where(w => w.IsActive).Single().Categories.ToList().Find(cat => cat.CategoryName.Equals(Task.category.category_name));
+                ProjCategory currentCat = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(Task.project.Proj_Name)).Categories.ToList().Find(cat => cat.CategoryName.Equals(Task.category.category_name));
 
                 currentCat.Tasks.Remove(this);
                 dbContext.assignees.RemoveRange((from assignee in dbContext.assignees

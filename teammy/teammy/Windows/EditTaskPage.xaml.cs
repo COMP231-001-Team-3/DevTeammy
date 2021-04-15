@@ -95,6 +95,12 @@ namespace teammy
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
+            ProjCategory catOfTask = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(TaskToBeEdited.project.Proj_Name)).Categories.ToList().Find(ctg => TaskToBeEdited.category.category_name.Equals(ctg.CategoryName));
+            TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_name);
+            TaskToBeEdited.due_date = TaskDue;
+            TaskToBeEdited.priority = EditTaskPriority;
+            TaskToBeEdited.task_name = TaskName;            
+            
             dbContext.tasks.Find(TaskToBeEdited.task_id).priority = EditTaskPriority;
             dbContext.tasks.Find(TaskToBeEdited.task_id).task_name = txtTaskName.Text;
             dbContext.tasks.Find(TaskToBeEdited.task_id).due_date = TaskDue;
@@ -116,17 +122,16 @@ namespace teammy
                                    where mate.user.user_name.Equals(username) && mate.Team_ID == TaskToBeEdited.project.Team_ID
                                    select mate.mate_id).Single()
                     });
-                }                
+                }
             }
-            
+
             dbContext.SaveChanges();
 
-            ProjCategory catOfTask = Application.Current.Windows.OfType<ProjBoard>().Where(w => w.IsActive).Single().Categories.ToList().Find(ctg => TaskToBeEdited.category.category_name.Equals(ctg.CategoryName));
-            TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_name);
-            TaskToBeEdited.due_date = TaskDue;
-            TaskToBeEdited.priority = EditTaskPriority;
-            TaskToBeEdited.task_name = TaskName;            
             boxOfTask.Task = TaskToBeEdited;
+            boxOfTask.TaskName = TaskName;
+            boxOfTask.TaskDue = TaskDue;
+            boxOfTask.TaskPriority = EditTaskPriority;
+
             boxOfTask.TaskAssigneeList = new ObservableCollection<AssigneeEllipseTask>();
 
             EditTaskAssignees.ToList().ForEach(eps =>
@@ -137,8 +142,6 @@ namespace teammy
                     User = eps.User
                 });
             });
-
-
             Close();
         }
 

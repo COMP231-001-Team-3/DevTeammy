@@ -124,7 +124,7 @@ namespace teammy
 
                 dbContext.SaveChanges();
 
-                Application.Current.Windows.OfType<ProjBoard>().Where(w => w.IsActive).Single().Categories.Remove(this);
+                Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.IsActive).Categories.Remove(this);
             }
         }
 
