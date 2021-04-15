@@ -19,7 +19,7 @@ namespace teammy
         //Colors for project cards
         private Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
-        private teammyEntities dbContext = new teammyEntities();
+        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
 
         //Margins indicate position of each box to be placed
         private int left, top, right, bottom;

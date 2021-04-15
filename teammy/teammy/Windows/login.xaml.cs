@@ -19,7 +19,7 @@ namespace teammy
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
         private List<user> users;
-        private teammyEntities dbContext = new teammyEntities();
+        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
 
         public LoginWindow()
         {

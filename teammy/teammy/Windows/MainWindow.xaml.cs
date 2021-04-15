@@ -20,7 +20,7 @@ namespace teammy
 
         List<task> myTasksData;
         List<task> dueWeekData;
-        teammyEntities dbContext = new teammyEntities();
+        teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
 
         public MainWindow()
         {

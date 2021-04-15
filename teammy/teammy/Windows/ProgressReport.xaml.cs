@@ -19,7 +19,7 @@ namespace teammy
         #region Fields
         //alias for Application resources
         private static ResourceDictionary globalItems = Application.Current.Resources;
-        private teammyEntities dbContext = new teammyEntities();
+        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
         private List<string> projNames;
         private List<string> memNames;
         #endregion

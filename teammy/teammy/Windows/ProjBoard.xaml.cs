@@ -20,7 +20,7 @@ namespace teammy
 
         public string projName { get; set; }
 
-        private teammyEntities dbContext = new teammyEntities();
+        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
 
         public ObservableCollection<ProjCategory> Categories
         {

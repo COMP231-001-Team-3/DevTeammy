@@ -28,7 +28,7 @@ namespace teammy
 
 
         private List<user> contactinfo;
-        private teammyEntities dbContext = new teammyEntities();
+        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
         public TeamsContactlist()
         {
             InitializeComponent();

@@ -20,11 +20,12 @@ namespace teammy
     /// </summary>
     public partial class PopTaskBox : UserControl
     {
+        private static ResourceDictionary globalItems = Application.Current.Resources;
         private Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(task), typeof(PopTaskBox));
 
-        private teammyEntities dbContext = new teammyEntities();
+        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
 
         public task Task
         {

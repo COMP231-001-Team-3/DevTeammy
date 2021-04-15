@@ -37,7 +37,7 @@ namespace teammy
         private int displayYear = DateTime.Now.Year;
         private int displayMonth = DateTime.Now.Month;
         private List<task> tasks;
-        private teammyEntities dbContext = new teammyEntities();
+        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
         private user currentUser = Application.Current.Resources["currentUser"] as user;
 
         public Schedule()

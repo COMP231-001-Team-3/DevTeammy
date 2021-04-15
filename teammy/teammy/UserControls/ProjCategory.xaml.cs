@@ -14,7 +14,7 @@ namespace teammy
     public partial class ProjCategory : UserControl
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
-        private teammyEntities dbContext = new teammyEntities();
+        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
         private int totalBoxes = 0;
         private TaskBox toBeInserted;
         public static readonly DependencyProperty CategoryNameProperty = DependencyProperty.Register("CategoryName", typeof(string), typeof(ProjCategory));
@@ -70,10 +70,10 @@ namespace teammy
             Tasks.Add(toBeInserted);
             dbContext.tasks.Add(newTask);
             dbContext.SaveChanges();
-            LoadTasks("new");
+            LoadTasks();
         }
 
-        public void LoadTasks(string taskAge = "")
+        public void LoadTasks()
         {
             if(CategoryName != null)
             {
@@ -94,7 +94,7 @@ namespace teammy
                         TaskProgress = tasksOfCategory[i].progress_code
                     };
                     Tasks.Add(taskBox);
-                    taskBox.LoadUsers(taskAge);
+                    taskBox.LoadUsers();
                 }
             }            
         }
@@ -103,7 +103,6 @@ namespace teammy
         {
             if (MessageBox.Show("Are you sure you want to delete this category?", "Delete Category", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                dbContext = new teammyEntities();
                 List<task> toBeRemoved = (from task in dbContext.tasks
                                           where task.category.category_name.Equals(CategoryName)
                                           select task).ToList();

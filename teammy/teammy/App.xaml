@@ -10,8 +10,7 @@
         <local:ProgressReport x:Key="progReportInstance"/>
         <local:TeamsList x:Key="teamsListInstance"/>
         <local:Schedule x:Key="scheduleInstance"/>
-        <local:ProjCategory x:Key="catNameInstance"/>
-
+        <local:teammyEntities x:Key="dbContext"/>
         <Style x:Key="mouseOverStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>

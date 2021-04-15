@@ -16,7 +16,7 @@ namespace teammy
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
         private Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
-        private teammyEntities dbContext = new teammyEntities();
+        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
 
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(task), typeof(TaskBox));
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
@@ -73,7 +73,7 @@ namespace teammy
             TaskAssigneeList = new ObservableCollection<AssigneeEllipseTask>();
         }
 
-        public void LoadUsers(string sender = "")
+        public void LoadUsers()
         {
             List<string> teamMembers = (from mate in dbContext.team_mates
                                         where mate.Team_ID == Task.project.Team_ID
@@ -229,7 +229,7 @@ namespace teammy
         }
 
         private void dlItem_Click(object sender, RoutedEventArgs e)
-        {            
+        {
             if (MessageBox.Show("Are you sure you want to delete this task?", "Delete Task", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 ProjCategory currentCat = Application.Current.Windows.OfType<ProjBoard>().Where(w => w.IsActive).Single().Categories.ToList().Find(cat => cat.CategoryName.Equals(Task.category.category_name));
