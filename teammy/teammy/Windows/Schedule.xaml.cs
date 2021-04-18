@@ -119,7 +119,7 @@ namespace teammy
                 //If the date is of the current month...then
                 if(dayBox.CurrentMonth = isCurrentMonth)
                 {
-                    dueThisDay = tasks.FindAll(task => task.due_date.Value.Month == month && task.due_date.Value.Year == year && task.due_date.Value.Day == date);
+                    dueThisDay = tasks.FindAll(task => task.due_date.HasValue && task.due_date.Value.Month == month && task.due_date.Value.Year == year && task.due_date.Value.Day == date);
 
                     //If atleast one task is due on this date...then
                     if(dueThisDay.Count != 0)
