@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace teammy
 {
@@ -59,12 +60,12 @@ namespace teammy
             teamsGrid.Children.Clear();
 
             teams = (from team in dbContext.teams
-                                      join mate in dbContext.team_mates
-                                        on team.Team_ID equals mate.Team_ID
-                                      join user in dbContext.users
-                                        on mate.user_id equals user.user_id
-                                      where user.user_id == currentUser.user_id
-                                      select team).ToList();
+                        join mate in dbContext.team_mates
+                            on team.Team_ID equals mate.Team_ID
+                        join user in dbContext.users
+                            on mate.user_id equals user.user_id
+                    where user.user_id == currentUser.user_id
+                    select team).ToList();
 
             CardBox teamBox;
 
@@ -125,26 +126,7 @@ namespace teammy
         {
             if (e.Key == Key.Enter)
             {
-                toBeInserted.FullName = txtNameInput.Text;
-                txtNameInput.Visibility = Visibility.Hidden;
-                
-                dbContext.teams.Add(new team()
-                {
-                    Team_Name = txtNameInput.Text
-                });
-
-                dbContext.team_mates.Add(new team_mates()
-                {
-                    Team_ID = (from team in dbContext.teams
-                               where team.Team_Name == txtNameInput.Text
-                               select team.Team_ID).Single(),
-                    user_id = currentUser.user_id
-                });
-
-                dbContext.SaveChanges();
-                btnDone.Visibility = Visibility.Hidden;
-                btnCancel.Visibility = Visibility.Hidden;
-                btnCreateTeam.Visibility = Visibility.Visible;
+                btnDone_Click(sender, new RoutedEventArgs());
             }
         }
         #endregion
@@ -243,33 +225,37 @@ namespace teammy
         /// <summary>
         ///     Inserts a team into the DB
         /// </summary>
-        private void btnDone_Click(object sender, RoutedEventArgs e)
+        private async void btnDone_Click(object sender, RoutedEventArgs e)
         {
             //Input used for display
             toBeInserted.FullName = txtNameInput.Text;
             txtNameInput.Visibility = Visibility.Hidden;
 
+            string inputName = txtNameInput.Text;
+            await Task.Run(() => AddTeam(inputName, currentUser));
+
+            btnDone.Visibility = Visibility.Hidden;
+            btnCancel.Visibility = Visibility.Hidden;
+            btnCreateTeam.Visibility = Visibility.Visible;
+        }
+
+        private async void AddTeam(string inputName, user currUser)
+        {
             //Inserting team
             dbContext.teams.Add(new team()
             {
-                Team_Name = txtNameInput.Text
+                Team_Name = inputName
             });
-
             dbContext.SaveChanges();
 
             dbContext.team_mates.Add(new team_mates()
             {
                 Team_ID = (from team in dbContext.teams
-                           where team.Team_Name.Equals(txtNameInput.Text)
+                           where team.Team_Name.Equals(inputName)
                            select team.Team_ID).Single(),
-                user_id = currentUser.user_id
+                user_id = currUser.user_id
             });
-
-            dbContext.SaveChanges();
-
-            btnDone.Visibility = Visibility.Hidden;
-            btnCancel.Visibility = Visibility.Hidden;
-            btnCreateTeam.Visibility = Visibility.Visible;
+            await dbContext.SaveChangesAsync();
         }
 
         /// <summary>

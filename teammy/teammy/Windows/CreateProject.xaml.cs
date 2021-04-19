@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace teammy
 {
@@ -268,7 +269,7 @@ namespace teammy
         /// <summary>
         ///     Inserts the project into the DB.
         /// </summary>
-        private void btnDone_Click(object sender, RoutedEventArgs e)
+        private async void btnDone_Click(object sender, RoutedEventArgs e)
         {
             if(toBeInserted != null)
             {
@@ -280,15 +281,10 @@ namespace teammy
 
                 if (existent.Count == 0 && !txtNameInput.Text.Equals("Enter Name"))
                 {
-                    dbContext.projects.Add(new project()
-                    {
-                        Proj_Name = txtNameInput.Text,
-                        Team_ID = (from team in dbContext.teams
-                                   where team.Team_Name.Equals(cmbTeams.SelectedItem.ToString())
-                                   select team.Team_ID).Single()
-                    });
+                    string selected = cmbTeams.SelectedItem.ToString();
+                    string inputName = txtNameInput.Text;
+                    await Task.Run(() => AddProject(selected, inputName));
 
-                    dbContext.SaveChanges();
                     LoadProjects("Reset");
                     toBeInserted = null;                    
                     btnDone.Visibility = Visibility.Hidden;
@@ -314,13 +310,10 @@ namespace teammy
                         if(crdBox.Selected)
                         {
                             project selected = (from proj in dbContext.projects
-                                               where proj.Proj_Name.Equals(crdBox.FullName)
-                                               select proj).Single();
-                            dbContext.tasks.RemoveRange(selected.tasks);
-                            dbContext.categories.RemoveRange(selected.categories);
-                            dbContext.projects.Remove(selected);
+                                                where proj.Proj_Name.Equals(crdBox.FullName)
+                                                select proj).Single();
 
-                            dbContext.SaveChanges();                        
+                            await Task.Run(() => RemoveProject(selected));  
                         }
                     }
                 }
@@ -331,6 +324,25 @@ namespace teammy
             btnCancel.Visibility = Visibility.Hidden;
             btnCreateProj.Visibility = Visibility.Visible;
             btnDelete.Visibility = Visibility.Visible;
+        }
+
+        private async void RemoveProject(project selected)
+        {
+            dbContext.tasks.RemoveRange(selected.tasks);
+            dbContext.categories.RemoveRange(selected.categories);
+            dbContext.projects.Remove(selected);
+            await dbContext.SaveChangesAsync();
+        }
+        private async void AddProject(string selected, string inputName)
+        {
+            dbContext.projects.Add(new project()
+            {
+                Proj_Name = inputName,
+                Team_ID = (from team in dbContext.teams
+                           where team.Team_Name.Equals(selected)
+                           select team.Team_ID).Single()
+            });
+            await dbContext.SaveChangesAsync();
         }
 
         /// <summary>

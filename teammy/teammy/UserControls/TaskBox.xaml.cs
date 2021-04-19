@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -26,7 +27,7 @@ namespace teammy
         public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("TaskAssigneeList", typeof(ObservableCollection<AssigneeEllipseTask>), typeof(TaskBox));
         public int LoadCounter = 0;
 
-        public task Task
+        public task ToDoTask
         {
             get { return (task)GetValue(TaskProperty); }
             set { SetValue(TaskProperty, value); }
@@ -73,16 +74,16 @@ namespace teammy
             TaskAssigneeList = new ObservableCollection<AssigneeEllipseTask>();
         }
 
-        public void LoadUsers()
+        public async void LoadUsers()
         {
             List<string> teamMembers = (from mate in dbContext.team_mates
-                                        where mate.Team_ID == Task.project.Team_ID
+                                        where mate.Team_ID == ToDoTask.project.Team_ID
                                         select mate.user.user_name).ToList();
 
             teamMembers.ForEach(member => TeamUsers.Add(new MenuItem() { Header = member, HorizontalContentAlignment = HorizontalAlignment.Left, VerticalContentAlignment = VerticalAlignment.Center }));
 
             int? assigned_group = (from task in dbContext.tasks
-                                   where task.task_id == Task.task_id && task.assigned_group.HasValue
+                                   where task.task_id == ToDoTask.task_id && task.assigned_group.HasValue
                                    select task.assigned_group).SingleOrDefault();              
 
             if (assigned_group.HasValue)
@@ -101,11 +102,11 @@ namespace teammy
                 int? maxAssign = (from task in dbContext.tasks
                     select task.assigned_group).Max();
 
-                if(dbContext.tasks.Find(Task.task_id).assigned_group == null)
+                if(dbContext.tasks.Find(ToDoTask.task_id).assigned_group == null)
                 {
-                    dbContext.tasks.Find(Task.task_id).assigned_group = maxAssign.Value + 1;
-                    dbContext.SaveChanges();
-                    Task.assigned_group = maxAssign.Value + 1;
+                    dbContext.tasks.Find(ToDoTask.task_id).assigned_group = maxAssign.Value + 1;
+                    await dbContext.SaveChangesAsync();
+                    ToDoTask.assigned_group = maxAssign.Value + 1;
                 }            
             }          
         }
@@ -146,7 +147,7 @@ namespace teammy
             cm.IsOpen = true;
         }
 
-        private void PriorMenuItem_Click(object sender, RoutedEventArgs e)
+        private async void PriorMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //initiate the button color to default
             btnPriority.Background = Brushes.Transparent;
@@ -155,8 +156,8 @@ namespace teammy
             string formatted = (priorName[0] + "").ToUpper() + priorName.Substring(1).ToLower();
 
             TaskPriority = formatted;
-            dbContext.tasks.Find(Task.task_id).priority = TaskPriority;
-            dbContext.SaveChanges();
+            dbContext.tasks.Find(ToDoTask.task_id).priority = TaskPriority;
+            await dbContext.SaveChangesAsync();
         }
 
         private void StatusMenuItem_MouseEnter(object sender, MouseEventArgs e)
@@ -179,29 +180,29 @@ namespace teammy
             btnIcon.Background = null;
         }
 
-        private void StatusMenuItem_Click(object sender, RoutedEventArgs e)
+        private async void StatusMenuItem_Click(object sender, RoutedEventArgs e)
         {
             string status = (sender as MenuItem).Header.ToString().ToUpper();
             string[] statusWords = status.Split(' ');
             if(statusWords.Length > 1)
             {
-                Task.progress_code = statusWords[0][0] + "" + statusWords[1][0];
+                ToDoTask.progress_code = statusWords[0][0] + "" + statusWords[1][0];
             }
             else
             {
-                Task.progress_code = statusWords[0][0] + "" + statusWords[0][1];
+                ToDoTask.progress_code = statusWords[0][0] + "" + statusWords[0][1];
             }
-            TaskProgress = Task.progress_code;
-            dbContext.tasks.Find(Task.task_id).progress_code = TaskProgress;
-            dbContext.SaveChanges();
+            TaskProgress = ToDoTask.progress_code;
+            dbContext.tasks.Find(ToDoTask.task_id).progress_code = TaskProgress;
+            await dbContext.SaveChangesAsync();
         }
 
-        private void taskNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private async void taskNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(Task != null)
+            if(ToDoTask != null)
             {
-                dbContext.tasks.Find(Task.task_id).task_name = taskNameTextBox.Text;
-                dbContext.SaveChanges();
+                dbContext.tasks.Find(ToDoTask.task_id).task_name = taskNameTextBox.Text;
+                await dbContext.SaveChangesAsync();
             }            
         }
 
@@ -209,7 +210,7 @@ namespace teammy
         {
             EditTaskPage taskDetail = new EditTaskPage() 
             {
-                TaskToBeEdited = Task,
+                TaskToBeEdited = ToDoTask,
                 TaskName = TaskName,
                 TaskDue = TaskDue,
                 EditTaskPriority = TaskPriority,
@@ -228,18 +229,18 @@ namespace teammy
             taskDetail.ShowDialog();            
         }
 
-        private void dlItem_Click(object sender, RoutedEventArgs e)
+        private async void dlItem_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to delete this task?", "Delete Task", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                ProjCategory currentCat = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(Task.project.Proj_Name)).Categories.ToList().Find(cat => cat.CategoryName.Equals(Task.category.category_name));
+                ProjCategory currentCat = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(ToDoTask.project.Proj_Name)).Categories.ToList().Find(cat => cat.CategoryName.Equals(ToDoTask.category.category_name));
 
                 currentCat.Tasks.Remove(this);
                 dbContext.assignees.RemoveRange((from assignee in dbContext.assignees
-                                                 where assignee.assigned_group == Task.assigned_group
+                                                 where assignee.assigned_group == ToDoTask.assigned_group
                                                  select assignee).ToList());
-                dbContext.tasks.Remove(dbContext.tasks.Find(Task.task_id));                
-                dbContext.SaveChanges();
+                dbContext.tasks.Remove(dbContext.tasks.Find(ToDoTask.task_id));                
+                await dbContext.SaveChangesAsync();
             }                      
         }
 
@@ -250,26 +251,21 @@ namespace teammy
             cm.IsOpen = true;
         }
 
-        public void AssigneeMenuItem_Click(object sender, RoutedEventArgs e)
+        public async void AssigneeMenuItem_Click(object sender, RoutedEventArgs e)
         {
-                string username = (sender as MenuItem).Header.ToString();
+            string username = (sender as MenuItem).Header.ToString();
             if (TaskAssigneeList.Count < 4)
             {
                 List<string> currAssignees = (from assignee in dbContext.assignees
-                                              where assignee.assigned_group == Task.assigned_group
+                                              where assignee.assigned_group == ToDoTask.assigned_group
                                               select assignee.team_mates.user.user_name).ToList();
 
                 if (!currAssignees.Contains(username))
                 {
                     CreateAssigneeBox(username);
-                    dbContext.assignees.Add(new assignee()
-                    {
-                        assigned_group = Task.assigned_group,
-                        mate_id = (from mate in dbContext.team_mates
-                                   where mate.user.user_name.Equals(username) && mate.Team_ID == Task.project.Team_ID
-                                   select mate.mate_id).Single()
-                    });
-                    dbContext.SaveChanges();
+                    int group = ToDoTask.assigned_group.Value;
+                    long teamID = ToDoTask.project.Team_ID.Value;
+                    await Task.Run(() => AddAssignee(group, username, teamID));
                 }
                 else
                 {
@@ -280,6 +276,18 @@ namespace teammy
             {
                 MessageBox.Show("The Maximum number of assignees per task is 4.", "Max Assignees Exceeded!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        private async void AddAssignee(int group, string username, long teamID)
+        {
+            dbContext.assignees.Add(new assignee()
+            {
+                assigned_group = group,
+                mate_id = (from mate in dbContext.team_mates
+                           where mate.user.user_name.Equals(username) && mate.Team_ID == teamID
+                           select mate.mate_id).Single()
+            });
+            await dbContext.SaveChangesAsync();
         }
 
         private void AssigneeMenu_Opened(object sender, RoutedEventArgs e)
@@ -296,12 +304,12 @@ namespace teammy
             }
         }
 
-        private void taskDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private async void taskDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(Task != null)
+            if(ToDoTask != null)
             {
-                dbContext.tasks.Find(Task.task_id).due_date = taskDate.SelectedDate;
-                dbContext.SaveChanges();
+                dbContext.tasks.Find(ToDoTask.task_id).due_date = taskDate.SelectedDate;
+                await dbContext.SaveChangesAsync();
             }            
         }
     }

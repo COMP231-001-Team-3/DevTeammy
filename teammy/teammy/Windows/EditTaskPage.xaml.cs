@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -98,7 +99,7 @@ namespace teammy
             TaskDue = dbContext.tasks.Find(TaskToBeEdited.task_id).due_date;
         }
 
-        private void saveBtn_Click(object sender, RoutedEventArgs e)
+        private async void saveBtn_Click(object sender, RoutedEventArgs e)
         {
             ProjCategory catOfTask = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(TaskToBeEdited.project.Proj_Name)).Categories.ToList().Find(ctg => TaskToBeEdited.category.category_name.Equals(ctg.CategoryName));
             TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_id);
@@ -120,19 +121,22 @@ namespace teammy
                 username = epsAssignee.User;
                 if (!assignees.Contains(username))
                 {
-                    dbContext.assignees.Add(new assignee()
+                    await Task.Run(async () =>
                     {
-                        assigned_group = TaskToBeEdited.assigned_group,
-                        mate_id = (from mate in dbContext.team_mates
-                                   where mate.user.user_name.Equals(username) && mate.Team_ID == TaskToBeEdited.project.Team_ID
-                                   select mate.mate_id).Single()
+                        dbContext.assignees.Add(new assignee()
+                        {
+                            assigned_group = TaskToBeEdited.assigned_group,
+                            mate_id = (from mate in dbContext.team_mates
+                                       where mate.user.user_name.Equals(username) && mate.Team_ID == TaskToBeEdited.project.Team_ID
+                                       select mate.mate_id).Single()
+                        });
+                        await dbContext.SaveChangesAsync();
                     });
+                    
                 }
             }
 
-            dbContext.SaveChanges();
-
-            boxOfTask.Task = TaskToBeEdited;
+            boxOfTask.ToDoTask = TaskToBeEdited;
             boxOfTask.TaskName = TaskName;
             boxOfTask.TaskDue = TaskDue;
             boxOfTask.TaskPriority = EditTaskPriority;

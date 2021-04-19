@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,7 +21,9 @@ namespace teammy
 
         public string projName { get; set; }
 
-        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
+        private static teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
+
+        public static readonly DependencyProperty CategoriesProperty = DependencyProperty.Register("Categories", typeof(ObservableCollection<ProjCategory>), typeof(ProjBoard));
 
         public ObservableCollection<ProjCategory> Categories
         {
@@ -29,7 +32,6 @@ namespace teammy
         }
         public user currentUser { get; set; } = globalItems["currentUser"] as user;
 
-        public static readonly DependencyProperty CategoriesProperty = DependencyProperty.Register("Categories", typeof(ObservableCollection<ProjCategory>), typeof(ProjBoard));
 
         public ProjBoard()
         {
@@ -99,12 +101,7 @@ namespace teammy
             DragMove();
         }
 
-        private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddCategory();
-        }
-
-        private void AddCategory()
+        private async void AddCategoryButton_Click(object sender, RoutedEventArgs e)
         {
             if (++totalCats == 10)
             {
@@ -112,20 +109,27 @@ namespace teammy
                 MessageBox.Show("The maximum limit for categories per project is 9!", "Max categories completed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            ProjCategory newlyAdded = new ProjCategory() 
+            ProjCategory newlyAdded = new ProjCategory()
             {
                 Project = (from project in dbContext.projects
                            where project.Proj_Name.Equals(projName)
                            select project).Single()
             };
             Categories.Add(newlyAdded);
+
+            string name = projName;
+            await Task.Run(() => AddCategory(name));
+        }
+
+        private async void AddCategory(string name)
+        {
             dbContext.categories.Add(new category()
             {
                 project = (from project in dbContext.projects
-                           where project.Proj_Name.Equals(projName)
+                           where project.Proj_Name.Equals(name)
                            select project).Single()
             });
-            dbContext.SaveChanges();
-        }   
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

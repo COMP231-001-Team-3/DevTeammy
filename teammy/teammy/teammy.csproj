@@ -297,7 +297,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="task.cs">
+    <Compile Include="Task.cs">
       <DependentUpon>teammyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="team.cs">
