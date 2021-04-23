@@ -178,6 +178,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\DragMoveCmd.cs" />
+    <Compile Include="Commands\MenuClickCmd.cs" />
+    <Compile Include="Commands\MenuEnterCmd.cs" />
+    <Compile Include="Commands\MenuLeaveCmd.cs" />
+    <Compile Include="Commands\WindowMenuCmd.cs" />
     <Compile Include="Commands\WindowMinCmd.cs" />
     <Compile Include="Commands\WindowClosedCmd.cs" />
     <Compile Include="Commands\SignInCmd.cs" />
@@ -236,6 +240,7 @@
       <DependentUpon>AssigneeEllipseTask.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Windows\EditTaskPage.xaml.cs">
       <DependentUpon>EditTaskPage.xaml</DependentUpon>

@@ -1,41 +1,35 @@
-﻿<Window x:Class="teammy.MainWindow"
+﻿<Window x:Class="teammy.Views.MainWindow"
         x:Name="mainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:teammy"
+        xmlns:views="clr-namespace:teammy.Views"
+        xmlns:vmodels="clr-namespace:teammy.ViewModels"
         mc:Ignorable="d"
-        Title="Teammy" Height="620" Width="1000" WindowStartupLocation="CenterScreen" Closed="mainWindow_Closed"
-        WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" DataContext="{Binding RelativeSource={RelativeSource self}}" >
+        Title="Teammy" Height="620" Width="1000" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True">
+    <Window.DataContext>
+        <vmodels:MainViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <local:StatusToSourceConverter x:Key="progConverter"/>        
     </Window.Resources>
 
     <Grid Margin="0,1,-0.4,-0.6">
-        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Margin="2,0,0.4,563.6" MouseDown="pnlTitle_MouseDown" RenderTransformOrigin="0.5,0.5">
-            <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Margin="965,7,2.6,18.4" Click="btnClose_Click"/>
-            <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="930,7,37.6,18.4" Click="btnMinimize_Click"/>
-            <Label Content="Teammy" HorizontalAlignment="Left" Margin="34,10,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting"/>
-            <Button x:Name="btnMenu" Background="{x:Null}" Margin="0,0,968.6,10.4" BorderBrush="{x:Null}" Click="btnMenu_Click">
-                <Button.Content>
-                    <Grid>
-                        <Image Source="..\images\menuIcon.png"/>
-                    </Grid>
-                </Button.Content>
-
-            </Button>
-        </Grid>
+        <views:TitlePaneCtrl Margin="0,-1,-0.6,570.6"/>
 
         <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="446" Margin="30,125,0,0" VerticalAlignment="Top" Width="274"/>
+        
         <Label x:Name="welcomeLabel" Content="Welcome Back, User!" HorizontalAlignment="Left" Margin="362,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.644,0.235" FontFamily="Yet R" FontSize="36" FontWeight="Bold" Foreground="#FF1F1F1F"/>
 
         <GroupBox x:Name="AssignedGroup" HorizontalAlignment="Left" Height="217" Margin="359,125,0,0" VerticalAlignment="Top" Width="593" Foreground="#FF262625" BorderBrush="#FF181818"  BorderThickness="2">
-
             <GroupBox.Header>
                 <TextBlock x:Name="text1" FontSize="14" Foreground="White" FontWeight="Bold" FontFamily="Yu Gothic" Background="#FFCE82E8" Width="500" Height="30" Margin="0,0,0,1.2">Assigned to me</TextBlock>
             </GroupBox.Header>
-            <DataGrid x:Name="AssignedtomeDatagrid" DataGrid.GridLinesVisibility="Horizontal" HorizontalAlignment="Left" Height="180" Margin="26,0,0,-1.6" VerticalAlignment="Top" Width="529" AutoGenerateColumns="False" HeadersVisibility="None" FontSize="14" CanUserAddRows="false" IsReadOnly="True">
+            
+            <DataGrid x:Name="AssignedtomeDatagrid" DataGrid.GridLinesVisibility="Horizontal" HorizontalAlignment="Left" Height="180" Margin="26,0,0,-1.6" VerticalAlignment="Top" Width="529" AutoGenerateColumns="False" HeadersVisibility="None" FontSize="14" CanUserAddRows="false" IsReadOnly="True" ItemsSource="{Binding myTasksData}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Status" Width="43">
                         <DataGridTemplateColumn.CellTemplate>
@@ -50,11 +44,11 @@
         </GroupBox>
 
         <GroupBox x:Name="ComingGroup" HorizontalAlignment="Left"  Height="217" Margin="359,363,0,0" VerticalAlignment="Top" Width="593" Foreground="#FF262625" BorderBrush="#FF181818"  BorderThickness="2">
-
             <GroupBox.Header>
                 <TextBlock x:Name="text2" FontSize="14" Foreground="White" FontWeight="Bold" FontFamily="Yu Gothic" Background="#FFCE82E8" Width="500" Height="30" Margin="0,0,0,1.2">Coming Up</TextBlock>
             </GroupBox.Header>
-            <DataGrid x:Name="ComingDatagrid" DataGrid.GridLinesVisibility="Horizontal" HorizontalAlignment="Left" Height="180" Margin="22,0,0,-1.6" VerticalAlignment="Top" Width="539" FontSize="14" AutoGenerateColumns="False" HeadersVisibility="None" CanUserAddRows="false" IsReadOnly="True" >
+            
+            <DataGrid x:Name="ComingDatagrid" DataGrid.GridLinesVisibility="Horizontal" HorizontalAlignment="Left" Height="180" Margin="22,0,0,-1.6" VerticalAlignment="Top" Width="539" FontSize="14" AutoGenerateColumns="False" HeadersVisibility="None" CanUserAddRows="false" IsReadOnly="True" ItemsSource="{Binding dueWeekData}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Status" Width="43">
                         <DataGridTemplateColumn.CellTemplate>

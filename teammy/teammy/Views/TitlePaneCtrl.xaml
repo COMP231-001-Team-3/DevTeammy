@@ -12,6 +12,7 @@
         <cmd:WindowClosedCmd x:Key="closeCmd"/>
         <cmd:WindowMinCmd x:Key="minCmd"/>
         <cmd:DragMoveCmd x:Key="dragCmd"/>
+        <cmd:WindowMenuCmd x:Key="menuCmd"/>
     </UserControl.Resources>
     <Viewbox>
         <!-- Grid pnlTitle represents Custom title Bar -->
@@ -28,10 +29,10 @@
             
             <Label Content="Teammy" HorizontalAlignment="Left"  VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting" Margin="36,6,0,0"/>
             
-            <Button x:Name="btnMenu" Background="{x:Null}"  BorderBrush="{x:Null}" Margin="0,3,773,7">
+            <Button x:Name="btnMenu" Background="{x:Null}"  BorderBrush="{x:Null}" Margin="0,3,773,7" Command="{StaticResource ResourceKey=menuCmd}" CommandParameter="{Binding ElementName=btnMenu}">
                 <Button.Content>
                     <Grid Height="27" Width="25">
-                        <Image Source="..\images\menuIcon.png"/>
+                        <Image Source="..\Images\menuIcon.png"/>
                     </Grid>
                 </Button.Content>
             </Button>            
