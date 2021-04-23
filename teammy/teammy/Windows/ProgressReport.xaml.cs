@@ -8,6 +8,7 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Defaults;
 using System.Threading.Tasks;
+using teammy.Models;
 
 namespace teammy
 {

@@ -28,6 +28,7 @@
                 <Button.Content>
                     <Grid>
                         <Image Source="..\images\menuIcon.png"/>
+
                     </Grid>
                 </Button.Content>
 
@@ -37,7 +38,7 @@
         <!-- This ScrollViewer houses the grid that ultimately holds the project cards -->
         <ScrollViewer MaxHeight="382" Margin="220,58,10,75" Grid.ColumnSpan="3">
             <Grid MinHeight="400" x:Name="projGrid" Margin="0,0,0,0">
-               
+
             </Grid>
         </ScrollViewer>
         <Image Source="..\images\jelly.jpg" HorizontalAlignment="Left" Height="345" Margin="0,80,0,0" VerticalAlignment="Top" Width="230"/>
