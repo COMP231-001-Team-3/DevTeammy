@@ -11,7 +11,7 @@
         <cmd:MenuEnterCmd x:Key="enterCmd"/>
         <cmd:MenuLeaveCmd x:Key="leaveCmd"/>
         <cmd:MenuClickCmd x:Key="clickCmd"/>
-        <local:MainWindow x:Key="mainInstance"/>
+        <views:MainWindow x:Key="mainInstance"/>
         <views:LoginWindow x:Key="loginInstance"/>
         <local:CreateProject x:Key="createProjInstance"/>
         <local:ProgressReport x:Key="progReportInstance"/>
