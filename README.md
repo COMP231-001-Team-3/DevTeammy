@@ -12,3 +12,5 @@ use of a MySQL Database to store and receive data pertaining to the application.
 5. Schedule view, illustrating tasks in a calendar format
 6. Teams view, showing a list of all teams
 7. Team details, informing users of team mates preferred contact method.
+
+Instructions to download the app are available at https://github.com/COMP231-001-Team-3/InstallTeammy/
