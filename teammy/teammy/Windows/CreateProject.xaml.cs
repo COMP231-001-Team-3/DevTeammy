@@ -5,8 +5,9 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Linq;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using teammy.Models;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace teammy
 {
@@ -21,7 +22,7 @@ namespace teammy
         //Colors for project cards
         private Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
-        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
+        private IMongoDatabase dbContext = DBConnector.Connect();
 
         //Margins indicate position of each box to be placed
         private int left, top, right, bottom;
@@ -31,11 +32,11 @@ namespace teammy
 
         private TextBox txtNameInput;
         private string prevSelection;
-        private List<List<ProjBoard>> projectBrds = new List<List<ProjBoard>>();
+        private List<List<Board>> projectBrds = new List<List<Board>>();
         #endregion
 
         #region Properties
-        public user currentUser { get; set; } = globalItems["currentUser"] as user;
+        public User currentUser { get; set; } = globalItems["currentUser"] as User;
         #endregion
 
         #region Constructor
@@ -57,18 +58,15 @@ namespace teammy
             
             if (cmbTeams.Items.Count == 0)
             {
-                List<string> teamNames = (from team in dbContext.teams
-                                          join mate in dbContext.team_mates
-                                            on team.Team_ID equals mate.Team_ID
-                                          join currUser in dbContext.users
-                                            on mate.user_id equals currUser.user_id
-                                          where currUser.user_name.Equals(currentUser.user_name)
-                                          select team.Team_Name).ToList();
+                List<string> teamNames = dbContext.GetCollection<Team>("teams")
+                                            .Find(Builders<Team>.Filter.ElemMatch(t => t.Members, m => m.UserId == currentUser.UserId))
+                                            .Project(team => team.TeamName)
+                                            .ToList();
                 cmbTeams.ItemsSource = teamNames;
 
                 for (int i = 0; i < teamNames.Count; i++)
                 {
-                    projectBrds.Add(new List<ProjBoard>());
+                    projectBrds.Add(new List<Board>());
                 }
 
                 cmbTeams.SelectedIndex = 0;
@@ -89,13 +87,38 @@ namespace teammy
             bottom = 260;
             boxCount = 0;
             totalBoxes = 0;
-            projGrid.Children.Clear();                    
+            projGrid.Children.Clear();
 
-            List<string> projNames = (from proj in dbContext.projects
-                                      join team in dbContext.teams 
-                                        on proj.Team_ID equals team.Team_ID
-                                      where team.Team_Name.Equals(currSelection)
-                                     select proj.Proj_Name).ToList();
+            PipelineDefinition<Project, BsonDocument> pipeline = new []
+            {
+                new BsonDocument("$lookup",
+                new BsonDocument
+                    {
+                        { "from", "teams" },
+                        { "localField", "teamId" },
+                        { "foreignField", "teamId" },
+                        { "as", "Teams" }
+                    }),
+                new BsonDocument("$unwind",
+                new BsonDocument("path", "$Teams")),
+                new BsonDocument("$match",
+                new BsonDocument
+                {
+                    { "Teams.teamName", currSelection }
+                }),
+                new BsonDocument("$project",
+                new BsonDocument
+                    {
+                        { "_id", 0 },
+                        { "name", 1 }
+                    })
+            };
+
+            List<string> projNames = dbContext.GetCollection<Project>("projects")
+                                        .Aggregate(pipeline)
+                                        .ToEnumerable()
+                                        .Select(d => d.GetValue("name").AsString)
+                                        .ToList();
 
             CardBox project;
             //Variables for usage in loop declared beforehand for performance reasons
@@ -151,7 +174,7 @@ namespace teammy
                     spLoader.Show(true);
                 }
                 current = sender as CardBox;
-                ProjBoard projDetails = new ProjBoard() { projName = current.FullName };
+                Board projDetails = new Board() { projName = current.FullName };
                 projDetails.LoadCategories();
                 projectBrds[cmbTeams.SelectedIndex].Add(projDetails);
             }
@@ -270,23 +293,22 @@ namespace teammy
         /// <summary>
         ///     Inserts the project into the DB.
         /// </summary>
-        private async void btnDone_Click(object sender, RoutedEventArgs e)
+        private void btnDone_Click(object sender, RoutedEventArgs e)
         {
             if(toBeInserted != null)
             {
                 toBeInserted.FullName = txtNameInput.Text;
                 txtNameInput.Visibility = Visibility.Hidden;
-                List<project> existent = (from project in dbContext.projects
-                                          where project.Proj_Name.Equals(txtNameInput.Text)
-                                          select project).ToList();
+                List<Project> existent = dbContext.GetCollection<Project>("projects")
+                                            .Find(p => p.Name.Equals(txtNameInput.Text))
+                                            .ToList();
 
                 if (existent.Count == 0 && !txtNameInput.Text.Equals("Enter Name"))
                 {
                     string selected = cmbTeams.SelectedItem.ToString();
                     string inputName = txtNameInput.Text;
-                    await Task.Run(() => AddProject(selected, inputName));
+                    AddProject(selected, inputName);
 
-                    LoadProjects("Reset");
                     toBeInserted = null;                    
                     btnDone.Visibility = Visibility.Hidden;
                     btnCancel.Visibility = Visibility.Hidden;
@@ -310,40 +332,61 @@ namespace teammy
                         crdBox = projGrid.Children[i] as CardBox;
                         if(crdBox.Selected)
                         {
-                            project selected = (from proj in dbContext.projects
-                                                where proj.Proj_Name.Equals(crdBox.FullName)
-                                                select proj).Single();
+                            Project selected = dbContext.GetCollection<Project>("projects")
+                                                .Find(p => p.Name.Equals(crdBox.FullName))
+                                                .Single();
 
-                            await Task.Run(() => RemoveProject(selected));  
+                            RemoveProject(selected);  
                         }
                     }
                 }
-                LoadProjects("Reset");
             }
 
             btnDone.Visibility = Visibility.Hidden;
             btnCancel.Visibility = Visibility.Hidden;
             btnCreateProj.Visibility = Visibility.Visible;
-            btnDelete.Visibility = Visibility.Visible;
+            btnDelete.Visibility = Visibility.Visible;            
         }
 
-        private async void RemoveProject(project selected)
+        private async void RemoveProject(Project selected)
         {
-            dbContext.tasks.RemoveRange(selected.tasks);
-            dbContext.categories.RemoveRange(selected.categories);
-            dbContext.projects.Remove(selected);
-            await dbContext.SaveChangesAsync();
+            using (var session = await DBConnector.client.StartSessionAsync())
+            {
+                // Begin transaction
+                session.StartTransaction();
+                try
+                {
+                    await dbContext.GetCollection<TaskToDo>("tasks")
+                                .DeleteManyAsync(t => t.ProjectId == selected.ProjectId);
+                    await dbContext.GetCollection<Project>("projects")
+                                .DeleteOneAsync(p => p.ProjectId == selected.ProjectId);
+                    await session.CommitTransactionAsync();
+                    LoadProjects("Reset");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error writing to MongoDB: " + e.Message);
+                    await session.AbortTransactionAsync();
+                }
+            }
+            
         }
         private async void AddProject(string selected, string inputName)
         {
-            dbContext.projects.Add(new project()
-            {
-                Proj_Name = inputName,
-                Team_ID = (from team in dbContext.teams
-                           where team.Team_Name.Equals(selected)
-                           select team.Team_ID).Single()
-            });
-            await dbContext.SaveChangesAsync();
+            int projId = dbContext.GetCollection<IDSequence>("idValues")
+                                     .FindOneAndUpdate(i => i.myID.Equals("Sequence"), Builders<IDSequence>.Update.Inc(i => i.ProjectId, 1))
+                                     .ProjectId;
+            await dbContext.GetCollection<Project>("projects")
+                           .InsertOneAsync(new Project()
+                           {
+                               ProjectId = projId,
+                               Name = inputName,
+                               TeamId = dbContext.GetCollection<Team>("teams")
+                                                   .Find(t => t.TeamName.Equals(selected))
+                                                   .Project(t => t.TeamId)
+                                                   .Single(),
+                               Categories = new List<string>()
+                           });
         }
 
         /// <summary>

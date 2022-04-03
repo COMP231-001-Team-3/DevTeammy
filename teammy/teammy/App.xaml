@@ -6,7 +6,7 @@
              xmlns:views="clr-namespace:teammy.Views"
              xmlns:cmd="clr-namespace:teammy.Commands"
              xmlns:models="clr-namespace:teammy.Models"
-             StartupUri="Views/login.xaml">
+             StartupUri="Views/LoginWindow.xaml">
     <Application.Resources>
         <cmd:MenuEnterCmd x:Key="enterCmd"/>
         <cmd:MenuLeaveCmd x:Key="leaveCmd"/>
@@ -17,7 +17,6 @@
         <local:ProgressReport x:Key="progReportInstance"/>
         <local:TeamsList x:Key="teamsListInstance"/>
         <local:Schedule x:Key="scheduleInstance"/>
-        <models:teammyEntities x:Key="dbContext"/>
         <Style x:Key="mouseOverStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>

@@ -13,13 +13,13 @@
     </UserControl.Resources>
     <Border x:Name="containerBorder" BorderBrush="#FF8671CE" BorderThickness="1">
         <Grid Background="White">
-            <Label x:Name="lblTaskName" Content="{Binding Task.task_name}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="175" FontFamily="Perpetua" FontSize="16" Foreground="#FF8671CE"/>
+            <Label x:Name="lblTaskName" Content="{Binding Task.Title}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="175" FontFamily="Perpetua" FontSize="16" Foreground="#FF8671CE"/>
 
             <Label x:Name="lblAssignedHdr" Content="Assigned To" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,38,0,0" Width="79" FontFamily="Perpetua" Foreground="#FF8671CE" FontSize="14"/>
 
-            <Rectangle x:Name="rectPriority" Margin="250,7,37.333,48.333" Fill="{Binding Task.priority, Converter={StaticResource ResourceKey=priorConverter}}" ToolTip="{Binding Task.priority}" Width="20" Height="20"/>
+            <Rectangle x:Name="rectPriority" Margin="250,7,37.333,48.333" Fill="{Binding Task.Priority, Converter={StaticResource ResourceKey=priorConverter}}" ToolTip="{Binding Task.Priority}" Width="20" Height="20"/>
 
-            <Image x:Name="imgStatus" Source="{Binding Task.progress_code, Converter={StaticResource ResourceKey=statusConverter}}" ToolTip="{Binding Task.progress_indicators.Progress}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="20" Margin="280,10,0,0" />
+            <Image x:Name="imgStatus" Source="{Binding Task.Progress, Converter={StaticResource ResourceKey=statusConverter}}" ToolTip="{Binding Task.Progress}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="20" Margin="280,10,0,0" />
             
             <StackPanel x:Name="pnlAssignees" Margin="267,35,5.333,7.333" Orientation="Horizontal" Width="40">
                 

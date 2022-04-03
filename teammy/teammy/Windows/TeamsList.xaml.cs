@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using teammy.Models;
+using MongoDB.Driver;
 
 namespace teammy
 {
@@ -21,7 +22,7 @@ namespace teammy
         //Colors for team cards
         Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
-        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
+        private IMongoDatabase dbContext = DBConnector.Connect();
 
         //Margins indicate position of each box to be placed
         private int left, top, right, bottom;
@@ -30,11 +31,11 @@ namespace teammy
         private CardBox toBeInserted;
 
         private TextBox txtNameInput;
-        private List<team> teams;
+        private List<Team> teams;
         #endregion
 
         #region Properties
-        public user currentUser { get; set; } = globalItems["currentUser"] as user;
+        public User currentUser { get; set; } = globalItems["currentUser"] as User;
         #endregion
 
         #region Constructor
@@ -60,13 +61,16 @@ namespace teammy
             totalBoxes = 0;
             teamsGrid.Children.Clear();
 
-            teams = (from team in dbContext.teams
-                        join mate in dbContext.team_mates
-                            on team.Team_ID equals mate.Team_ID
-                        join user in dbContext.users
-                            on mate.user_id equals user.user_id
-                    where user.user_id == currentUser.user_id
-                    select team).ToList();
+            teams = dbContext.GetCollection<Team>("teams")
+                                .Find(Builders<Team>.Filter.ElemMatch(t => t.Members, m => m.UserId == currentUser.UserId))
+                                .ToList();
+                //(from team in dbContext.teams
+                //        join mate in dbContext.team_mates
+                //            on team.Team_ID equals mate.Team_ID
+                //        join user in dbContext.users
+                //            on mate.user_id equals user.user_id
+                //    where user.user_id == currentUser.user_id
+                //    select team).ToList();
 
             CardBox teamBox;
 
@@ -78,7 +82,7 @@ namespace teammy
             for (int i = 0; i < teams.Count; i++)
             {
                 totalBoxes++;
-                teamName = teams[i].Team_Name.ToString();
+                teamName = teams[i].TeamName;
 
                 //Creation & Initialization of teamBox
                 teamBox = new CardBox() { FullName = teamName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)]};
@@ -112,9 +116,14 @@ namespace teammy
         {
             CardBox current = ((sender as Button).Parent as Grid).Parent as CardBox;
 
-            TeamsContactlist contactPage = new TeamsContactlist() { currentTeam = (from team in teams
-                               where team.Team_Name.Equals(current.FullName)
-                               select team).Single() };
+            TeamsContactlist contactPage = new TeamsContactlist()
+            { 
+                currentTeam = 
+                    (from team in teams
+                    where team.TeamName.Equals(current.FullName)
+                    select team)
+                    .Single() 
+            };
 
             contactPage.ShowDialog();
         }
@@ -233,30 +242,26 @@ namespace teammy
             txtNameInput.Visibility = Visibility.Hidden;
 
             string inputName = txtNameInput.Text;
-            await Task.Run(() => AddTeam(inputName, currentUser));
+            await Task.Run(() => AddTeam(inputName));
 
             btnDone.Visibility = Visibility.Hidden;
             btnCancel.Visibility = Visibility.Hidden;
             btnCreateTeam.Visibility = Visibility.Visible;
         }
 
-        private async void AddTeam(string inputName, user currUser)
+        private async void AddTeam(string inputName)
         {
+            int teamId = dbContext.GetCollection<IDSequence>("idValues")
+                                     .FindOneAndUpdate(i => i.myID.Equals("Sequence"), Builders<IDSequence>.Update.Inc(i => i.TeamId, 1))
+                                     .TeamId;
             //Inserting team
-            dbContext.teams.Add(new team()
-            {
-                Team_Name = inputName
-            });
-            dbContext.SaveChanges();
-
-            dbContext.team_mates.Add(new team_mates()
-            {
-                Team_ID = (from team in dbContext.teams
-                           where team.Team_Name.Equals(inputName)
-                           select team.Team_ID).Single(),
-                user_id = currUser.user_id
-            });
-            await dbContext.SaveChangesAsync();
+            await dbContext.GetCollection<Team>("teams")
+                            .InsertOneAsync(new Team()
+                            {
+                                TeamId = teamId,
+                                TeamName = inputName,
+                                Members = new List<User>() { currentUser }
+                            });
         }
 
         /// <summary>

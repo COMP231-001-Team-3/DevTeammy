@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -16,13 +17,12 @@ namespace teammy
         private static ResourceDictionary globalItems = Application.Current.Resources;
         private Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
 
-        public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(task), typeof(PopTaskBox));
+        public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(TaskToDo), typeof(PopTaskBox));
 
-        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
-
-        public task Task
+        private IMongoDatabase dbContext = DBConnector.Connect();
+        public TaskToDo Task
         {
-            get => GetValue(TaskProperty) as task;
+            get => GetValue(TaskProperty) as TaskToDo;
             set => SetValue(TaskProperty, value);
         }
 
@@ -33,18 +33,22 @@ namespace teammy
 
         private void popTaskBox_Loaded(object sender, RoutedEventArgs e)
         {
-            List<user> assignees = (from task in dbContext.tasks
-                                   join assignee in dbContext.assignees
-                                      on task.assigned_group equals assignee.assigned_group
-                                   join mate in dbContext.team_mates
-                                      on assignee.mate_id equals mate.mate_id
-                                   where task.task_id == Task.task_id
-                                   select mate.user).ToList();
+            List<User> assignees = dbContext.GetCollection<TaskToDo>("tasks")
+                                                .Find(t => t.TaskId == Task.TaskId)
+                                                .Project(t => t.Assignees)
+                                                .Single();
+                //(from task in dbContext.tasks
+                //                   join assignee in dbContext.assignees
+                //                      on task.assigned_group equals assignee.assigned_group
+                //                   join mate in dbContext.team_mates
+                //                      on assignee.mate_id equals mate.mate_id
+                //                   where task.task_id == Task.task_id
+                //                   select mate.user).ToList();
 
             Random rd = new Random();
             foreach (var assignee in assignees)
             {
-                pnlAssignees.Children.Add(new AssigneeEllipse() { User = assignee.user_name, BackColor = backColors[rd.Next(0, backColors.Length - 1)] });
+                pnlAssignees.Children.Add(new AssigneeEllipse() { User = assignee.Username, BackColor = backColors[rd.Next(0, backColors.Length - 1)] });
 
                 pnlAssignees.Width += 42;
                 pnlAssignees.Margin = new Thickness(pnlAssignees.Margin.Left - 40, pnlAssignees.Margin.Top, pnlAssignees.Margin.Right - 40, pnlAssignees.Margin.Bottom);

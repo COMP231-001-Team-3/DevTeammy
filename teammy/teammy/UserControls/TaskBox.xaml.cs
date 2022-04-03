@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Linq;
 using teammy.Models;
+using MongoDB.Driver;
 
 namespace teammy
 {
@@ -18,9 +19,9 @@ namespace teammy
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
         private Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
-        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
+        private IMongoDatabase dbContext = DBConnector.Connect();
 
-        public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(task), typeof(TaskBox));
+        public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(TaskToDo), typeof(TaskBox));
         public static readonly DependencyProperty TaskProgressProperty = DependencyProperty.Register("TaskProgress", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskNameProperty = DependencyProperty.Register("TaskName", typeof(string), typeof(TaskBox));
         public static readonly DependencyProperty TaskDueProperty = DependencyProperty.Register("TaskDue", typeof(DateTime?), typeof(TaskBox));
@@ -28,9 +29,9 @@ namespace teammy
         public static readonly DependencyProperty TaskAssigneeListProperty = DependencyProperty.Register("TaskAssigneeList", typeof(ObservableCollection<AssigneeEllipseTask>), typeof(TaskBox));
         public int LoadCounter = 0;
 
-        public task ToDoTask
+        public TaskToDo ToDoTask
         {
-            get { return (task)GetValue(TaskProperty); }
+            get { return (TaskToDo)GetValue(TaskProperty); }
             set { SetValue(TaskProperty, value); }
         }
 
@@ -66,8 +67,8 @@ namespace teammy
 
         public ObservableCollection<MenuItem> TeamUsers { get; set; } = new ObservableCollection<MenuItem>();
 
-        public static user currentUser { get; set; } = globalItems["currentUser"] as user;
-        public DateTime DisplayDateStart { get; set; } = currentUser.privilege_code.Equals("PM") ? DateTime.Now : DateTime.MaxValue;
+        public static User currentUser { get; set; } = globalItems["currentUser"] as User;
+        public DateTime DisplayDateStart { get; set; } = currentUser.Privilege.Equals("PM") ? DateTime.Now : DateTime.MaxValue;
 
         public TaskBox()
         {
@@ -75,41 +76,26 @@ namespace teammy
             TaskAssigneeList = new ObservableCollection<AssigneeEllipseTask>();
         }
 
-        public async void LoadUsers()
+        public void LoadUsers()
         {
-            List<string> teamMembers = (from mate in dbContext.team_mates
-                                        where mate.Team_ID == ToDoTask.project.Team_ID
-                                        select mate.user.user_name).ToList();
+            List<string> teamMembers = dbContext.GetCollection<Team>("teams")
+                                                .Find(t => t.TeamId == ToDoTask.TeamId)
+                                                .Project(t => t.Members)
+                                                .Single()
+                                                .Select(m => m.Username)
+                                                .ToList();
 
             teamMembers.ForEach(member => TeamUsers.Add(new MenuItem() { Header = member, HorizontalContentAlignment = HorizontalAlignment.Left, VerticalContentAlignment = VerticalAlignment.Center }));
 
-            int? assigned_group = (from task in dbContext.tasks
-                                   where task.task_id == ToDoTask.task_id && task.assigned_group.HasValue
-                                   select task.assigned_group).SingleOrDefault();              
+            List<string> assignees = ToDoTask.Assignees != null ? ToDoTask.Assignees
+                                        .Select(a => a.Username)
+                                        .ToList()
+                                        : new List<string>();
 
-            if (assigned_group.HasValue)
+            foreach (var item in assignees)
             {
-                List<string> assignees = (from assignee in dbContext.assignees
-                                            where assignee.assigned_group == assigned_group
-                                            select assignee.team_mates.user.user_name).ToList();
-
-                foreach (var item in assignees)
-                {
-                    CreateAssigneeBox(item);
-                }
-            }
-            else
-            {
-                int? maxAssign = (from task in dbContext.tasks
-                    select task.assigned_group).Max();
-
-                if(dbContext.tasks.Find(ToDoTask.task_id).assigned_group == null)
-                {
-                    dbContext.tasks.Find(ToDoTask.task_id).assigned_group = maxAssign.Value + 1;
-                    await dbContext.SaveChangesAsync();
-                    ToDoTask.assigned_group = maxAssign.Value + 1;
-                }            
-            }          
+                CreateAssigneeBox(item);
+            }     
         }
 
         private void CreateAssigneeBox(string assigneeName)
@@ -157,8 +143,10 @@ namespace teammy
             string formatted = (priorName[0] + "").ToUpper() + priorName.Substring(1).ToLower();
 
             TaskPriority = formatted;
-            dbContext.tasks.Find(ToDoTask.task_id).priority = TaskPriority;
-            await dbContext.SaveChangesAsync();
+            await dbContext.GetCollection<TaskToDo>("tasks")
+                        .UpdateOneAsync(t => t.TaskId == ToDoTask.TaskId, Builders<TaskToDo>.Update.Set(t => t.Priority, TaskPriority));
+            //dbContext.tasks.Find(ToDoTask.TaskId).priority = TaskPriority;
+            //await dbContext.SaveChangesAsync();
         }
 
         private void StatusMenuItem_MouseEnter(object sender, MouseEventArgs e)
@@ -187,23 +175,28 @@ namespace teammy
             string[] statusWords = status.Split(' ');
             if(statusWords.Length > 1)
             {
-                ToDoTask.progress_code = statusWords[0][0] + "" + statusWords[1][0];
+                ToDoTask.Progress = statusWords[0][0] + "" + statusWords[1][0];
             }
             else
             {
-                ToDoTask.progress_code = statusWords[0][0] + "" + statusWords[0][1];
+                ToDoTask.Progress = statusWords[0][0] + "" + statusWords[0][1];
             }
-            TaskProgress = ToDoTask.progress_code;
-            dbContext.tasks.Find(ToDoTask.task_id).progress_code = TaskProgress;
-            await dbContext.SaveChangesAsync();
+            TaskProgress = ToDoTask.Progress;
+
+            await dbContext.GetCollection<TaskToDo>("tasks")
+                        .UpdateOneAsync(t => t.TaskId == ToDoTask.TaskId, Builders<TaskToDo>.Update.Set(t => t.Progress, TaskProgress));
+            //dbContext.tasks.Find(ToDoTask.task_id).progress_code = TaskProgress;
+            //await dbContext.SaveChangesAsync();
         }
 
         private async void taskNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(ToDoTask != null)
             {
-                dbContext.tasks.Find(ToDoTask.task_id).task_name = taskNameTextBox.Text;
-                await dbContext.SaveChangesAsync();
+                await dbContext.GetCollection<TaskToDo>("tasks")
+                        .UpdateOneAsync(t => t.TaskId == ToDoTask.TaskId, Builders<TaskToDo>.Update.Set(t => t.Title, taskNameTextBox.Text));
+                //dbContext.tasks.Find(ToDoTask.task_id).task_name = taskNameTextBox.Text;
+                //await dbContext.SaveChangesAsync();
             }            
         }
 
@@ -234,14 +227,18 @@ namespace teammy
         {
             if (MessageBox.Show("Are you sure you want to delete this task?", "Delete Task", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                ProjCategory currentCat = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(ToDoTask.project.Proj_Name)).Categories.ToList().Find(cat => cat.CategoryName.Equals(ToDoTask.category.category_name));
+                Category currentCat = Application.Current.Windows
+                                             .OfType<Board>()
+                                             .SingleOrDefault(window =>
+                                                                window.projectId == ToDoTask.ProjectId)
+                                             .Categories.ToList()
+                                             .Find(cat => cat.CategoryName.Equals(ToDoTask.Category));
 
                 currentCat.Tasks.Remove(this);
-                dbContext.assignees.RemoveRange((from assignee in dbContext.assignees
-                                                 where assignee.assigned_group == ToDoTask.assigned_group
-                                                 select assignee).ToList());
-                dbContext.tasks.Remove(dbContext.tasks.Find(ToDoTask.task_id));                
-                await dbContext.SaveChangesAsync();
+                await dbContext.GetCollection<TaskToDo>("tasks")
+                                  .DeleteOneAsync(t => t.TaskId == ToDoTask.TaskId);
+                //dbContext.tasks.Remove(dbContext.tasks.Find(ToDoTask.task_id));                
+                //await dbContext.SaveChangesAsync();
             }                      
         }
 
@@ -252,26 +249,21 @@ namespace teammy
             cm.IsOpen = true;
         }
 
-        public async void AssigneeMenuItem_Click(object sender, RoutedEventArgs e)
+        public void AssigneeMenuItem_Click(object sender, RoutedEventArgs e)
         {
             string username = (sender as MenuItem).Header.ToString();
             if (TaskAssigneeList.Count < 4)
             {
-                List<string> currAssignees = (from assignee in dbContext.assignees
-                                              where assignee.assigned_group == ToDoTask.assigned_group
-                                              select assignee.team_mates.user.user_name).ToList();
-
-                if (!currAssignees.Contains(username))
-                {
-                    CreateAssigneeBox(username);
-                    int group = ToDoTask.assigned_group.Value;
-                    long teamID = ToDoTask.project.Team_ID.Value;
-                    await Task.Run(() => AddAssignee(group, username, teamID));
-                }
-                else
-                {
-                    MessageBox.Show("This person has already been assigned to this task.", "Duplicate Assignee", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                List<string> currAssignees = ToDoTask.Assignees != null ? ToDoTask.Assignees
+                                                        .Select(a => a.Username)
+                                                        .ToList()
+                                                        : new List<string>();
+                User newAssignee = dbContext.GetCollection<User>("users")
+                                                        .Find(u => u.Username.Equals(username))
+                                                        .Single();
+                CreateAssigneeBox(username);
+                long teamID = ToDoTask.TeamId;
+                AddAssignee(newAssignee);
             }
             else
             {
@@ -279,16 +271,11 @@ namespace teammy
             }
         }
 
-        private async void AddAssignee(int group, string username, long teamID)
+        private async void AddAssignee(User assignee)
         {
-            dbContext.assignees.Add(new assignee()
-            {
-                assigned_group = group,
-                mate_id = (from mate in dbContext.team_mates
-                           where mate.user.user_name.Equals(username) && mate.Team_ID == teamID
-                           select mate.mate_id).Single()
-            });
-            await dbContext.SaveChangesAsync();
+            await dbContext.GetCollection<TaskToDo>("tasks")
+                           .UpdateOneAsync(t => t.TaskId == ToDoTask.TaskId,
+                                        Builders<TaskToDo>.Update.AddToSet(t => t.Assignees, assignee));
         }
 
         private void AssigneeMenu_Opened(object sender, RoutedEventArgs e)
@@ -309,8 +296,11 @@ namespace teammy
         {
             if(ToDoTask != null)
             {
-                dbContext.tasks.Find(ToDoTask.task_id).due_date = taskDate.SelectedDate;
-                await dbContext.SaveChangesAsync();
+                await dbContext.GetCollection<TaskToDo>("tasks")
+                                  .UpdateOneAsync(t => t.TaskId == ToDoTask.TaskId,
+                                            Builders<TaskToDo>.Update.Set(t => t.DueDate, taskDate.SelectedDate));
+                //dbContext.tasks.Find(ToDoTask.TaskId).due_date = taskDate.SelectedDate;
+                //await dbContext.SaveChangesAsync();
             }            
         }
     }

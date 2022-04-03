@@ -1,10 +1,10 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,24 +17,25 @@ namespace teammy
     /// </summary>
     public partial class EditTaskPage : Window, INotifyPropertyChanged
     {
-       Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
-        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
+        Color[] backColors = new Color[] { Colors.Red, Colors.Blue, Colors.Orange, Colors.Aqua, Colors.BlueViolet, Colors.Gold, Colors.Brown, Colors.Coral, Colors.Gold, Colors.SaddleBrown, Colors.Salmon, Colors.CornflowerBlue, Colors.RoyalBlue, Colors.RosyBrown, Colors.Yellow, Colors.YellowGreen, Colors.GreenYellow, Colors.Indigo };
+        private IMongoDatabase dbContext = DBConnector.Connect();
         private int LoadCounter = 0;
-        public task TaskToBeEdited { get; set; }
+        public TaskToDo TaskToBeEdited { get; set; }
+        public User currentUser { get; set; } = globalItems["currentUser"] as User;
 
         private string _taskPriority;
         public string EditTaskPriority
         {
             get => _taskPriority;
-            set 
+            set
             {
                 _taskPriority = value;
                 RaisePropertyChanged();
-            } 
+            }
         }
 
         private string _taskName;
-        public string TaskName 
+        public string TaskName
         {
             get => _taskName;
             set
@@ -60,8 +61,6 @@ namespace teammy
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public static user currentUser { get; set; } = globalItems["currentUser"] as user;
-
         public EditTaskPage()
         {
             InitializeComponent();            
@@ -83,59 +82,48 @@ namespace teammy
             string formatted = (priorName[0] + "").ToUpper() + priorName.Substring(1).ToLower();
 
             EditTaskPriority = formatted;
-            dbContext.tasks.Find(TaskToBeEdited.task_id).priority = EditTaskPriority;
         }
         public ObservableCollection<MenuItem> TeamUsers { get; set; }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            TaskToBeEdited = dbContext.tasks.Find(TaskToBeEdited.task_id);
-            string priority = dbContext.tasks.Find(TaskToBeEdited.task_id).priority;
-            if(priority != null)
-            {
-                EditTaskPriority = (priority[0] + "").ToUpper() + priority.Substring(1).ToLower();
-            }
-            
-            TaskName = dbContext.tasks.Find(TaskToBeEdited.task_id).task_name;
-            TaskDue = dbContext.tasks.Find(TaskToBeEdited.task_id).due_date;
+            //TaskToBeEdited = newDBContext.GetCollection<TaskNew>("tasks")
+            //                             .Find(t => t.TaskId == TaskToBeEdited.TaskId)
+            //                             .Single();
+            //dbContext.tasks.Find(TaskToBeEdited.task_id);
+            //string priority = dbContext.tasks.Find(TaskToBeEdited.task_id).priority;
+            //if(priority != null)
+            //{
+            //    EditTaskPriority = (priority[0] + "").ToUpper() + priority.Substring(1).ToLower();
+            //}
+
+            //TaskName = dbContext.tasks.Find(TaskToBeEdited.task_id).task_name;
+            //TaskDue = dbContext.tasks.Find(TaskToBeEdited.task_id).due_date;
+            Close();
         }
 
         private async void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            ProjCategory catOfTask = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(TaskToBeEdited.project.Proj_Name)).Categories.ToList().Find(ctg => TaskToBeEdited.category.category_name.Equals(ctg.CategoryName));
-            TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_id);
-            TaskToBeEdited.due_date = TaskDue;
-            TaskToBeEdited.priority = EditTaskPriority;
-            TaskToBeEdited.task_name = TaskName;            
-            
-            dbContext.tasks.Find(TaskToBeEdited.task_id).priority = EditTaskPriority;
-            dbContext.tasks.Find(TaskToBeEdited.task_id).task_name = txtTaskName.Text;
-            dbContext.tasks.Find(TaskToBeEdited.task_id).due_date = TaskDue;
+            Category catOfTask = Application.Current.Windows
+                                    .OfType<Board>()
+                                    .SingleOrDefault(window => window.projectId == TaskToBeEdited.ProjectId).Categories
+                                    .ToList()
+                                    .Find(ctg => TaskToBeEdited.Category.Equals(ctg.CategoryName));
+            TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.TaskId);
 
-            string username;
-            List<string> assignees = (from assignee in dbContext.assignees
-                                      where assignee.assigned_group == TaskToBeEdited.assigned_group
-                                      select assignee.team_mates.user.user_name).ToList();
-
-            foreach (AssigneeEllipse epsAssignee in EditTaskAssignees)
-            {
-                username = epsAssignee.User;
-                if (!assignees.Contains(username))
-                {
-                    await Task.Run(async () =>
-                    {
-                        dbContext.assignees.Add(new assignee()
-                        {
-                            assigned_group = TaskToBeEdited.assigned_group,
-                            mate_id = (from mate in dbContext.team_mates
-                                       where mate.user.user_name.Equals(username) && mate.Team_ID == TaskToBeEdited.project.Team_ID
-                                       select mate.mate_id).Single()
-                        });
-                        await dbContext.SaveChangesAsync();
-                    });
-                    
-                }
-            }
+            List<string> assignees = EditTaskAssignees
+                                                .Select(a => a.User)
+                                                .ToList();
+            List<User> currentAssignees = 
+            dbContext.GetCollection<User>("users")
+                        .Find(u => assignees.Contains(u.Username))
+                        .ToList();
+            await dbContext.GetCollection<TaskToDo>("tasks")
+                              .UpdateOneAsync(t => t.TaskId == TaskToBeEdited.TaskId,
+                                              Builders<TaskToDo>.Update.Set(t => t.DueDate, TaskDue)
+                                                                      .Set(t => t.Priority, EditTaskPriority)
+                                                                      .Set(t => t.Title, txtTaskName.Text)
+                                                                      .Set(t => t.Assignees, currentAssignees));
 
             boxOfTask.ToDoTask = TaskToBeEdited;
             boxOfTask.TaskName = TaskName;
@@ -165,9 +153,12 @@ namespace teammy
         private void CreateAssigneeBox(string assigneeName)
         {
             Random rd = new Random();
-            List<string> assignees = (from assignee in dbContext.assignees
-                                      where assignee.assigned_group == TaskToBeEdited.assigned_group
-                                      select assignee.team_mates.user.user_name).ToList();
+            List<string> assignees = EditTaskAssignees
+                                        .Select(a => a.User)
+                                        .ToList();
+                //(from assignee in dbContext.assignees
+                //                      where assignee.assigned_group == TaskToBeEdited.assigned_group
+                //                      select assignee.team_mates.user.user_name).ToList();
 
             if (assignees.Contains(assigneeName))
             {
@@ -190,8 +181,12 @@ namespace teammy
 
             if (LoadCounter == 0 && cm.Items.Count != 0)
             {
-                ProjCategory catOfTask = Application.Current.Windows.OfType<ProjBoard>().SingleOrDefault(window => window.projName.Equals(TaskToBeEdited.project.Proj_Name)).Categories.ToList().Find(ctg => TaskToBeEdited.category.category_name.Equals(ctg.CategoryName));
-                TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.task_id);
+                Category catOfTask = Application.Current.Windows
+                                        .OfType<Board>()
+                                        .SingleOrDefault(window => window.projectId == TaskToBeEdited.ProjectId).Categories
+                                        .ToList()
+                                        .Find(ctg => TaskToBeEdited.Category.Equals(ctg.CategoryName));
+                TaskBox boxOfTask = catOfTask.FindTaskBox(TaskToBeEdited.TaskId);
 
                 foreach (MenuItem menuItem in cm.Items)
                 {

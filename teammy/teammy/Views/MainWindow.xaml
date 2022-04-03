@@ -29,16 +29,16 @@
                 <TextBlock x:Name="text1" FontSize="14" Foreground="White" FontWeight="Bold" FontFamily="Yu Gothic" Background="#FFCE82E8" Width="500" Height="30" Margin="0,0,0,1.2">Assigned to me</TextBlock>
             </GroupBox.Header>
             
-            <DataGrid x:Name="AssignedtomeDatagrid" DataGrid.GridLinesVisibility="Horizontal" HorizontalAlignment="Left" Height="180" Margin="26,0,0,-1.6" VerticalAlignment="Top" Width="529" AutoGenerateColumns="False" HeadersVisibility="None" FontSize="14" CanUserAddRows="false" IsReadOnly="True" ItemsSource="{Binding myTasksData}">
+            <DataGrid x:Name="AssignedtomeDatagrid" DataGrid.GridLinesVisibility="Horizontal" HorizontalAlignment="Left" Height="180" Margin="26,0,0,-1.6" VerticalAlignment="Top" Width="529" AutoGenerateColumns="False" HeadersVisibility="None" FontSize="14" CanUserAddRows="false" IsReadOnly="True" ItemsSource="{Binding TasksAssigned}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Status" Width="43">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Height="28" Width="28" Source="{Binding progress_code, Converter={StaticResource ResourceKey=progConverter}}"/>
+                                <Image Height="28" Width="28" Source="{Binding Progress, Converter={StaticResource ResourceKey=progConverter}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Name" Foreground="#FFCE82E8" Binding="{Binding task_name}" Width="400"/>
+                    <DataGridTextColumn Header="Title" Foreground="#FFCE82E8" Binding="{Binding Title}" Width="400"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -48,17 +48,17 @@
                 <TextBlock x:Name="text2" FontSize="14" Foreground="White" FontWeight="Bold" FontFamily="Yu Gothic" Background="#FFCE82E8" Width="500" Height="30" Margin="0,0,0,1.2">Coming Up</TextBlock>
             </GroupBox.Header>
             
-            <DataGrid x:Name="ComingDatagrid" DataGrid.GridLinesVisibility="Horizontal" HorizontalAlignment="Left" Height="180" Margin="22,0,0,-1.6" VerticalAlignment="Top" Width="539" FontSize="14" AutoGenerateColumns="False" HeadersVisibility="None" CanUserAddRows="false" IsReadOnly="True" ItemsSource="{Binding dueWeekData}">
+            <DataGrid x:Name="ComingDatagrid" DataGrid.GridLinesVisibility="Horizontal" HorizontalAlignment="Left" Height="180" Margin="22,0,0,-1.6" VerticalAlignment="Top" Width="539" FontSize="14" AutoGenerateColumns="False" HeadersVisibility="None" CanUserAddRows="false" IsReadOnly="True" ItemsSource="{Binding TasksDue}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Status" Width="43">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Height="28" Width="28" Source="{Binding progress_code, Converter={StaticResource ResourceKey=progConverter}}"/>
+                                <Image Height="28" Width="28" Source="{Binding Progress, Converter={StaticResource ResourceKey=progConverter}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Name"  Binding="{Binding task_name}" Foreground="#FFCE82E8" Width="295"/>
-                    <DataGridTextColumn Header="Due date" Binding="{Binding due_date}" Width="200" Foreground="Red"/>
+                    <DataGridTextColumn Header="Title"  Binding="{Binding Title}" Foreground="#FFCE82E8" Width="295"/>
+                    <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}" Width="200" Foreground="Red"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

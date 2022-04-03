@@ -12,7 +12,7 @@ namespace teammy
     {
         public int date, year;
         public string month;
-        public List<task> Tasks;
+        public List<TaskToDo> Tasks;
 
         public PopUp()
         {

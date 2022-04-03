@@ -9,6 +9,8 @@ using LiveCharts.Wpf;
 using LiveCharts.Defaults;
 using System.Threading.Tasks;
 using teammy.Models;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace teammy
 {
@@ -20,16 +22,13 @@ namespace teammy
         #region Fields
         //alias for Application resources
         private static ResourceDictionary globalItems = Application.Current.Resources;
-        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
+        private IMongoDatabase dbContext = DBConnector.Connect();
         private List<string> projNames;
         private List<string> memNames;
         #endregion
 
         #region Properties
-
-        //currently logged in user
-        public user currentUser { get; set; } = Application.Current.Resources["currentUser"] as user;
-
+        public User currentUser { get; set; } = globalItems["currentUser"] as User;
         public SeriesCollection ProjectsPie { get; set; } = new SeriesCollection()
         {
             new PieSeries
@@ -87,21 +86,40 @@ namespace teammy
             InitializeComponent();
 
             //Query to load all projects of the logged in person
-            projNames = (from project in dbContext.projects
-                         join team in dbContext.teams
-                            on project.Team_ID equals team.Team_ID
-                         join mate in dbContext.team_mates
-                            on team.Team_ID equals mate.Team_ID
-                         join user in dbContext.users 
-                            on mate.user_id equals user.user_id
-                         where currentUser.user_id.Equals(user.user_id)
-                         select project.Proj_Name).ToList();
+            PipelineDefinition<Team, BsonDocument> pipeline = new[]
+            {
+                new BsonDocument("$match",
+                new BsonDocument("members.userId", currentUser.UserId)),
+                new BsonDocument("$unwind",
+                new BsonDocument("path", "$projects")),
+                new BsonDocument("$lookup",
+                new BsonDocument
+                    {
+                        { "from", "projects" },
+                        { "localField", "projects" },
+                        { "foreignField", "projectId" },
+                        { "as", "proDetails" }
+                    }),
+                new BsonDocument("$unwind",
+                new BsonDocument("path", "$proDetails")),
+                new BsonDocument("$project",
+                new BsonDocument
+                    {
+                        { "_id", 0 },
+                        { "projectName", "$proDetails.name" }
+                    })
+            };
+            projNames = dbContext.GetCollection<Team>("teams")
+                                    .Aggregate(pipeline)
+                                    .ToEnumerable()
+                                    .Select(t => t.GetValue("projectName").AsString)
+                                    .ToList();
 
             cmbProjects.ItemsSource = projNames;
             cmbMemProjects.ItemsSource = projNames;
 
             cmbProjects.SelectedIndex = 0;
-            cmbMemProjects.SelectedIndex = 0;
+            cmbMemProjects.SelectedIndex = 1;
 
             cmbMemProjects.SelectionChanged += new SelectionChangedEventHandler(cmbMem_SelectionChanged);
         }
@@ -151,22 +169,21 @@ namespace teammy
         /// </summary>
         private void cmbProjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Runs DB query in parallel to the UI Thread
-            Parallel.Invoke(() =>
-            {
                 //Loads progress status of all tasks associated with the project selected
-                List<string> progress_codes = 
-                (from tasks in dbContext.tasks
-                 join project in dbContext.projects 
-                    on tasks.proj_id equals project.Proj_ID
-                 where project.Proj_Name.Equals(cmbProjects.SelectedItem.ToString())
-                 select tasks.progress_code).ToList();
+                int currProjectId = dbContext.GetCollection<Project>("projects")
+                                                  .Find(p => p.Name.Equals(cmbProjects.SelectedItem.ToString()))
+                                                  .Project(p => p.ProjectId)
+                                                  .Single();
+                List<string> progress_codes = dbContext.GetCollection<TaskToDo>("tasks")
+                                                          .Find(t => t.ProjectId == currProjectId)
+                                                          .Project(t => t.Progress)
+                                                          .ToList();
 
                 //Resets Pie chart values
                 ProjectsPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("NS")).Count) };
                 ProjectsPie[1].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("IP")).Count) };
                 ProjectsPie[2].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("CO")).Count) };
-            });
+
         }
 
         /// <summary>
@@ -179,18 +196,41 @@ namespace teammy
             Parallel.Invoke(() =>
             {
                 //Loads progress status of all tasks associated with the project for the member selected
-                List<string> progress_codes =
-                (from task in dbContext.tasks
-                 join project in dbContext.projects
-                     on task.proj_id equals project.Proj_ID
-                 join assignee in dbContext.assignees
-                    on task.assigned_group equals assignee.assigned_group
-                 join mate in dbContext.team_mates
-                    on assignee.mate_id equals mate.mate_id
-                 join user in dbContext.users
-                    on mate.user_id equals user.user_id
-                 where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString()) && user.user_name.Equals(cmbMembers.SelectedItem.ToString())
-                 select task.progress_code).ToList();
+                int currProjectId = dbContext.GetCollection<Project>("projects")
+                                                  .Find(p => p.Name.Equals(cmbMemProjects.SelectedItem.ToString()))
+                                                  .Project(p => p.ProjectId)
+                                                  .Single();
+                PipelineDefinition<TaskToDo, BsonDocument> pipeline = new[]
+                {
+                    new BsonDocument("$match",
+                    new BsonDocument("projectId", currProjectId)),
+                    new BsonDocument("$project",
+                    new BsonDocument
+                        {
+                            { "_id", 0 },
+                            { "assignees",
+                    new BsonDocument("$map",
+                    new BsonDocument
+                                {
+                                    { "input", "$assignees" },
+                                    { "as", "a" },
+                                    { "in", "$$a.username" }
+                                }) },
+                            { "progress", 1 }
+                        }),
+                    new BsonDocument("$match",
+                    new BsonDocument("assignees",
+                    new BsonDocument("$in",
+                    new BsonArray
+                                {
+                                    cmbMembers.SelectedItem.ToString()
+                                })))
+                };
+                List<string> progress_codes = dbContext.GetCollection<TaskToDo>("tasks")
+                                                          .Aggregate(pipeline)
+                                                          .ToEnumerable()
+                                                          .Select(r => r.GetValue("progress").AsString)
+                                                          .ToList();
 
                 //Resets Pie Chart values
                 ProjectsMemPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("NS")).Count) };
@@ -207,15 +247,25 @@ namespace teammy
             //Runs DB query in parallel to the UI Thread
             Parallel.Invoke(() =>
             {
-                memNames = (from project in dbContext.projects
-                            join team in dbContext.teams
-                            on project.Team_ID equals team.Team_ID
-                            join mate in dbContext.team_mates
-                            on team.Team_ID equals mate.Team_ID
-                            join user in dbContext.users
-                            on mate.user_id equals user.user_id
-                            where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString())
-                            select user.user_name).ToList();
+                int currProjectId = dbContext.GetCollection<Project>("projects")
+                                                  .Find(p => p.Name.Equals(cmbMemProjects.SelectedItem.ToString()))
+                                                  .Project(p => p.ProjectId)
+                                                  .Single();
+                memNames = dbContext.GetCollection<Team>("teams")
+                                       .Find(t => t.Projects.Contains(currProjectId))
+                                       .Project(t => t.Members)
+                                       .Single()
+                                       .Select(m => m.Username)
+                                       .ToList();
+                //(from project in dbContext.projects
+                //            join team in dbContext.teams
+                //            on project.Team_ID equals team.Team_ID
+                //            join mate in dbContext.team_mates
+                //            on team.Team_ID equals mate.Team_ID
+                //            join user in dbContext.users
+                //            on mate.user_id equals user.user_id
+                //            where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString())
+                //            select user.user_name).ToList();
 
                 Dispatcher.Invoke(() =>
                 {

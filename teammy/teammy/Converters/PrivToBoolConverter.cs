@@ -14,7 +14,7 @@ namespace teammy
         /// <returns>The Visibility string</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value as user).privilege_code.Equals("PM");
+            return (value as User).Privilege.Equals("PM");
         }
         /// <summary>
         ///     Present here only for the interface implementation

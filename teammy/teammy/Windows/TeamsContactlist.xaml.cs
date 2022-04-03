@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Data;
 using System.Diagnostics;
 using teammy.Models;
 
@@ -15,12 +13,11 @@ namespace teammy
     public partial class TeamsContactlist : Window
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
-        public user currentUser { get; set; } = globalItems["currentUser"] as user;
-        public team currentTeam { get; set; }
+        public User currentUser { get; set; } = globalItems["currentUser"] as User;
+        public Team currentTeam { get; set; }
 
 
-        private List<user> contactinfo;
-        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
+        private List<User> contactinfo;
         public TeamsContactlist()
         {
             InitializeComponent();
@@ -28,15 +25,16 @@ namespace teammy
 
         private void contactWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            teamnamelabel.Content = currentTeam.Team_Name;
-            
-            contactinfo = (from user in dbContext.users
-                           join mate in dbContext.team_mates
-                              on user.user_id equals mate.user_id
-                           join teams in dbContext.teams
-                              on mate.Team_ID equals teams.Team_ID
-                           where teams.Team_Name == currentTeam.Team_Name
-                           select user).ToList();
+            teamnamelabel.Content = currentTeam.TeamName;
+
+            contactinfo = currentTeam.Members;
+            //(from user in dbContext.users
+            //               join mate in dbContext.team_mates
+            //                  on user.user_id equals mate.user_id
+            //               join teams in dbContext.teams
+            //                  on mate.Team_ID equals teams.Team_ID
+            //               where teams.Team_Name == currentTeam.Team_Name
+            //               select user).ToList();
 
             dtgTeamMates.ItemsSource = contactinfo;
         }
@@ -80,7 +78,7 @@ namespace teammy
         #endregion
         private void Mail_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("mailto:" + (dtgTeamMates.SelectedItem as user).email_address);
+            Process.Start("mailto:" + (dtgTeamMates.SelectedItem as User).Email);
         }
     }
 }

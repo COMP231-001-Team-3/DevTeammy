@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MongoDB.Driver;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,9 +11,8 @@ namespace teammy.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private static ResourceDictionary globalItems = Application.Current.Resources;
-        private List<user> users;
-        private teammyEntities dbContext = globalItems["dbContext"] as teammyEntities;
+        private List<User> users;
+        private IMongoDatabase newDBContext = DBConnector.Connect();
 
         private string _txtUserName = "Enter your user name";
         public string txtUserName
@@ -45,8 +45,7 @@ namespace teammy.ViewModels
             Application.Current.Resources["loginInstance"] = this;
             Parallel.Invoke(() =>
             {
-                users = (from user in dbContext.users
-                         select user).ToList();
+                users = newDBContext.GetCollection<User>("users").Find(Builders<User>.Filter.Empty).ToList();
             });
 
             signInCommand = new SignInCmd(this);
@@ -58,8 +57,8 @@ namespace teammy.ViewModels
 
         public bool SignIn(string pwdPassword)
         {
-            user userEntered = users.Find((user) => user.user_name.Equals(txtUserName));
-            bool? validPassword = userEntered?.password.Equals(pwdPassword);
+            User userEntered = users.Find((user) => user.Username.Equals(txtUserName));
+            bool? validPassword = userEntered?.Password.Equals(pwdPassword);
 
             if (userEntered == null || !(bool)validPassword)
             {
@@ -69,10 +68,11 @@ namespace teammy.ViewModels
             {
                 //showing homepage if authentication success
                 Application.Current.Resources.Add("currentUser", userEntered);
+
                 SplashScreen splashLog = new SplashScreen("../images/splashLogging.png");
                 splashLog.Show(true);
+                (Application.Current.Resources["mainInstance"] as Window).Show();                
                 (Application.Current.Resources["createProjInstance"] as CreateProject).LoadProjects();
-                (Application.Current.Resources["mainInstance"] as Window).Show();
                 return true;
             }
             return false;

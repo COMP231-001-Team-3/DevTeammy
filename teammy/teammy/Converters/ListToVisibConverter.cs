@@ -16,7 +16,7 @@ namespace teammy
                 return "Hidden";
             }
             
-            List<task> Tasks = value as List<task>;
+            List<TaskToDo> Tasks = value as List<TaskToDo>;
             return Tasks.Count > 1 ? "Visible" : "Hidden";
         }
 
