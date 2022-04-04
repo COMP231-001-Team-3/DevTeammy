@@ -2,7 +2,7 @@
 The repository hosts all code for the final release for COMP231, better known as Software Development Project 1.
 ## Teammy
 Teammy is a simple, intuitive to-do list application that is entirely built using the .NET WPF framework. It also makes 
-use of a MySQL Database to store and receive data pertaining to the application.
+use of a MongoDB Database to store and receive data pertaining to the application.
 
 ### Features
 1. Home page providing quick glance on tasks assigned and tasks due in the coming week.
