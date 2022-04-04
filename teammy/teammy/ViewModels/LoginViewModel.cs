@@ -12,7 +12,7 @@ namespace teammy.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         private List<User> users;
-        private IMongoDatabase newDBContext = DBConnector.Connect();
+        private IMongoDatabase dbContext = DBConnector.Connect();
 
         private string _txtUserName = "Enter your user name";
         public string txtUserName
@@ -45,7 +45,7 @@ namespace teammy.ViewModels
             Application.Current.Resources["loginInstance"] = this;
             Parallel.Invoke(() =>
             {
-                users = newDBContext.GetCollection<User>("users").Find(Builders<User>.Filter.Empty).ToList();
+                users = dbContext.GetCollection<User>("users").Find(Builders<User>.Filter.Empty).ToList();
             });
 
             signInCommand = new SignInCmd(this);

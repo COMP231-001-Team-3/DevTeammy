@@ -257,15 +257,6 @@ namespace teammy
                                        .Single()
                                        .Select(m => m.Username)
                                        .ToList();
-                //(from project in dbContext.projects
-                //            join team in dbContext.teams
-                //            on project.Team_ID equals team.Team_ID
-                //            join mate in dbContext.team_mates
-                //            on team.Team_ID equals mate.Team_ID
-                //            join user in dbContext.users
-                //            on mate.user_id equals user.user_id
-                //            where project.Proj_Name.Equals(cmbMemProjects.SelectedItem.ToString())
-                //            select user.user_name).ToList();
 
                 Dispatcher.Invoke(() =>
                 {

@@ -39,7 +39,7 @@ namespace teammy
         private int displayYear = DateTime.Now.Year;
         private int displayMonth = DateTime.Now.Month;
         private List<TaskToDo> tasks;
-        private IMongoDatabase newDBContext = DBConnector.Connect();
+        private IMongoDatabase dbContext = DBConnector.Connect();
         public User currentUser { get; set; } = Application.Current.Resources["currentUser"] as User;
 
         public Schedule()
@@ -58,32 +58,18 @@ namespace teammy
         {
             if(!currentUser.Privilege.Equals("PM"))
             {
-                tasks = newDBContext.GetCollection<TaskToDo>("tasks")
-                                    .Find(t => t.Assignees.Contains(currentUser))
+                tasks = dbContext.GetCollection<TaskToDo>("tasks")
+                                    .Find(Builders<TaskToDo>.Filter.ElemMatch(t => t.Assignees, a => a.UserId == currentUser.UserId))
                                     .ToList();
-                    //(from task in dbContext.tasks
-                    //     join assignee in dbContext.assignees
-                    //        on task.assigned_group equals assignee.assigned_group
-                    //     join mate in dbContext.team_mates
-                    //        on assignee.mate_id equals mate.mate_id
-                    //     where mate.user.user_id == currentUser.user_id
-                    //     select task).ToList();
             }
             else
             {
-                List<int> teamsOfPm = newDBContext.GetCollection<Team>("teams")
+                List<int> teamsOfPm = dbContext.GetCollection<Team>("teams")
                                             .Find(Builders<Team>.Filter.ElemMatch(t => t.Members, m => m.UserId == currentUser.UserId))
                                             .Project(t => t.TeamId)
                                             .ToList();
-                //(from user in dbContext.users
-                //             join mate in dbContext.team_mates
-                //                on user.user_id equals mate.user_id
-                //             join team in dbContext.teams
-                //                on mate.Team_ID equals team.Team_ID
-                //             where user.user_id == currentUser.user_id
-                //             select team.Team_ID).ToList();
 
-                tasks = newDBContext.GetCollection<TaskToDo>("tasks")
+                tasks = dbContext.GetCollection<TaskToDo>("tasks")
                                     .Find(t => teamsOfPm.Contains(t.TeamId))
                                     .ToList();
             }

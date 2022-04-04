@@ -15,7 +15,7 @@ namespace teammy.ViewModels
         public ObservableCollection<TaskToDo> TasksAssigned { get; set; } = new ObservableCollection<TaskToDo>();
         public ObservableCollection<TaskToDo> TasksDue { get; set; } = new ObservableCollection<TaskToDo>();
 
-        private IMongoDatabase newDBContext = DBConnector.Connect();
+        private IMongoDatabase dbContext = DBConnector.Connect();
 
         public MainViewModel()
         {
@@ -25,7 +25,7 @@ namespace teammy.ViewModels
 
         public void DisplayTasksAssigned()
         {
-            List<TaskToDo> tasksAssigned = newDBContext.GetCollection<TaskToDo>("tasks")
+            List<TaskToDo> tasksAssigned = dbContext.GetCollection<TaskToDo>("tasks")
                                             .Find(Builders<TaskToDo>.Filter.ElemMatch(task => task.Assignees, assignee => assignee.UserId == currentUser.UserId))
                                             .ToList();
 

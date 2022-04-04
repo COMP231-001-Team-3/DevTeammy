@@ -37,13 +37,6 @@ namespace teammy
                                                 .Find(t => t.TaskId == Task.TaskId)
                                                 .Project(t => t.Assignees)
                                                 .Single();
-                //(from task in dbContext.tasks
-                //                   join assignee in dbContext.assignees
-                //                      on task.assigned_group equals assignee.assigned_group
-                //                   join mate in dbContext.team_mates
-                //                      on assignee.mate_id equals mate.mate_id
-                //                   where task.task_id == Task.task_id
-                //                   select mate.user).ToList();
 
             Random rd = new Random();
             foreach (var assignee in assignees)

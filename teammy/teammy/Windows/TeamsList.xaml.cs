@@ -64,13 +64,6 @@ namespace teammy
             teams = dbContext.GetCollection<Team>("teams")
                                 .Find(Builders<Team>.Filter.ElemMatch(t => t.Members, m => m.UserId == currentUser.UserId))
                                 .ToList();
-                //(from team in dbContext.teams
-                //        join mate in dbContext.team_mates
-                //            on team.Team_ID equals mate.Team_ID
-                //        join user in dbContext.users
-                //            on mate.user_id equals user.user_id
-                //    where user.user_id == currentUser.user_id
-                //    select team).ToList();
 
             CardBox teamBox;
 

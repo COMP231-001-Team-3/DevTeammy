@@ -28,13 +28,6 @@ namespace teammy
             teamnamelabel.Content = currentTeam.TeamName;
 
             contactinfo = currentTeam.Members;
-            //(from user in dbContext.users
-            //               join mate in dbContext.team_mates
-            //                  on user.user_id equals mate.user_id
-            //               join teams in dbContext.teams
-            //                  on mate.Team_ID equals teams.Team_ID
-            //               where teams.Team_Name == currentTeam.Team_Name
-            //               select user).ToList();
 
             dtgTeamMates.ItemsSource = contactinfo;
         }

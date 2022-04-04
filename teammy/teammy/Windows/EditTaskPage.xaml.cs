@@ -87,18 +87,6 @@ namespace teammy
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            //TaskToBeEdited = newDBContext.GetCollection<TaskNew>("tasks")
-            //                             .Find(t => t.TaskId == TaskToBeEdited.TaskId)
-            //                             .Single();
-            //dbContext.tasks.Find(TaskToBeEdited.task_id);
-            //string priority = dbContext.tasks.Find(TaskToBeEdited.task_id).priority;
-            //if(priority != null)
-            //{
-            //    EditTaskPriority = (priority[0] + "").ToUpper() + priority.Substring(1).ToLower();
-            //}
-
-            //TaskName = dbContext.tasks.Find(TaskToBeEdited.task_id).task_name;
-            //TaskDue = dbContext.tasks.Find(TaskToBeEdited.task_id).due_date;
             Close();
         }
 
@@ -156,9 +144,6 @@ namespace teammy
             List<string> assignees = EditTaskAssignees
                                         .Select(a => a.User)
                                         .ToList();
-                //(from assignee in dbContext.assignees
-                //                      where assignee.assigned_group == TaskToBeEdited.assigned_group
-                //                      select assignee.team_mates.user.user_name).ToList();
 
             if (assignees.Contains(assigneeName))
             {
