@@ -1,2 +1,2 @@
-MainPackage=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyInstaller\bin\x86\Release\TeammyInstaller_2.0.0.0_x86.msix
-SymbolPackage=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyInstaller\obj\x86\Release\Symbols\TeammyInstaller_2.0.0.0_x86.appxsym
+MainPackage=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyInstaller\bin\x86\Release\TeammyInstaller_2.1.0.0_x86.msix
+SymbolPackage=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyInstaller\obj\x86\Release\Symbols\TeammyInstaller_2.1.0.0_x86.appxsym
