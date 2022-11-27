@@ -8,7 +8,7 @@ using teammy.Models;
 
 namespace teammy.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainVM : ViewModelBase
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
         public User currentUser { get; set; } = globalItems["currentUser"] as User;
@@ -17,7 +17,7 @@ namespace teammy.ViewModels
 
         private IMongoDatabase dbContext = DBConnector.Connect();
 
-        public MainViewModel()
+        public MainVM()
         {
             DisplayTasksAssigned();
             DisplayTasksDue();

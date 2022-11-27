@@ -11,7 +11,7 @@
         Title="Teammy" Height="620" Width="1000" WindowStartupLocation="CenterScreen"
         WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True">
     <Window.DataContext>
-        <vmodels:MainViewModel/>
+        <vmodels:MainVM/>
     </Window.DataContext>
     <Window.Resources>
         <local:StatusToSourceConverter x:Key="progConverter"/>        

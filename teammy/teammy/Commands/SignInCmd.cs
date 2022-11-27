@@ -9,9 +9,9 @@ namespace teammy.Commands
     public class SignInCmd : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private LoginViewModel loginVModel;
+        private LoginVM loginVModel;
 
-        public SignInCmd(LoginViewModel lvModel)
+        public SignInCmd(LoginVM lvModel)
         {
             loginVModel = lvModel;
         }

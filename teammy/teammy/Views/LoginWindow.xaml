@@ -12,7 +12,7 @@
          WindowStartupLocation="CenterScreen" 
         WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True">
     <Window.DataContext>
-        <vmodels:LoginViewModel/>
+        <vmodels:LoginVM/>
     </Window.DataContext>
 
     <Window.Resources>

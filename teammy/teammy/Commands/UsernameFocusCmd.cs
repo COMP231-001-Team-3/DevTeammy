@@ -9,9 +9,9 @@ namespace teammy.Commands
     public class UsernameFocusCmd : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private LoginViewModel loginVModel;
+        private LoginVM loginVModel;
 
-        public UsernameFocusCmd(LoginViewModel lvModel)
+        public UsernameFocusCmd(LoginVM lvModel)
         {
             loginVModel = lvModel;
         }

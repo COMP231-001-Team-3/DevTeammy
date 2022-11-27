@@ -9,9 +9,9 @@ namespace teammy.Commands
     public class UsernameLostCmd : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private LoginViewModel loginVModel;
+        private LoginVM loginVModel;
 
-        public UsernameLostCmd(LoginViewModel lvModel)
+        public UsernameLostCmd(LoginVM lvModel)
         {
             loginVModel = lvModel;
         }

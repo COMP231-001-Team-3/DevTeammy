@@ -9,7 +9,7 @@ using teammy.Models;
 
 namespace teammy.ViewModels
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginVM : ViewModelBase
     {
         private List<User> users;
         private IMongoDatabase dbContext = DBConnector.Connect();
@@ -40,7 +40,7 @@ namespace teammy.ViewModels
         public ICommand userLostCmd { get; set; }
         public ICommand passwordLostCmd { get; set; }
 
-        public LoginViewModel()
+        public LoginVM()
         {
             Application.Current.Resources["loginInstance"] = this;
             Parallel.Invoke(() =>
