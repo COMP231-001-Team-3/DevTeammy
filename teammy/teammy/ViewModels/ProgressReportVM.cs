@@ -89,42 +89,18 @@ namespace teammy.ViewModels
         
         public ProgressReportVM()
         {
-            //Query to load all projects of the logged in person
-            PipelineDefinition<Team, BsonDocument> pipeline = new[]
-            {
-                new BsonDocument("$match",
-                new BsonDocument("members.userId", currentUser.UserId)),
-                new BsonDocument("$unwind",
-                new BsonDocument("path", "$projects")),
-                new BsonDocument("$lookup",
-                new BsonDocument
-                    {
-                        { "from", "projects" },
-                        { "localField", "projects" },
-                        { "foreignField", "projectId" },
-                        { "as", "proDetails" }
-                    }),
-                new BsonDocument("$unwind",
-                new BsonDocument("path", "$proDetails")),
-                new BsonDocument("$project",
-                new BsonDocument
-                    {
-                        { "_id", 0 },
-                        { "projectName", "$proDetails.name" }
-                    })
-            };
-            //List<int> projIDs =
-            //    (List<int>)
-            //    (from team in dbContext.GetCollection<Team>("teams").AsQueryable()
-            //    where team.Members.Select(m => m.UserId).Contains(currentUser.UserId)
-            //    select team.Projects);
 
-            projNames.Clear();
-            projNames.AddRange(dbContext.GetCollection<Team>("teams")
-                                        .Aggregate(pipeline)
-                                        .ToEnumerable()
-                                        .Select(t => t.GetValue("projectName").AsString)
-                                        .ToList());
+            var projIDs =
+            (from team in dbContext.GetCollection<Team>("teams").AsQueryable()
+            where team.Members.Select(m => m.UserId).Contains(currentUser.UserId)
+            from project in team.Projects
+            select project).ToList();
+
+            projNames =
+            (from proj in dbContext.GetCollection<Project>("projects").AsQueryable()
+             where projIDs.Contains(proj.ProjectId)
+             select proj.Name).ToList();
+
             selectionChangedCmd = new SelectionChangedCmd(this);
 
             LoadCharts();
@@ -183,11 +159,11 @@ namespace teammy.ViewModels
                                 txtCmbMembers
                             })))
             };
-            List<string> progress_codes = dbContext.GetCollection<TaskToDo>("tasks")
-                                                        .Aggregate(pipeline)
-                                                        .ToEnumerable()
-                                                        .Select(r => r.GetValue("progress").AsString)
-                                                        .ToList();
+
+            List<string> progress_codes = 
+            (from task in dbContext.GetCollection<TaskToDo>("tasks").AsQueryable()
+             where task.ProjectId == currProjectId && task.Assignees.Select(a => a.Username).Contains(txtCmbMembers)
+             select task.Progress).ToList();
 
             //Resets Pie Chart values
             ProjectsMemPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("NS")).Count) };
