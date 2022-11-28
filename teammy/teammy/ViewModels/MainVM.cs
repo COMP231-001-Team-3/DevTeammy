@@ -25,16 +25,19 @@ namespace teammy.ViewModels
 
         public void DisplayTasksAssigned()
         {
-            List<TaskToDo> tasksAssigned = dbContext.GetCollection<TaskToDo>("tasks")
-                                            .Find(Builders<TaskToDo>.Filter.ElemMatch(task => task.Assignees, assignee => assignee.UserId == currentUser.UserId))
-                                            .ToList();
+            List<TaskToDo> tasksAssigned =
+                (from t in dbContext.GetCollection<TaskToDo>("tasks").AsQueryable()
+                 where t.Assignees.Select(a => a.UserId).Contains(currentUser.UserId)
+                 select t).ToList();
 
             tasksAssigned.ForEach(TasksAssigned.Add);
         }
 
         public void DisplayTasksDue()
         {
-            List<TaskToDo> tasksDue = TasksAssigned.ToList().FindAll(task => task.DueDate <= DateTime.Now.AddDays(7) && task.DueDate >= DateTime.Now);
+            List<TaskToDo> tasksDue = TasksAssigned
+                                        .ToList()
+                                        .FindAll(task => task.DueDate <= DateTime.Now.AddDays(7) && task.DueDate >= DateTime.Now);
 
             tasksDue.ForEach(TasksDue.Add);
         }

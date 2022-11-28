@@ -58,20 +58,20 @@ namespace teammy
         {
             if(!currentUser.Privilege.Equals("PM"))
             {
-                tasks = dbContext.GetCollection<TaskToDo>("tasks")
-                                    .Find(Builders<TaskToDo>.Filter.ElemMatch(t => t.Assignees, a => a.UserId == currentUser.UserId))
-                                    .ToList();
+                tasks = 
+                    (from t in dbContext.GetCollection<TaskToDo>("tasks").AsQueryable()
+                     where t.Assignees.Select(a => a.UserId).Contains(currentUser.UserId)
+                     select t).ToList();
             }
             else
             {
-                List<int> teamsOfPm = dbContext.GetCollection<Team>("teams")
-                                            .Find(Builders<Team>.Filter.ElemMatch(t => t.Members, m => m.UserId == currentUser.UserId))
-                                            .Project(t => t.TeamId)
-                                            .ToList();
 
-                tasks = dbContext.GetCollection<TaskToDo>("tasks")
-                                    .Find(t => teamsOfPm.Contains(t.TeamId))
-                                    .ToList();
+                tasks = 
+                    (from team in dbContext.GetCollection<Team>("teams").AsQueryable()
+                     join t in dbContext.GetCollection<TaskToDo>("tasks").AsQueryable()
+                     on team.TeamId equals t.TeamId
+                     where team.Members.Select(m => m.UserId).Contains(currentUser.UserId)
+                     select t).ToList();
             }
         }
 

@@ -5,14 +5,9 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
 using teammy.Models;
-using MongoDB.Bson;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using System.Windows.Input;
 using teammy.Commands;
 
@@ -129,36 +124,10 @@ namespace teammy.ViewModels
         public void SelectTeamMember()
         {
             //Loads progress status of all tasks associated with the project for the member selected
-            int currProjectId = dbContext.GetCollection<Project>("projects")
-                                                .Find(p => p.Name.Equals(txtMemberProject))
-                                                .Project(p => p.ProjectId)
-                                                .Single();
-            PipelineDefinition<TaskToDo, BsonDocument> pipeline = new[]
-            {
-                new BsonDocument("$match",
-                new BsonDocument("projectId", currProjectId)),
-                new BsonDocument("$project",
-                new BsonDocument
-                    {
-                        { "_id", 0 },
-                        { "assignees",
-                new BsonDocument("$map",
-                new BsonDocument
-                            {
-                                { "input", "$assignees" },
-                                { "as", "a" },
-                                { "in", "$$a.username" }
-                            }) },
-                        { "progress", 1 }
-                    }),
-                new BsonDocument("$match",
-                new BsonDocument("assignees",
-                new BsonDocument("$in",
-                new BsonArray
-                            {
-                                txtCmbMembers
-                            })))
-            };
+            int currProjectId =
+                (from proj in dbContext.GetCollection<Project>("projects").AsQueryable()
+                 where proj.Name.Equals(txtMemberProject)
+                 select proj.ProjectId).Single();
 
             List<string> progress_codes = 
             (from task in dbContext.GetCollection<TaskToDo>("tasks").AsQueryable()
@@ -176,17 +145,16 @@ namespace teammy.ViewModels
         /// </summary>
         public void SelectMemberProject()
         {
-            int currProjectId = dbContext.GetCollection<Project>("projects")
-                                                .Find(p => p.Name.Equals(txtMemberProject))
-                                                .Project(p => p.ProjectId)
-                                                .Single();
-            memNames.Clear();
-            memNames.AddRange(dbContext.GetCollection<Team>("teams")
-                                    .Find(t => t.Projects.Contains(currProjectId))
-                                    .Project(t => t.Members)
-                                    .Single()
-                                    .Select(m => m.Username)
-                                    .ToList());
+            int currProjectId =
+                (from proj in dbContext.GetCollection<Project>("projects").AsQueryable()
+                 where proj.Name.Equals(txtMemberProject)
+                 select proj.ProjectId).Single();
+
+            memNames =
+                (from team in dbContext.GetCollection<Team>("teams").AsQueryable()
+                 where team.Projects.Contains(currProjectId)
+                 from member in team.Members
+                 select member.Username).ToList();
             txtCmbMembers = memNames[1];
         }
 
@@ -197,14 +165,16 @@ namespace teammy.ViewModels
         public void SelectProject()
         {
             //Loads progress status of all tasks associated with the project selected
-            int currProjectId = dbContext.GetCollection<Project>("projects")
-                                              .Find(p => p.Name.Equals(txtCmbProjects))
-                                              .Project(p => p.ProjectId)
-                                              .Single();
-            List<string> progress_codes = dbContext.GetCollection<TaskToDo>("tasks")
-                                                      .Find(t => t.ProjectId == currProjectId)
-                                                      .Project(t => t.Progress)
-                                                      .ToList();
+            int currProjectId = 
+                (from proj in dbContext.GetCollection<Project>("projects").AsQueryable()
+                where proj.Name.Equals(txtCmbProjects)
+                select proj.ProjectId).Single();
+
+            List<string> progress_codes =
+                (from t in dbContext.GetCollection<TaskToDo>("tasks").AsQueryable()
+                 where t.ProjectId == currProjectId
+                 select t.Progress).ToList();
+
 
             //Resets Pie chart values
             ProjectsPie[0].Values = new ChartValues<ObservableValue> { new ObservableValue(progress_codes.FindAll(code => code.Equals("NS")).Count) };

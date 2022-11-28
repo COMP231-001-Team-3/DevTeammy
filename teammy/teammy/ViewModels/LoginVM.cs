@@ -45,7 +45,9 @@ namespace teammy.ViewModels
             Application.Current.Resources["loginInstance"] = this;
             Parallel.Invoke(() =>
             {
-                users = dbContext.GetCollection<User>("users").Find(Builders<User>.Filter.Empty).ToList();
+                users = 
+                (from user in dbContext.GetCollection<User>("users").AsQueryable()
+                select user).ToList();
             });
 
             signInCommand = new SignInCmd(this);

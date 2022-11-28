@@ -61,9 +61,10 @@ namespace teammy
             totalBoxes = 0;
             teamsGrid.Children.Clear();
 
-            teams = dbContext.GetCollection<Team>("teams")
-                                .Find(Builders<Team>.Filter.ElemMatch(t => t.Members, m => m.UserId == currentUser.UserId))
-                                .ToList();
+            teams =
+                (from team in dbContext.GetCollection<Team>("teams").AsQueryable()
+                 where team.Members.Select(m => m.UserId).Contains(currentUser.UserId)
+                 select team).ToList();
 
             CardBox teamBox;
 
@@ -245,7 +246,7 @@ namespace teammy
         private async void AddTeam(string inputName)
         {
             int teamId = dbContext.GetCollection<IDSequence>("idValues")
-                                     .FindOneAndUpdate(i => i.myID.Equals("Sequence"), Builders<IDSequence>.Update.Inc(i => i.TeamId, 1))
+                                  .FindOneAndUpdate(i => i.myID.Equals("Sequence"), Builders<IDSequence>.Update.Inc(i => i.TeamId, 1))
                                      .TeamId;
             //Inserting team
             await dbContext.GetCollection<Team>("teams")
