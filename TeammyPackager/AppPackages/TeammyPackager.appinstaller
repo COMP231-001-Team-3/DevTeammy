@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppInstaller
+	Uri="https://teammy-code-jellies.azurewebsites.net/TeammyPackager.appinstaller"
+	Version="2.6.0.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2017/2">
+	<MainBundle
+		Name="1e3bf2c6-3bc0-421c-9e2b-170a5f1ba5f2"
+		Version="2.6.0.0"
+		Publisher="CN=Code Jellies"
+		Uri="https://teammy-code-jellies.azurewebsites.net/TeammyPackager_2.6.0.0_Test/TeammyPackager_2.6.0.0_x86_x64.msixbundle" />
+	<UpdateSettings>
+		<OnLaunch
+			HoursBetweenUpdateChecks="0" />
+	</UpdateSettings>
+</AppInstaller>

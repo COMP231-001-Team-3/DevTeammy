@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="teammy.Views.TitlePaneCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:teammy.Views"
+             xmlns:cmd="clr-namespace:teammy.Commands"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="800">
+    <UserControl.Resources>
+        <cmd:WindowClosedCmd x:Key="closeCmd"/>
+        <cmd:WindowMinCmd x:Key="minCmd"/>
+        <cmd:DragMoveCmd x:Key="dragCmd"/>
+        <cmd:WindowMenuCmd x:Key="menuCmd"/>
+
+        <Style x:Key="closeButton" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!-- Modifying control template of button to give custom mouseover color -->
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0.1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Mouseover trigger -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="minimizeButton" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontStyle" Value="Oblique"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!-- Modifying control template of button to give custom mouseover color -->
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0.1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Mouseover trigger -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightBlue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Viewbox>
+        <!-- Grid pnlTitle represents Custom title Bar -->
+        <Grid x:Name="pnlTitle" Background="#FFF01FFF" Grid.ColumnSpan="3" Height="40" Width="800">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDown">
+                    <i:InvokeCommandAction Command="{StaticResource ResourceKey=dragCmd}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            
+            <Button x:Name="btnClose" Content="X" Style="{StaticResource ResourceKey=closeButton}" Command="{StaticResource ResourceKey=closeCmd}" Height="Auto" Width="Auto" Margin="769,0,1,10" FontSize="20" Padding="0"/>
+
+            <Button x:Name="btnMinimize" Content="-" Style="{StaticResource ResourceKey=minimizeButton}" Margin="738,0,32,10" Command="{StaticResource ResourceKey=minCmd}"/>
+            
+            <Label Content="Teammy" HorizontalAlignment="Left"  VerticalAlignment="Top" Foreground="White" FontFamily="Lucida Handwriting" Margin="36,6,0,0"/>
+            
+            <Button x:Name="btnMenu" Background="{x:Null}"  BorderBrush="{x:Null}" Margin="0,3,773,7" Command="{StaticResource ResourceKey=menuCmd}" CommandParameter="{Binding ElementName=btnMenu}">
+                <Button.Content>
+                    <Grid Height="27" Width="25">
+                        <Image Source="..\Images\menuIcon.png"/>
+                    </Grid>
+                </Button.Content>
+            </Button>            
+        </Grid>
+    </Viewbox>
+</UserControl>

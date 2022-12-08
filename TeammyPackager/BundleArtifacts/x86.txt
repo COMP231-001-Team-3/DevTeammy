@@ -1,0 +1,2 @@
+MainPackage=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyPackager\bin\x86\Release\TeammyPackager_2.6.1.0_x86.msix
+SymbolPackage=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyPackager\obj\x86\Release\Symbols\TeammyPackager_2.6.1.0_x86.appxsym

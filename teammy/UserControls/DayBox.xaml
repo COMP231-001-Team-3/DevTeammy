@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="teammy.DayBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:teammy"
+             mc:Ignorable="d" 
+             d:DesignHeight="95" d:DesignWidth="95"
+             DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <UserControl.Resources>
+        <local:StatusToSourceConverter x:Key="statusConverter"/>
+        <local:BoolToColorConverter x:Key="boolConverter"/>
+        <local:ListToVisibConverter x:Key="listConverter"/>
+        
+        <!-- Mouseover style for button that overlays the whole box -->
+        <Style x:Key="mouseOverStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!-- Modifying control template of button to give custom mouseover color -->
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Rectangle x:Name="background"
+                                   Fill="Transparent"/>
+                                <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Mouseover trigger -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="background" Property="Fill" Value="{Binding CurrentMonth, Converter={StaticResource ResourceKey=boolConverter}, ConverterParameter='btn'}"/>
+                                <Setter TargetName="background" Property="Opacity" Value="0.5"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="containerGrid" Background="White" Width="95" Height="95">
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="95"  Stroke="#8671CE" VerticalAlignment="Top" Width="95"/>
+
+        <Label x:Name="lblDay" Content="{Binding Date}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{Binding CurrentMonth, Converter={StaticResource ResourceKey=boolConverter}}" FontSize="16" Margin="67,8,0,0"/>
+
+        <TextBlock x:Name="lblTask" Text="{Binding DisplayTask}" TextWrapping="WrapWithOverflow"  HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8671CE" Width="69" Margin="4,39,0,0" Padding="0" FontSize="14" Height="36"/>
+
+        <Image x:Name="imgStatus" Source="{Binding Status, Converter={StaticResource ResourceKey=statusConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="20" Margin="70,48,0,0" />
+        
+        <Button x:Name="btnClicker" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Height="95" Background="#00000000" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True"/>
+
+        <Image x:Name="moreTasksImg" Source="../images/threeDots.png" Margin="3,83,84,0" Visibility="{Binding Tasks, Converter={StaticResource ResourceKey=listConverter}}" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+    </Grid>
+</UserControl>

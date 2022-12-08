@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Source>D:\OneDrive - Centennial College\source\repos\DevTeammy\Square44x44Logo.altform-unplated_targetsize-256.png</Source>
+    <SmallTileSource>D:\OneDrive - Centennial College\source\repos\DevTeammy\Square44x44Logo.altform-unplated_targetsize-256.png</SmallTileSource>
+    <MediumTileSource>D:\OneDrive - Centennial College\source\repos\DevTeammy\Square44x44Logo.altform-unplated_targetsize-256.png</MediumTileSource>
+    <WideTileSource>D:\OneDrive - Centennial College\source\repos\DevTeammy\Square44x44Logo.altform-unplated_targetsize-256.png</WideTileSource>
+    <LargeTileSource>D:\OneDrive - Centennial College\source\repos\DevTeammy\Square44x44Logo.altform-unplated_targetsize-256.png</LargeTileSource>
+    <AppIconSource>D:\OneDrive - Centennial College\source\repos\DevTeammy\Square44x44Logo.altform-unplated_targetsize-256.png</AppIconSource>
+    <SplashScreenSource>D:\OneDrive - Centennial College\source\repos\DevTeammy\Square44x44Logo.altform-unplated_targetsize-256.png</SplashScreenSource>
+    <PackageLogoSource>D:\OneDrive - Centennial College\source\repos\DevTeammy\Square44x44Logo.altform-unplated_targetsize-256.png</PackageLogoSource>
+    <UapAppxPackageBuildMode>SideloadOnly</UapAppxPackageBuildMode>
+    <AppxShowAllApps>False</AppxShowAllApps>
+    <AppxBuildConfigurationSelection>x86|x64</AppxBuildConfigurationSelection>
+    <PackageOptionalProjectsInIdeBuilds>True</PackageOptionalProjectsInIdeBuilds>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <DebuggerFlavor>AppHostLocalDebugger</DebuggerFlavor>
+    <RemoteDebugEnabled>False</RemoteDebugEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <DebuggerFlavor>AppHostLocalDebugger</DebuggerFlavor>
+    <RemoteDebugEnabled>False</RemoteDebugEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DebuggerFlavor>AppHostLocalDebugger</DebuggerFlavor>
+    <RemoteDebugEnabled>False</RemoteDebugEnabled>
+  </PropertyGroup>
+</Project>
