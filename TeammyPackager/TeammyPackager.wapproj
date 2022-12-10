@@ -57,16 +57,16 @@
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <NoWarn>$(NoWarn);NU1702</NoWarn>
     <PackageCertificateKeyFile>TeammyPackager_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <EntryPointProjectUniqueName>..\teammy\teammy.csproj</EntryPointProjectUniqueName>
     <EntryPointExe>teammy.exe</EntryPointExe>
     <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
-    <AppInstallerUri>https://github.com/COMP231-001-Team-3/Teammy</AppInstallerUri>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+    <AppInstallerUri>https:\\999x</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <AppxPackageDir>D:\Teammy\Installer\</AppxPackageDir>
+    <EntryPointProjectUniqueName>..\teammy\teammy.csproj</EntryPointProjectUniqueName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AppxBundle>Always</AppxBundle>
@@ -165,12 +165,12 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <AppxSystemBinary Include="teammy.exe" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\teammy\teammy.csproj">
       <Private>True</Private>
       <CopyLocalSatelliteAssemblies>True</CopyLocalSatelliteAssemblies>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AppxSystemBinary Include="teammy.exe" />
   </ItemGroup>
 </Project>

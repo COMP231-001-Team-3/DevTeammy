@@ -9,7 +9,7 @@
   <Identity
     Name="1e3bf2c6-3bc0-421c-9e2b-170a5f1ba5f2"
     Publisher="CN=Code Jellies"
-    Version="2.6.1.0" />
+    Version="2.7.4.0" />
 
   <Properties>
     <DisplayName>Teammy</DisplayName>
@@ -31,8 +31,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="TeammyPackager"
-        Description="TeammyPackager"
+        DisplayName="Teammy"
+        Description="A simple, intuitive to do list application based on the modern .NET 6.0"
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">

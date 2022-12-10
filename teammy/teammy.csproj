@@ -5,9 +5,9 @@
     <AssemblyName>teammy</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo> 
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;netcoreapp3.1</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <Platforms>x86;x64</Platforms>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <Resource Include="Images\jelly.jpg" />
@@ -38,8 +38,12 @@
     <Resource Include="Images\splashLoading.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="LiveCharts.Wpf.NetCore3" Version="0.9.7" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+	<PackageReference Include="LiveCharts.Wpf.Core">
+		<Version>0.9.8</Version>
+	</PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
+		<Version>1.1.39</Version>
+	</PackageReference>
     <PackageReference Include="MongoDB.Analyzer">
       <Version>1.1.0</Version>
     </PackageReference>

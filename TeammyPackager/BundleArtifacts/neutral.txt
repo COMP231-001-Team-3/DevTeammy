@@ -1,0 +1,6 @@
+MainPackage=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyPackager\bin\AnyCPU\Release\TeammyPackager_2.7.4.0_AnyCPU.msix
+SymbolPackage=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyPackager\obj\Release\Symbols\TeammyPackager_2.7.4.0_AnyCPU.appxsym
+ResourcePack=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyPackager\bin\AnyCPU\Release\TeammyPackager_2.7.4.0_scale-100.msix
+ResourcePack=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyPackager\bin\AnyCPU\Release\TeammyPackager_2.7.4.0_scale-125.msix
+ResourcePack=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyPackager\bin\AnyCPU\Release\TeammyPackager_2.7.4.0_scale-150.msix
+ResourcePack=D:\OneDrive - Centennial College\source\repos\DevTeammy\teammy\TeammyPackager\bin\AnyCPU\Release\TeammyPackager_2.7.4.0_scale-400.msix

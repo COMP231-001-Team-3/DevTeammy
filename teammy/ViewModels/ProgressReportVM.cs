@@ -10,6 +10,7 @@ using System.Windows;
 using teammy.Models;
 using System.Windows.Input;
 using teammy.Commands;
+using System.Collections.ObjectModel;
 
 namespace teammy.ViewModels
 {
@@ -74,12 +75,14 @@ namespace teammy.ViewModels
         };
 
         public List<string> projNames { get; set; } = new List<string>();
-        public List<string> memNames { get; set; } = new List<string>();
+        public ObservableCollection<string> memNames { get; set; } = new ObservableCollection<string>();
 
         public string txtCmbMembers { get; set; }
         public string txtMemberProject { get; set; }
         public string txtCmbProjects { get; set; }
         public ICommand selectionChangedCmd { get; set; }
+
+        public int cmbMembers_selectedIndex { get; set; } = 1;
         #endregion   
         
         public ProgressReportVM()
@@ -150,12 +153,16 @@ namespace teammy.ViewModels
                  where proj.Name.Equals(txtMemberProject)
                  select proj.ProjectId).Single();
 
-            memNames =
-                (from team in dbContext.GetCollection<Team>("teams").AsQueryable()
-                 where team.Projects.Contains(currProjectId)
-                 from member in team.Members
-                 select member.Username).ToList();
+            memNames.Clear();
+            (from team in dbContext.GetCollection<Team>("teams").AsQueryable()
+            where team.Projects.Contains(currProjectId)
+            from member in team.Members
+            select member.Username)
+                .ToList()
+                .ForEach(i => memNames.Add(i));
+
             txtCmbMembers = memNames[1];
+            cmbMembers_selectedIndex = 1;
         }
 
         /// <summary>

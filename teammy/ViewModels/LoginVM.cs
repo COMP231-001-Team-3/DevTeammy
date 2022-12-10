@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using teammy.Commands;
 using teammy.Models;
+using System;
 
 namespace teammy.ViewModels
 {
@@ -72,9 +73,10 @@ namespace teammy.ViewModels
                 Application.Current.Resources.Add("currentUser", userEntered);
 
                 SplashScreen splashLog = new SplashScreen("../images/splashLogging.png");
-                splashLog.Show(true);
+                splashLog.Show(false, true);
                 (Application.Current.Resources["mainInstance"] as Window).Show();                
                 (Application.Current.Resources["createProjInstance"] as CreateProject).LoadProjects();
+                splashLog.Close(new TimeSpan(0));
                 return true;
             }
             return false;

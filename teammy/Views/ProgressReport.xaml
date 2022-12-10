@@ -79,7 +79,7 @@
                     </lvc:PieChart>
                     <ComboBox x:Name="cmbProjects"
                               Margin="210,310,199,0"
-                              ItemsSource="{Binding Path=projNames}"
+                              ItemsSource="{Binding Path=projNames, Mode=OneWay}"
                               SelectedItem="{Binding Path=txtCmbProjects, Mode=TwoWay}"
                               SelectedIndex="0"
                               IsEditable="false"
@@ -130,11 +130,10 @@
                     </ComboBox>
                     <ComboBox x:Name="cmbMembers"
                               Margin="268,308,141.333,2"
-                              ItemsSource="{Binding Path=memNames}"
-                              SelectedItem="{Binding Path=txtCmbMembers, Mode=TwoWay}"
-                              SelectedIndex="1"
-                              IsEditable="false"
-                              IsReadOnly="true">
+                              ItemsSource="{Binding Path=memNames, Mode=TwoWay}"
+                              Text="{Binding Path=txtCmbMembers, Mode=TwoWay}"
+                              SelectedIndex="{Binding Path=cmbMembers_selectedIndex, Mode=TwoWay}"
+                              IsEditable="false">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding Path=selectionChangedCmd}"
