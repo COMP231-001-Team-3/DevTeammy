@@ -77,18 +77,48 @@ namespace teammy.ViewModels
         public List<string> projNames { get; set; } = new List<string>();
         public ObservableCollection<string> memNames { get; set; } = new ObservableCollection<string>();
 
-        public string txtCmbMembers { get; set; }
-        public string txtMemberProject { get; set; }
-        public string txtCmbProjects { get; set; }
-        public ICommand selectionChangedCmd { get; set; }
-
-        public int cmbMembers_selectedIndex { get; set; } = 1;
+        private string _txtCmbMembers = "";
+        public string txtCmbMembers
+        {
+            get
+            {
+                return _txtCmbMembers;
+            }
+            set
+            {
+                SetProperty(ref _txtCmbMembers, value);
+            }
+        }
+        private string _txtMemberProject = "";
+        public string txtMemberProject 
+        {
+            get 
+            {
+                return _txtMemberProject;
+            }
+            set 
+            {
+                SetProperty(ref _txtMemberProject, value);
+            } 
+        }
+        private string _txtCmbProjects = "";
+        public string txtCmbProjects {
+            get 
+            {
+                return _txtCmbProjects;
+            }
+            set 
+            {
+                SetProperty(ref _txtCmbProjects, value);
+            }
+        }
+        public ICommand dropdownClosedCmd { get; set; }
         #endregion   
         
         public ProgressReportVM()
         {
 
-            var projIDs =
+            List<int> projIDs =
             (from team in dbContext.GetCollection<Team>("teams").AsQueryable()
             where team.Members.Select(m => m.UserId).Contains(currentUser.UserId)
             from project in team.Projects
@@ -96,10 +126,11 @@ namespace teammy.ViewModels
 
             projNames =
             (from proj in dbContext.GetCollection<Project>("projects").AsQueryable()
-             where projIDs.Contains(proj.ProjectId)
+             where projIDs.Any(id => id == proj.ProjectId)
              select proj.Name).ToList();
 
-            selectionChangedCmd = new SelectionChangedCmd(this);
+            txtCmbProjects = projNames[0];
+            dropdownClosedCmd = new DropDownClosedCmd(this);
 
             LoadCharts();
         }
@@ -162,7 +193,6 @@ namespace teammy.ViewModels
                 .ForEach(i => memNames.Add(i));
 
             txtCmbMembers = memNames[1];
-            cmbMembers_selectedIndex = 1;
         }
 
         /// <summary>

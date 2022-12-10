@@ -85,8 +85,8 @@
                               IsEditable="false"
                               IsReadOnly="true">
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding Path=selectionChangedCmd}"
+                            <i:EventTrigger EventName="DropDownClosed">
+                                <i:InvokeCommandAction Command="{Binding Path=dropdownClosedCmd}"
                                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ComboBox}, Path=Name}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
@@ -122,8 +122,8 @@
                               IsEditable="false"
                               IsReadOnly="true">
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding Path=selectionChangedCmd}"
+                            <i:EventTrigger EventName="DropDownClosed">
+                                <i:InvokeCommandAction Command="{Binding Path=dropdownClosedCmd}"
                                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ComboBox}, Path=Name}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
@@ -132,11 +132,11 @@
                               Margin="268,308,141.333,2"
                               ItemsSource="{Binding Path=memNames, Mode=TwoWay}"
                               Text="{Binding Path=txtCmbMembers, Mode=TwoWay}"
-                              SelectedIndex="{Binding Path=cmbMembers_selectedIndex, Mode=TwoWay}"
+                              SelectedIndex="1"
                               IsEditable="false">
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding Path=selectionChangedCmd}"
+                            <i:EventTrigger EventName="DropDownClosed">
+                                <i:InvokeCommandAction Command="{Binding Path=dropdownClosedCmd}"
                                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ComboBox}, Path=Name}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>

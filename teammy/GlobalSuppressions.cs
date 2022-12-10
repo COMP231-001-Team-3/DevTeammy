@@ -7,3 +7,4 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("MongoDB.Analyzer.LINQ", "MALinq2002:Not supported LINQ2 expression", Justification = "Project uses LINQ3", Scope = "member", Target = "~M:teammy.Schedule.LoadTasks")]
 [assembly: SuppressMessage("MongoDB.Analyzer.LINQ", "MALinq2002:Not supported LINQ2 expression", Justification = "Project uses LINQ3", Scope = "member", Target = "~M:teammy.ViewModels.ProgressReportVM.SelectTeamMember")]
+[assembly: SuppressMessage("MongoDB.Analyzer.LINQ", "MALinq2002:Not supported LINQ2 expression", Justification = "<Pending>", Scope = "member", Target = "~M:teammy.ViewModels.ProgressReportVM.#ctor")]

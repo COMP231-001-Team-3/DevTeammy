@@ -7,7 +7,6 @@ using System.Linq;
 using System.Collections.Generic;
 using teammy.Models;
 using MongoDB.Driver;
-using MongoDB.Bson;
 
 namespace teammy
 {
@@ -89,36 +88,17 @@ namespace teammy
             totalBoxes = 0;
             projGrid.Children.Clear();
 
-            PipelineDefinition<Project, BsonDocument> pipeline = new []
-            {
-                new BsonDocument("$lookup",
-                new BsonDocument
-                    {
-                        { "from", "teams" },
-                        { "localField", "teamId" },
-                        { "foreignField", "teamId" },
-                        { "as", "Teams" }
-                    }),
-                new BsonDocument("$unwind",
-                new BsonDocument("path", "$Teams")),
-                new BsonDocument("$match",
-                new BsonDocument
-                {
-                    { "Teams.teamName", currSelection }
-                }),
-                new BsonDocument("$project",
-                new BsonDocument
-                    {
-                        { "_id", 0 },
-                        { "name", 1 }
-                    })
-            };
+            List<int> projIDs =
+                (from team in dbContext.GetCollection<Team>("teams").AsQueryable()
+                 where team.TeamName.Equals(currSelection)
+                 select team.Projects).Single();
 
-            List<string> projNames = dbContext.GetCollection<Project>("projects")
-                                        .Aggregate(pipeline)
-                                        .ToEnumerable()
-                                        .Select(d => d.GetValue("name").AsString)
-                                        .ToList();
+            List<string> projNames = 
+                (from proj in dbContext.GetCollection<Project>("projects").AsQueryable()
+                 where projIDs.Any(id => id == proj.ProjectId)
+                 select proj.Name).ToList();
+
+
 
             CardBox project;
             //Variables for usage in loop declared beforehand for performance reasons

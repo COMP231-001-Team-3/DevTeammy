@@ -1,16 +1,4 @@
-﻿using System.Linq;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Controls;
-using System.Collections.Generic;
-using LiveCharts;
-using LiveCharts.Wpf;
-using LiveCharts.Defaults;
-using System.Threading.Tasks;
-using teammy.Models;
-using MongoDB.Driver;
-using MongoDB.Bson;
+﻿using System.Windows;
 
 namespace teammy
 {

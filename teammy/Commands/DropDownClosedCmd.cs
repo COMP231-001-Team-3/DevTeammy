@@ -7,12 +7,12 @@ using teammy.Views;
 
 namespace teammy.Commands
 {
-    public class SelectionChangedCmd : ICommand
+    public class DropDownClosedCmd : ICommand
     {
         public event EventHandler CanExecuteChanged;
         private ProgressReportVM prModel;
 
-        public SelectionChangedCmd(ProgressReportVM prModel)
+        public DropDownClosedCmd(ProgressReportVM prModel)
         {
             this.prModel = prModel;
         }
