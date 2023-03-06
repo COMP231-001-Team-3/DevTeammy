@@ -13,9 +13,9 @@
         <views:MainWindow x:Key="mainInstance"/>
         <views:LoginWindow x:Key="loginInstance"/>
         <local:CreateProject x:Key="createProjInstance"/>
-        <local:ProgressReport x:Key="progReportInstance"/>
+        <views:ProgressReport x:Key="progReportInstance"/>
         <local:TeamsList x:Key="teamsListInstance"/>
-        <local:Schedule x:Key="scheduleInstance"/>
+        <views:Schedule x:Key="scheduleInstance"/>
         <Style x:Key="mouseOverStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>

@@ -1,54 +1,83 @@
 ﻿using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using teammy.Commands;
 using teammy.Models;
+using teammy.UserControls;
 
-namespace teammy
+namespace teammy.ViewModels
 {
-    /// <summary>
-    ///     Maps an integer to the corresponding month of a year
-    /// </summary>
-    public enum Months
+    public class ScheduleVM : ViewModelBase
     {
-        January = 1,
-        February,
-        March,
-        April,
-        May, 
-        June,
-        July,
-        August,
-        September,
-        October,
-        November,
-        December
-    }
+        /// <summary>
+        ///     Maps an integer to the corresponding month of a year
+        /// </summary>
+        public enum Months
+        {
+            January = 1,
+            February,
+            March,
+            April,
+            May,
+            June,
+            July,
+            August,
+            September,
+            October,
+            November,
+            December
+        }
 
-    /// <summary>
-    /// Interaction logic for Schedule.xaml
-    /// </summary>
-    public partial class Schedule : Window
-    {
         private static ResourceDictionary globalItems = Application.Current.Resources;
 
         private int displayYear = DateTime.Now.Year;
         private int displayMonth = DateTime.Now.Month;
         private List<TaskToDo> tasks;
         private IMongoDatabase dbContext = DBConnector.Connect();
-        public User currentUser { get; set; } = Application.Current.Resources["currentUser"] as User;
+        public User currentUser { get; set; } = globalItems["currentUser"] as User;
 
-        public Schedule()
+        private string _lblMonth = string.Empty;
+        public string lblMonth 
         {
-            InitializeComponent();
+            get
+            {
+                return _lblMonth;
+            }
+            set 
+            {
+                _lblMonth = value;
+                OnPropertyChanged(nameof(lblMonth));
+            }
+        } 
+        public SolidColorBrush nextbtnIconBG { get; set; } = new SolidColorBrush(Colors.Transparent);
+        public SolidColorBrush prevbtnIconBG { get; set; } = new SolidColorBrush(Colors.Transparent);
+
+        
+        public ObservableCollection<DayDetails> Dates { get; set; } = new ObservableCollection<DayDetails>() {
+            new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails()
+        };
+
+        public ICommand btnEnterCmd { get; set; }
+        public ICommand btnLeaveCmd { get; set; }
+        public ICommand btnClickCmd { get; set; }
+        public ICommand boxClickCmd { get; set; }
+
+        public ScheduleVM() 
+        {
             LoadTasks();
             LoadDates(displayYear, displayMonth);
-        }
+            btnEnterCmd = new BtnEnterCmd(this);
+            btnLeaveCmd = new BtnLeaveCmd(this);
+            btnClickCmd = new BtnClickCmd(this);
+            boxClickCmd = new BoxClickCmd(this);
 
+        }
         #region Miscellaneous
 
         /// <summary>
@@ -56,9 +85,9 @@ namespace teammy
         /// </summary>
         private void LoadTasks()
         {
-            if(!currentUser.Privilege.Equals("PM"))
+            if (!currentUser.Privilege.Equals("PM"))
             {
-                tasks = 
+                tasks =
                     (from t in dbContext.GetCollection<TaskToDo>("tasks").AsQueryable()
                      where t.Assignees.Select(a => a.UserId).Contains(currentUser.UserId)
                      select t).ToList();
@@ -66,7 +95,7 @@ namespace teammy
             else
             {
 
-                tasks = 
+                tasks =
                     (from team in dbContext.GetCollection<Team>("teams").AsQueryable()
                      join t in dbContext.GetCollection<TaskToDo>("tasks").AsQueryable()
                      on team.TeamId equals t.TeamId
@@ -83,46 +112,33 @@ namespace teammy
         /// <param name="month">Represents the month to be shown</param>
         private void LoadDates(int year, int month)
         {
-            displayMonth = month;
-            displayYear = year;
-
-            lblMonthName.Content = (Months)month + " " + year;
+            lblMonth = (Months)month + " " + year;
 
             DateTime monthStart = new DateTime(year, month, 1);
             int totalDays = DateTime.DaysInMonth(year, month);
 
-            int startDay = (int) monthStart.DayOfWeek;
+            int startDay = (int)monthStart.DayOfWeek;
             int date = startDay != 0 ? DateTime.DaysInMonth(year, month != 1 ? month - 1 : 12) - startDay + 1 : 1;
 
-            //Fields for use in the loop declared beforehand for performance reasons
-            DayBox dayBox;
-            UIElementCollection dateBoxes = containerDates.Children;
             bool isCurrentMonth = date == 1;
             List<TaskToDo> dueThisDay;
 
             //Loop for telling each DayBox what its date is and what tasks are due on that date
-            for (int i = 0; i < dateBoxes.Count; ++i)
+            for (int i = 0; i < 42; i++)
             {
-                dayBox = dateBoxes[i] as DayBox;
-                dayBox.Date = date;
-                dayBox.Status = null;
-                dayBox.DisplayTask = null;
-                dayBox.Tasks = null;
-                dayBox.BoxClick -= new RoutedEventHandler(dayBox_Click);
-
+                Dates.RemoveAt(i);
+                Dates.Insert(i, new DayDetails(date, "", "", new List<TaskToDo>(), isCurrentMonth));
                 //If the date is of the current month...then
-                if(dayBox.CurrentMonth = isCurrentMonth)
+                if (isCurrentMonth)
                 {
                     dueThisDay = tasks.FindAll(task => task.DueDate.Month == month && task.DueDate.Year == year && task.DueDate.Day == date);
 
                     //If atleast one task is due on this date...then
-                    if(dueThisDay.Count != 0)
+                    if (dueThisDay.Count != 0)
                     {
-                        dayBox.DisplayTask = dueThisDay[0].Title;
-                        dayBox.Tasks = dueThisDay;
-                        dayBox.Status = dueThisDay[0].Progress;
-                        dayBox.BoxClick += new RoutedEventHandler(dayBox_Click);
-                    }       
+                        Dates.RemoveAt(i);
+                        Dates.Insert(i, new DayDetails(date, dueThisDay[0].Title, dueThisDay[0].Progress, dueThisDay, isCurrentMonth));
+                    }
                 }
 
                 date++;
@@ -138,79 +154,40 @@ namespace teammy
 
         #endregion
 
-        #region Title Bar Button Event Handlers
-        /// <summary>
-        ///     Shuts down the application
-        /// </summary>
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        /// <summary>
-        ///     Minimizes the current window
-        /// </summary>
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        /// <summary>
-        ///     Displays page menu when button is clicked
-        /// </summary>
-        private void btnMenu_Click(object sender, RoutedEventArgs e)
-        {
-            ContextMenu cm = globalItems["cmButton"] as ContextMenu;
-            cm.PlacementTarget = sender as Button;
-            cm.IsOpen = true;
-        }
-        #endregion
-
-        #region Title Pane Event Handlers
-
-        /// <summary>
-        ///     Moves the window along with the title pane when it is dragged
-        /// </summary>
-        private void pnlTitle_MouseDown(object sender, MouseEventArgs e)
-        {
-            DragMove();
-        }
-        #endregion
-
         #region Hover handlers
 
         /// <summary>
         ///     Matches the Hover style of the 'Next image' to that of the 'Next 
         ///     Button'
         /// </summary>
-        private void btnNext_MouseEnter(object sender, MouseEventArgs e)
+        public void btnNext_MouseEnter()
         {
-            nextbtnIcon.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
+            nextbtnIconBG = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
         }
 
         /// <summary>
         ///     Resets the background of the 'Next Image' to normal.
         /// </summary>
-        private void btnNext_MouseLeave(object sender, MouseEventArgs e)
+        public void btnNext_MouseLeave()
         {
-            nextbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
+            nextbtnIconBG = new SolidColorBrush(Colors.Transparent);
         }
 
         /// <summary>
         ///     Matches the Hover style of the 'Previous image' to that of the 'Next 
         ///     Button'
         /// </summary>
-        private void btnPrevious_MouseEnter(object sender, MouseEventArgs e)
+        public void btnPrevious_MouseEnter()
         {
-            prevbtnIcon.Background = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
+            prevbtnIconBG = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
         }
 
         /// <summary>
         ///     Resets the background of the 'Previous Image' to normal.
         /// </summary>
-        private void btnPrevious_MouseLeave(object sender, MouseEventArgs e)
+        public void btnPrevious_MouseLeave()
         {
-            prevbtnIcon.Background = new SolidColorBrush(Colors.Transparent);
+            prevbtnIconBG = new SolidColorBrush(Colors.Transparent);
         }
         #endregion
 
@@ -219,7 +196,7 @@ namespace teammy
         /// <summary>
         ///     Shifts the calendar to the previous month
         /// </summary>
-        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        public void btnPrevious_Click()
         {
             //If current month is January...then
             if (displayMonth == 1)
@@ -235,7 +212,7 @@ namespace teammy
         /// <summary>
         ///     Shifts the calendar to the next month
         /// </summary>
-        private void btnNext_Click(object sender, RoutedEventArgs e)
+        public void btnNext_Click()
         {
             //If current month is December...then
             if (displayMonth == 12)
@@ -249,12 +226,9 @@ namespace teammy
         }
         #endregion        
 
-        private void dayBox_Click(object sender, RoutedEventArgs e)
+        public void dayBox_Click(DayBox dateClicked)
         {
-            Button sent = sender as Button;
-            DayBox dateClicked = (sent.Parent as Grid).Parent as DayBox;
-
-            PopUp taskDetail = new PopUp() { date = dateClicked.Date.Value, month = ((Months)displayMonth).ToString(), year = displayYear, Tasks = dateClicked.Tasks};
+            PopUp taskDetail = new PopUp() { date = dateClicked.Details.Date, month = ((Months)displayMonth).ToString(), year = displayYear, Tasks = dateClicked.Details.Tasks };
 
             taskDetail.ShowDialog();
         }

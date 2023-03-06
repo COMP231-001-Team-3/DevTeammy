@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using teammy.Models;
+using teammy.UserControls;
 
-namespace teammy
+
+namespace teammy.UserControls
 {
     /// <summary>
     /// Interaction logic for DayBox.xaml
@@ -11,15 +12,7 @@ namespace teammy
    
     public partial class DayBox : UserControl
     {
-        public static readonly DependencyProperty DateProperty = DependencyProperty.Register("Date", typeof(int?), typeof(DayBox));
-
-        public static readonly DependencyProperty DisplayTaskProperty = DependencyProperty.Register("DisplayTask", typeof(string), typeof(DayBox));
-
-        public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(string), typeof(DayBox));
-
-        public static readonly DependencyProperty TasksProperty = DependencyProperty.Register("Tasks", typeof(List<TaskToDo>), typeof(DayBox));
-
-        public static readonly DependencyProperty CurrentMonthProperty = DependencyProperty.Register("CurrentMonth", typeof(bool), typeof(DayBox));
+        public static readonly DependencyProperty DetailsProperty = DependencyProperty.Register("Details", typeof(DayDetails), typeof(DayBox));
 
         public event RoutedEventHandler BoxClick
         {
@@ -27,30 +20,11 @@ namespace teammy
             remove { btnClicker.Click -= value; }
         }
 
-        public int? Date
+        
+        public DayDetails Details
         {
-            get => (int)GetValue(DateProperty);
-            set => SetValue(DateProperty, value);
-        }
-        public string DisplayTask
-        {
-            get => GetValue(DisplayTaskProperty).ToString();
-            set => SetValue(DisplayTaskProperty, value);
-        }
-        public string Status
-        {
-            get => GetValue(StatusProperty).ToString();
-            set => SetValue(StatusProperty, value);
-        }
-        public List<TaskToDo> Tasks
-        {
-            get => GetValue(TasksProperty) as List<TaskToDo>;
-            set => SetValue(TasksProperty, value);
-        }
-        public bool CurrentMonth
-        {
-            get => (bool)GetValue(CurrentMonthProperty);
-            set => SetValue(CurrentMonthProperty, value);
+            get => (DayDetails)GetValue(DetailsProperty);
+            set => SetValue(DetailsProperty, value);
         }
 
         public DayBox()

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace teammy
+namespace teammy.Views
 {
     /// <summary>
     /// Interaction logic for ProgressReport.xaml
