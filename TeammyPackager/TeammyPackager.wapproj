@@ -63,7 +63,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppInstallerUri>https:\\999x</AppInstallerUri>
+    <AppInstallerUri>https://teammy-code-jellies.azurewebsites.net/</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <AppxPackageDir>D:\Teammy\Installer\</AppxPackageDir>
     <EntryPointProjectUniqueName>..\teammy\teammy.csproj</EntryPointProjectUniqueName>

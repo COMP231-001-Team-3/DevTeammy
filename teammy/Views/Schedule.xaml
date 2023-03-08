@@ -6,6 +6,7 @@
         xmlns:vmodels="clr-namespace:teammy.ViewModels"
         xmlns:custom="clr-namespace:teammy.UserControls"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:teammy="clr-namespace:teammy"
         Title="Schedule"
         Height="686"
         Width="970"
@@ -16,6 +17,9 @@
     <Window.DataContext>
         <vmodels:ScheduleVM x:Name="windowData"/>
     </Window.DataContext>
+    <Window.Resources>
+        <teammy:BoolToMouseOverConverter x:Key="isMouseOverCnv" />
+    </Window.Resources>
     <Grid x:Name="containerGrid"
           Background="White"
           RenderTransformOrigin="0.503,0.497"
@@ -197,7 +201,7 @@
                         </Image>
                         <Button x:Name="prevbtnIcon"
                                 Style="{StaticResource mouseOverStyle}"
-                                Background="{Binding Path=prevbtnIconBG}"
+                                Background="{Binding MouseOverPrevBtn, Converter={StaticResource ResourceKey=isMouseOverCnv}}"
                                 BorderThickness="0"
                                 Width="{Binding ActualWidth, Source={x:Reference Name=prevImg}}"
                                 Height="{Binding ActualHeight, Source={x:Reference Name=prevImg}}" />
@@ -244,7 +248,7 @@
                                Width="20" />
                         <Button x:Name="nextbtnIcon"
                                 Style="{StaticResource mouseOverStyle}"
-                                Background="{Binding Path=nextbtnIconBG}"
+                                Background="{Binding Path=MouseOverNextBtn, Converter={StaticResource ResourceKey=isMouseOverCnv}}"
                                 BorderThickness="0"
                                 Width="{Binding ActualWidth, Source={x:Reference Name=nextImg}}"
                                 Height="{Binding ActualHeight, Source={x:Reference Name=nextImg}}" />

@@ -54,9 +54,29 @@ namespace teammy.ViewModels
                 _lblMonth = value;
                 OnPropertyChanged(nameof(lblMonth));
             }
-        } 
-        public SolidColorBrush nextbtnIconBG { get; set; } = new SolidColorBrush(Colors.Transparent);
-        public SolidColorBrush prevbtnIconBG { get; set; } = new SolidColorBrush(Colors.Transparent);
+        }
+
+        private bool _mouseOverNextBtn = false;
+        public bool MouseOverNextBtn
+        {
+            get { return _mouseOverNextBtn; }
+            set
+            {
+                _mouseOverNextBtn = value;
+                OnPropertyChanged(nameof(MouseOverNextBtn));
+            }
+        }
+
+        private bool _mouseOverPrevBtn = false;
+        public bool MouseOverPrevBtn
+        {
+            get { return _mouseOverPrevBtn;}
+            set
+            {
+                _mouseOverPrevBtn = value;
+                OnPropertyChanged(nameof(MouseOverPrevBtn));
+            }
+        }
 
         
         public ObservableCollection<DayDetails> Dates { get; set; } = new ObservableCollection<DayDetails>() {
@@ -152,43 +172,6 @@ namespace teammy.ViewModels
             }
         }
 
-        #endregion
-
-        #region Hover handlers
-
-        /// <summary>
-        ///     Matches the Hover style of the 'Next image' to that of the 'Next 
-        ///     Button'
-        /// </summary>
-        public void btnNext_MouseEnter()
-        {
-            nextbtnIconBG = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
-        }
-
-        /// <summary>
-        ///     Resets the background of the 'Next Image' to normal.
-        /// </summary>
-        public void btnNext_MouseLeave()
-        {
-            nextbtnIconBG = new SolidColorBrush(Colors.Transparent);
-        }
-
-        /// <summary>
-        ///     Matches the Hover style of the 'Previous image' to that of the 'Next 
-        ///     Button'
-        /// </summary>
-        public void btnPrevious_MouseEnter()
-        {
-            prevbtnIconBG = new SolidColorBrush(Colors.LightBlue) { Opacity = 0.7 };
-        }
-
-        /// <summary>
-        ///     Resets the background of the 'Previous Image' to normal.
-        /// </summary>
-        public void btnPrevious_MouseLeave()
-        {
-            prevbtnIconBG = new SolidColorBrush(Colors.Transparent);
-        }
         #endregion
 
         #region Button Click Event Handlers

@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using teammy.ViewModels;
+using System.Windows;
 
 namespace teammy.Commands
 {
@@ -23,14 +24,15 @@ namespace teammy.Commands
         {
             //The Button whose background is to be set
             Button btnInFocus = parameter as Button;
+            //(((btnInFocus.Content as DockPanel).Children[0] as Grid).Children[1] as Button).RaiseEvent(new RoutedEventArgs(Button.MouseEnterEvent));
 
             switch (btnInFocus.Name)
             {
                 case "btnPrevious":
-                    schedVM.btnPrevious_MouseEnter();
+                    schedVM.MouseOverPrevBtn = true;
                     break;
                 case "btnNext":
-                    schedVM.btnNext_MouseEnter();
+                    schedVM.MouseOverNextBtn = true;
                     break;
             }
         }

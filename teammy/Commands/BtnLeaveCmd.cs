@@ -27,10 +27,10 @@ namespace teammy.Commands
             switch (btnInFocus.Name)
             {
                 case "btnPrevious":
-                    schedVM.btnPrevious_MouseLeave();
+                    schedVM.MouseOverPrevBtn = false;
                     break;
                 case "btnNext":
-                    schedVM.btnNext_MouseLeave();
+                    schedVM.MouseOverNextBtn = false;
                     break;
             }
         }
