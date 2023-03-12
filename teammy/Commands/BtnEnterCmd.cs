@@ -10,9 +10,11 @@ namespace teammy.Commands
     {
         public event EventHandler CanExecuteChanged;
         ScheduleVM schedVM;
-        public BtnEnterCmd(ScheduleVM schedVM) 
+        TeamsVM teamVM;
+        public BtnEnterCmd(ScheduleVM schedVM = null, TeamsVM teamVM = null) 
         {
-            this.schedVM = schedVM;            
+            this.schedVM = schedVM;
+            this.teamVM = teamVM;
         }
 
         public bool CanExecute(object parameter)
@@ -24,7 +26,6 @@ namespace teammy.Commands
         {
             //The Button whose background is to be set
             Button btnInFocus = parameter as Button;
-            //(((btnInFocus.Content as DockPanel).Children[0] as Grid).Children[1] as Button).RaiseEvent(new RoutedEventArgs(Button.MouseEnterEvent));
 
             switch (btnInFocus.Name)
             {
@@ -33,6 +34,15 @@ namespace teammy.Commands
                     break;
                 case "btnNext":
                     schedVM.MouseOverNextBtn = true;
+                    break;
+                case "btnCancel":
+                    teamVM.MouseOverCancelBtn = true;
+                    break;
+                case "btnDone":
+                    teamVM.MouseOverDoneBtn = true;
+                    break;
+                case "btnCreateTeam":
+                    teamVM.MouseOverCreateTeamBtn = true;
                     break;
             }
         }

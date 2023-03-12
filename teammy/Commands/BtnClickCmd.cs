@@ -9,9 +9,11 @@ namespace teammy.Commands
     {
         public event EventHandler CanExecuteChanged;
         ScheduleVM schedVM;
-        public BtnClickCmd(ScheduleVM schedVM) 
+        TeamsVM teamVM;
+        public BtnClickCmd(ScheduleVM schedVM = null, TeamsVM teamVM = null) 
         {
-            this.schedVM = schedVM;            
+            this.schedVM = schedVM;
+            this.teamVM = teamVM;
         }
 
         public bool CanExecute(object parameter)
@@ -32,6 +34,16 @@ namespace teammy.Commands
                 case "btnNext":
                     schedVM.btnNext_Click();
                     break;
+                case "btnCancel":
+                    teamVM.btnCancel_Click();
+                        break;
+                case "btnCreateTeam":
+                    teamVM.btnCreateTeam_Click();
+                    break;
+                case "btnDone":
+                    teamVM.btnDone_Click();
+                    break;
+
             }
         }
     }
