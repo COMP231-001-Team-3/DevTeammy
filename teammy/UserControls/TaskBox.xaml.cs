@@ -10,7 +10,7 @@ using System.Linq;
 using teammy.Models;
 using MongoDB.Driver;
 
-namespace teammy
+namespace teammy.UserControls
 {
     /// <summary>
     /// Interaction logic for TaskBox.xaml

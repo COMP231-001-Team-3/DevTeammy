@@ -1,4 +1,4 @@
-﻿<Window x:Class="teammy.TeamsContactlist"
+﻿<Window x:Class="teammy.TeamDetails"
         x:Name="contactWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

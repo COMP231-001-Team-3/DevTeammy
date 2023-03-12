@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using teammy.Models;
 
-namespace teammy
+namespace teammy.UserControls
 {
     /// <summary>
     /// Interaction logic for NewCategory.xaml

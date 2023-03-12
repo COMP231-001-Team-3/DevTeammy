@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace teammy
+namespace teammy.UserControls
 {
     /// <summary>
     /// Interaction logic for AssigneeEllipse.xaml

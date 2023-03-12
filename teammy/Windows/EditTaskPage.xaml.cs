@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using teammy.Models;
+using teammy.UserControls;
 
 namespace teammy
 {

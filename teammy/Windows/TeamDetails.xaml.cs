@@ -10,7 +10,7 @@ namespace teammy
     /// <summary>
     /// Interaction logic for TeamsContactlist.xaml
     /// </summary>
-    public partial class TeamsContactlist : Window
+    public partial class TeamDetails : Window
     {
         private static ResourceDictionary globalItems = Application.Current.Resources;
         public User currentUser { get; set; } = globalItems["currentUser"] as User;
@@ -18,7 +18,7 @@ namespace teammy
 
 
         private List<User> contactinfo;
-        public TeamsContactlist()
+        public TeamDetails()
         {
             InitializeComponent();
         }

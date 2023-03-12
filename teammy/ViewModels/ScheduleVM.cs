@@ -80,7 +80,7 @@ namespace teammy.ViewModels
 
         
         public ObservableCollection<DayDetails> Dates { get; set; } = new ObservableCollection<DayDetails>() {
-            new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails()
+            new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails(), new DayDetails()
         };
 
         public ICommand btnEnterCmd { get; set; }

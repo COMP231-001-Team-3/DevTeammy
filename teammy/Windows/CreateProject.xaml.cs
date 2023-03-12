@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using teammy.Models;
 using MongoDB.Driver;
+using teammy.UserControls;
 
 namespace teammy
 {
@@ -112,7 +113,7 @@ namespace teammy
                 projName = projNames[i].ToString();
 
                 //Creation & Initialization of ProjectBox
-                project = new CardBox() { Name = "crdBox" + i, FullName = projName, Margin = new Thickness(left, top, right, bottom), ProfileBack = backColors[rd.Next(0, 18)] };
+                project = new CardBox() { Name = "crdBox" + i, Details = new CardDetails(projName, true, currentUser.Privilege.Equals("PM"), false), Margin = new Thickness(left, top, right, bottom), };
 
                 project.CardClick += new RoutedEventHandler(project_CardClick);
 
@@ -154,7 +155,7 @@ namespace teammy
                     spLoader.Show(true);
                 }
                 current = sender as CardBox;
-                Board projDetails = new Board() { projName = current.FullName };
+                Board projDetails = new Board() { projName = current.Details.FullName };
                 projDetails.LoadCategories();
                 projectBrds[cmbTeams.SelectedIndex].Add(projDetails);
             }
@@ -237,7 +238,7 @@ namespace teammy
             }
 
             Random rd = new Random();
-            toBeInserted = new CardBox() { ProfileBack = backColors[rd.Next(0, backColors.Length - 1)], Margin = new Thickness(left, top, right, bottom) };
+            toBeInserted = new CardBox() { Margin = new Thickness(left, top, right, bottom) };
             toBeInserted.CardClick += new RoutedEventHandler(project_CardClick);            
 
             txtNameInput = new TextBox() { Height = 25, Width = 120, FontSize = 16, Margin = new Thickness(left, top + 93, right, bottom - 3) };
@@ -277,7 +278,7 @@ namespace teammy
         {
             if(toBeInserted != null)
             {
-                toBeInserted.FullName = txtNameInput.Text;
+                toBeInserted.Details.FullName = txtNameInput.Text;
                 txtNameInput.Visibility = Visibility.Hidden;
                 List<Project> existent = dbContext.GetCollection<Project>("projects")
                                             .Find(p => p.Name.Equals(txtNameInput.Text))
@@ -310,10 +311,10 @@ namespace teammy
                     if(projGrid.Children[i].GetType() == typeof(CardBox))
                     {
                         crdBox = projGrid.Children[i] as CardBox;
-                        if(crdBox.Selected)
+                        if(crdBox.Details.Selected)
                         {
                             Project selected = dbContext.GetCollection<Project>("projects")
-                                                .Find(p => p.Name.Equals(crdBox.FullName))
+                                                .Find(p => p.Name.Equals(crdBox.Details.FullName))
                                                 .Single();
 
                             RemoveProject(selected);  
@@ -404,8 +405,8 @@ namespace teammy
                     if (currElement.GetType() == typeof(CardBox))
                     {
                         CardBox crdProj = currElement as CardBox;
-                        crdProj.Selected = false;
-                        crdProj.SelectorVisible = false;
+                        crdProj.Details.Selected = false;
+                        crdProj.Details.SelectorVisible = false;
                     }
                 }
             }
@@ -441,7 +442,7 @@ namespace teammy
                 if (currElement.GetType() == typeof(CardBox))
                 {
                     CardBox crdBox = currElement as CardBox;
-                    crdBox.SelectorVisible = true;
+                    crdBox.Details.SelectorVisible = true;
                 }
             }
             btnCreateProj.Visibility = Visibility.Hidden;

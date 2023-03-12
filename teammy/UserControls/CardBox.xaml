@@ -1,39 +1,47 @@
-﻿<UserControl x:Class="teammy.CardBox"
+﻿<UserControl x:Class="teammy.UserControls.CardBox"
              x:Name="root"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:teammy"
-             mc:Ignorable="d" Width="130" Height="130"
+             mc:Ignorable="d"
+             Width="130"
+             Height="130"
              DataContext="{Binding RelativeSource={RelativeSource self}}">
     <UserControl.Resources>
         <!-- Value Converter Instance -->
-        <local:ColorToBrushConverter x:Key="ColorConverter"/>
-        <local:NameToCharsConverter x:Key="NameConverter"/>
-        <local:BoolToVisibConverter x:Key="BoolConverter"/>
-        <local:BoolToBackConverter x:Key="BackConverter"/>
+        <local:ColorToBrushConverter x:Key="ColorConverter" />
+        <local:NameToCharsConverter x:Key="NameConverter" />
+        <local:BoolToVisibConverter x:Key="BoolConverter" />
+        <local:BoolToBackConverter x:Key="BackConverter" />
+        <local:BoolToInverseConverter x:Key="InvertConverter" />
         <!-- Mouseover style for button that covers the whole card -->
-        <Style x:Key="mouseOverStyle" TargetType="Button">
+        <Style x:Key="mouseOverStyle"
+               TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <!-- Modifying control template of button to give custom mouseover color -->
                     <ControlTemplate TargetType="Button">
                         <Border BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                                BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>
                                 <Rectangle x:Name="background"
-                                   Fill="{TemplateBinding Background}"/>
-                                <ContentPresenter
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                           Fill="{TemplateBinding Background}" />
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <!-- Mouseover trigger -->
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="background" Property="Fill" Value="AliceBlue"/>
-                                <Setter TargetName="background" Property="Opacity" Value="0.5"></Setter>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="background"
+                                        Property="Fill"
+                                        Value="AliceBlue" />
+                                <Setter TargetName="background"
+                                        Property="Opacity"
+                                        Value="0.5"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -41,22 +49,88 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid Margin="0,0,-4,-2.667">
+    <Grid Margin="0,0,-4,-2.667"
+          Visibility="{Binding Details.IsVisible, Converter={StaticResource BoolConverter}}">
         <!-- Represents the container for the card -->
-        <Rectangle x:Name="rectProj" Fill="White" HorizontalAlignment="Left" Height="125" Stroke="#FF1E1922" VerticalAlignment="Top" Width="127" Margin="2,3,-13,-14"/>
+        <Rectangle x:Name="rectProj"
+                   Fill="White"
+                   HorizontalAlignment="Left"
+                   Height="125"
+                   Stroke="#FF1E1922"
+                   VerticalAlignment="Top"
+                   Width="127"
+                   Margin="2,3,-13,-14" />
 
         <!-- Project Name -->
-        <TextBox x:Name="txtFullName" Text="{Binding Path=FullName}" HorizontalAlignment="Left" Margin="5,106,-10,-11" VerticalAlignment="Top" Width="121" FontFamily="Georgia" Foreground="#FF0A98F7" BorderBrush="{x:Null}" TextChanged="txtFullName_TextChanged" IsReadOnly="True" Height="19" IsHitTestVisible="False"/>
+        <TextBox x:Name="txtFullName"
+                 Text="{Binding Path=Details.FullName}"
+                 HorizontalAlignment="Left"
+                 Margin="5,106,-10,-11"
+                 VerticalAlignment="Top"
+                 Width="121"
+                 FontFamily="Georgia"
+                 Foreground="#FF0A98F7"
+                 BorderBrush="{x:Null}"
+                 IsReadOnly="True"
+                 Height="19"
+                 IsHitTestVisible="False" />
 
         <!-- The Background of the Project Profile -->
-        <Rectangle x:Name="rectProfile" HorizontalAlignment="Left" Height="83" Stroke="#FF1E1922" VerticalAlignment="Top" Width="93" Margin="18,18,0,0" Fill="{Binding Converter={StaticResource ColorConverter}, Path=ProfileBack}"/>
+        <Rectangle x:Name="rectProfile"
+                   HorizontalAlignment="Left"
+                   Height="83"
+                   Stroke="#FF1E1922"
+                   VerticalAlignment="Top"
+                   Width="93"
+                   Margin="18,18,0,0"
+                   Fill="{Binding Converter={StaticResource ColorConverter}, Path=Details.ProfileBack}" />
 
         <!-- Profile Text (Placed above the Background) -->
-        <TextBox x:Name="txtProfText" Text="{Binding ElementName=txtFullName, Converter={StaticResource NameConverter}, Path=Text}" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="80" FontFamily="Gill Sans Ultra Bold" Foreground="White" BorderBrush="{x:Null}" Height="60" Background="{x:Null}" FontSize="40" TextChanged="txtProfText_TextChanged" IsReadOnly="True" IsHitTestVisible="False"/>
+        <TextBox x:Name="txtProfText"
+                 Text="{Binding ElementName=txtFullName, Converter={StaticResource NameConverter}, Path=Text}"
+                 HorizontalAlignment="Left"
+                 Margin="25,27,0,0"
+                 VerticalAlignment="Top"
+                 Width="80"
+                 FontFamily="Gill Sans Ultra Bold"
+                 Foreground="White"
+                 BorderBrush="{x:Null}"
+                 Height="60"
+                 Background="{x:Null}"
+                 FontSize="40"
+                 IsReadOnly="True"
+                 IsHitTestVisible="False" />
+
+        
+
 
         <!-- Button that provides mouseover and click events for the project -->
-        <Button x:Name="btnDetails" HorizontalAlignment="Left" Margin="2,3,0,0" VerticalAlignment="Top" Width="127" Height="125" Background="{Binding Selected, Converter={StaticResource ResourceKey=BackConverter}}" Style="{StaticResource ResourceKey=mouseOverStyle}" BorderBrush="#00000000" IsEnabled="True"/>
+        <Button x:Name="btnDetails"
+                HorizontalAlignment="Left"
+                Margin="2,3,0,0"
+                VerticalAlignment="Top"
+                Width="127"
+                Height="125"
+                Background="{Binding Details.Selected, Converter={StaticResource ResourceKey=BackConverter}}"
+                Style="{StaticResource ResourceKey=mouseOverStyle}"
+                BorderBrush="#00000000"
+                IsEnabled="{Binding Details.IsInputVisible, Converter={StaticResource InvertConverter}}" />
 
-        <CheckBox x:Name="chkSelector" Content="" Margin="4,4,113,114.667" IsChecked="{Binding Selected}" Visibility="{Binding SelectorVisible, Converter={StaticResource ResourceKey=BoolConverter}}" Padding="0" BorderThickness="1" />
+        <CheckBox x:Name="chkSelector"
+                  Content=""
+                  Margin="4,4,113,114.667"
+                  IsChecked="{Binding Details.Selected,Mode=TwoWay}"
+                  Visibility="{Binding Details.SelectorVisible, Converter={StaticResource ResourceKey=BoolConverter}}"
+                  Padding="0"
+                  BorderThickness="1" />
+        
+        <!-- Input textbox for new box creation -->
+        <TextBox x:Name="txtInput"
+                   Margin="18,103,22,10"
+                   Text="{Binding Details.InputName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   Visibility="{Binding Details.IsInputVisible, Converter={StaticResource BoolConverter}}"
+                   FocusManager.IsFocusScope="{Binding Details.IsInputVisible}"
+                   GotFocus="txtInput_GotFocus"
+                   LostFocus="txtInput_LostFocus" />
     </Grid>
 </UserControl>

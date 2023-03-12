@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using teammy.Models;
 
-namespace teammy
+namespace teammy.UserControls
 {
     /// <summary>
     /// Interaction logic for PopTaskBox.xaml
