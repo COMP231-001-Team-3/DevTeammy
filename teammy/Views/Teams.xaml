@@ -34,14 +34,14 @@
         <views:TitlePaneCtrl Margin="0,-1,0,409" />
 
         <!-- This ScrollViewer houses the grid that ultimately holds the team cards -->
-        <ScrollViewer MaxHeight="382"
+        <ScrollViewer MaxHeight="475"
                       Margin="220,58,10,75">
             <Grid MinHeight="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer}, Path=MaxHeight}"
                   MinWidth="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer}, Path=ActualWidth}"
                   x:Name="teamsGrid"
                   Margin="0,0,0,0">
                 <custom:CardBox x:Name="row1T1"
-                                Margin="10,10,430,242"
+                                Margin="10,10,430,337"
                                 Details="{Binding ElementName=teamsVM, Path=Cards[0]}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CardClick">
@@ -56,7 +56,7 @@
                 </custom:CardBox>
 
                 <custom:CardBox x:Name="row1T2"
-                                Margin="207,10,233,242"
+                                Margin="207,10,233,337"
                                 Details="{Binding ElementName=teamsVM, Path=Cards[1]}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CardClick">
@@ -71,7 +71,7 @@
                 </custom:CardBox>
 
                 <custom:CardBox x:Name="row1T3"
-                                Margin="407,10,33,242"
+                                Margin="407,10,33,337"
                                 Details="{Binding ElementName=teamsVM, Path=Cards[2]}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CardClick">
@@ -86,7 +86,7 @@
                 </custom:CardBox>
 
                 <custom:CardBox x:Name="row2T1"
-                                Margin="10,153,430,99"
+                                Margin="10,153,430,194"
                                 Details="{Binding ElementName=teamsVM, Path=Cards[3]}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CardClick">
@@ -101,7 +101,7 @@
                 </custom:CardBox>
 
                 <custom:CardBox x:Name="row2T2"
-                                Margin="207,153,233,99"
+                                Margin="207,153,233,194"
                                 Details="{Binding ElementName=teamsVM, Path=Cards[4]}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CardClick">
@@ -116,7 +116,7 @@
                 </custom:CardBox>
 
                 <custom:CardBox x:Name="row2T3"
-                                Margin="407,153,33,99"
+                                Margin="407,153,33,194"
                                 Details="{Binding ElementName=teamsVM, Path=Cards[5]}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CardClick">
@@ -131,7 +131,7 @@
                 </custom:CardBox>
 
                 <custom:CardBox x:Name="row3T1"
-                                Margin="10,299,430,-47"
+                                Margin="10,299,430,10"
                                 Details="{Binding ElementName=teamsVM, Path=Cards[6]}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CardClick">
@@ -146,7 +146,7 @@
                 </custom:CardBox>
 
                 <custom:CardBox x:Name="row3T2"
-                                Margin="207,299,233,-47"
+                                Margin="207,299,233,10"
                                 Details="{Binding ElementName=teamsVM, Path=Cards[7]}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CardClick">
@@ -161,7 +161,7 @@
                 </custom:CardBox>
 
                 <custom:CardBox x:Name="row3T3"
-                                Margin="407,299,33,-47"
+                                Margin="407,299,33,10"
                                 Details="{Binding ElementName=teamsVM, Path=Cards[8]}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CardClick">
@@ -170,19 +170,21 @@
                         </i:EventTrigger>
                         <i:EventTrigger EventName="CardKeyUp">
                             <i:InvokeCommandAction Command="{Binding ElementName=teamsVM, Path=teamKeyUpCmd}"
-                                                   PassEventArgsToCommand="True"/>
+                                                   PassEventArgsToCommand="True" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </custom:CardBox>
 
             </Grid>
         </ScrollViewer>
+
         <Image Source="..\images\jelly.jpg"
                HorizontalAlignment="Left"
                Height="345"
                Margin="0,80,0,0"
                VerticalAlignment="Top"
                Width="230" />
+
         <Button x:Name="btnCreateTeam"
                 HorizontalAlignment="Left"
                 Margin="601,401,0,0"
@@ -190,22 +192,11 @@
                 Width="189"
                 Height="39"
                 FontSize="20"
-                Background="{Binding MouseOverCreateTeamBtn,Converter={StaticResource ResourceKey=isMouseOverCnv}}"
+                Background="White"
                 BorderBrush="{x:Null}"
                 Command="{Binding btnClickCmd}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                 Visibility="{Binding BtnCreateTeamVisible, Converter={StaticResource ResourceKey=boolToVisibCnv}}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseLeave">
-                    <i:InvokeCommandAction Command="{Binding Path=btnLeaveCmd}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Button}}" />
-                </i:EventTrigger>
-
-                <i:EventTrigger EventName="MouseEnter">
-                    <i:InvokeCommandAction Command="{Binding Path=btnEnterCmd}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Button}}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
             <Button.Content>
                 <DockPanel>
                     <Grid DockPanel.Dock="Left">
@@ -227,23 +218,12 @@
                 VerticalAlignment="Top"
                 Width="99"
                 Height="37"
-                Background="{Binding MouseOverCreateTeamBtn,Converter={StaticResource ResourceKey=isMouseOverCnv}}"
+                Background="White"
                 FontSize="20"
                 BorderBrush="{x:Null}"
                 Visibility="{Binding BtnDoneVisible, Converter={StaticResource ResourceKey=boolToVisibCnv}}"
                 Command="{Binding btnClickCmd}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseLeave">
-                    <i:InvokeCommandAction Command="{Binding Path=btnLeaveCmd}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Button}}" />
-                </i:EventTrigger>
-
-                <i:EventTrigger EventName="MouseEnter">
-                    <i:InvokeCommandAction Command="{Binding Path=btnEnterCmd}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Button}}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
             <Button.Content>
                 <DockPanel>
                     <Image Source="../images/protoDone.png"
@@ -261,43 +241,26 @@
                 VerticalAlignment="Top"
                 Width="103"
                 Height="36"
-                Background="{Binding MouseOverCreateTeamBtn,Converter={StaticResource ResourceKey=isMouseOverCnv}}"
+                Background="White"
                 FontSize="20"
                 BorderBrush="{x:Null}"
                 Visibility="{Binding BtnCancelVisible, Converter={StaticResource ResourceKey=boolToVisibCnv}}"
                 Command="{Binding btnClickCmd}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseLeave">
-                    <i:InvokeCommandAction Command="{Binding Path=btnLeaveCmd}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Button}}" />
-                </i:EventTrigger>
-                
-                <i:EventTrigger EventName="MouseEnter">
-                    <i:InvokeCommandAction Command="{Binding Path=btnEnterCmd}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Button}}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            
-            <DockPanel>
-                <Grid DockPanel.Dock="Left"
-                      Width="31">
-                    <Image x:Name="cancelImg"
-                           Source="../images/cancel.png" />
-                    <Button x:Name="cancelbtnIcon"
-                            Style="{StaticResource mouseOverStyle}"
-                            Background="{Binding MouseOverCancelBtn, Converter={StaticResource ResourceKey=isMouseOverCnv}}"
-                            BorderThickness="0"
-                            Width="{Binding ActualWidth, Source={x:Reference Name=cancelImg}}"
-                            Height="{Binding ActualHeight, Source={x:Reference Name=cancelImg}}"
-                            Margin="0,0,0,0.333" />
-                </Grid>
-                <Label Content="Cancel"
-                       VerticalAlignment="Center"
-                       Foreground="#FFF60000"
-                       DockPanel.Dock="Right"
-                       Height="32" />
-            </DockPanel>
+            <Button.Content>
+                <DockPanel>
+                    <Grid DockPanel.Dock="Left"
+                          Width="31">
+                        <Image x:Name="cancelImg"
+                               Source="../images/cancel.png" />
+                    </Grid>
+                    <Label Content="Cancel"
+                           VerticalAlignment="Center"
+                           Foreground="#FFF60000"
+                           DockPanel.Dock="Right"
+                           Height="32" />
+                </DockPanel>
+            </Button.Content>
         </Button>
 
     </Grid>

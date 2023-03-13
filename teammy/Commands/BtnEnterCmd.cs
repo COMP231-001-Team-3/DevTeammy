@@ -35,15 +35,6 @@ namespace teammy.Commands
                 case "btnNext":
                     schedVM.MouseOverNextBtn = true;
                     break;
-                case "btnCancel":
-                    teamVM.MouseOverCancelBtn = true;
-                    break;
-                case "btnDone":
-                    teamVM.MouseOverDoneBtn = true;
-                    break;
-                case "btnCreateTeam":
-                    teamVM.MouseOverCreateTeamBtn = true;
-                    break;
             }
         }
     }

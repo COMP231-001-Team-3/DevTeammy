@@ -25,45 +25,6 @@ namespace teammy.ViewModels
         #region Properties
         public User currentUser { get; set; } = globalItems["currentUser"] as User;
 
-        private bool _mouseOverCancelBtn;
-        public bool MouseOverCancelBtn
-        {
-            get
-            {
-                return _mouseOverCancelBtn;
-            }
-            set
-            {
-                _mouseOverCancelBtn = value;
-                OnPropertyChanged(nameof(MouseOverCancelBtn));
-            }
-        }
-        private bool _mouseOverDoneBtn;
-        public bool MouseOverDoneBtn
-        {
-            get
-            {
-                return _mouseOverDoneBtn;
-            }
-            set
-            {
-                _mouseOverDoneBtn = value;
-                OnPropertyChanged(nameof(MouseOverDoneBtn));
-            }
-        }
-        private bool _mouseOverCreateTeamBtn;
-        public bool MouseOverCreateTeamBtn
-        {
-            get
-            {
-                return _mouseOverCreateTeamBtn;
-            }
-            set
-            {
-                _mouseOverCreateTeamBtn = value;
-                OnPropertyChanged(nameof(MouseOverCreateTeamBtn));
-            }
-        }
         public ObservableCollection<CardDetails> Cards { get; set; } = new ObservableCollection<CardDetails>() {
             new CardDetails(null, false, false, false),
             new CardDetails(null, false, false, false),
@@ -122,15 +83,11 @@ namespace teammy.ViewModels
 
         #endregion
 
-        public ICommand btnEnterCmd { get; set; }
-        public ICommand btnLeaveCmd { get; set; }
         public ICommand btnClickCmd { get; set; }
         public ICommand teamClickCmd { get; set; }
         public ICommand teamKeyUpCmd { get; set; }
         public TeamsVM()
         {
-            btnEnterCmd = new BtnEnterCmd(null, this);
-            btnLeaveCmd = new BtnLeaveCmd(null, this);
             btnClickCmd = new BtnClickCmd(null, this);
             teamClickCmd = new CardClickCmd(this);
             teamKeyUpCmd = new CardKeyUpCmd(this);
@@ -186,16 +143,18 @@ namespace teammy.ViewModels
         /// </summary>
         public void btnCreateTeam_Click()
         {
-            BtnCreateTeamVisible = false;
-            BtnDoneVisible = true;
-            BtnCancelVisible = true;
             int firstHiddenBox = Cards.IndexOf(Cards.First(cd => !cd.IsVisible));
 
-            if (firstHiddenBox == -1)
+            if (firstHiddenBox == 9)
             {
                 MessageBox.Show("The maximum limit for teams per account is 9!", "Max teams completed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+            BtnCreateTeamVisible = false;
+            BtnDoneVisible = true;
+            BtnCancelVisible = true;
+            
 
             Cards.RemoveAt(firstHiddenBox);
             Cards.Insert(firstHiddenBox, new CardDetails("", true, true, false) { IsInputVisible = true });
