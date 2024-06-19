@@ -9,7 +9,7 @@
   <Identity
     Name="1e3bf2c6-3bc0-421c-9e2b-170a5f1ba5f2"
     Publisher="CN=Code Jellies"
-    Version="2.8.2.0" />
+    Version="2.8.5.0" />
 
   <Properties>
     <DisplayName>Teammy</DisplayName>

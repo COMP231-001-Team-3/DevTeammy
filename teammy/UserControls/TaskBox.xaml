@@ -164,7 +164,7 @@
                     <Button x:Name="btnPriority" Background="Transparent" BorderThickness="0" Style="{StaticResource ResourceKey=mouseOverStyle}" Click="btnPriority_Click" Margin="0,0,0.999,0" Visibility="{Binding currentUser, Converter={StaticResource ResourceKey=PrivConverter}}"/>
                 </Grid>
             </Border>
-            <DatePicker x:Name="taskDate" Margin="10,56,81.333,0" Text="{Binding Path=TaskDue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='01/01/2001'}" Focusable="{Binding currentUser, Converter={StaticResource ResourceKey=PrivBoolConverter}}" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="23" VerticalAlignment="Top" DisplayDateStart="{Binding DisplayDateStart}" SelectedDateChanged="taskDate_SelectedDateChanged"/>
+            <DatePicker x:Name="taskDate" Margin="10,56,81.333,0" SelectedDate="{Binding Path=TaskDue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='01/01/2001'}" Focusable="{Binding currentUser, Converter={StaticResource ResourceKey=PrivBoolConverter}}" RenderTransformOrigin="1.1,-0.278" FontSize="8" Height="23" VerticalAlignment="Top" DisplayDateStart="{Binding DisplayDateStart}" SelectedDateChanged="taskDate_SelectedDateChanged"/>
             <TextBox x:Name="taskNameTextBox" Text="{Binding Path=TaskName}" IsReadOnly="{Binding currentUser, Converter={StaticResource ResourceKey=PrivEnaConverter}}"  HorizontalAlignment="Left" Height="21" Margin="10,4,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110" FontSize="10" TextChanged="taskNameTextBox_TextChanged"/>
 
             <StackPanel x:Name="assigneeStackPanel" Orientation="Horizontal" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="138" Margin="10,28,0,0" >
